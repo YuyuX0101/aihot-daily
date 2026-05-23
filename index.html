@@ -476,37 +476,36 @@ fetch('days.json')
     const timeline = document.getElementById('timeline');
     const dayCount = document.getElementById('day-count');
     const totalDays = document.getElementById('total-days');
+    const totalItems = document.getElementById('total-items');
 
     days.sort((a, b) => b.localeCompare(a)); // newest first
 
-    dayCount.textContent = `${days.length} 期`;
+    dayCount.textContent = days.length + ' 期';
     totalDays.textContent = days.length;
     totalItems.textContent = days.length * 28; // approximate
 
     days.forEach((day, index) => {
       const item = document.createElement('div');
       item.className = 'timeline-item';
-      item.style.transitionDelay = `${index * 60}ms`;
+      item.style.transitionDelay = (index * 60) + 'ms';
 
       // Format date: 2026-05-23 -> 5月23日 周五
       const date = new Date(day + 'T00:00:00');
       const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-      const formatted = `${date.getMonth() + 1}月${date.getDate()}日 ${weekdays[date.getDay()]}`;
+      const formatted = (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + weekdays[date.getDay()];
 
-      item.innerHTML = `
-        <div class="day-card" onclick="location.href='${day}.html'">
-          <div class="day-date">${formatted}</div>
-          <div class="day-title">AI HOT 日报 · ${day}</div>
-          <div class="day-meta">
-            <span>${day}</span>
-            <span class="dot"></span>
-            <span>点击查看</span>
-            <span class="day-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </span>
-          </div>
-        </div>
-      `;
+      item.innerHTML = '<div class="day-card" onclick="location.href=\'' + day + '.html\'">' +
+        '<div class="day-date">' + formatted + '</div>' +
+        '<div class="day-title">AI HOT 日报 · ' + day + '</div>' +
+        '<div class="day-meta">' +
+          '<span>' + day + '</span>' +
+          '<span class="dot"></span>' +
+          '<span>点击查看</span>' +
+          '<span class="day-arrow">' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>' +
+          '</span>' +
+        '</div>' +
+      '</div>';
       timeline.appendChild(item);
     });
 
@@ -522,12 +521,11 @@ fetch('days.json')
     document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
   })
   .catch(err => {
-    document.getElementById('timeline').innerHTML = `
-      <div class="empty-state">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-        <p>暂无日报数据</p>
-      </div>
-    `;
+    document.getElementById('timeline').innerHTML =
+      '<div class="empty-state">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>' +
+        '<p>暂无日报数据</p>' +
+      '</div>';
   });
 </script>
 
