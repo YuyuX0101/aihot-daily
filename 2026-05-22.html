@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI HOT 日报 · 2026-05-22</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2236;
+  --bg-card: #1e293b;
+  --border-subtle: rgba(148, 163, 184, 0.08);
+  --border-glow: rgba(56, 189, 248, 0.15);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  --accent-green: #34d399;
+  --accent-orange: #fb923c;
+  --accent-pink: #f472b6;
+  --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.nav-back:hover {
+  border-color: var(--border-glow);
+  color: var(--text-primary);
+}
+
+.nav-back:active {
+  transform: scale(0.97);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 48px 24px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ===== SECTIONS ===== */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.section {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.section-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* ===== ITEMS ===== */
+.item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.item-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 38px;
+}
+
+.item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 38px;
+}
+
+.item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 38px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.item-link:hover {
+  opacity: 1;
+}
+
+/* ===== FLASHES ===== */
+.flashes {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.flash {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.flash-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.flash-text {
+  flex: 1;
+  line-height: 1.6;
+}
+
+.flash-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 36px 20px 24px; }
+  .content { padding: 0 16px 40px; }
+  .item { padding: 16px; }
+  .item-summary, .item-source, .item-link { padding-left: 0; margin-left: 0; }
+  .item-header { margin-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">AI HOT</div>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    返回首页
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-date">2026-05-22</div>
+  <h1>AI HOT 日报</h1>
+  <p class="hero-lead"></p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-value">26</div>
+      <div class="stat-label">条精选</div>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+  
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">模型发布/更新</span>
+        <span class="section-count">3 条</span>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">1</div>
+          <div class="item-title">Aleph 2.0 与 Edit Studio</div>
+        </div>
+        <div class="item-source">Runway：Changelog（网页）</div>
+        <div class="item-summary">正式发布 Aleph 2.0 及配套的 Edit Studio 创作工具。此次更新实现了创作流程的全面整合，将内容生成、编辑与后期制作集中于统一平台。新版本显著优化了多模态内容的处理效率，并提供了从构思到成品的一站式解决方案，旨在为创作者提供更流畅、集成的数字内容制作体验。</div>
+        <a href="https://app.runwayml.com/generate?mode=edit" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">2</div>
+          <div class="item-title">腾讯开源Hy-MT2多语言翻译模型</div>
+        </div>
+        <div class="item-source">X：腾讯混元 (@TencentHunyuan)</div>
+        <div class="item-summary">腾讯正式开源Hy-MT2多语言翻译模型，支持33种语言间的无缝互译。其7B与30B-A3B版本在开源模型中达到最先进的翻译性能，超越了许多参数规模大数十倍的模型。更具突破性的是，1.8B轻量级版本性能超越微软等主流商业API，并凭借腾讯AngelSlim 1.25-bit极量化技术，仅需440MB存储空间，即可在主流手机芯片上本地运行，推理速度较前代提升1.5倍，显著降低了高质量AI翻译的部署门槛。</div>
+        <a href="https://x.com/TencentHunyuan/status/2057384034544804136" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">3</div>
+          <div class="item-title">LongCat-Video-Avatar-1.5：升级版音频驱动数字人视频生成框架</div>
+        </div>
+        <div class="item-source">美团 LongCat：HuggingFace 新模型</div>
+        <div class="item-summary">美团LongCat团队发布了LongCat-Video-Avatar-1.5，一个专注于音频驱动数字人视频生成的开源框架。其核心升级在于采用Whisper-Large音频编码器，显著优化了唇部动态的流畅度与自然度。该版本实现了精准的唇形同步、全身时序稳定性以及长视频中的身份一致性，并能泛化应用于动漫、动物及多人交互等复杂场景。通过基于DMD2的步蒸馏技术，模型仅需8步即可高效推理。团队还构建了一个涵盖多场景、多语言的人工评估基准，通过大规模主观评分与专家分析，验证了其在多项关键维度上的优异性能。</div>
+        <a href="https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">产品发布/更新</span>
+        <span class="section-count">8 条</span>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">4</div>
+          <div class="item-title">Codex实现全天候跨设备安全操控Mac</div>
+        </div>
+        <div class="item-source">X：OpenAI Developers (@OpenAIDevs)</div>
+        <div class="item-summary">Codex随时随地，无处不在。 现在您的Mac无需解锁，Codex即可使用您的电脑。 通过手机，Codex可以安全地使用您Mac上的应用程序，即使屏幕关闭且处于锁定状态。 https://developers.openai.com/codex/app/computer-use#locked-use</div>
+        <a href="https://x.com/OpenAIDevs/status/2057536706778378692" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">5</div>
+          <div class="item-title">推出 Gemini for Home 赋能服务提供商与硬件合作伙伴</div>
+        </div>
+        <div class="item-source">Google Developers Blog（RSS）</div>
+        <div class="item-summary">Google 通过推出全栈 Gemini AI 解决方案扩展其智能家居生态系统。该方案集成了先进的摄像头智能、自然语言查询功能和日常活动摘要能力。它为服务提供商和硬件制造商提供了现成的参考设计与API，使其无需大量研发投入即可构建主动式、品牌化的智能家居服务。该计划旨在超越基础设备控制，迈向能够理解情境并实时响应用户需求的AI原生智能家居。</div>
+        <a href="https://developers.googleblog.com/empowering-service-providers-and-hardware-partners-with-gemini-for-home" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">6</div>
+          <div class="item-title">合作伙伴如何运用Opus强化网络安全</div>
+        </div>
+        <div class="item-source">Claude：Blog（网页）</div>
+        <div class="item-summary">多家企业正利用Claude Opus模型强化网络安全防御。Wiz通过其Red Agent，每周对超过15万个生产资产进行持续渗透测试，发现数千个高风险漏洞且误报率为零。Palo Alto Networks在不到三周内完成了相当于一年的渗透测试工作量。埃森哲将安全测试覆盖率从约10%提升至80%以上，涉及1600个应用和50万+个API，扫描周期从3-5天缩短至1小时内。应用主要围绕三个方向：开展大规模攻击性测试、缩短漏洞发现与修复的间隔，以及将受控AI系统部署到生产环境。</div>
+        <a href="https://claude.com/blog/how-our-partners-are-putting-opus-to-work-for-cybersecurity" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">7</div>
+          <div class="item-title">v2.1.147版本更新</div>
+        </div>
+        <div class="item-source">Claude Code：GitHub Releases（RSS）</div>
+        <div class="item-summary">本次更新引入了`Workflow`工具，支持确定性多智能体编排（默认关闭）。将`/simplify`命令重命名为`/code-review`，现可报告代码正确性问题并支持生成GitHub PR内联评论。改进了自动更新器（增加重试与错误报告）、大文件diff渲染性能，并优化了提示历史记录以避免重复条目。修复了多个关键问题，包括企业登录限制未生效、Windows下的PowerShell工具与终端闪烁问题、插件系统及shell快照的bug，并增强了沙箱安全性与终端兼容性。</div>
+        <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.147" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">8</div>
+          <div class="item-title">Replit企业版现已开放自助购买</div>
+        </div>
+        <div class="item-source">X：Replit (@Replit)</div>
+        <div class="item-summary">Replit Enterprise现已支持自助服务！ 几分钟内即可： - 购买Replit Enterprise - 配置SSO + SCIM - 与团队开始协作开发 无需合同谈判，无需等待。</div>
+        <a href="https://x.com/Replit/status/2057491954825674942" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">9</div>
+          <div class="item-title">Datasette Agent</div>
+        </div>
+        <div class="item-source">Simon Willison 博客</div>
+        <div class="item-summary">Datasette Agent是Datasette推出的首个可扩展AI助手，为用户提供对话式界面以查询数据，并支持通过插件生成图表。该工具基于其LLM Python库构建，是LLM与Datasette整合的重要成果。目前提供图表生成、AI图像创建和沙箱代码执行等官方插件。它既可运行于Gemini 3.1 Flash-Lite等云端模型，也支持通过LM Studio连接本地开源模型，具备可靠的工具调用与查询能力。</div>
+        <a href="https://simonwillison.net/2026/May/21/datasette-agent" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">10</div>
+          <div class="item-title">Shoplift by PixVerse快速生成平台原生广告视频</div>
+        </div>
+        <div class="item-source">X：PixVerse (@PixVerse_)</div>
+        <div class="item-summary">无需工作室，无需编辑队列。 将产品URL粘贴到Shoplift by PixVerse，几分钟内即可发布平台原生广告视频 ——专为持续进行创意测试的DTC团队打造。 免费早期访问：https://shoplift.pixverse.ai 转发+关注+回复=300积分（仅限72小时）</div>
+        <a href="https://x.com/PixVerse_/status/2057492991036588306" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">11</div>
+          <div class="item-title">发布 Kotlin版ADK与Android版ADK 0.1.0：在Android及其他平台构建AI Agent</div>
+        </div>
+        <div class="item-source">Google Developers Blog（RSS）</div>
+        <div class="item-summary">Google发布了面向开发者的新工具包：Kotlin版ADK与Android版ADK 0.1.0。这两个工具包旨在帮助开发者构建AI Agent。其中，Kotlin版ADK将代理工作流引入后端项目开发；Android版ADK则专注于移动端应用，提供了构建AI代理所需的特定功能。此次发布为开发者提供了在Android生态及更广泛平台创建AI应用的官方工具基础。</div>
+        <a href="https://developers.googleblog.com/adk-kotlin-android-building-ai-agents" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">行业动态</span>
+        <span class="section-count">8 条</span>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">12</div>
+          <div class="item-title">加州州长纽森签署首创性行政令，为应对AI可能带来的劳动力市场冲击做准备</div>
+        </div>
+        <div class="item-source">X：Rohan Paul (@rohanpaul_ai)</div>
+        <div class="item-summary">加州州长纽森签署行政令，首次将AI引发的失业问题正式列为公共政策议题，要求各部门研究遣散费、就业保险及员工持股等保障措施。该命令认识到AI可能渐进式替代岗位任务，而非一次性取代整个职位，因此计划建立新的劳动力数据看板，以更早捕捉行业受到的冲击。政策核心在于探讨如何将AI带来的生产力红利，通过股权、薪酬支持等方式在企业与员工间进行更公平的分配。同时指出，单纯的职业培训可能无法解决被AI彻底取代的岗位所带来的根本性就业错配问题。</div>
+        <a href="https://x.com/rohanpaul_ai/status/2057555054387949848" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">13</div>
+          <div class="item-title">FSD正式登陆中国大陆市场</div>
+        </div>
+        <div class="item-source">X：小互 (@xiaohu)</div>
+        <div class="item-summary">FSD来了… 官宣进入大陆…</div>
+        <a href="https://x.com/xiaohu/status/2057279976467218765" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">14</div>
+          <div class="item-title">Anthropic即将成为首个盈利的AI实验室</div>
+        </div>
+        <div class="item-source">The Decoder：AI News（RSS）</div>
+        <div class="item-summary">根据《华尔街日报》报道，Anthropic正接近实现其首个盈利季度，预计第二季度营收达109亿美元，运营利润为5.59亿美元。该公司在去年夏季时还预计最早在2028年才能盈利。主要增长动力来自编程工具和Claude的代理功能使用，其需求一度超过了可用的算力容量。这一转变标志着Anthropic可能成为业界首个实现盈利的领先AI研发机构。</div>
+        <a href="https://the-decoder.com/anthropic-is-about-to-become-the-first-profitable-ai-lab" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">15</div>
+          <div class="item-title">Intuit将裁员逾3000人，以重新聚焦人工智能</div>
+        </div>
+        <div class="item-source">Hacker News 热门（buzzing.cc 中文翻译）</div>
+        <div class="item-summary">软件公司Intuit宣布将裁员超过3000人，作为其战略重组的一部分。此次裁员旨在将公司资源重新聚焦于人工智能（AI）领域的发展，以适应技术趋势并提升长期竞争力。裁员规模约占其全球员工总数的10%。</div>
+        <a href="https://techcrunch.com/2026/05/20/intuit-to-lay-off-over-3000-employees-to-refocus-on-ai" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">16</div>
+          <div class="item-title">首部100%AI生成电影亮相戛纳，剑指2026院线</div>
+        </div>
+        <div class="item-source">X：可灵 Kling AI (@Kling_ai)</div>
+        <div class="item-summary">AI电影项目RAPHAEL在戛纳亮相。该片由Mateo AI Studio与韩国MBC C&I的AI内容实验室联合开发，全程使用Kling AI视频模型进行制作，旨在实现独特的视觉效果与差异化的观影体验。项目计划于2026年登陆院线，其大规模制作旨在证明纯AI电影制作的工业可行性，标志着AI原生院线电影新趋势的开端。</div>
+        <a href="https://x.com/Kling_ai/status/2057295321831539054" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">17</div>
+          <div class="item-title">谷歌DeepMind在亚太启动AI气候加速器</div>
+        </div>
+        <div class="item-source">Google DeepMind：Blog（RSS）</div>
+        <div class="item-summary">亚太地区经济增长迅速，但极易受到气候变化影响，且现有绿色技术发展速度跟不上环境风险的增长。为此，Google DeepMind宣布启动首届专注于“AI for the Planet”的加速器计划。该计划为期三个月，面向亚太地区的初创企业、研究团队和非营利组织，旨在利用前沿人工智能技术解决自然、气候、农业和能源等领域的挑战。入选组织将获得专家指导、定制化支持，并可集成Google AI的前沿模型。计划将从新加坡的线下训练营开始，现已开放注册。</div>
+        <a href="https://deepmind.google/blog/were-launching-the-google-deepmind-accelerator-program-in-asia-pacific-to-tackle-environmental-risks" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">18</div>
+          <div class="item-title">商汤连续十年领跑中国计算机视觉市场</div>
+        </div>
+        <div class="item-source">X：商汤 SenseTime (@SenseTime_AI)</div>
+        <div class="item-summary">商汤科技被IDC连续十年评为中国计算机视觉市场第一。其关键驱动因素包括：主导推进CV 2.0架构演进，原生嵌入生成式AI能力；海外市场扩展至12个国际区域，服务超500家企业客户并保持高留存率；以年度经常性收入增长为锚点实现盈利性增长；并从项目制交付转型为高度可扩展的AI平台。这一十年市场领导地位为其引领计算机视觉与生成式AI的融合浪潮奠定了基础。</div>
+        <a href="https://x.com/SenseTime_AI/status/2057289342654300586" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">19</div>
+          <div class="item-title">AdventHealth携手OpenAI推进全人医疗</div>
+        </div>
+        <div class="item-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</div>
+        <div class="item-summary">AdventHealth正在采用OpenAI的ChatGPT for Healthcare解决方案，旨在优化医疗工作流程，减轻医务人员行政负担，从而将更多时间还给患者护理。该合作利用人工智能技术处理文档、协调等非临床任务，以提升整体医疗效率与患者体验。</div>
+        <a href="https://openai.com/index/adventhealth" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">技巧与观点</span>
+        <span class="section-count">7 条</span>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">20</div>
+          <div class="item-title">游戏开发门槛被AI大幅降低</div>
+        </div>
+        <div class="item-source">X：阿易 AI Notes (@AYi_AInotes)</div>
+        <div class="item-summary">Grok展示了AI深度介入游戏开发的全新工作流。通过“提示词生成角色图→图片转动画视频→自动拼接成Spritesheet→导入引擎”四步流程，将传统需要美术与动画师耗时数天的工作，在几分钟内完成。这标志着AI不再仅生成静态内容，而是能实时生成可直接导入Unity或Godot等游戏引擎的可运行资产。该技术极大压缩了游戏原型的迭代周期，将反馈循环从“天”缩短至“秒”，使得独立开发者也能快速实现创意，显著降低了游戏创作的门槛。</div>
+        <a href="https://x.com/AYi_AInotes/status/2057371332359201103" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">21</div>
+          <div class="item-title">开源Suno技能：一键生成任意风格AI音乐</div>
+        </div>
+        <div class="item-source">X：Vista (@vista8)</div>
+        <div class="item-summary">这是基于Suno AI音乐生成工具的技能实现，可通过简单指令按用户需求生成不同风格的歌曲（例如德语空灵风格）。该技能订阅费用为每月10美元，支持高度自定义的风格生成。技术层面已优化，新增近6000个音乐风格检索以提升准确性，并可通过谷歌CDP免登录直接调用。项目已开源，提供GitHub仓库地址与安装指令，降低了创作门槛。目前AI生成音乐在艺术性上仍与人工制作存在差距，但实现了快速、灵活的创作可能。</div>
+        <a href="https://x.com/vista8/status/2057287459759698400" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">22</div>
+          <div class="item-title">Cloudflare首席执行官谈如何决定用人工智能取代哪些员工</div>
+        </div>
+        <div class="item-source">Hacker News 热门（buzzing.cc 中文翻译）</div>
+        <div class="item-summary">Cloudflare首席执行官在《华尔街日报》撰文，分享其公司用AI替代部分员工的决策逻辑。该文于2026年5月21日发布，引发了技术社区的广泛讨论，在Hacker News上获得100个点赞。</div>
+        <a href="https://www.wsj.com/opinion/how-i-choose-which-cloudflare-employees-to-replace-with-ai-40a197e5" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">23</div>
+          <div class="item-title">核算OpenAI和Anthropic最新动态背后的数学</div>
+        </div>
+        <div class="item-source">Gary Marcus：The Road to AI We Can Trust（RSS）</div>
+        <div class="item-summary">OpenAI与Anthropic近期相继发布重要产品更新。Claude 3.5 Sonnet在多项基准测试中超越GPT-4o，同时宣布API价格下调50%。Anthropic披露其模型训练成本年均增长约3.2倍，而OpenAI被曝已通过企业服务实现单季度超10亿美元营收。两家公司在技术突破与商业化竞赛中，正通过精密的成本核算与性能权衡重塑行业格局。</div>
+        <a href="https://garymarcus.substack.com/p/checking-the-math-behind-openai-and" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">24</div>
+          <div class="item-title">谷歌高级副总裁曼尼卡：AI短期内不会摧毁就业市场</div>
+        </div>
+        <div class="item-source">IT之家（RSS）</div>
+        <div class="item-summary">谷歌高级副总裁詹姆斯·曼尼卡近日表示，AI短期内不会摧毁就业市场，也不同意“大规模失业”的激进预测。他援引其2017年参与的麦肯锡报告指出，自动化将同时导致岗位减少、新岗位出现以及现有岗位被重新定义。他认为当前争议在于这三种情况的占比，而非是否发生。曼尼卡批评AI行业放大了公众焦虑，这种恐慌可能削弱技术价值。他强调，AI最大的影响是改变工作内容与方式，而非让职业消失。</div>
+        <a href="https://www.ithome.com/0/953/469.htm" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">25</div>
+          <div class="item-title">SpaceX的无限野心：AI企业集团</div>
+        </div>
+        <div class="item-source">Tomer Tunguz 博客（VC 分析）</div>
+        <div class="item-summary">SpaceX在提交S-1文件后，展现为一家AI时代的企业集团。公司由三大业务构成：Starlink（星链）、太空业务与AI业务。2025年总营收达187亿美元。其中，星链是绝对的核心与现金引擎，贡献了61%的营收并实现39%的营业利润率。太空业务收入占比22%，而AI业务（含X平台与xAI）虽仅占17%且处于巨额投入阶段，但代表了未来的战略方向。整体上，星链的强劲盈利为公司的太空探索与AI雄心提供了关键的资金支持。</div>
+        <a href="https://www.tomtunguz.com/spacex-s1-analysis" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-num">26</div>
+          <div class="item-title">构建云端智能体的经验总结</div>
+        </div>
+        <div class="item-source">Cursor Blog</div>
+        <div class="item-summary">云端智能体已从本地智能体的简单扩展，发展为具备独立环境、可并行无人值守处理长任务的系统。构建的核心经验在于：完整的开发环境是输出质量的关键，这需重建大量基础设施；可靠性方面，团队从自研架构迁移至Temporal平台，将可靠性提升至99.9%以上，该平台每日处理超5000万次操作，支撑超40%的代码拉取请求；同时，实现了智能体循环、机器状态与对话状态的解耦，以适应复杂的跨环境协作。</div>
+        <a href="https://cursor.com/blog/cloud-agent-lessons" class="item-link" target="_blank">阅读原文 →</a>
+      </div>
+    </div>
+
+  
+</main>
+
+<footer class="footer">
+  <p>数据来自 <a href="https://aihot.virxact.com" target="_blank">aihot.virxact.com</a> · 由 Hermes Agent 自动生成</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
