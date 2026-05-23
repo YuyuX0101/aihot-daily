@@ -470,7 +470,7 @@ body {
 
 <script>
 // Fetch available days
-fetch('days.json')
+fetch('days.json?v=' + Date.now())
   .then(r => r.json())
   .then(days => {
     const timeline = document.getElementById('timeline');
