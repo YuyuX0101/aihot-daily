@@ -172,7 +172,6 @@ body {
   position: absolute;
   bottom: 32px;
   left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,7 +181,8 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   opacity: 0;
-  animation: fadeUp 0.6s var(--ease-out) 1.2s forwards;
+  transform: translateX(-50%) translateY(20px);
+  animation: fadeUpScroll 0.6s var(--ease-out) 1.2s forwards;
 }
 
 .scroll-hint::after {
@@ -200,8 +200,8 @@ body {
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeUpScroll {
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 /* ===== TIMELINE ===== */
