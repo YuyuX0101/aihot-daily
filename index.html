@@ -2,462 +2,983 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 日报 · 2026-05-23</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI HOT 日报 · 2026-05-23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #060814;
-  --bg-card: #0d111f;
-  --bg-hover: #131a2e;
-  --text: #e2e8f0;
-  --text-muted: #8892a0;
-  --accent: #3b82f6;
-  --accent-dim: rgba(59,130,246,0.15);
-  --border: rgba(148,163,184,0.1);
-  --score-high: #22c55e;
-  --score-mid: #3b82f6;
+  --bg-deep: #0a0e1a;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2236;
+  --bg-card: #1e293b;
+  --border-subtle: rgba(148, 163, 184, 0.08);
+  --border-glow: rgba(56, 189, 248, 0.15);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  --accent-green: #34d399;
+  --accent-orange: #fb923c;
+  --accent-pink: #f472b6;
+  --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
   min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
-.container { max-width: 800px; margin: 0 auto; padding: 20px 16px; }
-header {
-  text-align: center;
-  padding: 40px 0 30px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 24px;
+
+/* ===== SIDEBAR (LEFT) ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: rgba(10, 14, 26, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border-subtle);
+  z-index: 200;
+  padding: 72px 0 24px;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--ease-out);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-header h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 0 20px 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 8px;
 }
-header .date {
-  color: var(--text-muted);
-  font-size: 0.875rem;
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0 12px;
 }
-header .subtitle {
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  margin-top: 8px;
-  opacity: 0.7;
+
+.sidebar-nav .nav-section {
+  margin-bottom: 4px;
 }
-.item {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 16px;
-  transition: all 0.2s;
-}
-.item:hover {
-  background: var(--bg-hover);
-  border-color: rgba(59,130,246,0.3);
-}
-.item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  gap: 12px;
-}
-.item-score {
-  background: var(--accent-dim);
-  color: var(--score-high);
-  font-size: 0.875rem;
+
+.sidebar-nav .nav-section-title {
+  display: block;
+  padding: 10px 12px 6px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
+  color: var(--accent-cyan);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 2px;
+}
+
+.sidebar-nav .nav-item a {
+  display: block;
+  padding: 8px 12px 8px 20px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.15s var(--ease-out);
+  border-left: 2px solid transparent;
   white-space: nowrap;
-  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.item-source {
+
+.sidebar-nav .nav-item a:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-left-color: var(--accent-cyan);
+}
+
+.sidebar-nav .nav-item a.active {
+  background: rgba(34, 211, 238, 0.06);
+  color: var(--accent-cyan);
+  border-left-color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+/* ===== SIDEBAR TOGGLE (SMALL CIRCLE) ===== */
+.sidebar-toggle {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 250;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
   color: var(--text-muted);
-  font-size: 0.75rem;
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  opacity: 0.5;
 }
-.item-summary {
-  color: var(--text);
-  font-size: 0.9375rem;
+
+.sidebar-toggle:hover {
+  opacity: 1;
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--border-glow);
+  color: var(--accent-cyan);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrapper {
+  transition: margin-left 0.35s var(--ease-out);
+}
+
+.main-wrapper.sidebar-open {
+  margin-left: 280px;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.nav-back:hover {
+  border-color: var(--border-glow);
+  color: var(--text-primary);
+}
+
+.nav-back:active {
+  transform: scale(0.97);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 48px 24px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 24px;
   line-height: 1.7;
 }
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ===== SECTIONS ===== */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.section {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.section-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* ===== ITEMS ===== */
+.item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.item-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 38px;
+}
+
+.item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 38px;
+}
+
 .item-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   margin-top: 12px;
-  color: var(--accent);
-  font-size: 0.8125rem;
+  margin-left: 38px;
+  font-size: 13px;
+  color: var(--accent-cyan);
   text-decoration: none;
+  font-weight: 500;
   opacity: 0.8;
+  transition: opacity 0.2s;
 }
-.item-link:hover { opacity: 1; }
-.empty {
+
+.item-link:hover {
+  opacity: 1;
+}
+
+/* ===== FOOTER ===== */
+.footer {
   text-align: center;
-  padding: 60px 20px;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer p {
+  font-size: 12px;
   color: var(--text-muted);
 }
-footer {
-  text-align: center;
-  padding: 30px 0;
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  border-top: 1px solid var(--border);
-  margin-top: 20px;
+
+.footer a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  opacity: 0.7;
 }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 85vw;
+    max-width: 320px;
+  }
+  .main-wrapper.sidebar-open {
+    margin-left: 0;
+  }
+  .sidebar-toggle {
+    left: 12px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @media (max-width: 480px) {
-  .container { padding: 12px; }
-  header { padding: 24px 0 20px; }
-  header h1 { font-size: 1.25rem; }
+  .hero { padding: 36px 20px 24px; }
+  .content { padding: 0 16px 40px; }
   .item { padding: 16px; }
+  .item-summary, .item-source, .item-link { padding-left: 0; margin-left: 0; }
+  .item-header { margin-bottom: 8px; }
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1>AI 日报</h1>
-    <div class="date">2026年5月23日 · 精选 68 分以上 · 共 29 条</div>
-    <div class="subtitle">数据来源：AI HOT (aihot.virxact.com)</div>
-  </header>
 
-  <div class="item">
-    <div class="item-header">
+<!-- Sidebar Toggle (small circle, left side) -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="目录">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar (Left) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">目录导航</div>
+  </div>
+  <ul class="sidebar-nav" id="sidebarNav">
+    <!-- JS will populate with sections and item titles -->
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="main-wrapper" id="mainWrapper">
+
+<nav class="nav">
+  <div class="nav-brand">AI HOT</div>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    返回首页
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-date">2026-05-23</div>
+  <h1>AI HOT 日报</h1>
+  <p class="hero-lead"></p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-value">29</div>
+      <div class="stat-label">条精选</div>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">模型发布/更新</span>
+      <span class="section-count">14 条</span>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">1</div>
+        <div class="item-title">Gemini 月活破9亿，发布3.5 Flash和Omni视频模型</div>
+      </div>
       <div class="item-source">Google Gemini</div>
-      <div class="item-score">87 分</div>
+      <div class="item-summary">谷歌宣布Gemini应用月活用户已突破9亿。在此次更新中，Gemini正从工具演变为更主动的个人AI代理。主要更新包括新一代模型Gemini 3.5 Flash、全新的Neural Expressive设计语言，以及能将提示转化为高质量视频的Gemini Omni模型。核心亮点是两项代理功能：Daily Brief提供个性化每日简报，Gemini Spark则作为24/7的个人代理，在用户授权下主动管理任务与数字生活。</div>
+      <a href="https://x.com/GeminiApp/status/2057974680242512071" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      谷歌宣布Gemini应用月活用户已突破9亿。在此次更新中，Gemini正从工具演变为更主动的个人AI代理。主要更新包括新一代模型Gemini 3.5 Flash、全新的"Neural Expressive"设计语言，以及能将提示转化为高质量视频的Gemini Omni模型。核心亮点是两项代理功能："Daily Brief"提供个性化每日简报，"Gemini Spark"则作为24/7的个人代理，在用户授权下主动管理任务与数字生活。
-    </div>
-    <a class="item-link" href="https://x.com/GeminiApp/status/2057974680242512071" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">AI News | TestingCatalog</div>
-      <div class="item-score">81 分</div>
-    </div>
-    <div class="item-summary">
-      DeepSeek宣布将其高性能模型V4-Pro的限时75%折扣永久化，输出价格降至0.87美元/百万tokens，远低于行业主流定价区间。此举不仅是促销，更被视为争夺定价权的战略行动，标志着AI模型的商业模式正从服务转向类似水电煤的基础设施逻辑。
-    </div>
-    <a class="item-link" href="https://x.com/testingcatalog/status/2057873107726041177" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">Anthropic · Research</div>
-      <div class="item-score">90 分</div>
-    </div>
-    <div class="item-summary">
-      Project Glasswing项目上线首月战果：与约50家合作伙伴使用Claude Mythos Preview模型，已在全球关键系统软件中发现超过10,000个高危或严重漏洞。Cloudflare发现2,000个漏洞（含400个高危），Mozilla在Firefox 150中修复271个漏洞。独立验证准确率达90.6%，部分团队漏洞发现效率提升超10倍。当前瓶颈已从发现转向修补。
-    </div>
-    <a class="item-link" href="https://www.anthropic.com/research/glasswing-initial-update" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">2</div>
+        <div class="item-title">Anthropic警告：Claude Mythos Preview发现超1万个严重漏洞</div>
+      </div>
       <div class="item-source">The Decoder</div>
-      <div class="item-score">79 分</div>
+      <div class="item-summary">Anthropic发布的AI模型Claude Mythos Preview，在玻璃翼计划中与约50家合作伙伴合作，已在关键系统软件中发现超过1万个严重漏洞。漏洞积累的速度已远超任何人的修补能力。Anthropic警告称，这创造了一个高风险过渡期，并表示没有任何公司（包括其自身）已建立足够强大的安全防护措施来防止这些模型被滥用。</div>
+      <a href="https://the-decoder.com/anthropic-warns-claude-mythos-preview" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      Anthropic发布的AI模型Claude Mythos Preview，在"玻璃翼计划"中与约50家合作伙伴合作，已在关键系统软件中发现超过1万个严重漏洞。漏洞积累的速度已远超任何人的修补能力。Anthropic警告称，这创造了一个高风险过渡期，并表示没有任何公司（包括其自身）已建立足够强大的安全防护措施来防止这些模型被滥用。
-    </div>
-    <a class="item-link" href="https://the-decoder.com/anthropic-warns-claude-mythos-preview" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">3</div>
+        <div class="item-title">微软报告：AI成本已高于人工工资</div>
+      </div>
       <div class="item-source">Hacker News · Fortune</div>
-      <div class="item-score">79 分</div>
+      <div class="item-summary">微软发布报告指出，在特定工作场景中，部署和使用人工智能（AI）的成本目前已高于支付相应的人工工资。报告分析了基于tokens和agents的AI使用模式，发现其综合开销超过了雇佣人类员工完成同类任务的费用。这一发现揭示了当前企业应用AI技术面临的现实经济挑战。</div>
+      <a href="https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      微软发布报告指出，在特定工作场景中，部署和使用人工智能（AI）的成本目前已高于支付相应的人工工资。报告分析了基于"tokens"和"agents"的AI使用模式，发现其综合开销超过了雇佣人类员工完成同类任务的费用。这一发现揭示了当前企业应用AI技术面临的现实经济挑战。
-    </div>
-    <a class="item-link" href="https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">IT之家</div>
-      <div class="item-score">79 分</div>
-    </div>
-    <div class="item-summary">
-      英伟达发布2027财年Q1财报，营收816亿美元，同比增长85%，净利润583亿美元，翻两倍多，市值达5.7万亿美元，已超德国2026年GDP预测。黄仁勋预测，超大规模云厂商的AI基建年度开支将从当前的1万亿美元，增长至3-4万亿美元，远超华尔街预期。财报同时显示，数据中心业务营收752亿美元，占比超九成。
-    </div>
-    <a class="item-link" href="https://www.ithome.com/0/954/223.htm" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">4</div>
+        <div class="item-title">Google DeepMind推出AlphaProof Nexus：LLM+Lean形式化验证</div>
+      </div>
       <div class="item-source">Rohan Paul · Google DeepMind</div>
-      <div class="item-score">79 分</div>
+      <div class="item-summary">Google DeepMind提出了AlphaProof Nexus系统，它将大型语言模型与Lean形式化验证工具相结合。该系统允许LLM在生成证明的过程中，不断读取Lean的编译错误并进行修正，还可调用更强的工具辅助解决子问题。在针对353个Erdős问题和492个开放猜想的测试中，系统成功解决了9个Erdős问题并证明了44个序列猜想。</div>
+      <a href="https://x.com/rohanpaul_ai/status/2057954067146781151" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      Google DeepMind提出了AlphaProof Nexus系统，它将大型语言模型与Lean形式化验证工具相结合。该系统允许LLM在生成证明的过程中，不断读取Lean的编译错误并进行修正，还可调用更强的工具辅助解决子问题。在针对353个Erdős问题和492个开放猜想的测试中，系统成功解决了9个Erdős问题并证明了44个序列猜想。
-    </div>
-    <a class="item-link" href="https://x.com/rohanpaul_ai/status/2057954067146781151" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">swyx</div>
-      <div class="item-score">78 分</div>
-    </div>
-    <div class="item-summary">
-      Kakuna是一款AI代理工具，旨在将早期快速原型自动转化为可维护的生产级代码库。它通过内置的检查清单和"计划-目标"工作流，模拟人类开发与运维流程，在保持功能不变的前提下，自动执行代码审查、测试补充、重构等"无聊"工作。一次约16小时的运行能生成上百次提交，将一个脆弱的MVP转变为一个结构清晰、可长期构建的稳定项目。
-    </div>
-    <a class="item-link" href="https://x.com/swyx/status/2057876022553690327" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">5</div>
+        <div class="item-title">（内容待补充）</div>
+      </div>
       <div class="item-source">Rohan Paul</div>
-      <div class="item-score">78 分</div>
+      <div class="item-summary">（内容待补充）</div>
+      <a href="https://x.com/rohanpaul_ai/status/2057878328443650300" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      （内容待补充）
-    </div>
-    <a class="item-link" href="https://x.com/rohanpaul_ai/status/2057878328443650300" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">6</div>
+        <div class="item-title">（内容待补充）</div>
+      </div>
       <div class="item-source">Ethan Mollick</div>
-      <div class="item-score">76 分</div>
+      <div class="item-summary">（内容待补充）</div>
+      <a href="https://x.com/emollick/status/2057874739817808223" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      （内容待补充）
-    </div>
-    <a class="item-link" href="https://x.com/emollick/status/2057874739817808223" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">7</div>
+        <div class="item-title">feishu-claude-code-bridge：飞书与Claude Code双向连接</div>
+      </div>
       <div class="item-source">宝玉</div>
-      <div class="item-score">75 分</div>
+      <div class="item-summary">feishu-claude-code-bridge是一个开源项目，可实现飞书与本机Claude Code CLI的双向连接。用户能从飞书消息中直接指挥Claude Code执行任务，Claude也能读取飞书中的工作上下文并创建、编辑飞书文档。其工作原理是将飞书消息转为Prompt通过命令行调用Claude CLI，并将流式输出实时同步回飞书。</div>
+      <a href="https://x.com/dotey/status/2058084478459826432" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      feishu-claude-code-bridge是一个开源项目，可实现飞书与本机Claude Code CLI的双向连接。用户能从飞书消息中直接指挥Claude Code执行任务，Claude也能读取飞书中的工作上下文并创建、编辑飞书文档。其工作原理是将飞书消息转为Prompt通过命令行调用Claude CLI，并将流式输出实时同步回飞书。
-    </div>
-    <a class="item-link" href="https://x.com/dotey/status/2058084478459826432" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">ViggleAI</div>
-      <div class="item-score">75 分</div>
-    </div>
-    <div class="item-summary">
-      PINOC: Upload a motion video, get clean skeletal animation. Export as .fbx/.glb, ready for use in 3D workflows.
-    </div>
-    <a class="item-link" href="https://x.com/ViggleAI/status/2057947352195858568" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">Hacker News · Anthropic</div>
-      <div class="item-score">75 分</div>
-    </div>
-    <div class="item-summary">
-      Anthropic发布了"玻璃翼"项目的初步进展报告。在约50家合作伙伴参与下，通过使用Claude Mythos Preview模型，已在全球关键系统中发现超过10,000个高危或严重漏洞。多家合作伙伴报告漏洞发现效率提升超过十倍。该报告在Hacker News上获得119个积分。
-    </div>
-    <a class="item-link" href="https://www.anthropic.com/research/glasswing-initial-update" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">Rohan Paul · 微软</div>
-      <div class="item-score">74 分</div>
-    </div>
-    <div class="item-summary">
-      Satya Nadella透露微软正借鉴丰田精益生产原则，将"精益知识工作"理念应用于内部AI运营。通过计算AI投资回报并利用其成本削减效应，微软在白领工作中部署AI以优化流程。例如，微软每年在客户支持业务上支出约40亿美元，通过部署AI代理处理前端问题分流及为支持人员提供实时推理协助，在Xbox和Azure等支持领域大幅降低了成本。
-    </div>
-    <a class="item-link" href="https://x.com/rohanpaul_ai/status/2058173673887113470" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">小互</div>
-      <div class="item-score">74 分</div>
-    </div>
-    <div class="item-summary">
-      Oasis Feng分享：远程服务器上并不需要安装完整版Codex app，只需安装CLI版Codex并运行 codex remote-control，手机上ChatGPT应用里的Codex就会显示出带有终端图标的服务器名称，实现远程控制。
-    </div>
-    <a class="item-link" href="https://x.com/xiaohu/status/2057910256106418180" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">8</div>
+        <div class="item-title">Vibe Coding：AI作为技术联合创始人的提示词框架</div>
+      </div>
       <div class="item-source">AYi · Vibe Coding</div>
-      <div class="item-score">73 分</div>
+      <div class="item-summary">本文介绍了一个名为Vibe Coding的详细提示词框架，由Miles Deutscher提出。该框架将AI定位为用户的技术联合创始人，旨在协助构建真实、可用且可发布的产品。它分为探索、规划、构建、打磨与交付五个阶段，强调AI通过提问、解释、测试和确认来确保用户全程知情并拥有最终决定权。</div>
+      <a href="https://x.com/AYi_AInotes/status/2058067574428930072" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      本文介绍了一个名为"Vibe Coding"的详细提示词框架，由Miles Deutscher提出。该框架将AI定位为用户的"技术联合创始人"，旨在协助构建真实、可用且可发布的产品。它分为探索、规划、构建、打磨与交付五个阶段，强调AI通过提问、解释、测试和确认来确保用户全程知情并拥有最终决定权。
-    </div>
-    <a class="item-link" href="https://x.com/AYi_AInotes/status/2058067574428930072" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">Chubby</div>
-      <div class="item-score">72 分</div>
-    </div>
-    <div class="item-summary">
-      NVIDIA凭借CUDA软件生态与NVLink互联技术构建了强大系统性壁垒，在数据中心业务保持高速增长。然而市场正加速分化：Google将TPU拆分为专用芯片，AMD推出机架级系统正面竞争，Cerebras等专用芯片在特定任务上展现数量级优势。与此同时，华为正构建独立于西方供应链的并行计算生态。随着AI负载从训练转向推理，AI基础设施的竞争格局可能迎来根本性重塑。
-    </div>
-    <a class="item-link" href="https://x.com/kimmonismus/status/2058173252497723562" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">9</div>
+        <div class="item-title">Karpathy的CLAUDE.md：将AI编程准确率从65%提升至94%</div>
+      </div>
       <div class="item-source">AYi · Karpathy</div>
-      <div class="item-score">72 分</div>
+      <div class="item-summary">Karpathy的CLAUDE.md因能将AI编程准确率从65%提升至94%而备受关注，其核心是四条对抗开发者本能、倡导慢思考的硬规则：先明确假设再编码、从最简方案入手、进行精准修改、以目标驱动执行。然而多数开发者仅将其存入收藏夹后便遗忘。真正的价值是将这65行规则转化为每日自查的工程纪律，通过持续执行形成复利。</div>
+      <a href="https://x.com/AYi_AInotes/status/2058147644061450446" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      Karpathy的CLAUDE.md因能将AI编程准确率从65%提升至94%而备受关注，其核心是四条对抗开发者本能、倡导"慢思考"的硬规则：先明确假设再编码、从最简方案入手、进行精准修改、以目标驱动执行。然而多数开发者仅将其存入收藏夹后便遗忘。真正的价值是将这65行规则转化为每日自查的工程纪律，通过持续执行形成复利。
-    </div>
-    <a class="item-link" href="https://x.com/AYi_AInotes/status/2058147644061450446" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">10</div>
+        <div class="item-title">Perplexity开源安全工具Bumblebee</div>
+      </div>
       <div class="item-source">MarkTechPost · Perplexity</div>
-      <div class="item-score">72 分</div>
+      <div class="item-summary">Perplexity将其内部安全工具Bumblebee开源，该工具旨在保护其搜索产品Comet和Computer背后的开发者系统。Bumblebee是一个面向macOS和Linux开发者端点的只读库存收集器，可扫描npm、PyPI、Go模块、MCP配置、编辑器扩展及浏览器扩展，其扫描过程不调用任何包管理器，也不运行任何代码。</div>
+      <a href="https://www.marktechpost.com/2026/05/23/perplexity-open-sources-bumblebee" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      Perplexity将其内部安全工具Bumblebee开源，该工具旨在保护其搜索产品Comet和Computer背后的开发者系统。Bumblebee是一个面向macOS和Linux开发者端点的只读库存收集器，可扫描npm、PyPI、Go模块、MCP配置、编辑器扩展及浏览器扩展，其扫描过程不调用任何包管理器，也不运行任何代码。
-    </div>
-    <a class="item-link" href="https://www.marktechpost.com/2026/05/23/perplexity-open-sources-bumblebee" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">IT之家 · Anthropic</div>
-      <div class="item-score">72 分</div>
-    </div>
-    <div class="item-summary">
-      Anthropic于5月22日披露，其Project Glasswing项目上线一个月内，已携手约50家合作伙伴，在关键软件中挖掘出超过1万个高危与关键漏洞。合作方反馈显示，Claude Mythos Preview模型显著提升了漏洞发现效率，部分团队速度提升超10倍。Cloudflare发现2000个漏洞（含400高危），Mozilla在Firefox 150中修复271个漏洞。
-    </div>
-    <a class="item-link" href="https://www.ithome.com/0/954/272.htm" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">11</div>
+        <div class="item-title">DeepSeek V4-Pro永久降价75%至$0.87/百万tokens</div>
+      </div>
       <div class="item-source">AYi · DeepSeek</div>
-      <div class="item-score">71 分</div>
+      <div class="item-summary">DeepSeek将其高性能模型V4-Pro的限时75%折扣宣布为永久性调整，输出价格降至0.87美元/百万tokens，远低于行业主流定价区间。此举不仅是促销，更被视为争夺定价权的战略行动，标志着AI模型的商业模式正从服务转向类似水电煤的基础设施逻辑。DeepSeek通过永久降价，意图以低单价换取海量使用数据、开发者生态及行业定价话语权。</div>
+      <a href="https://x.com/AYi_AInotes/status/2057873486555570460" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      DeepSeek将其高性能模型V4-Pro的限时75%折扣宣布为永久性调整，输出价格降至0.87美元/百万tokens，远低于行业主流定价区间。此举不仅是促销，更被视为争夺定价权的战略行动，标志着AI模型的商业模式正从服务转向类似水电煤的基础设施逻辑。DeepSeek通过永久降价，意图以低单价换取海量使用数据、开发者生态及行业定价话语权。
-    </div>
-    <a class="item-link" href="https://x.com/AYi_AInotes/status/2057873486555570460" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">12</div>
+        <div class="item-title">DeepSeek即将完成100亿美元融资，估值达450亿美元</div>
+      </div>
       <div class="item-source">The Decoder · DeepSeek</div>
-      <div class="item-score">71 分</div>
+      <div class="item-summary">Deepseek即将完成约100亿美元的融资，这将使这家中国AI初创公司的估值达到约450亿美元。创始人梁文峰向投资者明确表示，公司战略将优先推进AGI（通用人工智能）的研究，而非追求短期利润。这一举动凸显了在AI竞赛中，Deepseek坚持长期技术投入，即使获得巨额资金支持，也选择以突破性研究为导向。</div>
+      <a href="https://the-decoder.com/deepseek-reportedly-prioritizes-agi-research-over-quick-profits" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      Deepseek即将完成约100亿美元的融资，这将使这家中国AI初创公司的估值达到约450亿美元。创始人梁文峰向投资者明确表示，公司战略将优先推进AGI（通用人工智能）的研究，而非追求短期利润。这一举动凸显了在AI竞赛中，Deepseek坚持长期技术投入，即使获得巨额资金支持，也选择以突破性研究为导向。
-    </div>
-    <a class="item-link" href="https://the-decoder.com/deepseek-reportedly-prioritizes-agi-research-over-quick-profits" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">13</div>
+        <div class="item-title">Models.dev：开源AI模型规格数据库</div>
+      </div>
       <div class="item-source">Hacker News · Models.dev</div>
-      <div class="item-score">70 分</div>
+      <div class="item-summary">近期发布了开源数据库Models.dev，专门收录人工智能模型的各项规格、定价及功能信息。该项目在GitHub公开，便于开发者查询和比较不同AI模型。其在Hacker News社区获得101点关注度，显示出技术社区对这类集中化、透明化的模型信息资源的较大兴趣。</div>
+      <a href="https://github.com/anomalyco/models.dev" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      近期发布了开源数据库Models.dev，专门收录人工智能模型的各项规格、定价及功能信息。该项目在GitHub公开，便于开发者查询和比较不同AI模型。其在Hacker News社区获得101点关注度，显示出技术社区对这类集中化、透明化的模型信息资源的较大兴趣。
-    </div>
-    <a class="item-link" href="https://github.com/anomalyco/models.dev" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">IT之家 · 奥纬咨询</div>
-      <div class="item-score">70 分</div>
-    </div>
-    <div class="item-summary">
-      奥纬咨询研究发现，AI工具正被广泛用于入门级任务，导致企业招聘重心转向高级岗位，年轻人求职难度加大。科技行业受冲击最严重，74%的CEO已冻结或缩减招聘。计划削减初级岗位的比例从17%跃升至43%，而招聘转向中层岗位的比例则升至30%。尽管超90%的企业在部署AI，但多数仍处试点阶段。
-    </div>
-    <a class="item-link" href="https://www.ithome.com/0/954/235.htm" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">14</div>
+        <div class="item-title">OpenAI发布Codex Appshots：一键将Mac窗口内容发送给AI</div>
+      </div>
       <div class="item-source">The Decoder · OpenAI</div>
-      <div class="item-score">69 分</div>
+      <div class="item-summary">OpenAI为其编码助手Codex发布了名为Appshots的新功能。该功能面向Mac用户，允许他们通过一键操作，将当前任意应用程序窗口的内容（包括代码、文档或界面信息）直接发送给Codex。这使得Codex能够获取更精确、更实时的任务上下文，从而提升协助编写、修改或理解代码的效率和准确性。</div>
+      <a href="https://the-decoder.com/openai-appshots-turn-any-mac-window-into-context-for-codex" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      OpenAI为其编码助手Codex发布了名为Appshots的新功能。该功能面向Mac用户，允许他们通过一键操作，将当前任意应用程序窗口的内容（包括代码、文档或界面信息）直接发送给Codex。这使得Codex能够获取更精确、更实时的任务上下文，从而提升协助编写、修改或理解代码的效率和准确性。
-    </div>
-    <a class="item-link" href="https://the-decoder.com/openai-appshots-turn-any-mac-window-into-context-for-codex" target="_blank">查看原文 →</a>
   </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">Mistral AI</div>
-      <div class="item-score">68 分</div>
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">产品动态</span>
+      <span class="section-count">6 条</span>
     </div>
-    <div class="item-summary">
-      Mistral AI已与物理学AI先驱Emmi AI达成收购协议，旨在巩固其作为工业企业首要AI转型伙伴的地位。通过整合Emmi AI的先进模型及其超过30人的顶尖研究员和工程师团队，Mistral AI将大幅提升其在工程物理建模、实时仿真和数字孪生方面的能力，打造业界领先的工程师智能体。
-    </div>
-    <a class="item-link" href="https://mistral.ai/news/accelerate-ai-native-industry" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">向阳乔木 · GEOFlow</div>
-      <div class="item-score">68 分</div>
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">15</div>
+        <div class="item-title">DeepSeek宣布V4-Pro折扣永久化</div>
+      </div>
+      <div class="item-source">AI News · TestingCatalog</div>
+      <div class="item-summary">DeepSeek: We are making our discount permanent! Enjoy building with DeepSeek-V4-Pro and bring your innovative ideas to life!</div>
+      <a href="https://x.com/testingcatalog/status/2057873107726041177" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      开源GEO系统GEOFlow 2.0发布，一个月内GitHub星标超1.6k。此次关键版本升级，使其从内容生产工具演进为"GEO内容工程基础设施"。核心变化包括基于Laravel重构，实现多站点与多Agent管理；强化AI知识库与向量化检索；新增统一的数据分析页面，构建运营闭环。
-    </div>
-    <a class="item-link" href="https://x.com/vista8/status/2058011543812685967" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">16</div>
+        <div class="item-title">Kakuna：将快速原型自动转化为生产级代码的AI代理</div>
+      </div>
+      <div class="item-source">swyx</div>
+      <div class="item-summary">Kakuna是一款AI代理工具，旨在将早期快速原型自动转化为可维护的生产级代码库。它通过内置的检查清单和计划-目标工作流，模拟人类开发与运维流程，在保持功能不变的前提下，自动执行代码审查、测试补充、重构等无聊工作。一次约16小时的运行能生成上百次提交，将一个脆弱的MVP转变为一个结构清晰、可长期构建的稳定项目。</div>
+      <a href="https://x.com/swyx/status/2057876022553690327" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">17</div>
+        <div class="item-title">PINOC：上传动作视频，获取骨骼动画</div>
+      </div>
+      <div class="item-source">ViggleAI</div>
+      <div class="item-summary">PINOC: Upload a motion video, get clean skeletal animation. Export as .fbx/.glb, ready for use in 3D workflows.</div>
+      <a href="https://x.com/ViggleAI/status/2057947352195858568" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">18</div>
+        <div class="item-title">Codex远程控制：无需完整版App，CLI即可</div>
+      </div>
+      <div class="item-source">小互</div>
+      <div class="item-summary">Oasis Feng分享：远程服务器上并不需要安装完整版Codex app，只需安装CLI版Codex并运行 codex remote-control，手机上ChatGPT应用里的Codex就会显示出带有终端图标的服务器名称，实现远程控制。</div>
+      <a href="https://x.com/xiaohu/status/2057910256106418180" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">19</div>
+        <div class="item-title">Zero to Claude Code：Wix副总裁推出的免费编程课程</div>
+      </div>
       <div class="item-source">meng shao · Claude Code</div>
-      <div class="item-score">68 分</div>
+      <div class="item-summary">Wix副总裁推出免费课程Zero to Claude Code，旨在帮助零编程基础的用户从终端使用起步，最终能用Claude Code在生产环境发布软件。课程已吸引超过17,000名学员，支持7种语言，完全依靠口碑传播。平台由一人通过Claude Code构建并运营，实现了学员报Bug后自动修复、社区功能需求自动实现的全流程自动化。</div>
+      <a href="https://x.com/shao__meng/status/2057997802735796293" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      Wix副总裁推出免费课程「Zero to Claude Code」，旨在帮助零编程基础的用户从终端使用起步，最终能用Claude Code在生产环境发布软件。课程已吸引超过17,000名学员，支持7种语言，完全依靠口碑传播。平台由一人通过Claude Code构建并运营，实现了学员报Bug后自动修复、社区功能需求自动实现的全流程自动化。
-    </div>
-    <a class="item-link" href="https://x.com/shao__meng/status/2057997802735796293" target="_blank">查看原文 →</a>
-  </div>
 
-  <div class="item">
-    <div class="item-header">
-      <div class="item-source">Berryxia.AI · Anthropic</div>
-      <div class="item-score">68 分</div>
-    </div>
-    <div class="item-summary">
-      Anthropic推出的AI网络安全合作项目Project Glasswing在首月便取得惊人成果：与合作伙伴共同在核心生产软件中发现超过一万条高危或关键级漏洞。这一成果远超传统安全团队年度挖掘数百个漏洞的水平。Anthropic表示，未来的Claude模型将持续加速漏洞挖掘进程，软件行业必须适应新的安全常态。
-    </div>
-    <a class="item-link" href="https://x.com/berryxia/status/2057974531072168166" target="_blank">查看原文 →</a>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">20</div>
+        <div class="item-title">NVIDIA Nemotron-Labs扩散语言模型：逼近光速级生成</div>
+      </div>
       <div class="item-source">Hugging Face · NVIDIA</div>
-      <div class="item-score">68 分</div>
+      <div class="item-summary">NVIDIA在Hugging Face发布了关于Nemotron-Labs扩散语言模型的技术博客。该研究聚焦于通过扩散语言模型架构大幅提升文本生成速度，目标是逼近光速级生成效率。文章介绍了该模型在生成速度上的突破，以及相较于传统自回归模型在延迟和吞吐量方面的性能优势。</div>
+      <a href="https://huggingface.co/blog/nvidia/nemotron-labs-diffusion" class="item-link" target="_blank">阅读原文 →</a>
     </div>
-    <div class="item-summary">
-      NVIDIA在Hugging Face发布了关于Nemotron-Labs扩散语言模型的技术博客。该研究聚焦于通过扩散语言模型架构大幅提升文本生成速度，目标是逼近"光速级"生成效率。文章介绍了该模型在生成速度上的突破，以及相较于传统自回归模型在延迟和吞吐量方面的性能优势。
-    </div>
-    <a class="item-link" href="https://huggingface.co/blog/nvidia/nemotron-labs-diffusion" target="_blank">查看原文 →</a>
   </div>
 
-  <footer>
-    由 AI 自动筛选生成 · 仅展示 68 分以上内容 · 共 29 条
-  </footer>
-</div>
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">行业动态</span>
+      <span class="section-count">9 条</span>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">21</div>
+        <div class="item-title">Project Glasswing首月：发现10,000+高危漏洞，效率提升10倍</div>
+      </div>
+      <div class="item-source">Anthropic · Research</div>
+      <div class="item-summary">上月启动的Project Glasswing项目，旨在利用先进AI模型保障关键软件安全。通过约50家合作伙伴使用Claude Mythos Preview模型，已在全球关键系统中发现超过10,000个高危或严重漏洞。多家合作伙伴报告漏洞发现效率提升超过十倍。Cloudflare发现2,000个漏洞（含400个高危），Mozilla在Firefox 150中修复271个漏洞。独立验证准确率达90.6%。</div>
+      <a href="https://www.anthropic.com/research/glasswing-initial-update" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">22</div>
+        <div class="item-title">Anthropic Glasswing项目：AI驱动的软件安全革命</div>
+      </div>
+      <div class="item-source">Anthropic · Research</div>
+      <div class="item-summary">上月启动的Project Glasswing项目旨在利用AI能力保护关键软件安全。在约50家合作伙伴参与下，通过使用Claude Mythos Preview模型，已在全球最重要的系统软件中发现超过一万个高危或严重漏洞。</div>
+      <a href="https://www.anthropic.com/research/glasswing-initial-update" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">23</div>
+        <div class="item-title">英伟达Q1财报：营收816亿美元，净利润翻两倍多</div>
+      </div>
+      <div class="item-source">IT之家</div>
+      <div class="item-summary">英伟达发布2027财年Q1财报，营收816亿美元，同比增长85%，净利润583亿美元，翻两倍多，市值达5.7万亿美元，已超德国2026年GDP预测。黄仁勋预测，超大规模云厂商的AI基建年度开支将从当前的1万亿美元，增长至3-4万亿美元，远超华尔街预期。财报同时显示，数据中心业务营收752亿美元，占比超九成。</div>
+      <a href="https://www.ithome.com/0/954/223.htm" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">24</div>
+        <div class="item-title">Anthropic Glasswing：50家合作伙伴，月挖1万+漏洞</div>
+      </div>
+      <div class="item-source">IT之家 · Anthropic</div>
+      <div class="item-summary">Anthropic于5月22日披露，其Project Glasswing项目上线一个月内，已携手约50家合作伙伴，在关键软件中挖掘出超过1万个高危与关键漏洞。合作方反馈显示，Claude Mythos Preview模型显著提升了漏洞发现效率，部分团队速度提升超10倍。Cloudflare发现2000个漏洞（含400高危），Mozilla在Firefox 150中修复271个漏洞。</div>
+      <a href="https://www.ithome.com/0/954/272.htm" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">25</div>
+        <div class="item-title">Anthropic Glasswing初步进展报告</div>
+      </div>
+      <div class="item-source">Hacker News · Anthropic</div>
+      <div class="item-summary">Anthropic发布了玻璃翼项目的初步进展报告。在约50家合作伙伴参与下，通过使用Claude Mythos Preview模型，已在全球关键系统中发现超过10,000个高危或严重漏洞。多家合作伙伴报告漏洞发现效率提升超过十倍。该报告在Hacker News上获得119个积分。</div>
+      <a href="https://www.anthropic.com/research/glasswing-initial-update" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">26</div>
+        <div class="item-title">微软借鉴丰田精益生产，AI优化内部运营降本</div>
+      </div>
+      <div class="item-source">Rohan Paul · 微软</div>
+      <div class="item-summary">Satya Nadella透露微软正借鉴丰田精益生产原则，将精益知识工作理念应用于内部AI运营。通过计算AI投资回报并利用其成本削减效应，微软在白领工作中部署AI以优化流程。例如，微软每年在客户支持业务上支出约40亿美元，通过部署AI代理处理前端问题分流及为支持人员提供实时推理协助，在Xbox和Azure等支持领域大幅降低了成本。</div>
+      <a href="https://x.com/rohanpaul_ai/status/2058173673887113470" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">27</div>
+        <div class="item-title">NVIDIA CUDA壁垒与AI基础设施竞争格局重塑</div>
+      </div>
+      <div class="item-source">Chubby</div>
+      <div class="item-summary">NVIDIA凭借CUDA软件生态与NVLink互联技术构建了强大系统性壁垒，在数据中心业务保持高速增长。然而市场正加速分化：Google将TPU拆分为专用芯片，AMD推出机架级系统正面竞争，Cerebras等专用芯片在特定任务上展现数量级优势。与此同时，华为正构建独立于西方供应链的并行计算生态。随着AI负载从训练转向推理，AI基础设施的竞争格局可能迎来根本性重塑。</div>
+      <a href="https://x.com/kimmonismus/status/2058173252497723562" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">28</div>
+        <div class="item-title">AI工具冲击入门级岗位，74%科技CEO冻结招聘</div>
+      </div>
+      <div class="item-source">IT之家 · 奥纬咨询</div>
+      <div class="item-summary">奥纬咨询研究发现，AI工具正被广泛用于入门级任务，导致企业招聘重心转向高级岗位，年轻人求职难度加大。科技行业受冲击最严重，74%的CEO已冻结或缩减招聘。计划削减初级岗位的比例从17%跃升至43%，而招聘转向中层岗位的比例则升至30%。尽管超90%的企业在部署AI，但多数仍处试点阶段。</div>
+      <a href="https://www.ithome.com/0/954/235.htm" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <div class="item-num">29</div>
+        <div class="item-title">Mistral AI收购Emmi AI，进军工业AI领域</div>
+      </div>
+      <div class="item-source">Mistral AI</div>
+      <div class="item-summary">Mistral AI已与物理学AI先驱Emmi AI达成收购协议，旨在巩固其作为工业企业首要AI转型伙伴的地位。通过整合Emmi AI的先进模型及其超过30人的顶尖研究员和工程师团队，Mistral AI将大幅提升其在工程物理建模、实时仿真和数字孪生方面的能力，打造业界领先的工程师智能体。</div>
+      <a href="https://mistral.ai/news/accelerate-ai-native-industry" class="item-link" target="_blank">阅读原文 →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>数据来自 <a href="https://aihot.virxact.com" target="_blank">aihot.virxact.com</a> · 由 Hermes Agent 自动生成</p>
+</footer>
+
+</div><!-- /main-wrapper -->
+
+<script>
+// Sidebar functionality
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const mainWrapper = document.getElementById('mainWrapper');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  sidebarOverlay.classList.add('show');
+  mainWrapper.classList.add('sidebar-open');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('show');
+  mainWrapper.classList.remove('sidebar-open');
+}
+
+sidebarToggle.addEventListener('click', () => {
+  if (sidebar.classList.contains('open')) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
+
+sidebarOverlay.addEventListener('click', closeSidebar);
+
+// Populate sidebar nav with sections AND item titles
+const sidebarNav = document.getElementById('sidebarNav');
+const sections = document.querySelectorAll('.section');
+
+sections.forEach((section, sectionIndex) => {
+  const titleEl = section.querySelector('.section-title');
+  if (!titleEl) return;
+  
+  // Section anchor
+  const sectionId = 'section-' + sectionIndex;
+  section.id = sectionId;
+  
+  // Section header in sidebar
+  const sectionLi = document.createElement('li');
+  sectionLi.className = 'nav-section';
+  sectionLi.innerHTML = '<span class="nav-section-title">' + titleEl.textContent + '</span>';
+  sidebarNav.appendChild(sectionLi);
+  
+  // Item titles under this section
+  const items = section.querySelectorAll('.item');
+  items.forEach((item, itemIndex) => {
+    const itemTitleEl = item.querySelector('.item-title');
+    if (!itemTitleEl) return;
+    
+    const itemId = sectionId + '-item-' + itemIndex;
+    item.id = itemId;
+    
+    const li = document.createElement('li');
+    li.className = 'nav-item';
+    const a = document.createElement('a');
+    a.href = '#' + itemId;
+    
+    // Truncate long titles
+    let titleText = itemTitleEl.textContent;
+    if (titleText.length > 24) {
+      titleText = titleText.substring(0, 24) + '...';
+    }
+    a.textContent = titleText;
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeSidebar();
+      setTimeout(() => {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+    li.appendChild(a);
+    sidebarNav.appendChild(li);
+  });
+});
+
+// Active item highlighting
+const navLinks = sidebarNav.querySelectorAll('.nav-item a');
+const itemObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = sidebarNav.querySelector('a[href="#' + entry.target.id + '"');
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { threshold: 0.5, rootMargin: '-80px 0px -50% 0px' });
+
+document.querySelectorAll('.item').forEach(item => itemObserver.observe(item));
+
+// Scroll reveal for sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
 </body>
 </html>
