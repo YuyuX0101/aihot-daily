@@ -307,6 +307,151 @@ body {
   margin-left: 280px;
 }
 
+/* ===== TOP 5 ===== */
+.top5-section {
+  margin-bottom: 40px;
+}
+
+.top5-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.top5-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.top5-badge {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.top5-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.top5-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-purple);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.top5-item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.top5-item:hover::before {
+  opacity: 1;
+}
+
+.top5-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.top5-item-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.top5-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.top5-item-score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-purple);
+  background: rgba(168, 85, 247, 0.1);
+  padding: 2px 10px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.top5-item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 44px;
+}
+
+.top5-item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.top5-item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 44px;
+}
+
+.top5-item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 44px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.top5-item-link:hover {
+  opacity: 1;
+}
+
 /* ===== SECTIONS ===== */
 .content {
   max-width: 720px;
@@ -589,6 +734,7 @@ body {
 </section>
 
 <main class="content">
+  {{TOP5}}
   {{SECTIONS}}
   {{FLASHES}}
 </main>
@@ -646,7 +792,7 @@ sections.forEach((section, sectionIndex) => {
   sectionLi.innerHTML = `<span class="nav-section-title">${titleEl.textContent}</span>`;
   sidebarNav.appendChild(sectionLi);
   
-  // Item titles under this section
+    // Item titles under this section
   const items = section.querySelectorAll('.item');
   items.forEach((item, itemIndex) => {
     const itemTitleEl = item.querySelector('.item-title');
@@ -659,12 +805,16 @@ sections.forEach((section, sectionIndex) => {
     li.className = 'nav-item';
     const a = document.createElement('a');
     a.href = '#' + itemId;
-    // Truncate long titles
-    let titleText = itemTitleEl.textContent;
-    if (titleText.length > 24) {
-      titleText = titleText.substring(0, 24) + '...';
+    // Extract title gist (first 20 chars, no truncation ellipsis for short titles)
+    let titleText = itemTitleEl.textContent.trim();
+    // Remove common prefixes and clean up
+    titleText = titleText.replace(/^\d+\.\s*/, '').replace(/^【.*?】/, '');
+    // Get the gist - first meaningful part
+    if (titleText.length > 22) {
+      titleText = titleText.substring(0, 22) + '...';
     }
     a.textContent = titleText;
+    a.title = itemTitleEl.textContent; // full text on hover
     a.addEventListener('click', (e) => {
       e.preventDefault();
       closeSidebar();
