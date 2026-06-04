@@ -22,8 +22,8 @@ def validate_summary_quality(items):
     bad = [item for item in items if is_bad_summary(item.get("summary", ""))]
     top5 = sorted(items, key=lambda x: int(x.get("score", 0)), reverse=True)[:5]
     bad_top5 = [item for item in top5 if is_bad_summary(item.get("summary", ""))]
-    if bad_top5 or (items and len(bad) / len(items) > 0.10):
-        examples = "; ".join((i.get("title", "") + " => " + (i.get("summary", "") or "<empty>"))[:120] for i in (bad_top5 or bad)[:5])
+    if bad:
+        examples = "; ".join((i.get("title", "") + " => " + (i.get("summary", "") or "<empty>"))[:120] for i in bad[:5])
         raise ValueError(
             "摘要质量门禁失败：存在空摘要/日期/作者名/过短摘要。"
             "请先从 aihot 详情或原文补全为 80-180 字事实摘要。示例：" + examples
