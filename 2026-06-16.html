@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI HOT 日报 · 2026-06-16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2236;
+  --bg-card: #1e293b;
+  --border-subtle: rgba(148, 163, 184, 0.08);
+  --border-glow: rgba(56, 189, 248, 0.15);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.nav-back:hover {
+  border-color: var(--border-glow);
+  color: var(--text-primary);
+}
+
+.nav-back:active {
+  transform: scale(0.97);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 48px 24px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ===== SIDEBAR (LEFT) ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: rgba(10, 14, 26, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border-subtle);
+  z-index: 200;
+  padding: 72px 0 24px;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--ease-out);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 0 20px 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0 12px;
+}
+
+.sidebar-nav .nav-section {
+  margin-bottom: 4px;
+}
+
+.sidebar-nav .nav-section-title {
+  display: block;
+  padding: 10px 12px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 2px;
+}
+
+.sidebar-nav .nav-item a {
+  display: block;
+  padding: 8px 12px 8px 20px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.15s var(--ease-out);
+  border-left: 2px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav .nav-item a:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-left-color: var(--accent-cyan);
+}
+
+.sidebar-nav .nav-item a.active {
+  background: rgba(34, 211, 238, 0.06);
+  color: var(--accent-cyan);
+  border-left-color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+/* ===== SIDEBAR TOGGLE (SMALL CIRCLE) ===== */
+.sidebar-toggle {
+  position: fixed;
+  left: 16px;
+  top: 25%;
+  transform: translateY(-50%);
+  z-index: 250;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  opacity: 0.5;
+}
+
+.sidebar-toggle:hover {
+  opacity: 1;
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--border-glow);
+  color: var(--accent-cyan);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrapper {
+  transition: margin-left 0.35s var(--ease-out);
+}
+
+.main-wrapper.sidebar-open {
+  margin-left: 280px;
+}
+
+/* ===== TOP 5 ===== */
+.top5-section {
+  margin-bottom: 40px;
+}
+
+.top5-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.top5-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.top5-badge {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.top5-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.top5-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-purple);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.top5-item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.top5-item:hover::before {
+  opacity: 1;
+}
+
+.top5-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.top5-item-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.top5-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.top5-item-score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-purple);
+  background: rgba(168, 85, 247, 0.1);
+  padding: 2px 10px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.top5-item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 44px;
+}
+
+.top5-item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.top5-item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 44px;
+}
+
+.top5-item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 44px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.top5-item-link:hover {
+  opacity: 1;
+}
+
+/* ===== SECTIONS ===== */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.section {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.section-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* ===== ITEMS ===== */
+.item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.item-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 38px;
+}
+
+.item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 38px;
+}
+
+.item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 38px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.item-link:hover {
+  opacity: 1;
+}
+
+/* ===== FLASHES ===== */
+.flashes {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.flash {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.flash-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.flash-text {
+  flex: 1;
+  line-height: 1.6;
+}
+
+.flash-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 85vw;
+    max-width: 320px;
+  }
+  .main-wrapper.sidebar-open {
+    margin-left: 0;
+  }
+  .sidebar-toggle {
+    left: 12px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 36px 20px 24px; }
+  .content { padding: 0 16px 40px; }
+  .item { padding: 16px; }
+  .item-summary, .item-source, .item-link { padding-left: 0; margin-left: 0; }
+  .item-header { margin-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Toggle (small circle, left side) -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="目录">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar (Left) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">目录导航</div>
+  </div>
+  <ul class="sidebar-nav" id="sidebarNav">
+    <!-- JS will populate with sections and item titles -->
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="main-wrapper" id="mainWrapper">
+
+<nav class="nav">
+  <div class="nav-brand">AI HOT</div>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    返回首页
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-date">2026-06-16</div>
+  <h1>AI HOT 日报</h1>
+  <p class="hero-lead">2026-06-16 共精选 42 条 70 分以上 AI 动态：前沿模型、AI 编程、智能体、芯片并购与监管安全成为当天主线。</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-value">42</div>
+      <div class="stat-label">条精选</div>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+  <section class="top5-section">
+  <div class="top5-header"><span class="top5-title">Top 5</span><span class="top5-badge">高分精选</span></div>
+  <div class="top5-item">
+    <div class="top5-item-header"><div class="top5-item-rank">1</div><div class="top5-item-title">SpaceX将以600亿美元收购AI编程初创公司Cursor</div><div class="top5-item-score">90分</div></div>
+    <div class="top5-item-source">arsTechnica</div>
+    <div class="top5-item-summary">CNBC 报道称，SpaceX 将以约 600 亿美元收购 AI 编程初创公司 Cursor。若交易落地，马斯克体系将获得核心代码智能体入口，并把软件开发自动化能力纳入航天、汽车和通用 AI 产业链。这不仅会改变 Cursor、Claude Code、GitHub Copilot 等工具的竞争格局，也可能让 AI 编程能力成为大型科技集团内部研发效率和外部生态入口的关键资产。</div>
+    <a href="https://www.cnbc.com/2026/06/16/spacex-spcx-cursor-acquisition-ipo.html" class="top5-item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="top5-item">
+    <div class="top5-item-header"><div class="top5-item-rank">2</div><div class="top5-item-title">Anthropic的Mythos封锁事件对美国AI监管未来的影响</div><div class="top5-item-score">80分</div></div>
+    <div class="top5-item-source">arsTechnica</div>
+    <div class="top5-item-summary">CNBC 讨论 Anthropic 的 Mythos 封锁事件对美国 AI 监管的影响：事件触发政府、企业和安全专家围绕模型可控性、供应链风险与关闭机制的争论。由于相关模型被视为可能进入政府和关键行业供应链，争议不再只是单一公司危机，而可能推动美国重新设计高能力模型部署、应急处置、政府采购和责任追溯规则。</div>
+    <a href="https://www.cnbc.com/video/2026/06/16/what-anthropics-mythos-lockdown-means-for-the-future-of-u-s-ai-regulation.html" class="top5-item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="top5-item">
+    <div class="top5-item-header"><div class="top5-item-rank">3</div><div class="top5-item-title">40 Top Global Experts Secretly Gather in Washington for Closed-Door Talks on Averting AI Doomsday</div><div class="top5-item-score">80分</div></div>
+    <div class="top5-item-source">36kr</div>
+    <div class="top5-item-summary">36氪报道，约 40 名全球顶级专家在华盛顿闭门讨论如何避免 AI 灾难性风险。会议聚焦 AGI 到来后的安全、治理和应急机制，包括能力失控、模型滥用、国际协调和企业责任等议题。这说明前沿 AI 风险已经从学术圈预警进入政策和产业高层协商阶段，后续可能影响大模型发布节奏与监管框架。</div>
+    <a href="https://36kr.com/p/3855560126059520" class="top5-item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="top5-item">
+    <div class="top5-item-header"><div class="top5-item-rank">4</div><div class="top5-item-title">OpenAI 2025年亏损增长近8倍，支出达340亿美元</div><div class="top5-item-score">80分</div></div>
+    <div class="top5-item-source">hackernews</div>
+    <div class="top5-item-summary">Hacker News 引述报道称，OpenAI 2025 年亏损增长近 8 倍，支出达到 340 亿美元。高额训练、推理、数据中心和人才成本显示，前沿模型商业化仍处在重资本投入阶段。即便订阅、API 和企业业务收入继续增长，公司也需要资本市场持续支持基础设施扩张，并证明大规模 AI 投入能够转化为长期利润。</div>
+    <a href="https://news.ycombinator.com/item?id=48550465" class="top5-item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="top5-item">
+    <div class="top5-item-header"><div class="top5-item-rank">5</div><div class="top5-item-title">Triple Launch! Alibaba Releases Its First Embodied Large Model, the Qwen-Robot Series</div><div class="top5-item-score">80分</div></div>
+    <div class="top5-item-source">qbitai</div>
+    <div class="top5-item-summary">量子位报道，阿里发布首个具身大模型及 Qwen-Robot 系列，强调机器人可边走、边看、边思考。该发布把通义千问能力延伸到机器人场景，覆盖视觉感知、语言理解、任务规划和动作执行等环节。对开发者和机器人厂商来说，这类基础模型套件可减少从零训练成本，加速服务机器人、工业操作和家庭场景的落地验证。</div>
+    <a href="https://www.qbitai.com/2026/06/435873.html" class="top5-item-link" target="_blank">阅读原文 →</a>
+  </div>
+</section>
+  <section class="section" id="section-1">
+  <div class="section-header"><span class="section-title">模型发布/更新</span><span class="section-count">6 条</span></div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">1</div><div class="item-title">通过模拟部署来预测模型发布前的行为</div></div>
+    <div class="item-source">openai · 70分</div>
+    <div class="item-summary">OpenAI 发布 Deployment Simulation 方法，利用真实对话数据在模型上线前模拟部署后的行为表现。该方法用于提前发现安全、可靠性和用户交互风险，帮助团队在正式发布前改进评估流程，降低模型进入生产环境后的不确定性。</div>
+    <a href="https://openai.com/index/deployment-simulation" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">2</div><div class="item-title">Qwen机器人套件：面向物理世界智能的基础模型套件</div></div>
+    <div class="item-source">hackernews · 70分</div>
+    <div class="item-summary">Qwen 团队推出面向物理世界智能的 Qwen Robot 基础模型套件，强调机器人在移动、视觉理解和任务规划中的一体化能力。该套件把大模型能力扩展到具身智能场景，有助于降低机器人应用从感知到执行的开发门槛。</div>
+    <a href="https://news.ycombinator.com/item?id=48554814" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">3</div><div class="item-title">Where is the way out for domestic large models?</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪讨论国产大模型的出路，提出行业正在从“算力霸权”转向“架构分权”。文章认为国内模型公司需要减少对单纯堆算力的依赖，在架构、场景、数据与工程效率上寻找差异化突破。</div>
+    <a href="https://36kr.com/p/3855547730852745" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">4</div><div class="item-title">Triple Launch! Alibaba Releases Its First Embodied Large Model, the Qwen-Robot Series</div></div>
+    <div class="item-source">qbitai · 80分</div>
+    <div class="item-summary">量子位报道，阿里发布首个具身大模型及 Qwen-Robot 系列，强调机器人可边走、边看、边思考。该发布把通义千问能力延伸到机器人场景，覆盖视觉感知、语言理解、任务规划和动作执行等环节。对开发者和机器人厂商来说，这类基础模型套件可减少从零训练成本，加速服务机器人、工业操作和家庭场景的落地验证。</div>
+    <a href="https://www.qbitai.com/2026/06/435873.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">5</div><div class="item-title">Tencent invested 140 million in Lin Junyang, former head of Qwen, who started a business valued at 13.5 billion</div></div>
+    <div class="item-source">36kr · 80分</div>
+    <div class="item-summary">36氪报道，前阿里千问负责人林俊旸创业后获得腾讯等机构投资，公司估值达到 135 亿元。文章称腾讯投入约 1.4 亿元，显示大厂和资本仍在争抢顶级模型人才及其新公司入口。</div>
+    <a href="https://36kr.com/p/3855171494368512" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">6</div><div class="item-title">网络专家在白宫对峙中力挺Anthropic模型</div></div>
+    <div class="item-source">arsTechnica · 70分</div>
+    <div class="item-summary">CNBC 报道称，网络安全专家在白宫对峙中支持 Anthropic 模型。该事件把模型能力、安全评估和政府信任放在同一场景下讨论，说明前沿 AI 供应商需要同时面对技术证明和政策沟通压力。</div>
+    <a href="https://www.cnbc.com/video/2026/06/15/cyber-experts-stand-behind-anthropic-models-in-white-house-face-off.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+</section>
+<section class="section" id="section-2">
+  <div class="section-header"><span class="section-title">产品发布/更新</span><span class="section-count">8 条</span></div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">7</div><div class="item-title">Android 17 推出全新多任务工具，谷歌扩展 Gemini 功能</div></div>
+    <div class="item-source">techcrunch · 70分</div>
+    <div class="item-summary">TechCrunch 报道称，Android 17 增加新的多任务工具，同时 Google 继续扩展 Gemini 能力。更新重点在于让移动设备更适合并行处理任务、调用 AI 助手和跨应用协作，反映手机操作系统正在向 AI 原生工作流演进。</div>
+    <a href="https://techcrunch.com/2026/06/16/android-17-launches-with-new-multitasking-tools-as-google-expands-gemini-features/" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">8</div><div class="item-title">ChatGPT 市场份额首次跌破 50%</div></div>
+    <div class="item-source">techcrunch · 70分</div>
+    <div class="item-summary">TechCrunch 报道称，ChatGPT 的市场份额首次跌破 50%，显示生成式 AI 助手市场正在从单一领先者转向多强竞争。Gemini、Claude 等产品的增长会分流用户，也会迫使 OpenAI 在产品体验、价格和生态整合上继续加速。</div>
+    <a href="https://techcrunch.com/2026/06/16/chatgpts-market-share-slips-below-50-for-first-time/" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">9</div><div class="item-title">Plaud称其软件业务在交付超过200万台AI记录器后，年经常性收入突破1亿美元</div></div>
+    <div class="item-source">techcrunch · 70分</div>
+    <div class="item-summary">Plaud 表示，其 AI 录音笔出货超过 200 万台后，软件业务年经常性收入已突破 1 亿美元。硬件设备带动订阅服务增长，说明垂直 AI 记录、转写和会议整理工具正在形成可持续收入，而不只是一次性硬件销售。</div>
+    <a href="https://techcrunch.com/2026/06/16/plaud-says-its-software-business-topped-100m-in-arr-after-shipping-over-2m-ai-notetakers/" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">10</div><div class="item-title">SpaceX将以600亿美元收购AI编程初创公司Cursor</div></div>
+    <div class="item-source">arsTechnica · 90分</div>
+    <div class="item-summary">CNBC 报道称，SpaceX 将以约 600 亿美元收购 AI 编程初创公司 Cursor。若交易落地，马斯克体系将获得核心代码智能体入口，并把软件开发自动化能力纳入航天、汽车和通用 AI 产业链。这不仅会改变 Cursor、Claude Code、GitHub Copilot 等工具的竞争格局，也可能让 AI 编程能力成为大型科技集团内部研发效率和外部生态入口的关键资产。</div>
+    <a href="https://www.cnbc.com/2026/06/16/spacex-spcx-cursor-acquisition-ipo.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">11</div><div class="item-title">Cursor Drops Another Bombshell: Once Accounted for Half of Anthropic’s Revenue</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪称 Cursor 曾贡献 Anthropic 收入的重要部分，如今在 Claude Code 等竞争压力下被迫加码自身产品与资本选择。文章反映 AI 编程工具与基础模型供应商之间既合作又竞争，收入依赖和模型替代风险正在同时上升。</div>
+    <a href="https://36kr.com/p/3855560261637125" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">12</div><div class="item-title">Cerebras制造巨型AI芯片，东南亚能否获得？</div></div>
+    <div class="item-source">techinasia · 70分</div>
+    <div class="item-summary">Tech in Asia 关注 Cerebras 巨型 AI 芯片及其在东南亚落地的可能性。文章讨论区域市场能否获得高性能 AI 计算资源，关键在于数据中心基础设施、资本投入和本地企业对大模型训练推理的需求。</div>
+    <a href="http://www.techinasia.com/cerebras-builds-gigantic-ai-chips-sea-hands" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">13</div><div class="item-title">Breaking: Using Claude will require real-name verification, Anthropic&#x27;s new policy takes effect next month</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪报道，Anthropic 新政策将从下月起要求使用 Claude 前进行实名验证。该变化意味着高能力模型服务正在引入更强身份和责任绑定机制，可能提升合规性，但也会带来隐私、可访问性和开发者体验争议。</div>
+    <a href="https://36kr.com/p/3854638871647496" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">14</div><div class="item-title">Salesforce同意以36亿美元收购Fin以增强AI能力</div></div>
+    <div class="item-source">techinasia · 80分</div>
+    <div class="item-summary">Tech in Asia 报道称，Salesforce 同意以 36 亿美元收购 Fin，以增强其 AI 能力。交易将帮助 Salesforce 扩展面向客服、销售和企业流程的智能体产品，进一步把 AI 自动化嵌入 CRM 核心业务。</div>
+    <a href="http://www.techinasia.com/news/salesforce-agrees-buy-fin-36b-boost-ai" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+</section>
+<section class="section" id="section-3">
+  <div class="section-header"><span class="section-title">行业动态</span><span class="section-count">27 条</span></div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">15</div><div class="item-title">Anthropic的Fable关闭是开源AI的重要时刻</div></div>
+    <div class="item-source">arsTechnica · 70分</div>
+    <div class="item-summary">CNBC 报道称，Anthropic 的 Fable 关闭事件被视为开源 AI 的关键节点：围绕模型安全、供应链可信度和开放生态的争议，被重新推到监管和产业合作前台，可能影响企业选择闭源或开源模型的风险评估。</div>
+    <a href="https://www.cnbc.com/2026/06/16/anthropics-fable-shutdown-is-a-big-moment-for-open-source-ai.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">16</div><div class="item-title">Databricks销售额增长超80%，但利润率因大量AI代理而缩水</div></div>
+    <div class="item-source">arsTechnica · 70分</div>
+    <div class="item-summary">Databricks 披露销售额增长超过 80%，年化收入达到约 69 亿美元，但大量 AI Agent 与相关基础设施投入压缩了利润率。这说明企业 AI 平台需求仍强劲，同时也暴露出推理、编排和算力成本对商业模式的压力。</div>
+    <a href="https://www.cnbc.com/2026/06/16/databricks-revenue-growth-tops-80percent-to-6point9-billion-annualized.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">17</div><div class="item-title">国防部副部长：Anthropic的行为明显构成“供应链风险”</div></div>
+    <div class="item-source">arsTechnica · 70分</div>
+    <div class="item-summary">美国国防部副部长在 CNBC 采访中称，Anthropic 的相关行为已经体现出“供应链风险”。该表态把单一模型事件上升到政府采购与关键系统可信度问题，意味着 AI 供应商未来可能面临更严格的审查和合规要求。</div>
+    <a href="https://www.cnbc.com/video/2026/06/16/department-of-defense-under-secretary-evident-by-anthropics-actions-it-was-a-supply-chain-risk.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">18</div><div class="item-title">Anthropic的Mythos封锁事件对美国AI监管未来的影响</div></div>
+    <div class="item-source">arsTechnica · 80分</div>
+    <div class="item-summary">CNBC 讨论 Anthropic 的 Mythos 封锁事件对美国 AI 监管的影响：事件触发政府、企业和安全专家围绕模型可控性、供应链风险与关闭机制的争论。由于相关模型被视为可能进入政府和关键行业供应链，争议不再只是单一公司危机，而可能推动美国重新设计高能力模型部署、应急处置、政府采购和责任追溯规则。</div>
+    <a href="https://www.cnbc.com/video/2026/06/16/what-anthropics-mythos-lockdown-means-for-the-future-of-u-s-ai-regulation.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">19</div><div class="item-title">自动驾驶技术供应商Mobileye计划于2027年在美国推出机器人出租车服务</div></div>
+    <div class="item-source">arsTechnica · 70分</div>
+    <div class="item-summary">CNBC 报道称，自动驾驶技术供应商 Mobileye 计划在 2027 年于美国推出 robotaxi 服务。该计划显示传统 ADAS 与自动驾驶芯片厂商正向出行运营延伸，未来竞争焦点将从单车智能扩展到车队部署、监管许可和城市运营。</div>
+    <a href="https://www.cnbc.com/2026/06/16/self-driving-tech-supplier-mobileye-targets-us-robotaxi-launch-in-2027.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">20</div><div class="item-title">DeepSeek’s Funding Details Revealed: How Liang Wenfeng Retained Control</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪披露 DeepSeek 融资细节，重点讨论梁文锋如何在资本进入时保持控制权。文章认为该融资安排改写了部分科创企业的融资剧本，也说明头部大模型公司在资金、治理和长期技术路线之间需要更精细的平衡。</div>
+    <a href="https://36kr.com/p/3855773631976456" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">21</div><div class="item-title">联邦调查局因简单“修复此代码”提示而对《神鬼寓言5》感到恐慌，并非越狱</div></div>
+    <div class="item-source">hackernews · 70分</div>
+    <div class="item-summary">Hacker News 热议称，围绕《神鬼寓言5》的恐慌并非传统越狱，而是简单“修复此代码”提示引发的安全担忧。事件说明模型在编程辅助场景中的边界仍不清晰，监管方可能把普通开发请求也视作潜在风险信号。</div>
+    <a href="https://news.ycombinator.com/item?id=48552687" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">22</div><div class="item-title">Burned-Out Leaders, Blunted Tracks: The Fivefold Capital Dilemma of Embodied Intelligence</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪分析具身智能的资本困境，指出资金持续流向头部公司，但未必流向真正面向未来的技术路线。文章从赛道拥挤、硬件交付、数据闭环和商业化周期解释行业焦虑，提醒投资不能只看概念热度。</div>
+    <a href="https://36kr.com/p/3855438649070857" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">23</div><div class="item-title">高通CEO表示AI智能体将改变人们使用智能手机的方式</div></div>
+    <div class="item-source">arsTechnica · 70分</div>
+    <div class="item-summary">高通 CEO Cristiano Amon 表示，AI 智能体将改变人们使用智能手机的方式。手机可能从以 App 为中心转向由智能体理解意图、调用服务和完成任务，这会影响芯片、系统、应用分发和终端交互设计。</div>
+    <a href="https://www.cnbc.com/video/2026/06/16/qualcomm-ceo-cristiano-amon-the-tech-download.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">24</div><div class="item-title">40 Top Global Experts Secretly Gather in Washington for Closed-Door Talks on Averting AI Doomsday</div></div>
+    <div class="item-source">36kr · 80分</div>
+    <div class="item-summary">36氪报道，约 40 名全球顶级专家在华盛顿闭门讨论如何避免 AI 灾难性风险。会议聚焦 AGI 到来后的安全、治理和应急机制，包括能力失控、模型滥用、国际协调和企业责任等议题。这说明前沿 AI 风险已经从学术圈预警进入政策和产业高层协商阶段，后续可能影响大模型发布节奏与监管框架。</div>
+    <a href="https://36kr.com/p/3855560126059520" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">25</div><div class="item-title">Karpathy Kicked Out? U.S. May Push Foreign Geniuses Out of the ASI Core Circle</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪以 Karpathy 相关争议讨论美国可能将外国 AI 人才排除在 ASI 核心圈外。文章指出，前沿模型访问权限未来可能不只取决于能力，也取决于国籍、合规和安全审查，这会影响全球 AI 人才流动。</div>
+    <a href="https://36kr.com/p/3855560590136576" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">26</div><div class="item-title">Mega IPOs and Mega Follow-On Offerings Keep Coming; Under Massive Financing, One of the &quot;Core Highlights&quot; of U.S. Stocks Is Gone</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪称 SpaceX 完成 750 亿美元级 IPO，OpenAI、Anthropic 等大型融资或 IPO 也在推进，Alphabet 计划大额增发。摩根大通估算未来两年净股权供给或达 1.5 万亿美元，股权供给冲击可能削弱美股长期支撑。</div>
+    <a href="https://36kr.com/p/3855537870181636" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">27</div><div class="item-title">Sarvam AI 在新一轮融资中筹集2.34亿美元</div></div>
+    <div class="item-source">techinasia · 70分</div>
+    <div class="item-summary">Tech in Asia 报道称，印度 AI 初创公司 Sarvam AI 新一轮融资达到 2.34 亿美元，由 HCLTech 相关方领投。融资将支持其面向印度语言和企业场景的大模型研发，凸显主权 AI 与本地化模型市场升温。</div>
+    <a href="http://www.techinasia.com/news/hcltech-leads-indian-ai-startup-234m-funding" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">28</div><div class="item-title">马来西亚AI智能体驱动的消息应用Respond.io融资6250万美元，计划进行收购</div></div>
+    <div class="item-source">techcrunch · 70分</div>
+    <div class="item-summary">TechCrunch 报道称，马来西亚 AI 智能体驱动消息应用 Respond.io 融资 6250 万美元，并计划在北美和欧洲进行收购。资金将用于扩展客户沟通自动化能力，显示企业消息、客服和销售流程正加速智能体化。</div>
+    <a href="https://techcrunch.com/2026/06/15/malaysias-respond-io-raises-62-5m-eyes-acquisitions-in-north-america-and-europe/" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">29</div><div class="item-title">人类尚未准备好迎接即将到来的智能爆炸</div></div>
+    <div class="item-source">hackernews · 70分</div>
+    <div class="item-summary">Hacker News 热议“人类尚未准备好迎接即将到来的智能爆炸”。讨论集中在社会制度、监管、就业和安全机制是否能跟上 AI 能力增长，反映技术社区对快速迈向更强智能系统的治理准备不足仍有强烈担忧。</div>
+    <a href="https://news.ycombinator.com/item?id=48549628" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">30</div><div class="item-title">OpenAI 2025年亏损增长近8倍，支出达340亿美元</div></div>
+    <div class="item-source">hackernews · 80分</div>
+    <div class="item-summary">Hacker News 引述报道称，OpenAI 2025 年亏损增长近 8 倍，支出达到 340 亿美元。高额训练、推理、数据中心和人才成本显示，前沿模型商业化仍处在重资本投入阶段。即便订阅、API 和企业业务收入继续增长，公司也需要资本市场持续支持基础设施扩张，并证明大规模 AI 投入能够转化为长期利润。</div>
+    <a href="https://news.ycombinator.com/item?id=48550465" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">31</div><div class="item-title">高通CEO称AI代理将取代应用程序，公司正研发40款新AI设备</div></div>
+    <div class="item-source">arsTechnica · 70分</div>
+    <div class="item-summary">CNBC 报道称，高通 CEO 认为 AI 代理将取代部分传统应用程序，公司正在研发 40 款新的 AI 设备。该路线把芯片能力、终端设备和智能体体验绑定在一起，意在抢占后 App 时代的入口。</div>
+    <a href="https://www.cnbc.com/2026/06/16/qualcomm-ceo-ai-devices-agents.html" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">32</div><div class="item-title">Google Chief Engineer: The software engineering ecosystem that has naturally grown over two decades is about to burst from being accelerated 10x by large models</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪引用 Google 首席工程师观点称，过去二十年自然生长的软件工程生态正被大模型以 10 倍速度加速。文章强调 AI 是放大器而不是方向，团队若缺少架构判断和工程治理，提速也可能放大技术债。</div>
+    <a href="https://36kr.com/p/3855246928237830" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">33</div><div class="item-title">高通洽谈以高达100亿美元收购Tenstorrent</div></div>
+    <div class="item-source">techinasia · 80分</div>
+    <div class="item-summary">Tech in Asia 报道称，高通正洽谈以最高 100 亿美元收购 AI 芯片公司 Tenstorrent。若交易达成，高通将补强数据中心与 AI 加速器能力，在英伟达主导的计算市场中争取更多训练和推理份额。</div>
+    <a href="http://www.techinasia.com/news/qualcomm-talks-buy-tenstorrent-10b" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">34</div><div class="item-title">Launched for only 180 days, the bubble in the AI application layer has burst</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪称 AI 应用层上线仅约 180 天后泡沫开始破裂，生成式 AI 应用正在出清。文章认为只有嵌入真实业务场景、能带来持续效率或收入提升的产品才能存活，单靠包装模型能力的应用会被淘汰。</div>
+    <a href="https://36kr.com/p/3854657422119941" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">35</div><div class="item-title">Affected by the Fable 5 ban, GPT-5.6 may be delayed</div></div>
+    <div class="item-source">36kr · 80分</div>
+    <div class="item-summary">36氪称，受 Fable 5 禁用事件影响，GPT-5.6 可能推迟。文章把 Anthropic 与美国政府的争执视为行业级监管压力信号，认为高能力模型发布节奏可能因安全、责任和关闭机制争议而放缓。</div>
+    <a href="https://36kr.com/p/3855177134969857" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">36</div><div class="item-title">&quot;Tell him he&#x27;s an asshole&quot;: 6,500 engineers forced to work for AI, Meta internal meeting spirals out of control—someone curses publicly, angrily calling it &quot;a gulag&quot;</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪报道 Meta 内部会议因 6500 名工程师被要求配合 AI 工作流而失控，有员工公开爆粗并称其像“劳改营”。事件显示大型科技公司推动 AI 改造研发流程时，效率目标与员工自主性、组织信任之间冲突加剧。</div>
+    <a href="https://36kr.com/p/3854639082656770" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">37</div><div class="item-title">微软在GitHub面临AI算力瓶颈时转向AWS</div></div>
+    <div class="item-source">hackernews · 70分</div>
+    <div class="item-summary">Hacker News 热议称，微软在 GitHub 面临 AI 算力瓶颈时转向 AWS。该动向说明 AI 编程产品的推理需求可能超过单一云基础设施承载能力，也反映云厂商之间在算力供应上既竞争又互相依赖。</div>
+    <a href="https://news.ycombinator.com/item?id=48549918" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">38</div><div class="item-title">Can&#x27;t afford it anymore, Meta calls a halt to the token consumption war</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪称 Meta 正叫停“词元消耗战”，硅谷大厂从最大化模型调用转向控制成本。随着推理费用成为产品利润关键变量，AI 公司开始更重视缓存、模型分层、任务路由和单位经济效益。</div>
+    <a href="https://36kr.com/p/3855241621296137" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">39</div><div class="item-title">OpenAI hasn&#x27;t rung the bell yet, but has already created 300 billionaires</div></div>
+    <div class="item-source">36kr · 80分</div>
+    <div class="item-summary">36氪称 OpenAI 尚未上市就已通过一轮售股制造 300 多名千万美元级富翁，其中 75 人每人到手约 2 亿美元。文章指出，前沿 AI 公司为留住顶级研究员付出巨大股权成本，人才竞争已接近资本战。</div>
+    <a href="https://36kr.com/p/3855174478025732" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">40</div><div class="item-title">微软股东因Azure及AI支出提起诉讼</div></div>
+    <div class="item-source">techinasia · 70分</div>
+    <div class="item-summary">Tech in Asia 报道称，微软股东因 Azure 与 AI 支出问题提起诉讼。争议集中在大规模 AI 基础设施投入、云业务增长预期和信息披露责任，显示投资者开始更严格审视科技巨头 AI 资本开支回报。</div>
+    <a href="http://www.techinasia.com/news/microsoft-shareholders-sue-azure-ai-spend" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">41</div><div class="item-title">腾讯支持的燧原科技获批8.88亿美元上海IPO</div></div>
+    <div class="item-source">techinasia · 70分</div>
+    <div class="item-summary">Tech in Asia 报道称，腾讯支持的燧原科技获批在上海进行 8.88 亿美元 IPO。该上市将为国产 AI 芯片公司补充资金，用于研发和产能扩张，也反映中国 AI 算力国产化仍是资本市场重点。</div>
+    <a href="http://www.techinasia.com/news/tencentbacked-enflame-wins-approval-888m-shanghai-ipo" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+</section>
+<section class="section" id="section-4">
+  <div class="section-header"><span class="section-title">论文研究</span><span class="section-count">1 条</span></div>
+  <div class="item">
+    <div class="item-header"><div class="item-num">42</div><div class="item-title">AGI is not the end, DeepMind&#x27;s new paper: Toward ASI, the real progress in AI has just begun</div></div>
+    <div class="item-source">36kr · 70分</div>
+    <div class="item-summary">36氪解读 DeepMind 关于从 AGI 迈向 ASI 的新论文，认为真正的 AI 进展并不会止步于通用智能。文章关注能力扩展、安全边界和长期治理，提示行业需要把评估体系从“是否达到 AGI”推进到更高阶智能的可控发展。</div>
+    <a href="https://36kr.com/p/3855615518921729" class="item-link" target="_blank">阅读原文 →</a>
+  </div>
+</section>
+  
+</main>
+
+<footer class="footer">
+  <p>数据来自 <a href="https://aihot.virxact.com" target="_blank">aihot.virxact.com</a> · 由 Hermes Agent 自动生成</p>
+</footer>
+
+</div><!-- /main-wrapper -->
+
+<script>
+// Sidebar functionality
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const mainWrapper = document.getElementById('mainWrapper');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  sidebarOverlay.classList.add('show');
+  mainWrapper.classList.add('sidebar-open');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('show');
+  mainWrapper.classList.remove('sidebar-open');
+}
+
+sidebarToggle.addEventListener('click', () => {
+  if (sidebar.classList.contains('open')) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
+
+sidebarOverlay.addEventListener('click', closeSidebar);
+
+// Populate sidebar nav with sections AND item titles
+const sidebarNav = document.getElementById('sidebarNav');
+const sections = document.querySelectorAll('.section');
+
+sections.forEach((section, sectionIndex) => {
+  const titleEl = section.querySelector('.section-title');
+  if (!titleEl) return;
+  
+  // Section anchor
+  const sectionId = 'section-' + sectionIndex;
+  section.id = sectionId;
+  
+  // Section header in sidebar
+  const sectionLi = document.createElement('li');
+  sectionLi.className = 'nav-section';
+  sectionLi.innerHTML = `<span class="nav-section-title">${titleEl.textContent}</span>`;
+  sidebarNav.appendChild(sectionLi);
+  
+    // Item titles under this section
+  const items = section.querySelectorAll('.item');
+  items.forEach((item, itemIndex) => {
+    const itemTitleEl = item.querySelector('.item-title');
+    if (!itemTitleEl) return;
+    
+    const itemId = sectionId + '-item-' + itemIndex;
+    item.id = itemId;
+    
+    const li = document.createElement('li');
+    li.className = 'nav-item';
+    const a = document.createElement('a');
+    a.href = '#' + itemId;
+    // Extract title gist (first 20 chars, no truncation ellipsis for short titles)
+    let titleText = itemTitleEl.textContent.trim();
+    // Remove common prefixes and clean up
+    titleText = titleText.replace(/^\d+\.\s*/, '').replace(/^【.*?】/, '');
+    // Get the gist - first meaningful part
+    if (titleText.length > 22) {
+      titleText = titleText.substring(0, 22) + '...';
+    }
+    a.textContent = titleText;
+    a.title = itemTitleEl.textContent; // full text on hover
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeSidebar();
+      setTimeout(() => {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+    li.appendChild(a);
+    sidebarNav.appendChild(li);
+  });
+});
+
+// Active item highlighting
+const navLinks = sidebarNav.querySelectorAll('.nav-item a');
+const itemObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = sidebarNav.querySelector('a[href="#' + entry.target.id + '"]');
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { threshold: 0.5, rootMargin: '-80px 0px -50% 0px' });
+
+document.querySelectorAll('.item').forEach(item => itemObserver.observe(item));
+
+// Scroll reveal for sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
