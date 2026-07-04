@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI HOT 日报 · 2026年07月03日</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2236;
+  --bg-card: #1e293b;
+  --border-subtle: rgba(148, 163, 184, 0.08);
+  --border-glow: rgba(56, 189, 248, 0.15);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.nav-back:hover {
+  border-color: var(--border-glow);
+  color: var(--text-primary);
+}
+
+.nav-back:active {
+  transform: scale(0.97);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 48px 24px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ===== SIDEBAR (LEFT) ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: rgba(10, 14, 26, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border-subtle);
+  z-index: 200;
+  padding: 72px 0 24px;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--ease-out);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 0 20px 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0 12px;
+}
+
+.sidebar-nav .nav-section {
+  margin-bottom: 4px;
+}
+
+.sidebar-nav .nav-section-title {
+  display: block;
+  padding: 10px 12px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 2px;
+}
+
+.sidebar-nav .nav-item a {
+  display: block;
+  padding: 8px 12px 8px 20px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.15s var(--ease-out);
+  border-left: 2px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav .nav-item a:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-left-color: var(--accent-cyan);
+}
+
+.sidebar-nav .nav-item a.active {
+  background: rgba(34, 211, 238, 0.06);
+  color: var(--accent-cyan);
+  border-left-color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+/* ===== SIDEBAR TOGGLE (SMALL CIRCLE) ===== */
+.sidebar-toggle {
+  position: fixed;
+  left: 16px;
+  top: 25%;
+  transform: translateY(-50%);
+  z-index: 250;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  opacity: 0.5;
+}
+
+.sidebar-toggle:hover {
+  opacity: 1;
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--border-glow);
+  color: var(--accent-cyan);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrapper {
+  transition: margin-left 0.35s var(--ease-out);
+}
+
+.main-wrapper.sidebar-open {
+  margin-left: 280px;
+}
+
+/* ===== TOP 5 ===== */
+.top5-section {
+  margin-bottom: 40px;
+}
+
+.top5-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.top5-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.top5-badge {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.top5-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.top5-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-purple);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.top5-item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.top5-item:hover::before {
+  opacity: 1;
+}
+
+.top5-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.top5-item-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.top5-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.top5-item-score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-purple);
+  background: rgba(168, 85, 247, 0.1);
+  padding: 2px 10px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.top5-item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 44px;
+}
+
+.top5-item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.top5-item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 44px;
+}
+
+.top5-item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 44px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.top5-item-link:hover {
+  opacity: 1;
+}
+
+/* ===== SECTIONS ===== */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.section {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.section-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* ===== ITEMS ===== */
+.item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.item-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 38px;
+}
+
+.item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 38px;
+}
+
+.item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 38px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.item-link:hover {
+  opacity: 1;
+}
+
+/* ===== FLASHES ===== */
+.flashes {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.flash {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.flash-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.flash-text {
+  flex: 1;
+  line-height: 1.6;
+}
+
+.flash-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 85vw;
+    max-width: 320px;
+  }
+  .main-wrapper.sidebar-open {
+    margin-left: 0;
+  }
+  .sidebar-toggle {
+    left: 12px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 36px 20px 24px; }
+  .content { padding: 0 16px 40px; }
+  .item { padding: 16px; }
+  .item-summary, .item-source, .item-link { padding-left: 0; margin-left: 0; }
+  .item-header { margin-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Toggle (small circle, left side) -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="目录">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar (Left) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">目录导航</div>
+  </div>
+  <ul class="sidebar-nav" id="sidebarNav">
+    <!-- JS will populate with sections and item titles -->
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="main-wrapper" id="mainWrapper">
+
+<nav class="nav">
+  <div class="nav-brand">AI HOT</div>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    返回首页
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-date">2026-07-03</div>
+  <h1>AI HOT 日报</h1>
+  <p class="hero-lead">精选 9 条 AI 行业动态，涵盖模型发布、产品更新、行业事件与前沿研究。</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-value">9</div>
+      <div class="stat-label">条精选</div>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+  <section class="top5-section">
+  <div class="top5-header">
+    <span class="top5-title">Top 5 精选</span>
+    <span class="top5-badge">编辑精选</span>
+  </div>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">1</div>
+      <div class="top5-item-title">claude-real-video ─ 让任何大语言模型（LLM）都能观看视频</div>
+      <span class="top5-item-score">81分</span>
+    </div>
+    <div class="top5-item-source">Hacker News 热门（buzzing.cc 中文翻译）</div>
+    <div class="top5-item-summary">claude-real-video 是一个开源工具，让大语言模型基于视频画面而非字幕进行理解。它通过场景变化检测提取关键帧、滑动窗口去重并转录音频，生成干净的本地文件夹供模型读取。支持 YouTube 链接或本地文件，依赖 ffmpeg 和 Whisper，通过 pip 安装。全部处理在本地完成，不上传云端。</div>
+    <a href="https://aihot.virxact.com/items/cmr4hb6x001txsll5jfiiy9u3" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">2</div>
+      <div class="top5-item-title">阿里达摩院发布超导材料发现AI智能体Elements Claw</div>
+      <span class="top5-item-score">80分</span>
+    </div>
+    <div class="top5-item-source">IT之家（RSS）</div>
+    <div class="top5-item-summary">7月3日，阿里达摩院联合中国人民大学、中国科学院大学发布首个超导材料发现AI智能体Elements Claw。该智能体采用“专通融合”架构，基于1.25亿分子/晶体结构预训练的1B参数原子基础模型Elements，判断超导性AUC达0.996，预测临界温度平均误差小于1K。AI仅用28个GPU小时筛选240万晶体结构，预测出6.8万个候选材料，其中4种（Hf₂₁Re₂₅、Zr₄VRe₇、HfZrRe₄、Zr₃ScRe₈）已合成并验证超导性，临界温度最高6.5K。全部240万稳定晶体数据库已开放。</div>
+    <a href="https://aihot.virxact.com/items/cmr4ewvnu016msll54kwma7sx" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">3</div>
+      <div class="top5-item-title">国家网信办就《互联网信息服务管理办法》再次征求意见，首设&quot;智能信息服务&quot;专章规范AI服务</div>
+      <span class="top5-item-score">79分</span>
+    </div>
+    <div class="top5-item-source">IT之家（RSS）</div>
+    <div class="top5-item-summary">国家网信办首次为AI信息服务设专章，要求公示算法原理、标识生成内容，国内所有做AI产品的团队都得认真看这份征求意见稿，影响可能比模型发布更大。</div>
+    <a href="https://aihot.virxact.com/items/cmr4rs02404h6sll50myozvz0" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">4</div>
+      <div class="top5-item-title">Microsoft 成立&quot;Frontier Company&quot;，斥资 25 亿美元派驻 6000 名 AI 工程师到企业客户现场</div>
+      <span class="top5-item-score">78分</span>
+    </div>
+    <div class="top5-item-source">The Decoder：AI News（RSS）</div>
+    <div class="top5-item-summary">Microsoft 新设业务部门“Frontier Company”，拨款 25 亿美元，将 6000 名行业与工程专家派驻企业客户现场，“共同设计、共同创新、部署并持续改进 AI 系统”。该部门由 Rodrigo Kede Lima 领导，旨在超越“前部署工程”模式，成为“最大、以结果为导向的工程组织”。Microsoft 将自己定位为 OpenAI 和 Anthropic 的“平台中立”替代方案，后两者也已设立专门部署公司。Microsoft 将借助埃森哲、凯捷、安永等系统集成商扩大覆盖范围。</div>
+    <a href="https://aihot.virxact.com/items/cmr3wzycy008tslnxrw3opnfn" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">5</div>
+      <div class="top5-item-title">Wan Video 推出&quot;音乐伴舞&quot;新功能</div>
+      <span class="top5-item-score">77分</span>
+    </div>
+    <div class="top5-item-source">Alibaba Cloud</div>
+    <div class="top5-item-summary">Wan Video 新功能：音乐伴舞 💃  
+上传一个角色，添加一首歌曲，让 Wan Video 生成与节奏同步的舞蹈视频。  
+可用舞种：  
+• 街舞  
+• 踢踏舞  
+• 拉丁舞  
+• K-Pop  
+• 中国古典舞  
+从节拍至动作，你的角色随音乐起舞。  
+
+前往 wan.video 体验音乐伴舞 👉 https://int.alibabacloud.com/m/1000412428/</div>
+    <a href="https://aihot.virxact.com/items/cmr4psupf03zwsll57yggswsf" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+
+  <section class="section">
+  <div class="section-header">
+    <span class="section-title">模型发布/更新</span>
+    <span class="section-count">3 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">claude-real-video ─ 让任何大语言模型（LLM）都能观看视频</div>
+    </div>
+    <div class="item-source">Hacker News 热门（buzzing.cc 中文翻译） &middot; 81分</div>
+    <div class="item-summary">claude-real-video 是一个开源工具，让大语言模型基于视频画面而非字幕进行理解。它通过场景变化检测提取关键帧、滑动窗口去重并转录音频，生成干净的本地文件夹供模型读取。支持 YouTube 链接或本地文件，依赖 ffmpeg 和 Whisper，通过 pip 安装。全部处理在本地完成，不上传云端。</div>
+    <a href="https://aihot.virxact.com/items/cmr4hb6x001txsll5jfiiy9u3" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">2</div>
+      <div class="item-title">阿里达摩院发布超导材料发现AI智能体Elements Claw</div>
+    </div>
+    <div class="item-source">IT之家（RSS） &middot; 80分</div>
+    <div class="item-summary">7月3日，阿里达摩院联合中国人民大学、中国科学院大学发布首个超导材料发现AI智能体Elements Claw。该智能体采用“专通融合”架构，基于1.25亿分子/晶体结构预训练的1B参数原子基础模型Elements，判断超导性AUC达0.996，预测临界温度平均误差小于1K。AI仅用28个GPU小时筛选240万晶体结构，预测出6.8万个候选材料，其中4种（Hf₂₁Re₂₅、Zr₄VRe₇、HfZrRe₄、Zr₃ScRe₈）已合成并验证超导性，临界温度最高6.5K。全部240万稳定晶体数据库已开放。</div>
+    <a href="https://aihot.virxact.com/items/cmr4ewvnu016msll54kwma7sx" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">3</div>
+      <div class="item-title">Anthropic与五角大楼控权之争：Claude军事用途护栏分歧</div>
+    </div>
+    <div class="item-source">Chubby♨️ &middot; 75分</div>
+    <div class="item-summary">WSJ法庭文件显示，Anthropic CEO Dario Amodei与五角大楼副部长Emil Michael数月邮件往来，核心分歧在于Claude的军事用途护栏。Anthropic要求禁止全自主武器及某些监控用途，五角大楼则希望Claude可用于所有合法国家安全场景。Michael称若分歧太大不愿“强行推动”。随后五角大楼将Anthropic列为供应链风险，阻止合作伙伴在国防部项目中使用其模型。法官暂停部分措施，政府正在上诉。Michael称原先采用Anthropic的操作中已有三分之二切换至其他AI工具。</div>
+    <a href="https://aihot.virxact.com/items/cmr3pz3hx00w5sl7lk3qk71x5" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+<section class="section">
+  <div class="section-header">
+    <span class="section-title">产品发布/更新</span>
+    <span class="section-count">1 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">Wan Video 推出&quot;音乐伴舞&quot;新功能</div>
+    </div>
+    <div class="item-source">Alibaba Cloud &middot; 77分</div>
+    <div class="item-summary">Wan Video 新功能：音乐伴舞 💃  
+上传一个角色，添加一首歌曲，让 Wan Video 生成与节奏同步的舞蹈视频。  
+可用舞种：  
+• 街舞  
+• 踢踏舞  
+• 拉丁舞  
+• K-Pop  
+• 中国古典舞  
+从节拍至动作，你的角色随音乐起舞。  
+
+前往 wan.video 体验音乐伴舞 👉 https://int.alibabacloud.com/m/1000412428/</div>
+    <a href="https://aihot.virxact.com/items/cmr4psupf03zwsll57yggswsf" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+<section class="section">
+  <div class="section-header">
+    <span class="section-title">行业动态</span>
+    <span class="section-count">4 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">国家网信办就《互联网信息服务管理办法》再次征求意见，首设&quot;智能信息服务&quot;专章规范AI服务</div>
+    </div>
+    <div class="item-source">IT之家（RSS） &middot; 79分</div>
+    <div class="item-summary">国家网信办首次为AI信息服务设专章，要求公示算法原理、标识生成内容，国内所有做AI产品的团队都得认真看这份征求意见稿，影响可能比模型发布更大。</div>
+    <a href="https://aihot.virxact.com/items/cmr4rs02404h6sll50myozvz0" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">2</div>
+      <div class="item-title">Microsoft 成立&quot;Frontier Company&quot;，斥资 25 亿美元派驻 6000 名 AI 工程师到企业客户现场</div>
+    </div>
+    <div class="item-source">The Decoder：AI News（RSS） &middot; 78分</div>
+    <div class="item-summary">Microsoft 新设业务部门“Frontier Company”，拨款 25 亿美元，将 6000 名行业与工程专家派驻企业客户现场，“共同设计、共同创新、部署并持续改进 AI 系统”。该部门由 Rodrigo Kede Lima 领导，旨在超越“前部署工程”模式，成为“最大、以结果为导向的工程组织”。Microsoft 将自己定位为 OpenAI 和 Anthropic 的“平台中立”替代方案，后两者也已设立专门部署公司。Microsoft 将借助埃森哲、凯捷、安永等系统集成商扩大覆盖范围。</div>
+    <a href="https://aihot.virxact.com/items/cmr3wzycy008tslnxrw3opnfn" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">3</div>
+      <div class="item-title">关于Mythos和网络安全的讨论并非炒作</div>
+    </div>
+    <div class="item-source">Ethan Mollick &middot; 77分</div>
+    <div class="item-summary">关于Mythos和网络安全的讨论并非炒作。
+（正如任何使用Fable进行自主工作的人可能已经认识到的那样。）</div>
+    <a href="https://aihot.virxact.com/items/cmr3yrwnf00e1slw21f16oh2d" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">4</div>
+      <div class="item-title">全球首例 AI Agent 勒索攻击曝光，从漏洞利用到数据库加密全程自主完成</div>
+    </div>
+    <div class="item-source">IT之家（RSS） &middot; 76分</div>
+    <div class="item-summary">安全厂商 Sysdig 首次记录到 AI Agent“JADEPUFFER”自动完成的勒索攻击。攻击利用暴露的 Langflow 服务漏洞 CVE-2025-3248 远程执行 Python 代码，随后自主收集 OpenAI、Anthropic、DeepSeek、Gemini 等 API 密钥及阿里云、腾讯云、华为云、AWS、Google Cloud、Azure 等云平台凭证，通过 MinIO 默认密码访问对象存储并创建每 30 分钟连接的计划任务。横向移动到 MySQL 和 Nacos 服务器，利用数据库 Root 账号及 Nacos 漏洞 CVE-2021-29441 获取管理权限，加密全部 1342 条配置数据，留下包含比特币钱包地址和 Proton Mail 的勒索信息。AI 在首次操作失败后 31 秒内自主完成错误分析与修复，累计执行超过 600 个攻击载荷，全程无需人类操作。</div>
+    <a href="https://aihot.virxact.com/items/cmr4w2clt05kasll56e54tanx" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+<section class="section">
+  <div class="section-header">
+    <span class="section-title">技巧与观点</span>
+    <span class="section-count">1 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">藏师傅PPT与Pencil结合使用技巧</div>
+    </div>
+    <div class="item-source">歸藏(guizang.ai) &middot; 75分</div>
+    <div class="item-summary">用户将藏师傅的AI生成PPT导入Pencil设计软件，可在Pencil中一次性浏览所有页面并手动调整AI常见的排版问题，如元素重叠、对齐不准、字体错误。Pencil提供比PPT更强的编辑能力（对齐、嵌套、打组），支持导出网页和编辑文件，也可导出PNG后直接放入PPT演示。这种工作流昨天经朋友分享验证，大幅提升AI生成内容的可编辑性。</div>
+    <a href="https://aihot.virxact.com/items/cmr4wyzef05r3sll5oxo52f8j" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+
+  
+</main>
+
+<footer class="footer">
+  <p>数据来自 <a href="https://aihot.virxact.com" target="_blank">aihot.virxact.com</a> · 由 Hermes Agent 自动生成</p>
+</footer>
+
+</div><!-- /main-wrapper -->
+
+<script>
+// Sidebar functionality
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const mainWrapper = document.getElementById('mainWrapper');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  sidebarOverlay.classList.add('show');
+  mainWrapper.classList.add('sidebar-open');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('show');
+  mainWrapper.classList.remove('sidebar-open');
+}
+
+sidebarToggle.addEventListener('click', () => {
+  if (sidebar.classList.contains('open')) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
+
+sidebarOverlay.addEventListener('click', closeSidebar);
+
+// Populate sidebar nav with sections AND item titles
+const sidebarNav = document.getElementById('sidebarNav');
+const sections = document.querySelectorAll('.section');
+
+sections.forEach((section, sectionIndex) => {
+  const titleEl = section.querySelector('.section-title');
+  if (!titleEl) return;
+  
+  // Section anchor
+  const sectionId = 'section-' + sectionIndex;
+  section.id = sectionId;
+  
+  // Section header in sidebar
+  const sectionLi = document.createElement('li');
+  sectionLi.className = 'nav-section';
+  sectionLi.innerHTML = `<span class="nav-section-title">${titleEl.textContent}</span>`;
+  sidebarNav.appendChild(sectionLi);
+  
+    // Item titles under this section
+  const items = section.querySelectorAll('.item');
+  items.forEach((item, itemIndex) => {
+    const itemTitleEl = item.querySelector('.item-title');
+    if (!itemTitleEl) return;
+    
+    const itemId = sectionId + '-item-' + itemIndex;
+    item.id = itemId;
+    
+    const li = document.createElement('li');
+    li.className = 'nav-item';
+    const a = document.createElement('a');
+    a.href = '#' + itemId;
+    // Extract title gist (first 20 chars, no truncation ellipsis for short titles)
+    let titleText = itemTitleEl.textContent.trim();
+    // Remove common prefixes and clean up
+    titleText = titleText.replace(/^\d+\.\s*/, '').replace(/^【.*?】/, '');
+    // Get the gist - first meaningful part
+    if (titleText.length > 22) {
+      titleText = titleText.substring(0, 22) + '...';
+    }
+    a.textContent = titleText;
+    a.title = itemTitleEl.textContent; // full text on hover
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeSidebar();
+      setTimeout(() => {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+    li.appendChild(a);
+    sidebarNav.appendChild(li);
+  });
+});
+
+// Active item highlighting
+const navLinks = sidebarNav.querySelectorAll('.nav-item a');
+const itemObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = sidebarNav.querySelector('a[href="#' + entry.target.id + '"]');
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { threshold: 0.5, rootMargin: '-80px 0px -50% 0px' });
+
+document.querySelectorAll('.item').forEach(item => itemObserver.observe(item));
+
+// Scroll reveal for sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
