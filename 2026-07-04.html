@@ -724,10 +724,10 @@ body {
 <section class="hero">
   <div class="hero-date">2026-07-04</div>
   <h1>AI HOT 日报</h1>
-  <p class="hero-lead">精选 1 条 AI 行业动态，涵盖模型发布、产品更新、行业事件与前沿研究。</p>
+  <p class="hero-lead">精选 5 条 AI 行业动态，涵盖模型发布、产品更新、行业事件与前沿研究。</p>
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-value">1</div>
+      <div class="stat-value">5</div>
       <div class="stat-label">条精选</div>
     </div>
   </div>
@@ -746,15 +746,55 @@ body {
       <span class="top5-item-score">83分</span>
     </div>
     <div class="top5-item-source">Hacker News 热门（buzzing.cc 中文翻译）</div>
-    <div class="top5-item-summary">pxpipe是一个本地代理，将系统提示、工具文档和历史记录等密集文本渲染为PNG图像，利用图像token成本取决于像素尺寸的特性压缩输入token。在Fable 5模型上，约25k文本token压缩为约2.7k图像token，端到端账单降低59–70%。SWE-bench Lite 10个实例全部通过，成本从$54降至$27；SWE-bench Pro 19对测试中18对判定一致，单次请求成本降低约60%。该方法有损（精确ID等需保持文本），默认仅处理claude-fable-5请求，可通过PXPIPE_MODELS变量控制。</div>
+    <div class="top5-item-summary">pxpipe 通过把大量上下文渲染成图像来降低 token 开销，实测能削减 60-70% 的账单，对重度使用 Claude Code 的开发者很诱人，但它有损，精确值可能读错，适合容错高的编码场景。</div>
     <a href="https://aihot.virxact.com/items/cmr5cef1q017islc779xjrcy6" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">2</div>
+      <div class="top5-item-title">我国研制全球首款基于可控存内计算的忆阻器神经动力学芯片</div>
+      <span class="top5-item-score">74分</span>
+    </div>
+    <div class="top5-item-source">IT之家（RSS）</div>
+    <div class="top5-item-summary">全球首款神经动力学芯片将单步时延压至2.12毫秒，首次实现实时计算，比GPU快50倍以上，这是神经拟态芯片落地的关键一步，做实时仿真和边缘AI的可以留意。</div>
+    <a href="https://aihot.virxact.com/items/cmr5wizx2067eslc7xynzcf9y" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">3</div>
+      <div class="top5-item-title">26000名学生研究显示AI隐藏学习成本需两年才显现</div>
+      <span class="top5-item-score">73分</span>
+    </div>
+    <div class="top5-item-source">The Decoder：AI News（RSS）</div>
+    <div class="top5-item-summary">AI助学短期提分但会偷走真正的学习，这2.6万人的研究用两年数据揭穿了安逸的幻觉，是每位家长和开发者都该看的预警。</div>
+    <a href="https://aihot.virxact.com/items/cmr65ieko002tslf0xiomac0c" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">4</div>
+      <div class="top5-item-title">Fable 的判断力：Simon Willison 从 Claude Code 团队获得的效率技巧</div>
+      <span class="top5-item-score">73分</span>
+    </div>
+    <div class="top5-item-source">Simon Willison 博客</div>
+    <div class="top5-item-summary">Simon 从 Claude Code 团队得到的实战技巧：别硬性规定 Fable 怎么写测试、用哪个模型，让它自己判断。他实测这条 prompt 能明显节省代币消耗，Fable 涨价前偷时间的利器。</div>
+    <a href="https://aihot.virxact.com/items/cmr5blxyu00ykslc7kiaaxqam" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">5</div>
+      <div class="top5-item-title">NVIDIA 联合多所大学提出 ASPIRE：自我改进机器人框架，零样本成功率最高提升 77 分</div>
+      <span class="top5-item-score">70分</span>
+    </div>
+    <div class="top5-item-source">MarkTechPost（RSS）</div>
+    <div class="top5-item-summary">ASPIRE让机器人编程从单次尝试变成持续学习，把失败调试沉淀成可复用技能库，长任务零样本直接从4%拉到31%，这条思路比具体数字更有启发性。</div>
+    <a href="https://aihot.virxact.com/items/cmr5zuihg0739slc7nv4mlc5r" class="item-link" target="_blank">查看原文 &rarr;</a>
   </article>
 </section>
 
   <section class="section">
   <div class="section-header">
     <span class="section-title">模型发布/更新</span>
-    <span class="section-count">1 条</span>
+    <span class="section-count">2 条</span>
   </div>
   <article class="item">
     <div class="item-header">
@@ -762,8 +802,56 @@ body {
       <div class="item-title">pxpipe：通过图像化压缩输入token降低Claude Code成本</div>
     </div>
     <div class="item-source">Hacker News 热门（buzzing.cc 中文翻译） &middot; 83分</div>
-    <div class="item-summary">pxpipe是一个本地代理，将系统提示、工具文档和历史记录等密集文本渲染为PNG图像，利用图像token成本取决于像素尺寸的特性压缩输入token。在Fable 5模型上，约25k文本token压缩为约2.7k图像token，端到端账单降低59–70%。SWE-bench Lite 10个实例全部通过，成本从$54降至$27；SWE-bench Pro 19对测试中18对判定一致，单次请求成本降低约60%。该方法有损（精确ID等需保持文本），默认仅处理claude-fable-5请求，可通过PXPIPE_MODELS变量控制。</div>
+    <div class="item-summary">pxpipe 通过把大量上下文渲染成图像来降低 token 开销，实测能削减 60-70% 的账单，对重度使用 Claude Code 的开发者很诱人，但它有损，精确值可能读错，适合容错高的编码场景。</div>
     <a href="https://aihot.virxact.com/items/cmr5cef1q017islc779xjrcy6" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">2</div>
+      <div class="item-title">Fable 的判断力：Simon Willison 从 Claude Code 团队获得的效率技巧</div>
+    </div>
+    <div class="item-source">Simon Willison 博客 &middot; 73分</div>
+    <div class="item-summary">Simon 从 Claude Code 团队得到的实战技巧：别硬性规定 Fable 怎么写测试、用哪个模型，让它自己判断。他实测这条 prompt 能明显节省代币消耗，Fable 涨价前偷时间的利器。</div>
+    <a href="https://aihot.virxact.com/items/cmr5blxyu00ykslc7kiaaxqam" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+<section class="section">
+  <div class="section-header">
+    <span class="section-title">行业动态</span>
+    <span class="section-count">1 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">我国研制全球首款基于可控存内计算的忆阻器神经动力学芯片</div>
+    </div>
+    <div class="item-source">IT之家（RSS） &middot; 74分</div>
+    <div class="item-summary">全球首款神经动力学芯片将单步时延压至2.12毫秒，首次实现实时计算，比GPU快50倍以上，这是神经拟态芯片落地的关键一步，做实时仿真和边缘AI的可以留意。</div>
+    <a href="https://aihot.virxact.com/items/cmr5wizx2067eslc7xynzcf9y" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+<section class="section">
+  <div class="section-header">
+    <span class="section-title">论文研究</span>
+    <span class="section-count">2 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">26000名学生研究显示AI隐藏学习成本需两年才显现</div>
+    </div>
+    <div class="item-source">The Decoder：AI News（RSS） &middot; 73分</div>
+    <div class="item-summary">AI助学短期提分但会偷走真正的学习，这2.6万人的研究用两年数据揭穿了安逸的幻觉，是每位家长和开发者都该看的预警。</div>
+    <a href="https://aihot.virxact.com/items/cmr65ieko002tslf0xiomac0c" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">2</div>
+      <div class="item-title">NVIDIA 联合多所大学提出 ASPIRE：自我改进机器人框架，零样本成功率最高提升 77 分</div>
+    </div>
+    <div class="item-source">MarkTechPost（RSS） &middot; 70分</div>
+    <div class="item-summary">ASPIRE让机器人编程从单次尝试变成持续学习，把失败调试沉淀成可复用技能库，长任务零样本直接从4%拉到31%，这条思路比具体数字更有启发性。</div>
+    <a href="https://aihot.virxact.com/items/cmr5zuihg0739slc7nv4mlc5r" class="item-link" target="_blank">查看原文 &rarr;</a>
   </article>
 </section>
 
