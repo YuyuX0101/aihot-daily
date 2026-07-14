@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI HOT 日报 · 2026年07月13日</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2236;
+  --bg-card: #1e293b;
+  --border-subtle: rgba(148, 163, 184, 0.08);
+  --border-glow: rgba(56, 189, 248, 0.15);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.nav-back:hover {
+  border-color: var(--border-glow);
+  color: var(--text-primary);
+}
+
+.nav-back:active {
+  transform: scale(0.97);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 48px 24px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ===== SIDEBAR (LEFT) ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: rgba(10, 14, 26, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border-subtle);
+  z-index: 200;
+  padding: 72px 0 24px;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--ease-out);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 0 20px 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0 12px;
+}
+
+.sidebar-nav .nav-section {
+  margin-bottom: 4px;
+}
+
+.sidebar-nav .nav-section-title {
+  display: block;
+  padding: 10px 12px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 2px;
+}
+
+.sidebar-nav .nav-item a {
+  display: block;
+  padding: 8px 12px 8px 20px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.15s var(--ease-out);
+  border-left: 2px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav .nav-item a:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-left-color: var(--accent-cyan);
+}
+
+.sidebar-nav .nav-item a.active {
+  background: rgba(34, 211, 238, 0.06);
+  color: var(--accent-cyan);
+  border-left-color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+/* ===== SIDEBAR TOGGLE (SMALL CIRCLE) ===== */
+.sidebar-toggle {
+  position: fixed;
+  left: 16px;
+  top: 25%;
+  transform: translateY(-50%);
+  z-index: 250;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  opacity: 0.5;
+}
+
+.sidebar-toggle:hover {
+  opacity: 1;
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--border-glow);
+  color: var(--accent-cyan);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrapper {
+  transition: margin-left 0.35s var(--ease-out);
+}
+
+.main-wrapper.sidebar-open {
+  margin-left: 280px;
+}
+
+/* ===== TOP 5 ===== */
+.top5-section {
+  margin-bottom: 40px;
+}
+
+.top5-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.top5-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.top5-badge {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.top5-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.top5-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-purple);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.top5-item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.top5-item:hover::before {
+  opacity: 1;
+}
+
+.top5-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.top5-item-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.top5-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.top5-item-score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-purple);
+  background: rgba(168, 85, 247, 0.1);
+  padding: 2px 10px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.top5-item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 44px;
+}
+
+.top5-item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.top5-item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 44px;
+}
+
+.top5-item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 44px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.top5-item-link:hover {
+  opacity: 1;
+}
+
+/* ===== SECTIONS ===== */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.section {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.section-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* ===== ITEMS ===== */
+.item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.item-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 38px;
+}
+
+.item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 38px;
+}
+
+.item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 38px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.item-link:hover {
+  opacity: 1;
+}
+
+/* ===== FLASHES ===== */
+.flashes {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.flash {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.flash-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.flash-text {
+  flex: 1;
+  line-height: 1.6;
+}
+
+.flash-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 85vw;
+    max-width: 320px;
+  }
+  .main-wrapper.sidebar-open {
+    margin-left: 0;
+  }
+  .sidebar-toggle {
+    left: 12px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 36px 20px 24px; }
+  .content { padding: 0 16px 40px; }
+  .item { padding: 16px; }
+  .item-summary, .item-source, .item-link { padding-left: 0; margin-left: 0; }
+  .item-header { margin-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Toggle (small circle, left side) -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="目录">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar (Left) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">目录导航</div>
+  </div>
+  <ul class="sidebar-nav" id="sidebarNav">
+    <!-- JS will populate with sections and item titles -->
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="main-wrapper" id="mainWrapper">
+
+<nav class="nav">
+  <div class="nav-brand">AI HOT</div>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    返回首页
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-date">2026-07-13</div>
+  <h1>AI HOT 日报</h1>
+  <p class="hero-lead">精选 7 条 AI 行业动态，涵盖模型发布、产品更新、行业事件与前沿研究。</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-value">7</div>
+      <div class="stat-label">条精选</div>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+  <section class="top5-section">
+  <div class="top5-header">
+    <span class="top5-title">Top 5 精选</span>
+    <span class="top5-badge">编辑精选</span>
+  </div>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">1</div>
+      <div class="top5-item-title">xAI 官方 Grok CLI 被曝静默上传整个代码库及用户密钥</div>
+      <span class="top5-item-score">86分</span>
+    </div>
+    <div class="top5-item-source">公众号：数字生命卡兹克</div>
+    <div class="top5-item-summary">安全研究者发现，xAI 官方 Grok CLI（npm 包 @xai-official/grok 0.2.93 版）会在每轮任务前后，将当前工作目录打包为 before_codebase.tar.gz 和 after_codebase.tar.gz，通过独立旁路通道静默上传至 xAI 的 Google Cloud 仓库。验证显示，即使模型仅回复一个单词，上传依然发生。上传包还包含仓库外的 ~/.claude.json、Claude Code 设置、全局 AGENTS 规则、30 多个 Skill 文件及一个 API 密钥。7 月 13 日凌晨，xAI 通过服务端远程开关新增 disable_codebase_upload 字段，将默认上传行为关闭，但此前该功能默认开启。</div>
+    <a href="https://aihot.virxact.com/items/cmriguktg00arbijpt0l7c2vh" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">2</div>
+      <div class="top5-item-title">Meta 宣布扩建路易斯安那州数据中心至 5GW，总投资超 500 亿美元</div>
+      <span class="top5-item-score">77分</span>
+    </div>
+    <div class="top5-item-source">IT之家（RSS）</div>
+    <div class="top5-item-summary">Meta 将其路易斯安那州数据中心算力扩至 5GW，总投资超 500 亿美元，为全球最大 AI 基础设施投资之一。Meta 承诺承担全部能源及水资源费用，并另投超 10 亿美元改善当地道路及供水系统。此外，Meta 与安特吉公司达成协议，为新建天然气发电厂、储能电池及核电增容项目提供资金支持。</div>
+    <a href="https://aihot.virxact.com/items/cmrj36yri059qbilk1n6jhqn1" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">3</div>
+      <div class="top5-item-title">黄仁勋：英伟达季度收入逼近千亿美元，Rubin Ultra 架构未延期</div>
+      <span class="top5-item-score">77分</span>
+    </div>
+    <div class="top5-item-source">IT之家（RSS）</div>
+    <div class="top5-item-summary">英伟达CEO黄仁勋在摩根士丹利路演中表示，公司季度营收即将逼近1000亿美元，且增长速度仍在加快。他否认下一代旗舰架构Rubin Ultra延期传闻，称其仍按计划于明年出货，当前机架设计调整仅为系统架构优化。一个此前主要依赖ASIC的前沿AI模型项目，如今英伟达GPU算力占比已接近50%，市场普遍指向Anthropic。英伟达预计本财年CPU业务收入约200亿美元，下一代Vera CPU将进军通用服务器市场。摩根士丹利维持英伟达“增持”评级，目标价288美元。</div>
+    <a href="https://aihot.virxact.com/items/cmrijw1sy00j6bi0jshweyv4l" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">4</div>
+      <div class="top5-item-title">Codex与ChatGPT Work多项更新：取消5小时限制</div>
+      <span class="top5-item-score">76分</span>
+    </div>
+    <div class="top5-item-source">Tibo</div>
+    <div class="top5-item-summary">早上好。过去48小时里，Codex和ChatGPT Work非常忙碌！三项重要更新：
+
+- 暂时取消所有Plus、Business和Pro计划的5小时使用限制  
+- 正在推出变更，使GPT 5.6 Sol整体更高效，这将体现在使用量减少上，从而让你能走得更远。具体影响待量化后公布  
+- 我们已达到600万活跃用户，并将在接下来一小时内进行使用量重置  
+
+去创造吧。</div>
+    <a href="https://aihot.virxact.com/items/cmri4o4kx00qcbi3hqxj8rxqd" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">5</div>
+      <div class="top5-item-title">腾讯混元发布 HyOCR-1.5：端到端 OCR 大模型全栈开源，推理提速 6.37 倍</div>
+      <span class="top5-item-score">76分</span>
+    </div>
+    <div class="top5-item-source">公众号：腾讯混元</div>
+    <div class="top5-item-summary">腾讯混元发布 HyOCR-1.5，这是端到端 OCR 大模型领域首个将训练、推理、模型权重完整开源的专家模型。仅 1B 参数，覆盖 8 种以上 text-centric 任务。引入 DFlash 投机解码框架，在 Transformers 下实现 6.37× 加速，vLLM 下 2.14× 加速，端到端推理达每页 1.408s。支持 4K 分辨率与 128K 上下文窗口，通过 Agentic Data Flow 扩展低资源 OCR（331 种语言）、古文字识别与多图问答能力。在 OmniDocBench v1.6 上以 94.74 分居端到端第一。</div>
+    <a href="https://aihot.virxact.com/items/cmrj4s89p05nhbilkljqel2d5" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+
+  <section class="section">
+  <div class="section-header">
+    <span class="section-title">模型发布/更新</span>
+    <span class="section-count">4 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">xAI 官方 Grok CLI 被曝静默上传整个代码库及用户密钥</div>
+    </div>
+    <div class="item-source">公众号：数字生命卡兹克 &middot; 86分</div>
+    <div class="item-summary">安全研究者发现，xAI 官方 Grok CLI（npm 包 @xai-official/grok 0.2.93 版）会在每轮任务前后，将当前工作目录打包为 before_codebase.tar.gz 和 after_codebase.tar.gz，通过独立旁路通道静默上传至 xAI 的 Google Cloud 仓库。验证显示，即使模型仅回复一个单词，上传依然发生。上传包还包含仓库外的 ~/.claude.json、Claude Code 设置、全局 AGENTS 规则、30 多个 Skill 文件及一个 API 密钥。7 月 13 日凌晨，xAI 通过服务端远程开关新增 disable_codebase_upload 字段，将默认上传行为关闭，但此前该功能默认开启。</div>
+    <a href="https://aihot.virxact.com/items/cmriguktg00arbijpt0l7c2vh" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">2</div>
+      <div class="item-title">Codex与ChatGPT Work多项更新：取消5小时限制</div>
+    </div>
+    <div class="item-source">Tibo &middot; 76分</div>
+    <div class="item-summary">早上好。过去48小时里，Codex和ChatGPT Work非常忙碌！三项重要更新：
+
+- 暂时取消所有Plus、Business和Pro计划的5小时使用限制  
+- 正在推出变更，使GPT 5.6 Sol整体更高效，这将体现在使用量减少上，从而让你能走得更远。具体影响待量化后公布  
+- 我们已达到600万活跃用户，并将在接下来一小时内进行使用量重置  
+
+去创造吧。</div>
+    <a href="https://aihot.virxact.com/items/cmri4o4kx00qcbi3hqxj8rxqd" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">3</div>
+      <div class="item-title">腾讯混元发布 HyOCR-1.5：端到端 OCR 大模型全栈开源，推理提速 6.37 倍</div>
+    </div>
+    <div class="item-source">公众号：腾讯混元 &middot; 76分</div>
+    <div class="item-summary">腾讯混元发布 HyOCR-1.5，这是端到端 OCR 大模型领域首个将训练、推理、模型权重完整开源的专家模型。仅 1B 参数，覆盖 8 种以上 text-centric 任务。引入 DFlash 投机解码框架，在 Transformers 下实现 6.37× 加速，vLLM 下 2.14× 加速，端到端推理达每页 1.408s。支持 4K 分辨率与 128K 上下文窗口，通过 Agentic Data Flow 扩展低资源 OCR（331 种语言）、古文字识别与多图问答能力。在 OmniDocBench v1.6 上以 94.74 分居端到端第一。</div>
+    <a href="https://aihot.virxact.com/items/cmrj4s89p05nhbilkljqel2d5" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">4</div>
+      <div class="item-title">腾讯混元发布Hy3模型：295B参数MoE架构，Agent向LLM定位，已集成微信服务10亿+用户</div>
+    </div>
+    <div class="item-source">AYi &middot; 75分</div>
+    <div class="item-summary">腾讯混元团队发布Hy3模型，采用295B总参数、21B激活参数的MoE架构，推理效率可打平参数规模2-5倍的旗舰模型。Hy3定位为Agent向LLM，从preview到正式版基于50多个真实业务反馈迭代，内部WorkBuddy任务成功率从72%提升至90%，耗时降低34%，幻觉和常识错误持续下降。实测显示其在coding、办公、复杂任务规划方面表现突出，纯视觉能力为短板。Hy3已集成至微信服务10亿+用户，视频演示包括生成HTML网页、Agent网页和10页PPT，模型具备自检和主动说明不足的能力。</div>
+    <a href="https://aihot.virxact.com/items/cmri0lo1e00irbixecx7cj2f5" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+<section class="section">
+  <div class="section-header">
+    <span class="section-title">行业动态</span>
+    <span class="section-count">3 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">Meta 宣布扩建路易斯安那州数据中心至 5GW，总投资超 500 亿美元</div>
+    </div>
+    <div class="item-source">IT之家（RSS） &middot; 77分</div>
+    <div class="item-summary">Meta 将其路易斯安那州数据中心算力扩至 5GW，总投资超 500 亿美元，为全球最大 AI 基础设施投资之一。Meta 承诺承担全部能源及水资源费用，并另投超 10 亿美元改善当地道路及供水系统。此外，Meta 与安特吉公司达成协议，为新建天然气发电厂、储能电池及核电增容项目提供资金支持。</div>
+    <a href="https://aihot.virxact.com/items/cmrj36yri059qbilk1n6jhqn1" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">2</div>
+      <div class="item-title">黄仁勋：英伟达季度收入逼近千亿美元，Rubin Ultra 架构未延期</div>
+    </div>
+    <div class="item-source">IT之家（RSS） &middot; 77分</div>
+    <div class="item-summary">英伟达CEO黄仁勋在摩根士丹利路演中表示，公司季度营收即将逼近1000亿美元，且增长速度仍在加快。他否认下一代旗舰架构Rubin Ultra延期传闻，称其仍按计划于明年出货，当前机架设计调整仅为系统架构优化。一个此前主要依赖ASIC的前沿AI模型项目，如今英伟达GPU算力占比已接近50%，市场普遍指向Anthropic。英伟达预计本财年CPU业务收入约200亿美元，下一代Vera CPU将进军通用服务器市场。摩根士丹利维持英伟达“增持”评级，目标价288美元。</div>
+    <a href="https://aihot.virxact.com/items/cmrijw1sy00j6bi0jshweyv4l" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">3</div>
+      <div class="item-title">Seedream 5.0 Pro 测评：图像编辑门槛爆降</div>
+    </div>
+    <div class="item-source">歸藏(guizang.ai) &middot; 75分</div>
+    <div class="item-summary">字节跳动发布 Seedream 5.0 Pro，图像质量与提示词理解追平 GPT-Image 2.0，综合能力仅次于后者。核心亮点是“可编辑”交互：用户可在图上打点、画框、涂鸦，提示词中直接 @ 标记，实现精准局部编辑（如换沙发、改墙面颜色），其他区域不变。实测案例涵盖家装改造（一次替换六件家具）、商品图制作（键盘爆炸拆解图、标注卖点）、海报排版（框定位置生成文字）等场景，支持色卡配色和 SKU 换色。火山引擎已全量上线 API，即梦、豆包、Lumina 可体验。</div>
+    <a href="https://aihot.virxact.com/items/cmrj2yiav054pbilkyf6ufbw2" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+
+  
+</main>
+
+<footer class="footer">
+  <p>数据来自 <a href="https://aihot.virxact.com" target="_blank">aihot.virxact.com</a> · 由 Hermes Agent 自动生成</p>
+</footer>
+
+</div><!-- /main-wrapper -->
+
+<script>
+// Sidebar functionality
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const mainWrapper = document.getElementById('mainWrapper');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  sidebarOverlay.classList.add('show');
+  mainWrapper.classList.add('sidebar-open');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('show');
+  mainWrapper.classList.remove('sidebar-open');
+}
+
+sidebarToggle.addEventListener('click', () => {
+  if (sidebar.classList.contains('open')) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
+
+sidebarOverlay.addEventListener('click', closeSidebar);
+
+// Populate sidebar nav with sections AND item titles
+const sidebarNav = document.getElementById('sidebarNav');
+const sections = document.querySelectorAll('.section');
+
+sections.forEach((section, sectionIndex) => {
+  const titleEl = section.querySelector('.section-title');
+  if (!titleEl) return;
+  
+  // Section anchor
+  const sectionId = 'section-' + sectionIndex;
+  section.id = sectionId;
+  
+  // Section header in sidebar
+  const sectionLi = document.createElement('li');
+  sectionLi.className = 'nav-section';
+  sectionLi.innerHTML = `<span class="nav-section-title">${titleEl.textContent}</span>`;
+  sidebarNav.appendChild(sectionLi);
+  
+    // Item titles under this section
+  const items = section.querySelectorAll('.item');
+  items.forEach((item, itemIndex) => {
+    const itemTitleEl = item.querySelector('.item-title');
+    if (!itemTitleEl) return;
+    
+    const itemId = sectionId + '-item-' + itemIndex;
+    item.id = itemId;
+    
+    const li = document.createElement('li');
+    li.className = 'nav-item';
+    const a = document.createElement('a');
+    a.href = '#' + itemId;
+    // Extract title gist (first 20 chars, no truncation ellipsis for short titles)
+    let titleText = itemTitleEl.textContent.trim();
+    // Remove common prefixes and clean up
+    titleText = titleText.replace(/^\d+\.\s*/, '').replace(/^【.*?】/, '');
+    // Get the gist - first meaningful part
+    if (titleText.length > 22) {
+      titleText = titleText.substring(0, 22) + '...';
+    }
+    a.textContent = titleText;
+    a.title = itemTitleEl.textContent; // full text on hover
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeSidebar();
+      setTimeout(() => {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+    li.appendChild(a);
+    sidebarNav.appendChild(li);
+  });
+});
+
+// Active item highlighting
+const navLinks = sidebarNav.querySelectorAll('.nav-item a');
+const itemObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = sidebarNav.querySelector('a[href="#' + entry.target.id + '"]');
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { threshold: 0.5, rootMargin: '-80px 0px -50% 0px' });
+
+document.querySelectorAll('.item').forEach(item => itemObserver.observe(item));
+
+// Scroll reveal for sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
