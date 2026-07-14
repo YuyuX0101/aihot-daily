@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI HOT 日报 · 2026年07月14日</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0e1a;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2236;
+  --bg-card: #1e293b;
+  --border-subtle: rgba(148, 163, 184, 0.08);
+  --border-glow: rgba(56, 189, 248, 0.15);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.nav-back:hover {
+  border-color: var(--border-glow);
+  color: var(--text-primary);
+}
+
+.nav-back:active {
+  transform: scale(0.97);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 48px 24px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ===== SIDEBAR (LEFT) ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: rgba(10, 14, 26, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--border-subtle);
+  z-index: 200;
+  padding: 72px 0 24px;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--ease-out);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 0 20px 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0 12px;
+}
+
+.sidebar-nav .nav-section {
+  margin-bottom: 4px;
+}
+
+.sidebar-nav .nav-section-title {
+  display: block;
+  padding: 10px 12px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 2px;
+}
+
+.sidebar-nav .nav-item a {
+  display: block;
+  padding: 8px 12px 8px 20px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.15s var(--ease-out);
+  border-left: 2px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav .nav-item a:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-left-color: var(--accent-cyan);
+}
+
+.sidebar-nav .nav-item a.active {
+  background: rgba(34, 211, 238, 0.06);
+  color: var(--accent-cyan);
+  border-left-color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+/* ===== SIDEBAR TOGGLE (SMALL CIRCLE) ===== */
+.sidebar-toggle {
+  position: fixed;
+  left: 16px;
+  top: 25%;
+  transform: translateY(-50%);
+  z-index: 250;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  opacity: 0.5;
+}
+
+.sidebar-toggle:hover {
+  opacity: 1;
+  background: rgba(30, 41, 59, 0.9);
+  border-color: var(--border-glow);
+  color: var(--accent-cyan);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrapper {
+  transition: margin-left 0.35s var(--ease-out);
+}
+
+.main-wrapper.sidebar-open {
+  margin-left: 280px;
+}
+
+/* ===== TOP 5 ===== */
+.top5-section {
+  margin-bottom: 40px;
+}
+
+.top5-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.top5-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.top5-badge {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.top5-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.top5-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-purple);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.top5-item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.top5-item:hover::before {
+  opacity: 1;
+}
+
+.top5-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.top5-item-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.top5-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.top5-item-score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-purple);
+  background: rgba(168, 85, 247, 0.1);
+  padding: 2px 10px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.top5-item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 44px;
+}
+
+.top5-item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.top5-item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 44px;
+}
+
+.top5-item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 44px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.top5-item-link:hover {
+  opacity: 1;
+}
+
+/* ===== SECTIONS ===== */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.section {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.section-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* ===== ITEMS ===== */
+.item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.item:hover {
+  border-color: var(--border-glow);
+  transform: translateX(4px);
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.item-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.item-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 38px;
+}
+
+.item-source::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.item-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 38px;
+}
+
+.item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 38px;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.item-link:hover {
+  opacity: 1;
+}
+
+/* ===== FLASHES ===== */
+.flashes {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.flash {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.flash-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.flash-text {
+  flex: 1;
+  line-height: 1.6;
+}
+
+.flash-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 85vw;
+    max-width: 320px;
+  }
+  .main-wrapper.sidebar-open {
+    margin-left: 0;
+  }
+  .sidebar-toggle {
+    left: 12px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 36px 20px 24px; }
+  .content { padding: 0 16px 40px; }
+  .item { padding: 16px; }
+  .item-summary, .item-source, .item-link { padding-left: 0; margin-left: 0; }
+  .item-header { margin-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Toggle (small circle, left side) -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="目录">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar (Left) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">目录导航</div>
+  </div>
+  <ul class="sidebar-nav" id="sidebarNav">
+    <!-- JS will populate with sections and item titles -->
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="main-wrapper" id="mainWrapper">
+
+<nav class="nav">
+  <div class="nav-brand">AI HOT</div>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    返回首页
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-date">2026-07-14</div>
+  <h1>AI HOT 日报</h1>
+  <p class="hero-lead">精选 3 条 AI 行业动态，涵盖模型发布、产品更新、行业事件与前沿研究。</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-value">3</div>
+      <div class="stat-label">条精选</div>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+  <section class="top5-section">
+  <div class="top5-header">
+    <span class="top5-title">Top 5 精选</span>
+    <span class="top5-badge">编辑精选</span>
+  </div>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">1</div>
+      <div class="top5-item-title">OpenAI 面向普通用户发布提示词指南：从结果出发，少写步骤</div>
+      <span class="top5-item-score">78分</span>
+    </div>
+    <div class="top5-item-source">The Decoder：AI News（RSS）</div>
+    <div class="top5-item-summary">OpenAI 整合了一份面向普通用户的提示词指南，涵盖目标、上下文、输出格式和边界四个可选模块。指南建议以结果而非步骤开头，用一两条硬性规则替代逐步骤脚本。Chat 处理快速任务，基于 Codex 技术和 GPT-5.6 模型的 ChatGPT Work 负责多源、多步骤的复杂项目。Codex 新增 Steer（重定向当前运行）、Queue（排队下一条消息）和沙盒模式，支持 /plan、/goal 和 /review 等斜杠命令。用户无需一次性写对提示词，后续追问是预期调整方式。</div>
+    <a href="https://aihot.virxact.com/items/cmrjj6scy03ghbi03olyygged" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">2</div>
+      <div class="top5-item-title">前沿模型实际成本：tokenizer 差异导致隐性涨价</div>
+      <span class="top5-item-score">77分</span>
+    </div>
+    <div class="top5-item-source">Hacker News 热门（buzzing.cc 中文翻译）</div>
+    <div class="top5-item-summary">同一份 TypeScript 文件在 GPT-5.x 上为 681 个 token，在 Claude 最新 tokenizer 下为 1,178 个，相差 1.73 倍。Anthropic 新 tokenizer 比旧版多产生约 30% 的 token，标价不变，构成隐性涨价。Claude Opus 4.6 与 Opus 4.8 标价同为 $5.00 / $25.00，但新 tokenizer 使同一代码的 token 数增加约 32%。Claude Sonnet 5 的 $2.00 / $10.00 为促销价，2026 年 8 月 31 日后恢复 $3.00 / $15.00，届时相同代码成本将比 Sonnet 4.6 高出约 32%。跨厂商对比中，Claude 新 tokenizer 在代码上比 GPT 多产生 1.50x 至 1.73x 的 token，TypeScript 差距最大。</div>
+    <a href="https://aihot.virxact.com/items/cmrjrg5aj0202bis4f9pzo8d3" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="top5-item">
+    <div class="top5-item-header">
+      <div class="top5-item-rank">3</div>
+      <div class="top5-item-title">马斯克承认 Grok Build 上传用户代码，SpaceXAI 承诺彻底删除数据</div>
+      <span class="top5-item-score">75分</span>
+    </div>
+    <div class="top5-item-source">IT之家（RSS）</div>
+    <div class="top5-item-summary">独立安全研究者 @cereblab 通过钓鱼仓库证实，SpaceXAI 旗下 AI 编程 agent Grok Build 在用户关闭“帮助改进模型”开关后仍将整个代码仓库上传至 Google Cloud 存储桶。一个 12GB 测试仓库被拆成 73 个数据包共传输 5.1GB，而正常对话仅用 192KB。另一研究者复现发现日志记录 339 次自动上传，其中一次涉及整个电脑主目录。事件曝光后，Elon Musk 亲自回应承认属实，承诺彻底删除所有此前上传的用户数据。Grok Build 已上线 /privacy 命令供用户一键关闭数据留存并追溯删除已上传数据。</div>
+    <a href="https://aihot.virxact.com/items/cmrka3jld050tbiw29heoy5nl" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+
+  <section class="section">
+  <div class="section-header">
+    <span class="section-title">模型发布/更新</span>
+    <span class="section-count">3 条</span>
+  </div>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">1</div>
+      <div class="item-title">OpenAI 面向普通用户发布提示词指南：从结果出发，少写步骤</div>
+    </div>
+    <div class="item-source">The Decoder：AI News（RSS） &middot; 78分</div>
+    <div class="item-summary">OpenAI 整合了一份面向普通用户的提示词指南，涵盖目标、上下文、输出格式和边界四个可选模块。指南建议以结果而非步骤开头，用一两条硬性规则替代逐步骤脚本。Chat 处理快速任务，基于 Codex 技术和 GPT-5.6 模型的 ChatGPT Work 负责多源、多步骤的复杂项目。Codex 新增 Steer（重定向当前运行）、Queue（排队下一条消息）和沙盒模式，支持 /plan、/goal 和 /review 等斜杠命令。用户无需一次性写对提示词，后续追问是预期调整方式。</div>
+    <a href="https://aihot.virxact.com/items/cmrjj6scy03ghbi03olyygged" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">2</div>
+      <div class="item-title">前沿模型实际成本：tokenizer 差异导致隐性涨价</div>
+    </div>
+    <div class="item-source">Hacker News 热门（buzzing.cc 中文翻译） &middot; 77分</div>
+    <div class="item-summary">同一份 TypeScript 文件在 GPT-5.x 上为 681 个 token，在 Claude 最新 tokenizer 下为 1,178 个，相差 1.73 倍。Anthropic 新 tokenizer 比旧版多产生约 30% 的 token，标价不变，构成隐性涨价。Claude Opus 4.6 与 Opus 4.8 标价同为 $5.00 / $25.00，但新 tokenizer 使同一代码的 token 数增加约 32%。Claude Sonnet 5 的 $2.00 / $10.00 为促销价，2026 年 8 月 31 日后恢复 $3.00 / $15.00，届时相同代码成本将比 Sonnet 4.6 高出约 32%。跨厂商对比中，Claude 新 tokenizer 在代码上比 GPT 多产生 1.50x 至 1.73x 的 token，TypeScript 差距最大。</div>
+    <a href="https://aihot.virxact.com/items/cmrjrg5aj0202bis4f9pzo8d3" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+  <article class="item">
+    <div class="item-header">
+      <div class="item-num">3</div>
+      <div class="item-title">马斯克承认 Grok Build 上传用户代码，SpaceXAI 承诺彻底删除数据</div>
+    </div>
+    <div class="item-source">IT之家（RSS） &middot; 75分</div>
+    <div class="item-summary">独立安全研究者 @cereblab 通过钓鱼仓库证实，SpaceXAI 旗下 AI 编程 agent Grok Build 在用户关闭“帮助改进模型”开关后仍将整个代码仓库上传至 Google Cloud 存储桶。一个 12GB 测试仓库被拆成 73 个数据包共传输 5.1GB，而正常对话仅用 192KB。另一研究者复现发现日志记录 339 次自动上传，其中一次涉及整个电脑主目录。事件曝光后，Elon Musk 亲自回应承认属实，承诺彻底删除所有此前上传的用户数据。Grok Build 已上线 /privacy 命令供用户一键关闭数据留存并追溯删除已上传数据。</div>
+    <a href="https://aihot.virxact.com/items/cmrka3jld050tbiw29heoy5nl" class="item-link" target="_blank">查看原文 &rarr;</a>
+  </article>
+</section>
+
+  
+</main>
+
+<footer class="footer">
+  <p>数据来自 <a href="https://aihot.virxact.com" target="_blank">aihot.virxact.com</a> · 由 Hermes Agent 自动生成</p>
+</footer>
+
+</div><!-- /main-wrapper -->
+
+<script>
+// Sidebar functionality
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const mainWrapper = document.getElementById('mainWrapper');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  sidebarOverlay.classList.add('show');
+  mainWrapper.classList.add('sidebar-open');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('show');
+  mainWrapper.classList.remove('sidebar-open');
+}
+
+sidebarToggle.addEventListener('click', () => {
+  if (sidebar.classList.contains('open')) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
+
+sidebarOverlay.addEventListener('click', closeSidebar);
+
+// Populate sidebar nav with sections AND item titles
+const sidebarNav = document.getElementById('sidebarNav');
+const sections = document.querySelectorAll('.section');
+
+sections.forEach((section, sectionIndex) => {
+  const titleEl = section.querySelector('.section-title');
+  if (!titleEl) return;
+  
+  // Section anchor
+  const sectionId = 'section-' + sectionIndex;
+  section.id = sectionId;
+  
+  // Section header in sidebar
+  const sectionLi = document.createElement('li');
+  sectionLi.className = 'nav-section';
+  sectionLi.innerHTML = `<span class="nav-section-title">${titleEl.textContent}</span>`;
+  sidebarNav.appendChild(sectionLi);
+  
+    // Item titles under this section
+  const items = section.querySelectorAll('.item');
+  items.forEach((item, itemIndex) => {
+    const itemTitleEl = item.querySelector('.item-title');
+    if (!itemTitleEl) return;
+    
+    const itemId = sectionId + '-item-' + itemIndex;
+    item.id = itemId;
+    
+    const li = document.createElement('li');
+    li.className = 'nav-item';
+    const a = document.createElement('a');
+    a.href = '#' + itemId;
+    // Extract title gist (first 20 chars, no truncation ellipsis for short titles)
+    let titleText = itemTitleEl.textContent.trim();
+    // Remove common prefixes and clean up
+    titleText = titleText.replace(/^\d+\.\s*/, '').replace(/^【.*?】/, '');
+    // Get the gist - first meaningful part
+    if (titleText.length > 22) {
+      titleText = titleText.substring(0, 22) + '...';
+    }
+    a.textContent = titleText;
+    a.title = itemTitleEl.textContent; // full text on hover
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeSidebar();
+      setTimeout(() => {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+    li.appendChild(a);
+    sidebarNav.appendChild(li);
+  });
+});
+
+// Active item highlighting
+const navLinks = sidebarNav.querySelectorAll('.nav-item a');
+const itemObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = sidebarNav.querySelector('a[href="#' + entry.target.id + '"]');
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { threshold: 0.5, rootMargin: '-80px 0px -50% 0px' });
+
+document.querySelectorAll('.item').forEach(item => itemObserver.observe(item));
+
+// Scroll reveal for sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
