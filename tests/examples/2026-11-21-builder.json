@@ -13,9 +13,14 @@
       "author": "demo-builder",
       "published_at": "2026-11-20T18:00:00Z",
       "verified_at": "2026-11-21T03:30:00Z",
-      "verification_tags": ["verified"],
+      "verification_tags": [
+        "untested",
+        "author_claim"
+      ],
       "notes": "未实玩：仅核对 README 与公开截图",
-      "score": 90
+      "score": 90,
+      "author_claim": "（示例）作者声明占位",
+      "verified_evidence": "公开仓库放出可本地运行的编排 UI，支持多 Agent 会话与工具调用轨迹回放。未接入付费 API。"
     },
     {
       "id": "builder:demo-voice-notes",
@@ -25,9 +30,15 @@
       "author": "indie-dev",
       "published_at": "2026-11-20T12:00:00Z",
       "verified_at": "2026-11-21T03:40:00Z",
-      "verification_tags": ["untested"],
+      "verification_tags": [
+        "untested",
+        "author_claim"
+      ],
       "notes": "未实玩",
-      "score": 70
+      "score": 70,
+      "author_claim": "（示例）作者声明占位",
+      "verified_evidence": "作品演示：上传音频后输出待办与责任人表格，适合个人知识库。"
     }
-  ]
+  ],
+  "demo": true
 }

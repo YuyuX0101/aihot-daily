@@ -11,6 +11,12 @@
     "channel": { "type": "string", "enum": ["daily", "builder", "deals"] },
     "source": { "type": "string", "minLength": 1, "maxLength": 64 },
     "generated_at": { "type": "string", "minLength": 8, "maxLength": 40 },
+    "demo": { "type": "boolean", "description": "Must stay false/absent for production; examples only under tests/examples" },
+    "channel_meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Empty-state messages etc. Never invent items here."
+    },
     "items": {
       "type": "array",
       "maxItems": 500,
@@ -27,13 +33,20 @@
         "title": { "type": "string", "minLength": 1, "maxLength": 200 },
         "summary": { "type": "string", "maxLength": 2000 },
         "source_url": { "type": "string", "maxLength": 2000 },
+        "playable_url": { "type": "string", "maxLength": 2000 },
+        "repo_url": { "type": "string", "maxLength": 2000 },
         "author": { "type": "string", "maxLength": 120 },
         "published_at": { "type": "string", "maxLength": 40 },
         "verified_at": { "type": "string", "maxLength": 40 },
+        "author_claim": { "type": "string", "maxLength": 2000 },
+        "verified_evidence": { "type": "string", "maxLength": 2000 },
         "verification_tags": {
           "type": "array",
           "maxItems": 20,
-          "items": { "type": "string", "minLength": 1, "maxLength": 40, "pattern": "^[A-Za-z0-9_-]+$" }
+          "items": {
+            "type": "string",
+            "enum": ["page_reachable", "author_claim", "untested", "repo_reachable", "hearsay", "no_playable"]
+          }
         },
         "notes": { "type": "string", "maxLength": 500 },
         "score": { "type": "integer", "minimum": 0, "maximum": 100000 },

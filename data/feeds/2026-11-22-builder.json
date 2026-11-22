@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "edition_date": "2026-11-22",
+  "channel": "builder",
+  "source": "bot-x-web",
+  "generated_at": "2026-11-22T10:51:00+08:00",
+  "items": [
+    {
+      "id": "builder:2124141427672134013",
+      "title": "Tiny Orbits：行星上的外星居民现在会回话",
+      "summary": "站点可打开，可见行星行走、驾驶飞船、与居民说话等界面；核查时多人服显示已满，但提供独自游玩入口。未实际完成一次居民对话。",
+      "source_url": "https://x.com/byeolmasil/status/2124141427672134013",
+      "playable_url": "https://tiny-orbits.vercel.app/?lang=en",
+      "author": "별마실 (@byeolmasil)",
+      "published_at": "2026-11-21T14:02:35.000Z",
+      "verified_at": "2026-11-22T10:51:00+08:00",
+      "author_claim": "作者自称给自己的浏览器小游戏每个行星加了可对话的外星居民，免费、无需注册；并举例海王星水母自称是 Wavy。",
+      "verified_evidence": "站点可打开，可见行星行走、驾驶飞船、与居民说话等界面；核查时多人服显示已满，但提供独自游玩入口。未实际完成一次居民对话。",
+      "verification_tags": [
+        "page_reachable",
+        "author_claim",
+        "untested"
+      ],
+      "notes": "未实际实玩",
+      "score": 50
+    },
+    {
+      "id": "builder:2124161720448893216",
+      "title": "Prompt Puncher：和孩子一起做的 AI CEO 格斗小游戏",
+      "summary": "已打开官网，可见找对手、好友对战、打 BOT 以及角色名单；未实际开一局对战。",
+      "source_url": "https://x.com/HeffHQ/status/2124161720448893216",
+      "playable_url": "https://www.promptpuncher.com/",
+      "author": "Matthew Hefferon (@HeffHQ)",
+      "published_at": "2026-11-21T15:23:13.000Z",
+      "verified_at": "2026-11-22T10:51:00+08:00",
+      "author_claim": "作者自称和孩子一起做了可扮演多家 AI 公司负责人的格斗游戏，并在 Product Hunt 上线。",
+      "verified_evidence": "已打开官网，可见找对手、好友对战、打 BOT 以及角色名单；未实际开一局对战。",
+      "verification_tags": [
+        "page_reachable",
+        "author_claim",
+        "untested"
+      ],
+      "notes": "未实际实玩",
+      "score": 51
+    },
+    {
+      "id": "builder:2124194668015661346",
+      "title": "Watts & Weights：从车库把整条 AI 栈做成经营游戏",
+      "summary": "页面标题与说明为 isometric tycoon，游戏脚本资源返回 200；未实际玩通。外部抓取曾出现“model hallucinated”字样，可能是游戏内事件或运行时状态，故不把整局可玩当作已验证。",
+      "source_url": "https://x.com/Mradulterated/status/2124194668015661346",
+      "playable_url": "https://wattsandweights.app/",
+      "author": "Daiwik Chilukuri (@Mradulterated)",
+      "published_at": "2026-11-21T17:34:09.000Z",
+      "verified_at": "2026-11-22T10:51:00+08:00",
+      "author_claim": "作者自称做了从车库 AI 实验室一路做到芯片和能源的浏览器游戏，免费、无需注册。",
+      "verified_evidence": "页面标题与说明为 isometric tycoon，游戏脚本资源返回 200；未实际玩通。外部抓取曾出现“model hallucinated”字样，可能是游戏内事件或运行时状态，故不把整局可玩当作已验证。",
+      "verification_tags": [
+        "page_reachable",
+        "author_claim",
+        "untested"
+      ],
+      "notes": "未实际实玩",
+      "score": 52
+    },
+    {
+      "id": "builder:2124265810663244086",
+      "title": "Inside a 3nm CPU：能放大 1500 万倍的交互 3D 模拟",
+      "summary": "演示页与模拟脚本可打开，仓库存在且主页与演示地址一致（仓库于 2026-11-22 04:51 北京时间创建，05:41 推送）。未在页面里实际操作缩放。",
+      "source_url": "https://x.com/Navidixx/status/2124265810663244086",
+      "playable_url": "https://navidixstudio.com/explore/inside-a-cpu/?lang=en",
+      "author": "Navidix (@Navidixx)",
+      "published_at": "2026-11-21T22:16:21.000Z",
+      "verified_at": "2026-11-22T10:51:00+08:00",
+      "author_claim": "作者自称做了可放大 1500 万倍、进入 3nm CPU 内部的 3D 模拟器。",
+      "verified_evidence": "演示页与模拟脚本可打开，仓库存在且主页与演示地址一致（仓库于 2026-11-22 04:51 北京时间创建，05:41 推送）。未在页面里实际操作缩放。",
+      "verification_tags": [
+        "page_reachable",
+        "author_claim",
+        "untested",
+        "repo_reachable"
+      ],
+      "notes": "未实际实玩；倍率等能力为作者声明；页可打开≠功能审计",
+      "score": 53,
+      "repo_url": "https://github.com/NavidixStudio/inside-a-3nm-cpu"
+    },
+    {
+      "id": "builder:2124333271177908405",
+      "title": "文隐 TextVeil：丢给 AI 之前，先在本地给文档脱敏",
+      "summary": "网页版可打开，可见拖入文档、脱敏/还原、本地处理不上传等界面；仓库 ramdolphlim/textveil 可访问。未实际上传文档做脱敏测试。",
+      "source_url": "https://x.com/ramdolphlim/status/2124333271177908405",
+      "playable_url": "https://textveil.limch.cc",
+      "author": "Limch (@ramdolphlim)",
+      "published_at": "2026-11-22T02:44:54.000Z",
+      "verified_at": "2026-11-22T10:51:00+08:00",
+      "author_claim": "作者自称在开源「图隐 DrawVeil」之后做了文档脱敏姊妹工具，浏览器本地处理 Word/Excel/PPT/Markdown，桌面版支持 PDF。",
+      "verified_evidence": "网页版可打开，可见拖入文档、脱敏/还原、本地处理不上传等界面；仓库 ramdolphlim/textveil 可访问。未实际上传文档做脱敏测试。",
+      "verification_tags": [
+        "page_reachable",
+        "author_claim",
+        "untested",
+        "repo_reachable"
+      ],
+      "notes": "未实际实玩；「本地不上传」为作者声明；页可打开≠隐私审计",
+      "score": 54,
+      "repo_url": "https://github.com/ramdolphlim/textveil"
+    }
+  ]
+}

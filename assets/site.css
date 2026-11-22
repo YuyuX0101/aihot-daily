@@ -207,7 +207,9 @@ a:hover { opacity: 0.9; }
   margin-bottom: 8px;
 }
 
-.deal-box {
+.deal-box,
+.claim-box,
+.evidence-box {
   font-size: 13px;
   color: var(--text-secondary);
   background: var(--bg-elevated);
@@ -217,15 +219,61 @@ a:hover { opacity: 0.9; }
   margin-bottom: 8px;
 }
 
-.item-link {
+.claim-box { border-left: 3px solid var(--accent-amber); }
+.evidence-box { border-left: 3px solid var(--accent-cyan); }
+
+.box-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.item-link, .item-links a {
   font-size: 13px;
   font-weight: 500;
 }
 
+.item-links { margin-top: 4px; }
+
 .empty {
   color: var(--text-muted);
   font-size: 14px;
-  padding: 20px 0;
+  padding: 8px 0;
+}
+
+.empty-state-box {
+  padding: 12px 0 4px;
+}
+
+.empty-link {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.section.is-empty {
+  opacity: 0.92;
+}
+
+.section.is-empty .section-header {
+  margin-bottom: 6px;
+}
+
+.list-card.is-empty {
+  border-style: dashed;
+  opacity: 0.9;
+}
+
+.demo-banner {
+  background: #7c2d12;
+  color: #ffedd5;
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 2px solid #ea580c;
 }
 
 .list-card {

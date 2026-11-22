@@ -64,19 +64,24 @@
 ## 本仓库命令（脱敏）
 
 ```bash
-# 投放 JSON
-cp fixtures/mock/2026-11-21-*.json data/inbox/
-
-python3 -m tools.aihot_pipeline ingest
-python3 -m tools.aihot_pipeline build
-python3 -m tools.aihot_pipeline summary 2026-11-21
-python3 -m tools.aihot_pipeline notify 2026-11-21          # dry-run，且默认未发布则跳过发送
-python3 -m tools.aihot_pipeline notify 2026-11-21 --mock --published --allow-unpublished
+bash scripts/demo_pipeline.sh   # 实际重建 data/feeds 中的生产预览，不用 tests/examples
+python3 -m unittest discover -s tests -v
+python3 -m tools.aihot_pipeline summary 2026-11-22
+python3 -m tools.aihot_pipeline notify 2026-11-22          # dry-run + 未发布则跳过
 ```
+
+## 明确未接线边界（本 PR 仍成立）
+
+1. **HP 生产生成器**（`aihot-daily-generator-win.py` / 任务 `Kimi-AIHOT-Daily`）未迁入仓库，也未停用。
+2. **真实统一调度**（父 Bot routines / 云电脑定时）未由本 PR 改动或启用。
+3. **飞书真实发送**未接线；仓库无 webhook secret，notify 默认 dry-run。
+4. 正式切流前必须与其他雷达迁移协调，防止双端 push / 双发飞书。
 
 ## 禁止事项（再次确认）
 
-- 不切 DNS / 不停未批准的 HP 任务 / 不实发外部消息
+- 不 merge 到 main、不 push main、不部署切流、不实发外部消息
+- 不切 DNS / 不停未批准的 HP 任务
 - 不购买付费 API、不假设 grok CLI / Bot 私有工具可用
 - 不向仓库提交 `feishu-webhook.json` 或任何 secret
 - 不自动启用真实 cron；调度由父 Bot 管理
+- 不把 `tests/examples` 虚构内容发布到普通期次页

@@ -1,71 +1,64 @@
 # AIHOT 统一摄取协议（v1）
 
 面向「AI HOT 日报 / Builder 一手作品速报 / AI 羊毛雷达」的文件导入协议。  
-Bot 或人工将 JSON 放入 `data/inbox/`，由本地管线幂等摄取并构建静态页。无需新增付费 API 或常驻服务。
+Bot 或人工将 JSON 放入 `data/inbox/`，由本地管线幂等摄取并构建静态页。
 
 ## 投放方式
 
-1. 将符合本协议的 JSON 文件复制到 `data/inbox/`（文件名任意，建议 `YYYY-MM-DD-<channel>-<slug>.json`）。
-2. 运行：
-
 ```bash
+cp data/feeds/<file>.json data/inbox/
 python3 -m tools.aihot_pipeline ingest
 python3 -m tools.aihot_pipeline build
-python3 -m tools.aihot_pipeline notify --dry-run
+python3 -m tools.aihot_pipeline notify --dry-run   # 默认即 dry-run
 ```
 
-3. 成功摄取的文件移至 `data/archive/`；合并结果写入 `data/editions/YYYY-MM-DD.json`。
+成功摄取的文件移至 `data/archive/`；合并结果写入 `data/editions/YYYY-MM-DD.json`。
+
+## Demo / 示例隔离（硬规则）
+
+- 示例仅允许放在 `tests/examples/`，且必须 `"demo": true`
+- 生产 `ingest` **拒绝** `demo=true`、example.com 主机、以及笼统 `verified/tested/played/audited` 标签
+- 对外期次页禁止混入虚构优惠/作品；若确需本地演示页，必须全局醒目「示例预览」横幅（本仓库生产输出不生成该页）
 
 ## 顶层字段
 
 | 字段 | 必填 | 说明 |
 |------|------|------|
-| `schema_version` | 是 | 固定 `"1.0"` |
-| `edition_date` | 是 | `YYYY-MM-DD`，北京时间业务日 |
+| `schema_version` | 是 | `"1.0"` |
+| `edition_date` | 是 | `YYYY-MM-DD`（业务日，北京时间） |
 | `channel` | 是 | `daily` \| `builder` \| `deals` |
-| `source` | 是 | 来源标识，如 `bot-x-web`、`file-import`、`hp-legacy` |
-| `generated_at` | 是 | ISO-8601 生成时间 |
-| `items` | 是 | 条目数组，可为空 |
+| `source` | 是 | 如 `bot-x-web` |
+| `generated_at` | 是 | ISO-8601 |
+| `items` | 是 | 可为空数组 |
+| `channel_meta` | 否 | 空栏目说明（如 deals=0 原因），**不用于伪造条目** |
+| `demo` | 否 | 仅 tests/examples |
 
-## 条目公共字段
+## 条目字段
 
-| 字段 | 必填 | 说明 |
-|------|------|------|
-| `id` | 是 | **稳定 ID**（跨重导入不变）。建议 `channel:hash(source_url)` 或上游主键 |
-| `title` | 是 | 标题，纯文本，最长 200 字 |
-| `summary` | 否 | 摘要，纯文本，最长 2000 字 |
-| `source_url` | 否 | 原文 URL（`http`/`https` only） |
-| `author` | 否 | 作者/账号 |
-| `published_at` | 否 | 发布时间 ISO-8601 |
-| `verified_at` | 否 | 核查时间 ISO-8601 |
-| `verification_tags` | 否 | 字符串数组，如 `verified`、`hearsay`、`untested` |
-| `notes` | 否 | 未实玩备注等说明，最长 500 字 |
-| `score` | 否 | 可选排序分（整数） |
+公共：`id`（稳定）、`title`、`summary`、`source_url`、`playable_url`、`repo_url`、`author`、`published_at`、`verified_at`、`notes`、`score`
 
-## deals 专属字段 `deal`
+Builder 语义字段：
 
-| 字段 | 必填 | 说明 |
-|------|------|------|
-| `threshold` | 否 | 优惠门槛，如「新用户免费 7 天」 |
-| `deadline` | 否 | 截止日 `YYYY-MM-DD` 或 ISO-8601 |
-| `regions` | 否 | 地区限制数组，如 `["CN","US"]` |
-| `restrictions` | 否 | 其他限制说明 |
+| 字段 | 说明 |
+|------|------|
+| `author_claim` | 作者声明（未当作已审计事实） |
+| `verified_evidence` | 核验正文证据（页可打开、仓库存在等） |
+| `verification_tags` | 仅允许：`page_reachable` / `author_claim` / `untested` / `repo_reachable` / `hearsay` / `no_playable` |
 
-## 幂等与去重
+**禁止** `verified` 等笼统标签，以免被理解成「已实测」。
 
-- 主键：`(edition_date, channel, id)`
-- 同日同频道同 `id` 再次导入时，以**较新的 `verified_at` / `generated_at`** 覆盖
-- 无 `id` 或非法 `id` 的条目整条拒绝
+deals 专属：`deal.threshold` / `deadline` / `regions` / `restrictions`
 
-## 安全约束
+## 空栏目约定
 
-管线会：
+- `items: []` + `channel_meta.empty_message` 说明原因
+- deals=0 示例文案：说明「未找到同时满足最近12h新鲜度+可核验」——**不等于全网无优惠**
+- 当日无 AIHOT 日报：链接历史 `YYYY-MM-DD.html`，不插示例
 
-- HTML 转义全部展示字段，禁止把未转义文本写入页面
-- 拒绝 `javascript:`、`data:` 等危险 URL scheme
-- 拒绝含 `<script` / 事件处理器特征的原始字段（硬拒绝，不尝试「清洗后放行」）
-- 限制字段长度与条目数量（单文件 ≤ 500 条）
+## 时间展示
 
-## 最小示例
+管线渲染一律转为 **Asia/Shanghai**，显示为 `YYYY-MM-DD HH:MM 北京时间`，不在页面裸露末尾 `Z`。
 
-见 `fixtures/mock/`。
+## 安全
+
+HTML 转义；拒绝 `javascript:` / `data:`；拒绝 script/事件注入特征；字段长度与条目上限。

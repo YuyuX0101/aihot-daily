@@ -6,7 +6,6 @@ from typing import Any
 
 from .paths import SITE_BASE_URL
 
-
 CHANNEL_LABELS = {
     "daily": "AI HOT 日报",
     "builder": "Builder 一手作品",
@@ -20,10 +19,6 @@ def _top_titles(items: list[dict[str, Any]], n: int = 3) -> list[str]:
 
 
 def build_summary_text(edition: dict[str, Any], site_base: str = SITE_BASE_URL) -> str:
-    """Compose a short Feishu-friendly summary + site link.
-
-    Intentionally NOT a full dump — website holds the full results.
-    """
     date = edition.get("edition_date", "")
     channels = edition.get("channels") or {}
     lines: list[str] = [f"AIHOT 统一速报 · {date}", ""]
@@ -32,6 +27,7 @@ def build_summary_text(edition: dict[str, Any], site_base: str = SITE_BASE_URL) 
     for key in ("daily", "builder", "deals"):
         bucket = channels.get(key) or {}
         items = bucket.get("items") or []
+        meta = bucket.get("meta") or {}
         label = CHANNEL_LABELS[key]
         totals.append(f"{label} {len(items)} 条")
         tops = _top_titles(items, 3)
@@ -39,6 +35,10 @@ def build_summary_text(edition: dict[str, Any], site_base: str = SITE_BASE_URL) 
             lines.append(f"【{label}】")
             for t in tops:
                 lines.append(f"· {t}")
+            lines.append("")
+        elif meta.get("empty_message"):
+            lines.append(f"【{label}】")
+            lines.append(f"· {meta['empty_message']}")
             lines.append("")
 
     lines.append("汇总：" + " / ".join(totals))

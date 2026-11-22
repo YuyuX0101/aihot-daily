@@ -13,15 +13,22 @@
       "author": "radar-bot",
       "published_at": "2026-11-20T09:00:00Z",
       "verified_at": "2026-11-21T03:50:00Z",
-      "verification_tags": ["verified", "untested"],
+      "verification_tags": [
+        "untested",
+        "untested"
+      ],
       "notes": "未实玩领券；仅核对公开活动页",
       "score": 85,
       "deal": {
         "threshold": "新用户实名后领取",
         "deadline": "2026-11-30",
-        "regions": ["CN"],
+        "regions": [
+          "CN"
+        ],
         "restrictions": "限一次；不可与其他试用叠加"
-      }
+      },
+      "author_claim": "（示例）作者声明占位",
+      "verified_evidence": "注册完成实名后发放试用额度，可用于公开模型推理。请自行核对活动页条款。"
     },
     {
       "id": "deals:demo-ide-promo",
@@ -31,15 +38,24 @@
       "author": "radar-bot",
       "published_at": "2026-11-19T10:00:00Z",
       "verified_at": "2026-11-21T03:55:00Z",
-      "verification_tags": ["hearsay"],
+      "verification_tags": [
+        "hearsay",
+        "untested"
+      ],
       "notes": "二手转述，需打开官方页复核",
       "score": 60,
       "deal": {
         "threshold": "学生认证",
         "deadline": "2026-12-15",
-        "regions": ["CN", "US"],
+        "regions": [
+          "CN",
+          "US"
+        ],
         "restrictions": "需教育邮箱"
-      }
+      },
+      "author_claim": "（示例）作者声明占位",
+      "verified_evidence": "教育邮箱认证后年付半价。地区与库存以官方为准。"
     }
-  ]
+  ],
+  "demo": true
 }

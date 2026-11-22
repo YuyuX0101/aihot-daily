@@ -13,8 +13,13 @@
       "author": "aihot-demo",
       "published_at": "2026-11-20T22:00:00Z",
       "verified_at": "2026-11-21T04:00:00Z",
-      "verification_tags": ["verified"],
-      "score": 80
+      "verification_tags": [
+        "untested"
+      ],
+      "score": 80,
+      "author_claim": "（示例）作者声明占位",
+      "verified_evidence": "演示用日报条目。生产环境仍可由上游 aihot 数据源生成历史风格 YYYY-MM-DD.html；本条仅进入统一期次页的 daily 频道。"
     }
-  ]
+  ],
+  "demo": true
 }

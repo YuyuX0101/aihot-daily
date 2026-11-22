@@ -1,4 +1,4 @@
-"""Unit tests for ingest / sanitize / notify (no network)."""
+"""Deterministic tests for ingest / sanitize / notify / acceptance guards."""
 
 from __future__ import annotations
 
@@ -12,13 +12,17 @@ from tools.aihot_pipeline import build as build_mod
 from tools.aihot_pipeline import ingest as ingest_mod
 from tools.aihot_pipeline import notify as notify_mod
 from tools.aihot_pipeline import paths
+from tools.aihot_pipeline.demo_guard import DemoGuardError, assert_production_feed
+from tools.aihot_pipeline.render import render_channel_section, render_item
 from tools.aihot_pipeline.sanitize import SanitizationError, validate_url
 from tools.aihot_pipeline.summary import build_summary_text
+from tools.aihot_pipeline.timefmt import format_beijing
 from tools.aihot_pipeline.validate import ValidationError, load_and_validate_file, validate_feed
 
 
 REPO = Path(__file__).resolve().parents[1]
-FIXTURES = REPO / "fixtures" / "mock"
+EXAMPLES = REPO / "tests" / "examples"
+REAL_FEED = REPO / "data" / "feeds" / "2026-11-22-builder.json"
 
 
 class SanitizeTests(unittest.TestCase):
@@ -27,36 +31,132 @@ class SanitizeTests(unittest.TestCase):
             validate_url("javascript:alert(1)")
 
     def test_accepts_https(self):
-        self.assertEqual(validate_url("https://example.com/a"), "https://example.com/a")
+        self.assertEqual(validate_url("https://x.com/a"), "https://x.com/a")
 
 
-class ValidateTests(unittest.TestCase):
-    def test_good_builder_fixture(self):
-        doc = load_and_validate_file(FIXTURES / "2026-11-21-builder.json")
-        self.assertEqual(doc["channel"], "builder")
-        self.assertGreaterEqual(len(doc["items"]), 1)
+class TimezoneTests(unittest.TestCase):
+    def test_utc_z_to_beijing(self):
+        text = format_beijing("2026-11-21T15:23:13.000Z")
+        self.assertEqual(text, "2026-11-21 23:23 北京时间")
+        self.assertNotIn("Z", text)
 
-    def test_rejects_injection_fixture(self):
-        with self.assertRaises(ValidationError):
-            load_and_validate_file(FIXTURES / "bad-injection.json")
+    def test_offset_to_beijing(self):
+        text = format_beijing("2026-11-22T10:51:00+08:00")
+        self.assertEqual(text, "2026-11-22 10:51 北京时间")
 
-    def test_deal_only_on_deals_channel(self):
+    def test_render_item_no_bare_z(self):
+        html = render_item(
+            {
+                "id": "builder:1",
+                "title": "t",
+                "published_at": "2026-11-21T15:23:13.000Z",
+                "verified_at": "2026-11-22T02:44:54.000Z",
+                "author_claim": "claim",
+                "verified_evidence": "evidence",
+                "verification_tags": ["page_reachable", "author_claim", "untested"],
+            },
+            "builder",
+        )
+        self.assertIn("北京时间", html)
+        self.assertNotRegex(html, r"\d{2}:\d{2}:\d{2}(?:\.\d+)?Z")
+
+
+class TagSemanticsTests(unittest.TestCase):
+    def test_forbidden_verified_tag(self):
         raw = {
             "schema_version": "1.0",
-            "edition_date": "2026-11-21",
+            "edition_date": "2026-11-22",
             "channel": "builder",
-            "source": "t",
-            "generated_at": "2026-11-21T00:00:00Z",
+            "source": "bot-x-web",
+            "generated_at": "2026-11-22T10:51:00+08:00",
             "items": [
                 {
-                    "id": "x",
+                    "id": "builder:x",
                     "title": "t",
-                    "deal": {"threshold": "x"},
+                    "verification_tags": ["verified"],
                 }
             ],
         }
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(ValidationError) as ctx:
             validate_feed(raw)
+        self.assertIn("forbidden", str(ctx.exception).lower())
+
+    def test_allowed_honesty_tags_render_labels(self):
+        html = render_item(
+            {
+                "id": "builder:1",
+                "title": "t",
+                "author_claim": "作者自称本地不上传",
+                "verified_evidence": "网页可打开；未实际上传测试",
+                "verification_tags": ["page_reachable", "author_claim", "untested"],
+                "notes": "页可打开≠隐私审计",
+            },
+            "builder",
+        )
+        self.assertIn("作者声明", html)
+        self.assertIn("核验正文证据", html)
+        self.assertIn("页面可达", html)
+        self.assertIn("未实测", html)
+        self.assertNotIn(">verified<", html.lower())
+
+
+class DemoGuardTests(unittest.TestCase):
+    def test_examples_require_allow_demo(self):
+        with self.assertRaises(ValidationError):
+            load_and_validate_file(EXAMPLES / "2026-11-21-builder.json", allow_demo=False)
+
+    def test_examples_ok_with_allow_demo(self):
+        doc = load_and_validate_file(EXAMPLES / "2026-11-21-builder.json", allow_demo=True)
+        self.assertTrue(doc.get("demo"))
+
+    def test_production_rejects_example_hosts(self):
+        feed = {
+            "schema_version": "1.0",
+            "edition_date": "2026-11-22",
+            "channel": "builder",
+            "source": "bot-x-web",
+            "generated_at": "2026-11-22T10:51:00+08:00",
+            "items": [
+                {
+                    "id": "builder:evil",
+                    "title": "fake",
+                    "source_url": "https://example.com/x",
+                    "verification_tags": ["page_reachable", "author_claim", "untested"],
+                }
+            ],
+        }
+        feed = validate_feed(feed)
+        with self.assertRaises(DemoGuardError):
+            assert_production_feed(feed)
+
+    def test_demo_flag_blocked_in_production_guard(self):
+        feed = load_and_validate_file(EXAMPLES / "2026-11-21-deals.json", allow_demo=True)
+        with self.assertRaises(DemoGuardError):
+            assert_production_feed(feed)
+
+
+class EmptyDealsTests(unittest.TestCase):
+    def test_zero_deals_message_not_fabricated(self):
+        html = render_channel_section(
+            "deals",
+            [],
+            meta={
+                "empty_message": "本次未找到同时满足最近12小时新鲜度与可核验要求的新优惠（不等于全网无优惠）。"
+            },
+        )
+        self.assertIn("0 条", html)
+        self.assertIn("不等于全网无优惠", html)
+        self.assertIn("is-empty", html)
+        self.assertNotIn("LLM 推理额度", html)
+
+    def test_empty_daily_links_legacy(self):
+        html = render_channel_section(
+            "daily",
+            [],
+            meta={"empty_message": "当日暂无 AI HOT 日报生成结果"},
+            legacy_daily_href="../2026-11-20.html",
+        )
+        self.assertIn("2026-11-20.html", html)
 
 
 class PipelineIntegrationTests(unittest.TestCase):
@@ -70,7 +170,6 @@ class PipelineIntegrationTests(unittest.TestCase):
         self.archive.mkdir()
         self.editions.mkdir()
 
-        # Redirect module paths
         self._orig = {
             "INBOX_DIR": paths.INBOX_DIR,
             "ARCHIVE_DIR": paths.ARCHIVE_DIR,
@@ -117,58 +216,72 @@ class PipelineIntegrationTests(unittest.TestCase):
         notify_mod.NOTIFY_STATE = self._orig["NOTIFY_STATE"]
         shutil.rmtree(self.tmp, ignore_errors=True)
 
-    def _copy_good_fixtures(self):
-        for name in (
-            "2026-11-21-builder.json",
-            "2026-11-21-deals.json",
-            "2026-11-21-daily.json",
-        ):
-            shutil.copy(FIXTURES / name, self.inbox / name)
+    def test_demo_fixture_cannot_enter_production_inbox(self):
+        shutil.copy(EXAMPLES / "2026-11-21-builder.json", self.inbox / "demo.json")
+        result = ingest_mod.ingest_inbox(self.inbox, self.archive)
+        self.assertFalse(result["ok"])
+        self.assertTrue(result["errors"])
+        self.assertEqual(list(self.editions.glob("*.json")), [])
 
-    def test_ingest_dedup_and_build(self):
-        self._copy_good_fixtures()
-        # second copy of builder with same ids -> update path
-        shutil.copy(
-            FIXTURES / "2026-11-21-builder.json",
-            self.inbox / "2026-11-21-builder-again.json",
+    def test_real_builder_feed_and_zero_deals(self):
+        self.assertTrue(REAL_FEED.exists(), "committed real feed missing")
+        shutil.copy(REAL_FEED, self.inbox / "builder.json")
+        deals = {
+            "schema_version": "1.0",
+            "edition_date": "2026-11-22",
+            "channel": "deals",
+            "source": "bot-x-web",
+            "generated_at": "2026-11-22T10:51:00+08:00",
+            "channel_meta": {
+                "empty_message": "本次未找到同时满足最近12小时新鲜度与可核验要求的新优惠（不等于全网无优惠）。"
+            },
+            "items": [],
+        }
+        (self.inbox / "deals.json").write_text(
+            json.dumps(deals, ensure_ascii=False), encoding="utf-8"
         )
         result = ingest_mod.ingest_inbox(self.inbox, self.archive)
-        self.assertTrue(result["ok"])
-        edition = ingest_mod.load_edition("2026-11-21")
-        self.assertEqual(len(edition["channels"]["builder"]["items"]), 2)
-        self.assertEqual(len(edition["channels"]["deals"]["items"]), 2)
+        self.assertTrue(result["ok"], result)
+        edition = ingest_mod.load_edition("2026-11-22")
+        self.assertEqual(len(edition["channels"]["builder"]["items"]), 5)
+        self.assertEqual(len(edition["channels"]["deals"]["items"]), 0)
+        self.assertIn("不等于全网无优惠", edition["channels"]["deals"]["meta"]["empty_message"])
+        for item in edition["channels"]["builder"]["items"]:
+            tags = set(item.get("verification_tags") or [])
+            self.assertIn("untested", tags)
+            self.assertIn("author_claim", tags)
+            self.assertIn("page_reachable", tags)
+            self.assertNotIn("verified", tags)
+            self.assertTrue(item.get("author_claim"))
+            self.assertTrue(item.get("verified_evidence"))
 
         text = build_summary_text(edition)
-        self.assertIn("完整内容：", text)
-        self.assertIn("/e/2026-11-21.html", text)
-        self.assertIn("Builder", text)
-        self.assertIn("羊毛", text)
+        self.assertIn("羊毛雷达 0 条", text)
+        self.assertIn("不等于全网无优惠", text)
+        self.assertNotIn("example.com", text)
 
         built = build_mod.build_site()
         self.assertTrue(built["ok"])
-        page = (paths.EDITION_HTML_DIR / "2026-11-21.html").read_text(encoding="utf-8")
-        self.assertIn("OpenClaw", page)
-        self.assertIn("LLM 推理额度", page)
-        # escaped / no raw script from good fixtures
-        self.assertNotIn("<script>alert", page)
+        page = (paths.EDITION_HTML_DIR / "2026-11-22.html").read_text(encoding="utf-8")
+        self.assertIn("Prompt Puncher", page)
+        self.assertIn("TextVeil", page)
+        self.assertIn("北京时间", page)
+        self.assertNotIn("example.com", page)
+        self.assertNotRegex(page, r"\d{2}:\d{2}:\d{2}(?:\.\d+)?Z")
 
     def test_notify_dry_run_and_anti_resend(self):
-        self._copy_good_fixtures()
+        shutil.copy(REAL_FEED, self.inbox / "builder.json")
         ingest_mod.ingest_inbox(self.inbox, self.archive)
-
-        # Default: not published -> skip
         r0 = notify_mod.notify_edition(
-            "2026-11-21",
+            "2026-11-22",
             dry_run=True,
             require_published=True,
             published=False,
             state_path=self.state,
         )
         self.assertEqual(r0["reason"], "site_not_published")
-
-        # Mock send once
         r1 = notify_mod.notify_edition(
-            "2026-11-21",
+            "2026-11-22",
             dry_run=False,
             require_published=True,
             published=True,
@@ -176,10 +289,8 @@ class PipelineIntegrationTests(unittest.TestCase):
             state_path=self.state,
         )
         self.assertTrue(r1["sent"])
-
-        # Same content must not resend
         r2 = notify_mod.notify_edition(
-            "2026-11-21",
+            "2026-11-22",
             dry_run=False,
             require_published=True,
             published=True,
@@ -189,17 +300,25 @@ class PipelineIntegrationTests(unittest.TestCase):
         self.assertTrue(r2["skipped"])
         self.assertEqual(r2["reason"], "already_sent_same_content")
 
-        # Force allows resend
-        r3 = notify_mod.notify_edition(
-            "2026-11-21",
-            dry_run=False,
-            require_published=True,
-            published=True,
-            sender=notify_mod.mock_sender,
-            state_path=self.state,
-            force=True,
-        )
-        self.assertTrue(r3["sent"])
+
+class CommittedSiteAcceptanceTests(unittest.TestCase):
+    """Guardrails against regressing fictional content into public pages."""
+
+    def test_no_demo_edition_html(self):
+        self.assertFalse((REPO / "e" / "2026-11-21.html").exists())
+        self.assertFalse((REPO / "data" / "editions" / "2026-11-21.json").exists())
+
+    def test_real_edition_page(self):
+        page = (REPO / "e" / "2026-11-22.html").read_text(encoding="utf-8")
+        self.assertIn("Prompt Puncher", page)
+        self.assertIn("不等于全网无优惠", page)
+        self.assertIn("北京时间", page)
+        self.assertIn("作者声明", page)
+        self.assertIn("核验正文证据", page)
+        self.assertIn("未实测", page)
+        self.assertNotIn("example.com", page)
+        self.assertNotIn("OpenClaw", page)
+        self.assertNotIn("LLM 推理额度", page)
 
 
 if __name__ == "__main__":

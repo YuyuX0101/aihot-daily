@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "edition_date": "2026-11-22",
+  "channel": "deals",
+  "source": "bot-x-web",
+  "generated_at": "2026-11-22T10:51:00+08:00",
+  "channel_meta": {
+    "empty_reason": "no_match_12h_verifiable",
+    "empty_message": "本次未找到同时满足最近12小时新鲜度与可核验要求的新优惠（不等于全网无优惠）。"
+  },
+  "items": []
+}

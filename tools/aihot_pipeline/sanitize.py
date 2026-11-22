@@ -7,7 +7,6 @@ import re
 from typing import Any
 from urllib.parse import urlparse
 
-# Patterns that indicate script/event injection attempts in plain-text fields.
 _DANGEROUS_TEXT = re.compile(
     r"(?is)(<\s*script\b|</\s*script\b|javascript\s*:|vbscript\s*:|data\s*:text/html|"
     r"\bon(?:error|load|click|mouseover|focus|submit)\s*=)"
@@ -29,7 +28,6 @@ def reject_dangerous_text(value: str, field: str) -> str:
 
 
 def escape_text(value: Any) -> str:
-    """HTML-escape for safe insertion into text nodes / attributes."""
     if value is None:
         return ""
     return html.escape(str(value), quote=True)
@@ -50,21 +48,30 @@ def validate_url(url: str | None, field: str = "source_url") -> str | None:
 
 
 def scrub_item_strings(item: dict[str, Any]) -> dict[str, Any]:
-    """Validate string fields for injection; return a shallow-copied item."""
     out = dict(item)
-    for key in ("id", "title", "summary", "author", "notes", "published_at", "verified_at"):
+    for key in (
+        "id",
+        "title",
+        "summary",
+        "author",
+        "notes",
+        "published_at",
+        "verified_at",
+        "author_claim",
+        "verified_evidence",
+    ):
         if key in out and out[key] is not None:
             out[key] = reject_dangerous_text(str(out[key]), key)
-    if "source_url" in out:
-        out["source_url"] = validate_url(out.get("source_url"))
+    for key in ("source_url", "playable_url", "repo_url"):
+        if key in out:
+            out[key] = validate_url(out.get(key), field=key)
     tags = out.get("verification_tags")
     if tags is not None:
         if not isinstance(tags, list):
             raise SanitizationError("verification_tags: must be a list")
-        cleaned = []
-        for t in tags:
-            cleaned.append(reject_dangerous_text(str(t), "verification_tags[]"))
-        out["verification_tags"] = cleaned
+        out["verification_tags"] = [
+            reject_dangerous_text(str(t), "verification_tags[]") for t in tags
+        ]
     deal = out.get("deal")
     if deal is not None:
         if not isinstance(deal, dict):

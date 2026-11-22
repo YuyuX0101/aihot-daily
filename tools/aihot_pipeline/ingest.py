@@ -8,12 +8,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from .demo_guard import DemoGuardError, assert_production_feed
 from .paths import ARCHIVE_DIR, EDITIONS_DIR, EDITIONS_INDEX, INBOX_DIR
 from .validate import ValidationError, load_and_validate_file
 
 
 def _item_rank(item: dict[str, Any], feed_generated_at: str) -> str:
-    """Higher lexical value wins on overwrite."""
     return item.get("verified_at") or feed_generated_at or ""
 
 
@@ -35,12 +35,15 @@ def _merge_channel(
         if _item_rank(item, feed_generated_at) >= _item_rank(old, feed_generated_at):
             by_id[item_id] = dict(item)
             updated += 1
-    # Stable-ish order: score desc then id
     merged = sorted(
         by_id.values(),
         key=lambda x: (-int(x.get("score") or 0), x["id"]),
     )
     return merged, added, updated
+
+
+def empty_channel() -> dict[str, Any]:
+    return {"items": [], "sources": [], "meta": {}}
 
 
 def load_edition(date: str) -> dict[str, Any]:
@@ -50,9 +53,9 @@ def load_edition(date: str) -> dict[str, Any]:
             "edition_date": date,
             "updated_at": None,
             "channels": {
-                "daily": {"items": [], "sources": []},
-                "builder": {"items": [], "sources": []},
-                "deals": {"items": [], "sources": []},
+                "daily": empty_channel(),
+                "builder": empty_channel(),
+                "deals": empty_channel(),
             },
         }
     return json.loads(path.read_text(encoding="utf-8"))
@@ -82,12 +85,11 @@ def refresh_editions_index() -> list[str]:
 
 
 def apply_feed(feed: dict[str, Any]) -> dict[str, Any]:
+    assert_production_feed(feed)
     date = feed["edition_date"]
     channel = feed["channel"]
     edition = load_edition(date)
-    channel_bucket = edition["channels"].setdefault(
-        channel, {"items": [], "sources": []}
-    )
+    channel_bucket = edition["channels"].setdefault(channel, empty_channel())
     merged, added, updated = _merge_channel(
         channel_bucket.get("items") or [],
         feed["items"],
@@ -100,9 +102,11 @@ def apply_feed(feed: dict[str, Any]) -> dict[str, Any]:
         "generated_at": feed["generated_at"],
         "item_count": len(feed["items"]),
     }
-    # Keep unique source records by (source, generated_at)
     if src_entry not in sources:
         sources.append(src_entry)
+    meta = channel_bucket.setdefault("meta", {})
+    if feed.get("channel_meta"):
+        meta.update(feed["channel_meta"])
     edition["channels"][channel] = channel_bucket
     path = save_edition(edition)
     return {
@@ -113,6 +117,20 @@ def apply_feed(feed: dict[str, Any]) -> dict[str, Any]:
         "total": len(merged),
         "path": str(path),
     }
+
+
+def ensure_channel_meta(
+    edition_date: str,
+    channel: str,
+    meta: dict[str, Any],
+) -> dict[str, Any]:
+    """Attach empty-state metadata without inventing items."""
+    edition = load_edition(edition_date)
+    bucket = edition["channels"].setdefault(channel, empty_channel())
+    bucket.setdefault("meta", {}).update(meta)
+    edition["channels"][channel] = bucket
+    path = save_edition(edition)
+    return {"edition_date": edition_date, "channel": channel, "path": str(path), "meta": meta}
 
 
 def ingest_inbox(inbox: Path | None = None, archive: Path | None = None) -> dict[str, Any]:
@@ -127,7 +145,7 @@ def ingest_inbox(inbox: Path | None = None, archive: Path | None = None) -> dict
     files = sorted(p for p in inbox.iterdir() if p.is_file() and p.suffix.lower() == ".json")
     for path in files:
         try:
-            feed = load_and_validate_file(path)
+            feed = load_and_validate_file(path, allow_demo=False)
             summary = apply_feed(feed)
             summary["file"] = path.name
             results.append(summary)
@@ -135,7 +153,7 @@ def ingest_inbox(inbox: Path | None = None, archive: Path | None = None) -> dict
             if dest.exists():
                 dest = archive / f"{path.stem}-{datetime.now(timezone.utc).strftime('%H%M%S')}{path.suffix}"
             shutil.move(str(path), str(dest))
-        except (ValidationError, OSError, json.JSONDecodeError) as exc:
+        except (ValidationError, DemoGuardError, OSError, json.JSONDecodeError) as exc:
             errors.append({"file": path.name, "error": str(exc)})
 
     dates = refresh_editions_index()

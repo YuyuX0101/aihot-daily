@@ -1,0 +1,93 @@
+{
+  "report": "AI builder 一手速报",
+  "run_type": "first-run-proof",
+  "generated_at": "2026-11-22T10:51:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "window": {
+    "start": "2026-11-21T21:43:00+08:00",
+    "end": "2026-11-22T10:51:00+08:00",
+    "note": "按开跑时约12-13小时窗检索；文隐 TextVeil 发于 10:44，与开跑时刻几乎同时，仍收入候选。"
+  },
+  "method": "Public X reads via built-in x.search_posts_all and x.get_posts_by_ids only; no Grok CLI, no user X login, no paid user API credits. Playable/repo URLs verified with HTTP fetch. Author claims distinguished from verified page evidence.",
+  "delivery_status": "candidates_not_yet_delivered",
+  "note_for_parent": "这些是已核验的发送候选，尚未当作已送达。请父代理确认后再记为 delivered。",
+  "items": [
+    {
+      "id": "2124161720448893216",
+      "title": "Prompt Puncher：和孩子一起做的 AI CEO 格斗小游戏",
+      "author_name": "Matthew Hefferon",
+      "username": "HeffHQ",
+      "post_url": "https://x.com/HeffHQ/status/2124161720448893216",
+      "playable_url": "https://www.promptpuncher.com/",
+      "posted_at_shanghai": "2026-11-21 23:23",
+      "posted_at_utc": "2026-11-21T15:23:13.000Z",
+      "author_claim": "作者自称和孩子一起做了可扮演多家 AI 公司负责人的格斗游戏，并在 Product Hunt 上线。",
+      "verified": "已打开官网，可见找对手、好友对战、打 BOT 以及角色名单；未实际开一局对战。",
+      "status": "candidate_not_yet_delivered"
+    },
+    {
+      "id": "2124194668015661346",
+      "title": "Watts & Weights：从车库把整条 AI 栈做成经营游戏",
+      "author_name": "Daiwik Chilukuri",
+      "username": "Mradulterated",
+      "post_url": "https://x.com/Mradulterated/status/2124194668015661346",
+      "playable_url": "https://wattsandweights.app/",
+      "posted_at_shanghai": "2026-11-22 01:34",
+      "posted_at_utc": "2026-11-21T17:34:09.000Z",
+      "author_claim": "作者自称做了从车库 AI 实验室一路做到芯片和能源的浏览器游戏，免费、无需注册。",
+      "verified": "页面标题与说明为 isometric tycoon，游戏脚本资源返回 200；未实际玩通。外部抓取曾出现“model hallucinated”字样，可能是游戏内事件或运行时状态，故不把整局可玩当作已验证。",
+      "status": "candidate_not_yet_delivered"
+    },
+    {
+      "id": "2124141427672134013",
+      "title": "Tiny Orbits：行星上的外星居民现在会回话",
+      "author_name": "별마실",
+      "username": "byeolmasil",
+      "post_url": "https://x.com/byeolmasil/status/2124141427672134013",
+      "playable_url": "https://tiny-orbits.vercel.app/?lang=en",
+      "posted_at_shanghai": "2026-11-21 22:02",
+      "posted_at_utc": "2026-11-21T14:02:35.000Z",
+      "author_claim": "作者自称给自己的浏览器小游戏每个行星加了可对话的外星居民，免费、无需注册；并举例海王星水母自称是 Wavy。",
+      "verified": "站点可打开，可见行星行走、驾驶飞船、与居民说话等界面；核查时多人服显示已满，但提供独自游玩入口。未实际完成一次居民对话。",
+      "status": "candidate_not_yet_delivered"
+    },
+    {
+      "id": "2124265810663244086",
+      "title": "Inside a 3nm CPU：能放大 1500 万倍的交互 3D 模拟",
+      "author_name": "Navidix",
+      "username": "Navidixx",
+      "post_url": "https://x.com/Navidixx/status/2124265810663244086",
+      "playable_url": "https://navidixstudio.com/explore/inside-a-cpu/?lang=en",
+      "repo_url": "https://github.com/NavidixStudio/inside-a-3nm-cpu",
+      "posted_at_shanghai": "2026-11-22 06:16",
+      "posted_at_utc": "2026-11-21T22:16:21.000Z",
+      "author_claim": "作者自称做了可放大 1500 万倍、进入 3nm CPU 内部的 3D 模拟器。",
+      "verified": "演示页与模拟脚本可打开，仓库存在且主页与演示地址一致（仓库于 2026-11-22 04:51 北京时间创建，05:41 推送）。未在页面里实际操作缩放。",
+      "status": "candidate_not_yet_delivered"
+    },
+    {
+      "id": "2124333271177908405",
+      "title": "文隐 TextVeil：丢给 AI 之前，先在本地给文档脱敏",
+      "author_name": "Limch",
+      "username": "ramdolphlim",
+      "post_url": "https://x.com/ramdolphlim/status/2124333271177908405",
+      "playable_url": "https://textveil.limch.cc",
+      "repo_url": "https://github.com/ramdolphlim/textveil",
+      "posted_at_shanghai": "2026-11-22 10:44",
+      "posted_at_utc": "2026-11-22T02:44:54.000Z",
+      "author_claim": "作者自称在开源「图隐 DrawVeil」之后做了文档脱敏姊妹工具，浏览器本地处理 Word/Excel/PPT/Markdown，桌面版支持 PDF。",
+      "verified": "网页版可打开，可见拖入文档、脱敏/还原、本地处理不上传等界面；仓库 ramdolphlim/textveil 可访问。未实际上传文档做脱敏测试。",
+      "status": "candidate_not_yet_delivered"
+    }
+  ],
+  "excluded_examples": [
+    {
+      "id": "2124256574470324564",
+      "reason": "作者给出的 Play 地址 neon-cyber-drift.vercel.app 实际是空的 vite-scaffold，未把可玩演示核验通过，故不入选。"
+    },
+    {
+      "id": "2124331288287137838",
+      "reason": "帖文指向博客文章，未把嵌入游戏本身核验为可直接开玩，严格不凑数。"
+    }
+  ]
+}
