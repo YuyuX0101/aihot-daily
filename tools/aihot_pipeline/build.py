@@ -83,7 +83,8 @@ def build_edition_page(edition: dict[str, Any]) -> str:
 
     lead = (
         "本页汇总当日 AI HOT 日报、Builder 一手作品与 AI 羊毛雷达。"
-        "标签区分「作者声明 / 页面可达 / 未实测」；页可打开不等于功能或隐私审计。"
+        "日报栏目为 AIHOT 第三方转载（未独立核验）；Builder 保留作者声明/页面可达/未实测边界；"
+        "页可打开不等于功能或隐私审计，也不等于原文事实已证实。"
     )
     return page_shell(
         title=f"AIHOT 统一期次 · {date}",

@@ -20,9 +20,18 @@ TAG_LABELS = {
     "repo_reachable": "仓库可达",
     "hearsay": "二手转述",
     "no_playable": "无可玩页",
+    "aihot_repost": "AIHOT转载",
+    "unverified_upstream": "未独立核验",
 }
 
-WARN_TAGS = {"untested", "hearsay", "author_claim", "no_playable"}
+WARN_TAGS = {
+    "untested",
+    "hearsay",
+    "author_claim",
+    "no_playable",
+    "aihot_repost",
+    "unverified_upstream",
+}
 
 DEFAULT_EMPTY = {
     "daily": "当日暂无 AI HOT 日报生成结果；请查看最近历史日报，勿将示例内容当作当日资讯。",
@@ -64,29 +73,46 @@ def render_item(item: dict[str, Any], channel: str) -> str:
     published = format_beijing(item.get("published_at") or "")
     verified = format_beijing(item.get("verified_at") or "")
     tags = _tags_html(item.get("verification_tags"))
+    is_daily = channel == "daily"
 
     meta_parts = []
     if author:
-        meta_parts.append(f"<span>作者 {author}</span>")
+        if is_daily:
+            meta_parts.append(f"<span>上游来源 {author}</span>")
+            meta_parts.append("<span>经 AIHOT 转载（未独立核验）</span>")
+        else:
+            meta_parts.append(f"<span>作者 {author}</span>")
     if published:
-        meta_parts.append(f"<span>发布 {escape_text(published)}</span>")
+        meta_parts.append(f"<span>原文发布 {escape_text(published)}</span>")
+    elif is_daily:
+        meta_parts.append("<span>原文发布时间未知（未编造）</span>")
     if verified:
-        meta_parts.append(f"<span>核查 {escape_text(verified)}</span>")
+        meta_parts.append(
+            f"<span>{'摄取' if is_daily else '核查'} {escape_text(verified)}</span>"
+        )
     if tags:
         meta_parts.append(tags)
     meta_html = f'<div class="item-meta">{"".join(meta_parts)}</div>' if meta_parts else ""
 
     claim = item.get("author_claim") or ""
-    evidence = item.get("verified_evidence") or item.get("summary") or ""
+    # For daily: never fall back to summary as "核验证据" — that would overclaim.
+    if is_daily:
+        evidence = item.get("verified_evidence") or ""
+        claim_label = "上游报道（AIHOT 转载 · 未独立核验）"
+        evidence_label = "本站核验边界"
+    else:
+        evidence = item.get("verified_evidence") or item.get("summary") or ""
+        claim_label = "作者声明"
+        evidence_label = "核验正文证据"
     blocks = []
     if claim:
         blocks.append(
-            f'<div class="claim-box"><div class="box-label">作者声明</div>'
+            f'<div class="claim-box"><div class="box-label">{escape_text(claim_label)}</div>'
             f"<div>{escape_text(claim)}</div></div>"
         )
     if evidence:
         blocks.append(
-            f'<div class="evidence-box"><div class="box-label">核验正文证据</div>'
+            f'<div class="evidence-box"><div class="box-label">{escape_text(evidence_label)}</div>'
             f"<div>{escape_text(evidence)}</div></div>"
         )
 
@@ -110,12 +136,20 @@ def render_item(item: dict[str, Any], channel: str) -> str:
         if rows:
             deal_html = f'<div class="deal-box">{"".join(rows)}</div>'
 
+    if is_daily:
+        link_specs = (
+            (item.get("source_url"), "AIHOT 条目"),
+            (item.get("playable_url"), "原文链接（未核验）"),
+            (item.get("repo_url"), "仓库"),
+        )
+    else:
+        link_specs = (
+            (item.get("source_url"), "来源帖"),
+            (item.get("playable_url"), "可打开页面"),
+            (item.get("repo_url"), "仓库"),
+        )
     links = []
-    for url, label in (
-        (item.get("source_url"), "来源帖"),
-        (item.get("playable_url"), "可打开页面"),
-        (item.get("repo_url"), "仓库"),
-    ):
+    for url, label in link_specs:
         part = _safe_link(url, label)
         if part:
             links.append(part)
@@ -145,6 +179,14 @@ def render_channel_section(
     count = len(items)
     empty = count == 0
 
+    disclaimer = ""
+    if channel == "daily":
+        text = meta.get("section_disclaimer") or (
+            "本栏目为 AIHOT 第三方汇总转载：API 刊期是业务日，不等于原文发布时间；"
+            "未提供发布时间时不编造。标题与摘要为上游报道，未独立核验事实断言。"
+        )
+        disclaimer = f'<p class="section-disclaimer">{escape_text(text)}</p>'
+
     if empty:
         message = meta.get("empty_message") or DEFAULT_EMPTY.get(channel, "本期暂无条目。")
         extra = ""
@@ -166,6 +208,7 @@ def render_channel_section(
     <span class="section-title">{escape_text(title)}</span>
     <span class="section-count">{count} 条{" · 已折叠" if empty else ""}</span>
   </div>
+  {disclaimer}
   {body}
 </section>
 """.strip()

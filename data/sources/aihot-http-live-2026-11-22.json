@@ -224,117 +224,144 @@
     "edition_date": "2026-11-22",
     "channel": "daily",
     "source": "aihot-news-api-v1-dailies",
-    "generated_at": "2026-11-22T11:51:29+08:00",
+    "generated_at": "2026-11-22T12:00:53+08:00",
     "items": [
       {
         "id": "daily:rlj39tzyujneo0u35iyrfb4uc",
         "title": "Qwen4 Max 上线 Together AI，单次调用修复 Tornado 整仓 bug",
-        "summary": "Together AI 宣布阿里旗舰模型 Qwen4 Max 上线其 Serverless 推理平台（模型串 Qwen/Qwen4-Max），1M token 上下文，截至 2026 年 11 月 22 日 7 折。",
-        "source_url": "https://aihot.news/items/rlj39tzyujneo0u35iyrfb4uc",
+        "summary": "【上游报道 · AIHOT 转载 · 未独立核验】Together AI 宣布阿里旗舰模型 Qwen4 Max 上线其 Serverless 推理平台（模型串 Qwen/Qwen4-Max），1M token 上下文，截至 2026 年 11 月 22 日 7 折。",
         "author": "Together AI 研究与产品博客（RSS）",
         "published_at": null,
-        "verified_at": "2026-11-22T11:51:29+08:00",
+        "verified_at": "2026-11-22T12:00:53+08:00",
         "verification_tags": [
-          "page_reachable",
-          "untested"
+          "aihot_repost",
+          "unverified_upstream",
+          "untested",
+          "hearsay"
         ],
-        "notes": "官方栏目：产品发布/更新；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；未人工实测",
+        "notes": "AIHOT 转载 / 未独立核验；上游来源名：Together AI 研究与产品博客（RSS）；上游栏目：产品发布/更新；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；链接可点开查阅，不等于本站已读过或证实其断言",
         "score": 0,
-        "author_claim": "",
-        "verified_evidence": "Together AI 宣布阿里旗舰模型 Qwen4 Max 上线其 Serverless 推理平台（模型串 Qwen/Qwen4-Max），1M token 上下文，截至 2026 年 11 月 22 日 7 折。",
+        "author_claim": "Qwen4 Max 上线 Together AI，单次调用修复 Tornado 整仓 bug\n\n上游摘要：Together AI 宣布阿里旗舰模型 Qwen4 Max 上线其 Serverless 推理平台（模型串 Qwen/Qwen4-Max），1M token 上下文，截至 2026 年 11 月 22 日 7 折。",
+        "verified_evidence": "仅确认 AIHOT 公开 API/抓取返回该条目；未独立打开原文核验事实，也不把链接存在当作已读过或已证实。",
+        "source_url": "https://aihot.news/items/rlj39tzyujneo0u35iyrfb4uc",
         "playable_url": "https://www.together.ai/blog/qwen4-max"
       },
       {
         "id": "daily:xqe6lbb5zsjp9xbsc1o912cs0",
         "title": "Together AI 通报 2026 年 6-7 月 serverless 推理服务提示词泄露事件",
-        "summary": "Together AI 通报一起安全事件：因 AI 编码 agent 在公开 GitHub 仓库 xorl 中提交了私有 Hugging Face 仓库凭证，未授权方下载了 2026 年 6-7 月提交给 MiniMax M3、GLM-5.2、Kimi K2.6 等 serverless 推理服务的存储提示词样本，并搜索其中其他服务凭证。",
-        "source_url": "https://aihot.news/items/xqe6lbb5zsjp9xbsc1o912cs0",
+        "summary": "【上游报道 · AIHOT 转载 · 未独立核验】Together AI 通报一起安全事件：因 AI 编码 agent 在公开 GitHub 仓库 xorl 中提交了私有 Hugging Face 仓库凭证，未授权方下载了 2026 年 6-7 月提交给 MiniMax M3、GLM-5.2、Kimi K2.6 等 serverless 推理服务的存储提示词样本，并搜索其中其他服务凭证。",
         "author": "Together AI 研究与产品博客（RSS）",
         "published_at": null,
-        "verified_at": "2026-11-22T11:51:29+08:00",
+        "verified_at": "2026-11-22T12:00:53+08:00",
         "verification_tags": [
-          "page_reachable",
-          "untested"
+          "aihot_repost",
+          "unverified_upstream",
+          "untested",
+          "hearsay"
         ],
-        "notes": "官方栏目：行业动态；分类候选：技巧与观点；来自 aihot.news 公开日报 API（只读）；未人工实测",
+        "notes": "AIHOT 转载 / 未独立核验；上游来源名：Together AI 研究与产品博客（RSS）；上游栏目：行业动态；分类候选：技巧与观点；来自 aihot.news 公开日报 API（只读）；链接可点开查阅，不等于本站已读过或证实其断言",
         "score": 0,
-        "author_claim": "",
-        "verified_evidence": "Together AI 通报一起安全事件：因 AI 编码 agent 在公开 GitHub 仓库 xorl 中提交了私有 Hugging Face 仓库凭证，未授权方下载了 2026 年 6-7 月提交给 MiniMax M3、GLM-5.2、Kimi K2.6 等 serverless 推理服务的存储提示词样本，并搜索其中其他服务凭证。",
+        "author_claim": "Together AI 通报 2026 年 6-7 月 serverless 推理服务提示词泄露事件\n\n上游摘要：Together AI 通报一起安全事件：因 AI 编码 agent 在公开 GitHub 仓库 xorl 中提交了私有 Hugging Face 仓库凭证，未授权方下载了 2026 年 6-7 月提交给 MiniMax M3、GLM-5.2、Kimi K2.6 等 serverless 推理服务的存储提示词样本，并搜索其中其他服务凭证。",
+        "verified_evidence": "仅确认 AIHOT 公开 API/抓取返回该条目；未独立打开原文核验事实，也不把链接存在当作已读过或已证实。",
+        "source_url": "https://aihot.news/items/xqe6lbb5zsjp9xbsc1o912cs0",
         "playable_url": "https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026"
       },
       {
         "id": "daily:tje8i8y21ttk7jjmqet5bpxuq",
         "title": "Anthropic 数学家称与 Claude 完成黎曼猜想证明，斯坦福数小时后发布纯人类竞争草稿",
-        "summary": "Anthropic 数学家 Levent Alpöge 周五宣布与 Claude 合作得到黎曼猜想及广义黎曼猜想的证明，证明以 Lean 语言分 14 个数据包发布，打印将超 25 万页。",
-        "source_url": "https://aihot.news/items/tje8i8y21ttk7jjmqet5bpxuq",
+        "summary": "【上游报道 · AIHOT 转载 · 未独立核验】Anthropic 数学家 Levent Alpöge 周五宣布与 Claude 合作得到黎曼猜想及广义黎曼猜想的证明，证明以 Lean 语言分 14 个数据包发布，打印将超 25 万页。",
         "author": "The Decoder：AI News（RSS）",
         "published_at": null,
-        "verified_at": "2026-11-22T11:51:29+08:00",
+        "verified_at": "2026-11-22T12:00:53+08:00",
         "verification_tags": [
-          "page_reachable",
-          "untested"
+          "aihot_repost",
+          "unverified_upstream",
+          "untested",
+          "hearsay"
         ],
-        "notes": "官方栏目：论文研究；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；未人工实测",
+        "notes": "AIHOT 转载 / 未独立核验；上游来源名：The Decoder：AI News（RSS）；上游栏目：论文研究；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；链接可点开查阅，不等于本站已读过或证实其断言",
         "score": 0,
-        "author_claim": "",
-        "verified_evidence": "Anthropic 数学家 Levent Alpöge 周五宣布与 Claude 合作得到黎曼猜想及广义黎曼猜想的证明，证明以 Lean 语言分 14 个数据包发布，打印将超 25 万页。",
+        "author_claim": "Anthropic 数学家称与 Claude 完成黎曼猜想证明，斯坦福数小时后发布纯人类竞争草稿\n\n上游摘要：Anthropic 数学家 Levent Alpöge 周五宣布与 Claude 合作得到黎曼猜想及广义黎曼猜想的证明，证明以 Lean 语言分 14 个数据包发布，打印将超 25 万页。",
+        "verified_evidence": "仅确认 AIHOT 公开 API/抓取返回该条目；未独立打开原文核验事实，也不把链接存在当作已读过或已证实。",
+        "source_url": "https://aihot.news/items/tje8i8y21ttk7jjmqet5bpxuq",
         "playable_url": "https://the-decoder.com/hours-after-anthropic-claims-a-claude-proof-of-the-riemann-hypothesis-stanford-releases-an-all-human-competing-draft/"
       },
       {
         "id": "daily:agm7klro03kcu9weuix1bt4su",
         "title": "研究者向 AI 供应链埋入 200 万个金丝雀，揭露敏感数据泄露",
-        "summary": "研究者在经过 OpenRouter 等 AI 路由的请求中埋入 200 万个金丝雀链接，测试敏感信息是否会沿 AI 服务链泄露，结果显示这些数据像筛子一样大量外泄。",
-        "source_url": "https://aihot.news/items/agm7klro03kcu9weuix1bt4su",
+        "summary": "【上游报道 · AIHOT 转载 · 未独立核验】研究者在经过 OpenRouter 等 AI 路由的请求中埋入 200 万个金丝雀链接，测试敏感信息是否会沿 AI 服务链泄露，结果显示这些数据像筛子一样大量外泄。",
         "author": "Ars Technica：AI（RSS）",
         "published_at": null,
-        "verified_at": "2026-11-22T11:51:29+08:00",
+        "verified_at": "2026-11-22T12:00:53+08:00",
         "verification_tags": [
-          "page_reachable",
-          "untested"
+          "aihot_repost",
+          "unverified_upstream",
+          "untested",
+          "hearsay"
         ],
-        "notes": "官方栏目：论文研究；分类候选：论文研究；来自 aihot.news 公开日报 API（只读）；未人工实测",
+        "notes": "AIHOT 转载 / 未独立核验；上游来源名：Ars Technica：AI（RSS）；上游栏目：论文研究；分类候选：论文研究；来自 aihot.news 公开日报 API（只读）；链接可点开查阅，不等于本站已读过或证实其断言",
         "score": 0,
-        "author_claim": "",
-        "verified_evidence": "研究者在经过 OpenRouter 等 AI 路由的请求中埋入 200 万个金丝雀链接，测试敏感信息是否会沿 AI 服务链泄露，结果显示这些数据像筛子一样大量外泄。",
+        "author_claim": "研究者向 AI 供应链埋入 200 万个金丝雀，揭露敏感数据泄露\n\n上游摘要：研究者在经过 OpenRouter 等 AI 路由的请求中埋入 200 万个金丝雀链接，测试敏感信息是否会沿 AI 服务链泄露，结果显示这些数据像筛子一样大量外泄。",
+        "verified_evidence": "仅确认 AIHOT 公开 API/抓取返回该条目；未独立打开原文核验事实，也不把链接存在当作已读过或已证实。",
+        "source_url": "https://aihot.news/items/agm7klro03kcu9weuix1bt4su",
         "playable_url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/"
       },
       {
         "id": "daily:d32df9vzpliz9m348fug74inq",
         "title": "Columbia 与 MIT 论文展示 Claude 发现的算法突破 3SUM 与 APSP 长期速度上限",
-        "summary": "Columbia 和 MIT 的论文展示 Claude 发现的算法在 3SUM 和全对最短路径（APSP）上取得多项式改进，3SUM 达到 O(n^1.9992)、APSP 达到 O(n^2.9995)，推翻了 3SUM 和 APSP 假设。",
-        "source_url": "https://aihot.news/items/d32df9vzpliz9m348fug74inq",
+        "summary": "【上游报道 · AIHOT 转载 · 未独立核验】Columbia 和 MIT 的论文展示 Claude 发现的算法在 3SUM 和全对最短路径（APSP）上取得多项式改进，3SUM 达到 O(n^1.9992)、APSP 达到 O(n^2.9995)，推翻了 3SUM 和 APSP 假设。",
         "author": "X：Rohan Paul (@rohanpaul_ai)",
         "published_at": null,
-        "verified_at": "2026-11-22T11:51:29+08:00",
+        "verified_at": "2026-11-22T12:00:53+08:00",
         "verification_tags": [
-          "page_reachable",
-          "untested"
+          "aihot_repost",
+          "unverified_upstream",
+          "untested",
+          "hearsay"
         ],
-        "notes": "官方栏目：论文研究；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；未人工实测",
+        "notes": "AIHOT 转载 / 未独立核验；上游来源名：X：Rohan Paul (@rohanpaul_ai)；上游栏目：论文研究；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；链接可点开查阅，不等于本站已读过或证实其断言",
         "score": 0,
-        "author_claim": "",
-        "verified_evidence": "Columbia 和 MIT 的论文展示 Claude 发现的算法在 3SUM 和全对最短路径（APSP）上取得多项式改进，3SUM 达到 O(n^1.9992)、APSP 达到 O(n^2.9995)，推翻了 3SUM 和 APSP 假设。",
+        "author_claim": "Columbia 与 MIT 论文展示 Claude 发现的算法突破 3SUM 与 APSP 长期速度上限\n\n上游摘要：Columbia 和 MIT 的论文展示 Claude 发现的算法在 3SUM 和全对最短路径（APSP）上取得多项式改进，3SUM 达到 O(n^1.9992)、APSP 达到 O(n^2.9995)，推翻了 3SUM 和 APSP 假设。",
+        "verified_evidence": "仅确认 AIHOT 公开 API/抓取返回该条目；未独立打开原文核验事实，也不把链接存在当作已读过或已证实。",
+        "source_url": "https://aihot.news/items/d32df9vzpliz9m348fug74inq",
         "playable_url": "https://x.com/rohanpaul_ai/status/2124213113583174076"
       },
       {
         "id": "daily:p52mxe56big96tb6cx9qr1rij",
         "title": "OpenAI 发布 MedChemBench：评估 AI 模型解读分子结构与实验数据的能力",
-        "summary": "OpenAI 推出 MedChemBench，用 99 道源自已发表研究的题目评估 AI 模型解读分子结构、解释实验证据并预测化合物性质的能力。在 xhigh 推理设置下，GPT‑6.2 Astra 获得 84.5% 的可用分数，GPT‑6 Astra 为 83.3%，GPT‑6.1 Sol 为 82.0%，GPT‑5.6 Sol 为 58.2%。",
-        "source_url": "https://aihot.news/items/p52mxe56big96tb6cx9qr1rij",
+        "summary": "【上游报道 · AIHOT 转载 · 未独立核验】OpenAI 推出 MedChemBench，用 99 道源自已发表研究的题目评估 AI 模型解读分子结构、解释实验证据并预测化合物性质的能力。在 xhigh 推理设置下，GPT‑6.2 Astra 获得 84.5% 的可用分数，GPT‑6 Astra 为 83.3%，GPT‑6.1 Sol 为 82.0%，GPT‑5.6 Sol 为 58.2%。",
         "author": "OpenAI：官网动态（RSS · 排除企业/客户案例）",
         "published_at": null,
-        "verified_at": "2026-11-22T11:51:29+08:00",
+        "verified_at": "2026-11-22T12:00:53+08:00",
         "verification_tags": [
-          "page_reachable",
-          "untested"
+          "aihot_repost",
+          "unverified_upstream",
+          "untested",
+          "hearsay"
         ],
-        "notes": "官方栏目：论文研究；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；未人工实测",
+        "notes": "AIHOT 转载 / 未独立核验；上游来源名：OpenAI：官网动态（RSS · 排除企业/客户案例）；上游栏目：论文研究；分类候选：模型发布/更新；来自 aihot.news 公开日报 API（只读）；链接可点开查阅，不等于本站已读过或证实其断言",
         "score": 0,
-        "author_claim": "",
-        "verified_evidence": "OpenAI 推出 MedChemBench，用 99 道源自已发表研究的题目评估 AI 模型解读分子结构、解释实验证据并预测化合物性质的能力。在 xhigh 推理设置下，GPT‑6.2 Astra 获得 84.5% 的可用分数，GPT‑6 Astra 为 83.3%，GPT‑6.1 Sol 为 82.0%，GPT‑5.6 Sol 为 58.2%。",
+        "author_claim": "OpenAI 发布 MedChemBench：评估 AI 模型解读分子结构与实验数据的能力\n\n上游摘要：OpenAI 推出 MedChemBench，用 99 道源自已发表研究的题目评估 AI 模型解读分子结构、解释实验证据并预测化合物性质的能力。在 xhigh 推理设置下，GPT‑6.2 Astra 获得 84.5% 的可用分数，GPT‑6 Astra 为 83.3%，GPT‑6.1 Sol 为 82.0%，GPT‑5.6 Sol 为 58.2%。",
+        "verified_evidence": "仅确认 AIHOT 公开 API/抓取返回该条目；未独立打开原文核验事实，也不把链接存在当作已读过或已证实。",
+        "source_url": "https://aihot.news/items/p52mxe56big96tb6cx9qr1rij",
         "playable_url": "https://openai.com/index/introducing-medchembench"
       }
     ],
+    "channel_meta": {
+      "honesty": "aihot_repost_unverified",
+      "section_disclaimer": "本栏目条目来自 AIHOT 第三方公开汇总（API 刊期 date=业务日）。API 刊期不等于原文发布时间；未提供 published_at 时不编造时间。标题与摘要均为上游报道转载，本站未独立核验其中的科学/安全等事实断言。",
+      "source_meta": {
+        "aihot_daily_date": "2026-11-22",
+        "aihot_generated_at": "2026-11-22T00:00:32.553Z",
+        "window_start": "2026-11-21T00:00:00.000Z",
+        "window_end": "2026-11-22T00:00:00.000Z",
+        "lead_title": "Anthropic 数学家称与 Claude 完成黎曼猜想证明，斯坦福数小时后发布纯人类竞争草稿",
+        "official_page": "https://aihot.news/daily/2026-11-22",
+        "ingest_mode": "public_http_api",
+        "attribution": "AIHOT",
+        "honesty": "third_party_aggregate_unverified"
+      }
+    },
     "source_meta": {
       "aihot_daily_date": "2026-11-22",
       "aihot_generated_at": "2026-11-22T00:00:32.553Z",
@@ -343,36 +370,10 @@
       "lead_title": "Anthropic 数学家称与 Claude 完成黎曼猜想证明，斯坦福数小时后发布纯人类竞争草稿",
       "official_page": "https://aihot.news/daily/2026-11-22",
       "ingest_mode": "public_http_api",
-      "fetch_evidence": {
-        "ok": true,
-        "base_url": "https://aihot.news",
-        "request_url": "https://aihot.news/api/v1/dailies/2026-11-22",
-        "http_status": 200,
-        "etag": null,
-        "bytes": 7251,
-        "daily_date": "2026-11-22",
-        "item_count": 6,
-        "highlight_count": 3,
-        "section_labels": [
-          "产品发布/更新",
-          "行业动态",
-          "论文研究"
-        ],
-        "source_urls": [
-          "https://aihot.news/items/rlj39tzyujneo0u35iyrfb4uc",
-          "https://aihot.news/items/xqe6lbb5zsjp9xbsc1o912cs0",
-          "https://aihot.news/items/tje8i8y21ttk7jjmqet5bpxuq",
-          "https://aihot.news/items/agm7klro03kcu9weuix1bt4su",
-          "https://aihot.news/items/d32df9vzpliz9m348fug74inq",
-          "https://aihot.news/items/p52mxe56big96tb6cx9qr1rij"
-        ],
-        "generated_at": "2026-11-22T00:00:32.553Z",
-        "window_start": "2026-11-21T00:00:00.000Z",
-        "window_end": "2026-11-22T00:00:00.000Z",
-        "error": null,
-        "fetched_at_beijing": "2026-11-22 11:51:29 北京时间",
-        "note": "Public REST /api/v1/dailies — anonymous read-only. Not CDP/browser. Not a publish/push/notify action."
-      }
+      "attribution": "AIHOT",
+      "honesty": "third_party_aggregate_unverified"
     }
-  }
+  },
+  "honesty_note": "HTTP 200 only proves third-party aggregate retrieval. Items must be tagged aihot_repost/unverified_upstream; Feishu daily summary must not amplify unverified breakthrough titles.",
+  "honesty_updated_at_beijing": "2026-11-22 12:00:53 北京时间"
 }

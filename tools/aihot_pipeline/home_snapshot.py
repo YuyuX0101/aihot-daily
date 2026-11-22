@@ -66,7 +66,7 @@ def build_home_snapshot(dates: list[str]) -> dict[str, Any]:
             "daily_official_page": (daily_meta.get("source_meta") or {}).get("official_page"),
             "note": (
                 "网站预览：完整结果在期次页。"
-                f"日报栏目日期={date}"
+                f"日报栏目日期={date}（AIHOT 第三方汇总转载，未独立核验）"
                 + (
                     f"；官方页={(daily_meta.get('source_meta') or {}).get('official_page')}"
                     if (daily_meta.get("source_meta") or {}).get("official_page")

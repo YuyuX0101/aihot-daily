@@ -1,4 +1,9 @@
-"""Unified Feishu summary text (preview / dry-run payload)."""
+"""Unified Feishu summary text (preview / dry-run payload).
+
+Daily (AIHOT) section: count + honesty line only — do not amplify unverified
+breakthrough/security headlines as settled facts. Builder keeps title highlights
+with its own verification boundary. Deals keeps empty-state honesty.
+"""
 
 from __future__ import annotations
 
@@ -30,6 +35,19 @@ def build_summary_text(edition: dict[str, Any], site_base: str = SITE_BASE_URL) 
         meta = bucket.get("meta") or {}
         label = CHANNEL_LABELS[key]
         totals.append(f"{label} {len(items)} 条")
+
+        if key == "daily":
+            lines.append(f"【{label}】")
+            if items:
+                lines.append(f"· {len(items)} 条（上游汇总，未独立核验）")
+                lines.append("· 重大科学/安全等断言请点进站点查阅原文，勿当作本站已证实事实")
+            elif meta.get("empty_message"):
+                lines.append(f"· {meta['empty_message']}")
+            else:
+                lines.append("· 0 条")
+            lines.append("")
+            continue
+
         tops = _top_titles(items, 3)
         if tops:
             lines.append(f"【{label}】")

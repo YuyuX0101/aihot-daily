@@ -86,5 +86,5 @@
   "daily_source_date": "2026-11-22",
   "daily_ingest_source": "aihot-news-api-v1-dailies",
   "daily_official_page": "https://aihot.news/daily/2026-11-22",
-  "note": "网站预览：完整结果在期次页。日报栏目日期=2026-11-22；官方页=https://aihot.news/daily/2026-11-22。统一飞书摘要发送与生产切流尚未启用。"
+  "note": "网站预览：完整结果在期次页。日报栏目日期=2026-11-22（AIHOT 第三方汇总转载，未独立核验）；官方页=https://aihot.news/daily/2026-11-22。统一飞书摘要发送与生产切流尚未启用。"
 }

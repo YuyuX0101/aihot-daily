@@ -205,6 +205,14 @@ button:focus-visible,
 }
 .section.is-empty { opacity: 0.92; }
 .section.is-empty .section-header { border-bottom-style: dashed; }
+.section-disclaimer {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.88rem;
+  color: var(--ink-secondary);
+  background: var(--warn-soft);
+  border-left: 3px solid var(--warn);
+}
 
 .item {
   padding: 1.25rem 0;

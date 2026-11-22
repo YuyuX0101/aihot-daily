@@ -50,6 +50,9 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn("Prompt Puncher", html)
         self.assertIn("不等于全网无优惠", html)
         self.assertIn("北京时间", html)
+        self.assertIn("未独立核验", html)
+        self.assertIn("AIHOT 转载", html)
+        self.assertIn("不等于原文发布时间", html)
         # focus style exists in CSS
         css = (REPO / "assets" / "editorial.css").read_text(encoding="utf-8")
         self.assertIn(":focus-visible", css)

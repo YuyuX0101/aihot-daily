@@ -227,6 +227,11 @@ def report_to_raw_items(report: dict[str, Any]) -> list[dict[str, Any]]:
             seen.add(key)
             links = it.get("links") or {}
             source = it.get("source") or {}
+            aihot_url = str(links.get("aihot") or "") or None
+            original_url = str(links.get("original") or "") or None
+            published_at = it.get("publishedAt") or it.get("published_at")
+            if published_at is not None:
+                published_at = str(published_at).strip() or None
             out.append(
                 {
                     "id": iid,
@@ -234,8 +239,11 @@ def report_to_raw_items(report: dict[str, Any]) -> list[dict[str, Any]]:
                     "summary": str(it.get("summary") or "").strip(),
                     "reason": str(it.get("summary") or "").strip(),
                     "src": str(source.get("name") or ""),
-                    "link": str(links.get("aihot") or links.get("original") or ""),
-                    "original_url": str(links.get("original") or "") or None,
+                    "source_name": str(source.get("name") or ""),
+                    "aihot_url": aihot_url,
+                    "link": aihot_url or original_url or "",
+                    "original_url": original_url,
+                    "published_at": published_at,
                     "score": int(it.get("score") or 0),
                     "section_label": label,
                     "time": "",

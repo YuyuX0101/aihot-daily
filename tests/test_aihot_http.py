@@ -31,6 +31,10 @@ class OfficialDailyConvertTests(unittest.TestCase):
         # Must not be the older local HTML day masquerading as today
         self.assertNotEqual(feed["edition_date"], "2026-11-20")
         self.assertIn("aihot_daily_date", feed["source_meta"])
+        for it in feed["items"]:
+            self.assertIn("aihot_repost", it["verification_tags"])
+            self.assertNotIn("verified", it["verification_tags"])
+            self.assertNotIn("page_reachable", it["verification_tags"])
 
 
 class FetcherConfigTests(unittest.TestCase):

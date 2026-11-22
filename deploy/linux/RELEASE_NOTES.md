@@ -26,5 +26,13 @@
 ## live_ready
 
 - 打包时 `live_ready=false`（避免未探测即宣称）
-- parent 执行 `deps --probe-http` 或 `check-http-readonly.sh` 成功后，探针可报 `live_ready=true` **仅表示公开 HTTP API 可读**，不是 CDP、不是发布/飞书就绪
+- parent 执行 `deps --probe-http` 或 `check-http-readonly.sh` 成功后，探针可报 `live_ready=true` **仅表示公开 HTTP API 可读**，不是 CDP、不是发布/飞书就绪，**更不是原文事实已核验**
 - `cdp_ready` 恒为 false
+
+## 内容可信度（上线前）
+
+- AIHOT 日报导入一律标签：`aihot_repost` / `unverified_upstream` / `untested` / `hearsay`
+- 保留上游 `source.name` 与原文 URL；AIHOT 归属页不覆盖原文
+- 飞书统一摘要对日报区只报条数 +「上游汇总，未独立核验」+ 站点链接，不扩散未核验突破断言标题
+- Builder 仍用作者声明/页面可达/未实测边界；deals=0 诚实空状态
+- 发布 / 通知 / 调度默认仍关闭

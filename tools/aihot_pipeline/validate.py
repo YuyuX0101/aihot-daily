@@ -23,6 +23,9 @@ ALLOWED_TAGS = {
     "repo_reachable",
     "hearsay",
     "no_playable",
+    # Third-party AIHOT aggregate imports (not independent verification).
+    "aihot_repost",
+    "unverified_upstream",
 }
 
 # Over-claim tags that imply实测/审计 — never allowed in feeds.
