@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "edition_date": "2026-11-21",
+  "channel": "daily",
+  "source": "file-import",
+  "generated_at": "2026-11-21T04:10:00Z",
+  "items": [
+    {
+      "id": "daily:demo-model-release",
+      "title": "示例：开源模型发布小版本更新",
+      "summary": "演示用日报条目。生产环境仍可由上游 aihot 数据源生成历史风格 YYYY-MM-DD.html；本条仅进入统一期次页的 daily 频道。",
+      "source_url": "https://example.com/news/model-release",
+      "author": "aihot-demo",
+      "published_at": "2026-11-20T22:00:00Z",
+      "verified_at": "2026-11-21T04:00:00Z",
+      "verification_tags": ["verified"],
+      "score": 80
+    }
+  ]
+}

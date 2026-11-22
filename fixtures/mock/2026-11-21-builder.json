@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "edition_date": "2026-11-21",
+  "channel": "builder",
+  "source": "bot-x-web",
+  "generated_at": "2026-11-21T04:00:00Z",
+  "items": [
+    {
+      "id": "builder:demo-openclaw-ui",
+      "title": "OpenClaw 作者开源桌面编排面板",
+      "summary": "公开仓库放出可本地运行的编排 UI，支持多 Agent 会话与工具调用轨迹回放。未接入付费 API。",
+      "source_url": "https://example.com/builder/openclaw-ui",
+      "author": "demo-builder",
+      "published_at": "2026-11-20T18:00:00Z",
+      "verified_at": "2026-11-21T03:30:00Z",
+      "verification_tags": ["verified"],
+      "notes": "未实玩：仅核对 README 与公开截图",
+      "score": 90
+    },
+    {
+      "id": "builder:demo-voice-notes",
+      "title": "语音笔记 Agent 把会议录音整理成行动项",
+      "summary": "作品演示：上传音频后输出待办与责任人表格，适合个人知识库。",
+      "source_url": "https://example.com/builder/voice-notes",
+      "author": "indie-dev",
+      "published_at": "2026-11-20T12:00:00Z",
+      "verified_at": "2026-11-21T03:40:00Z",
+      "verification_tags": ["untested"],
+      "notes": "未实玩",
+      "score": 70
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "edition_date": "2026-11-21",
+  "channel": "deals",
+  "source": "bot-x-web",
+  "generated_at": "2026-11-21T04:05:00Z",
+  "items": [
+    {
+      "id": "deals:demo-llm-credits",
+      "title": "某云厂商新用户赠送 LLM 推理额度",
+      "summary": "注册完成实名后发放试用额度，可用于公开模型推理。请自行核对活动页条款。",
+      "source_url": "https://example.com/deals/llm-credits",
+      "author": "radar-bot",
+      "published_at": "2026-11-20T09:00:00Z",
+      "verified_at": "2026-11-21T03:50:00Z",
+      "verification_tags": ["verified", "untested"],
+      "notes": "未实玩领券；仅核对公开活动页",
+      "score": 85,
+      "deal": {
+        "threshold": "新用户实名后领取",
+        "deadline": "2026-11-30",
+        "regions": ["CN"],
+        "restrictions": "限一次；不可与其他试用叠加"
+      }
+    },
+    {
+      "id": "deals:demo-ide-promo",
+      "title": "AI IDE 学生认证半价",
+      "summary": "教育邮箱认证后年付半价。地区与库存以官方为准。",
+      "source_url": "https://example.com/deals/ide-promo",
+      "author": "radar-bot",
+      "published_at": "2026-11-19T10:00:00Z",
+      "verified_at": "2026-11-21T03:55:00Z",
+      "verification_tags": ["hearsay"],
+      "notes": "二手转述，需打开官方页复核",
+      "score": 60,
+      "deal": {
+        "threshold": "学生认证",
+        "deadline": "2026-12-15",
+        "regions": ["CN", "US"],
+        "restrictions": "需教育邮箱"
+      }
+    }
+  ]
+}

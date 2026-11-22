@@ -1,0 +1,26 @@
+# Local secrets — never commit
+**/feishu-webhook.json
+**/*webhook*.json
+**/*.secret
+.env
+.env.*
+
+# Notify / runtime state (optional local)
+data/state/notify_state.json
+
+# Ingest archive copies (source fixtures live under fixtures/)
+data/archive/*.json
+data/inbox/*.json
+!data/inbox/.gitkeep
+!data/archive/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

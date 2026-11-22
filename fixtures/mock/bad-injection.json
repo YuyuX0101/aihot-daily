@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "edition_date": "2026-11-21",
+  "channel": "builder",
+  "source": "attacker",
+  "generated_at": "2026-11-21T04:00:00Z",
+  "items": [
+    {
+      "id": "builder:evil",
+      "title": "Normal title",
+      "summary": "hello <script>alert(1)</script>",
+      "source_url": "javascript:alert(1)"
+    }
+  ]
+}

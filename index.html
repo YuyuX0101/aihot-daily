@@ -437,12 +437,24 @@ body {
 </head>
 <body>
 
+<!-- TOP NAV: entry points for unified channels (legacy daily URLs unchanged) -->
+<header style="position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(10,14,26,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-subtle);">
+  <div style="font-size:18px;font-weight:700;letter-spacing:-0.02em;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AI HOT</div>
+  <nav style="display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="index.html" style="color:var(--text-primary);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;border:1px solid var(--border-subtle);background:var(--bg-elevated);text-decoration:none;">首页</a>
+    <a href="e/index.html" style="color:var(--text-secondary);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;text-decoration:none;">统一期次</a>
+    <a href="builder/index.html" style="color:var(--text-secondary);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;text-decoration:none;">Builder</a>
+    <a href="deals/index.html" style="color:var(--text-secondary);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;text-decoration:none;">羊毛雷达</a>
+    <a href="#timeline" style="color:var(--text-secondary);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;text-decoration:none;">历史日报</a>
+  </nav>
+</header>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-badge">每日更新</div>
   <h1>AI HOT<br><span class="gradient">日报</span></h1>
-  <p class="hero-subtitle">追踪 AI 行业最前沿动态，模型发布、产品更新、论文研究，一网打尽</p>
+  <p class="hero-subtitle">日报 · Builder 一手作品 · AI 羊毛雷达，网站展示全部结果；飞书仅发摘要与链接</p>
   <div class="hero-stats">
     <div class="stat">
       <div class="stat-value" id="total-days">--</div>
@@ -457,7 +469,7 @@ body {
 </section>
 
 <!-- TIMELINE -->
-<section class="timeline-section">
+<section class="timeline-section" id="timeline">
   <div class="timeline-header">
     <h2>历史日报</h2>
     <span class="timeline-count" id="day-count">加载中...</span>

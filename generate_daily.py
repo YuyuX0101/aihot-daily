@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Generate AI HOT daily HTML from API data."""
+"""Generate AI HOT daily HTML from API data.
+
+Legacy HP-oriented helper (hard-coded repo path). For cloud-side Builder/Deals
+ingestion and unified edition pages, use: python3 -m tools.aihot_pipeline
+"""
 
 import json, sys, os, re
 

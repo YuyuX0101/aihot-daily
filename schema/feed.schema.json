@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yuyux0101.github.io/aihot-daily/schema/feed.schema.json",
+  "title": "AIHOT Unified Feed",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "edition_date", "channel", "source", "generated_at", "items"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "edition_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "channel": { "type": "string", "enum": ["daily", "builder", "deals"] },
+    "source": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "generated_at": { "type": "string", "minLength": 8, "maxLength": 40 },
+    "items": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/item" }
+    }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9_.:/@-]+$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "summary": { "type": "string", "maxLength": 2000 },
+        "source_url": { "type": "string", "maxLength": 2000 },
+        "author": { "type": "string", "maxLength": 120 },
+        "published_at": { "type": "string", "maxLength": 40 },
+        "verified_at": { "type": "string", "maxLength": 40 },
+        "verification_tags": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "type": "string", "minLength": 1, "maxLength": 40, "pattern": "^[A-Za-z0-9_-]+$" }
+        },
+        "notes": { "type": "string", "maxLength": 500 },
+        "score": { "type": "integer", "minimum": 0, "maximum": 100000 },
+        "deal": { "$ref": "#/$defs/deal" }
+      }
+    },
+    "deal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "threshold": { "type": "string", "maxLength": 200 },
+        "deadline": { "type": "string", "maxLength": 40 },
+        "regions": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "type": "string", "minLength": 1, "maxLength": 16, "pattern": "^[A-Za-z0-9_-]+$" }
+        },
+        "restrictions": { "type": "string", "maxLength": 300 }
+      }
+    }
+  }
+}
