@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Manual dry-run of unified pipeline on parent host. Never enables timers.
+# Manual dry-run of unified pipeline on parent host. Never enables timers/send/push.
 set -euo pipefail
 export TZ=Asia/Shanghai
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -21,7 +21,16 @@ export AIHOT_ENABLE_SCHEDULE=0
 DATE="${1:-}"
 ARGS=(run)
 if [[ -n "$DATE" ]]; then ARGS+=(--date "$DATE"); fi
-if [[ -n "${AIHOT_GROUPS_FILE:-}" ]]; then ARGS+=(--groups-file "$AIHOT_GROUPS_FILE"); else ARGS+=(--skip-aihot); fi
+
+# Prefer public HTTP; else groups-file; else skip
+if [[ "${AIHOT_HTTP_FETCH:-0}" == "1" || "${AIHOT_ALLOW_LIVE_FETCH:-0}" == "1" ]]; then
+  ARGS+=(--http-aihot)
+elif [[ -n "${AIHOT_GROUPS_FILE:-}" ]]; then
+  ARGS+=(--groups-file "$AIHOT_GROUPS_FILE")
+else
+  ARGS+=(--skip-aihot)
+fi
+
 if [[ -f data/feeds/${DATE:-2026-11-22}-builder.json ]]; then
   ARGS+=(--builder-feed "data/feeds/${DATE:-2026-11-22}-builder.json")
 fi

@@ -63,6 +63,7 @@ def validate_feed(doc: Any, *, allow_demo: bool = False) -> dict[str, Any]:
         "items",
         "demo",
         "channel_meta",
+        "source_meta",
     }
     unknown = set(doc) - allowed_top
     if unknown:
@@ -117,6 +118,9 @@ def validate_feed(doc: Any, *, allow_demo: bool = False) -> dict[str, Any]:
     channel_meta = doc.get("channel_meta")
     if channel_meta is not None and not isinstance(channel_meta, dict):
         raise ValidationError("channel_meta must be an object")
+    source_meta = doc.get("source_meta")
+    if source_meta is not None and not isinstance(source_meta, dict):
+        raise ValidationError("source_meta must be an object")
 
     _load_schema_hints()
 
@@ -132,6 +136,8 @@ def validate_feed(doc: Any, *, allow_demo: bool = False) -> dict[str, Any]:
         out["demo"] = True
     if channel_meta:
         out["channel_meta"] = channel_meta
+    if source_meta:
+        out["source_meta"] = source_meta
     return out
 
 

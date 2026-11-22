@@ -180,7 +180,11 @@ class PipelineIntegrationTests(unittest.TestCase):
             "BUILDER_DIR": paths.BUILDER_DIR,
             "DEALS_DIR": paths.DEALS_DIR,
             "DAYS_JSON": paths.DAYS_JSON,
+            "DATA_DIR": paths.DATA_DIR,
+            "REPO_ROOT": paths.REPO_ROOT,
         }
+        self._data = self.tmp / "data"
+        self._data.mkdir()
         paths.INBOX_DIR = self.inbox
         paths.ARCHIVE_DIR = self.archive
         paths.EDITIONS_DIR = self.editions
@@ -190,6 +194,8 @@ class PipelineIntegrationTests(unittest.TestCase):
         paths.BUILDER_DIR = self.tmp / "builder"
         paths.DEALS_DIR = self.tmp / "deals"
         paths.DAYS_JSON = self.tmp / "days.json"
+        paths.DATA_DIR = self._data
+        paths.REPO_ROOT = self.tmp
         ingest_mod.INBOX_DIR = self.inbox
         ingest_mod.ARCHIVE_DIR = self.archive
         ingest_mod.EDITIONS_DIR = self.editions
@@ -199,9 +205,20 @@ class PipelineIntegrationTests(unittest.TestCase):
         build_mod.BUILDER_DIR = paths.BUILDER_DIR
         build_mod.DEALS_DIR = paths.DEALS_DIR
         build_mod.DAYS_JSON = paths.DAYS_JSON
+        build_mod.REPO_ROOT = self.tmp
         notify_mod.NOTIFY_STATE = self.state
+        from tools.aihot_pipeline import home_snapshot as home_snap_mod
+
+        self._home_snap_orig = home_snap_mod.HOME_SNAPSHOT
+        self._home_data_orig = home_snap_mod.DATA_DIR
+        home_snap_mod.DATA_DIR = self._data
+        home_snap_mod.HOME_SNAPSHOT = self._data / "home_snapshot.json"
 
     def tearDown(self):
+        from tools.aihot_pipeline import home_snapshot as home_snap_mod
+
+        home_snap_mod.HOME_SNAPSHOT = self._home_snap_orig
+        home_snap_mod.DATA_DIR = self._home_data_orig
         for k, v in self._orig.items():
             setattr(paths, k, v)
         ingest_mod.INBOX_DIR = self._orig["INBOX_DIR"]
@@ -213,6 +230,7 @@ class PipelineIntegrationTests(unittest.TestCase):
         build_mod.BUILDER_DIR = self._orig["BUILDER_DIR"]
         build_mod.DEALS_DIR = self._orig["DEALS_DIR"]
         build_mod.DAYS_JSON = self._orig["DAYS_JSON"]
+        build_mod.REPO_ROOT = self._orig["REPO_ROOT"]
         notify_mod.NOTIFY_STATE = self._orig["NOTIFY_STATE"]
         shutil.rmtree(self.tmp, ignore_errors=True)
 

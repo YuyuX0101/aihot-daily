@@ -61,7 +61,19 @@ def build_home_snapshot(dates: list[str]) -> dict[str, Any]:
                 "当日暂无 AI HOT 日报生成结果。",
             ),
             "legacy_daily_url": legacy,
-            "note": "网站预览：完整结果在期次页。统一飞书摘要发送与生产切流尚未启用。",
+            "daily_source_date": date,
+            "daily_ingest_source": daily_meta.get("ingest_source"),
+            "daily_official_page": (daily_meta.get("source_meta") or {}).get("official_page"),
+            "note": (
+                "网站预览：完整结果在期次页。"
+                f"日报栏目日期={date}"
+                + (
+                    f"；官方页={(daily_meta.get('source_meta') or {}).get('official_page')}"
+                    if (daily_meta.get("source_meta") or {}).get("official_page")
+                    else ""
+                )
+                + "。统一飞书摘要发送与生产切流尚未启用。"
+            ),
         }
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     HOME_SNAPSHOT.write_text(

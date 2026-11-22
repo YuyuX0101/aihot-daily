@@ -105,8 +105,15 @@ def apply_feed(feed: dict[str, Any]) -> dict[str, Any]:
     if src_entry not in sources:
         sources.append(src_entry)
     meta = channel_bucket.setdefault("meta", {})
+    if feed.get("items"):
+        meta.pop("empty_reason", None)
+        meta.pop("empty_message", None)
     if feed.get("channel_meta"):
         meta.update(feed["channel_meta"])
+    if feed.get("source_meta"):
+        meta["source_meta"] = feed["source_meta"]
+    if feed.get("source"):
+        meta["ingest_source"] = feed["source"]
     edition["channels"][channel] = channel_bucket
     path = save_edition(edition)
     return {

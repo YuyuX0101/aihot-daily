@@ -101,7 +101,19 @@
       document.getElementById('deals-count').textContent = String(counts.deals || 0);
       document.getElementById('daily-count').textContent = String(counts.daily || 0);
       document.getElementById('deals-msg').textContent = snap.deals_empty_message || '';
-      document.getElementById('daily-msg').textContent = snap.daily_empty_message || '';
+      var dailyMsg = snap.daily_empty_message || '';
+      if ((counts.daily || 0) > 0 && snap.daily_source_date) {
+        dailyMsg = '来源日期 ' + snap.daily_source_date + '（官方日报，非旧本地 HTML 冒充）';
+        if (snap.daily_official_page) {
+          dailyMsg += ' · ';
+        }
+      }
+      document.getElementById('daily-msg').textContent = dailyMsg;
+      if ((counts.daily || 0) > 0 && snap.daily_official_page) {
+        var dailyWrap = document.getElementById('daily-legacy-wrap');
+        dailyWrap.innerHTML = '<a href="' + esc(snap.daily_official_page) + '" rel="noopener noreferrer" target="_blank">官方日报页 →</a>' +
+          (snap.legacy_daily_url ? ' · <a id="daily-legacy" href="' + esc((/\.html/.test(snap.legacy_daily_url) ? snap.legacy_daily_url : snap.legacy_daily_url + '.html')) + '">本地历史页</a>' : '');
+      }
       document.getElementById('home-note').textContent = snap.note || '';
       var editionLink = document.getElementById('edition-link');
       if (snap.edition_url) {

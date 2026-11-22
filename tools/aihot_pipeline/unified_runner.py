@@ -3,7 +3,7 @@
 Defaults:
   - dry_run for Feishu + git push
   - does NOT call legacy generator send_feishu / git push
-  - uses Mock/File fetcher unless live CDP explicitly allowed (still may DependencyGap)
+  - AIHOT source: public HTTP API (--http-aihot) or groups-file; no CDP adapter
 """
 
 from __future__ import annotations
@@ -15,10 +15,16 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
-from .aihot_fetch import AihotFetcher, DependencyGapError, FileGroupsFetcher, MockFetcher
-from .aihot_logic import SCORE_THRESHOLD, default_target_date, filter_target_items, shanghai_today
+from .aihot_fetch import (
+    DependencyGapError,
+    FileGroupsFetcher,
+    HttpDailyFetcher,
+    MockFetcher,
+)
+from .aihot_http import resolve_daily_date
+from .aihot_logic import SCORE_THRESHOLD, filter_target_items, shanghai_today
 from .build import build_site
-from .convert_aihot import items_to_daily_feed
+from .convert_aihot import items_to_daily_feed, official_report_to_daily_feed
 from .daily_html import write_daily_html
 from .feishu_gate import send_text
 from .ingest import apply_feed, ensure_channel_meta, load_edition, refresh_editions_index
@@ -43,6 +49,8 @@ class RunConfig:
     deals_feed: Path | None = None
     aihot_groups_file: Path | None = None
     mock_groups: list[dict[str, Any]] | None = None
+    use_http_aihot: bool = False
+    aihot_base_url: str | None = None
     repo_root: Path = field(default_factory=lambda: REPO_ROOT)
     state_path: Path | None = None
     force_notify: bool = False
@@ -74,43 +82,138 @@ def _load_optional_feed(path: Path | None) -> dict[str, Any] | None:
     return validate_feed(json.loads(path.read_text(encoding="utf-8")), allow_demo=False)
 
 
-def _fetcher(cfg: RunConfig) -> AihotFetcher:
-    if cfg.mock_groups is not None:
-        return MockFetcher(cfg.mock_groups)
-    if cfg.aihot_groups_file:
-        return FileGroupsFetcher(cfg.aihot_groups_file)
-    raise DependencyGapError(
-        "unified runner offline mode requires mock_groups or aihot_groups_file "
-        "(live CDP not assumed available)"
-    )
-
-
 def run_unified(cfg: RunConfig) -> RunResult:
-    target = cfg.edition_date or default_target_date()
-    date_str = target.strftime("%Y-%m-%d")
     stages: dict[str, Any] = {
         "beijing_today": shanghai_today().isoformat(),
-        "edition_date": date_str,
         "dry_run": cfg.dry_run,
         "score_threshold": cfg.score_threshold,
     }
 
     try:
+        # --- resolve edition date (official API latest unless CLI overrides) ---
+        if cfg.skip_aihot_fetch and cfg.edition_date is None:
+            raise ValueError("edition --date required when --skip-aihot (no API date probe)")
+
+        resolved = None
+        if cfg.use_http_aihot and not cfg.skip_aihot_fetch and not cfg.aihot_groups_file and cfg.mock_groups is None:
+            resolved = resolve_daily_date(
+                cfg.edition_date,
+                base_url=cfg.aihot_base_url or "https://aihot.news",
+                probe_latest=True,
+            )
+            target = resolved.edition_date
+            stages["date_resolution"] = {
+                "edition_date": target.isoformat(),
+                "beijing_today": resolved.beijing_today.isoformat(),
+                "hp_legacy_yesterday": resolved.hp_legacy_yesterday.isoformat(),
+                "resolution": resolved.resolution,
+                "latest_api_date": resolved.latest_api_date.isoformat()
+                if resolved.latest_api_date
+                else None,
+                "note": resolved.note,
+            }
+        else:
+            if cfg.edition_date is None:
+                # Offline groups/mock path: keep HP default (yesterday) unless caller sets date.
+                from .aihot_logic import default_target_date
+
+                target = default_target_date()
+                stages["date_resolution"] = {
+                    "edition_date": target.isoformat(),
+                    "beijing_today": shanghai_today().isoformat(),
+                    "resolution": "hp_legacy_yesterday_default",
+                    "note": (
+                        "No HTTP probe; defaulting to HP legacy yesterday. "
+                        "Pass --date to pin the official daily date."
+                    ),
+                }
+            else:
+                target = cfg.edition_date
+                stages["date_resolution"] = {
+                    "edition_date": target.isoformat(),
+                    "beijing_today": shanghai_today().isoformat(),
+                    "resolution": "cli",
+                    "note": "Explicit --date without HTTP latest probe in this branch.",
+                }
+
+        date_str = target.strftime("%Y-%m-%d")
+        stages["edition_date"] = date_str
+
         # --- AIHOT source ---
         aihot_items: list[dict[str, Any]] = []
         if not cfg.skip_aihot_fetch:
-            fetcher = _fetcher(cfg)
-            groups = fetcher.fetch_groups()
-            stages["aihot_groups"] = len(groups)
-            aihot_items = filter_target_items(
-                groups, target, score_threshold=cfg.score_threshold, today=shanghai_today()
-            )
-            aihot_items = fetcher.enrich_summaries(aihot_items)
-            stages["aihot_items"] = len(aihot_items)
+            if cfg.mock_groups is not None:
+                fetcher = MockFetcher(cfg.mock_groups)
+                groups = fetcher.fetch_groups()
+                stages["aihot_mode"] = "mock_groups"
+                stages["aihot_groups"] = len(groups)
+                aihot_items = filter_target_items(
+                    groups, target, score_threshold=cfg.score_threshold, today=shanghai_today()
+                )
+                aihot_items = fetcher.enrich_summaries(aihot_items)
+                daily_feed = items_to_daily_feed(
+                    aihot_items, edition_date=target, source="aihot-mock-groups"
+                )
+            elif cfg.aihot_groups_file:
+                fetcher = FileGroupsFetcher(cfg.aihot_groups_file)
+                groups = fetcher.fetch_groups()
+                stages["aihot_mode"] = "groups_file"
+                stages["aihot_groups_file"] = str(cfg.aihot_groups_file)
+                stages["aihot_groups"] = len(groups)
+                aihot_items = filter_target_items(
+                    groups, target, score_threshold=cfg.score_threshold, today=shanghai_today()
+                )
+                aihot_items = fetcher.enrich_summaries(aihot_items)
+                daily_feed = items_to_daily_feed(
+                    aihot_items,
+                    edition_date=target,
+                    source="aihot-groups-file",
+                    source_meta={
+                        "groups_file": str(cfg.aihot_groups_file),
+                        "note": "Parent/external capture; not live HTTP API.",
+                    },
+                )
+            elif cfg.use_http_aihot:
+                http = HttpDailyFetcher(cfg.aihot_base_url)
+                report = http.fetch_report(target)
+                if str(report.get("date")) != date_str:
+                    raise ValueError(
+                        f"API daily date {report.get('date')} != edition {date_str}"
+                    )
+                evidence = http.evidence_dict() or {}
+                daily_feed = official_report_to_daily_feed(report, evidence=evidence)
+                aihot_items = [
+                    {
+                        "title": it["title"],
+                        "score": it.get("score") or 0,
+                        "src": it.get("author") or "",
+                        "link": it.get("source_url") or "",
+                        "summary": it.get("summary") or "",
+                        "reason": it.get("summary") or "",
+                    }
+                    for it in daily_feed["items"]
+                ]
+                stages["aihot_mode"] = "public_http_api"
+                stages["aihot_http_evidence"] = evidence
+                stages["aihot_official_page"] = (daily_feed.get("source_meta") or {}).get(
+                    "official_page"
+                )
+            else:
+                raise DependencyGapError(
+                    "AIHOT source required: use --http-aihot (public REST /api/v1/dailies), "
+                    "--groups-file PATH, or --skip-aihot. "
+                    "CDP adapter is not implemented."
+                )
 
-            daily_feed = items_to_daily_feed(aihot_items, edition_date=target)
+            stages["aihot_items"] = len(daily_feed["items"])
             apply_feed(daily_feed)
-            stages["daily_ingest"] = {"count": len(daily_feed["items"])}
+            stages["daily_ingest"] = {
+                "count": len(daily_feed["items"]),
+                "source": daily_feed.get("source"),
+                "aihot_daily_date": (daily_feed.get("source_meta") or {}).get(
+                    "aihot_daily_date", date_str
+                ),
+            }
 
             if aihot_items and cfg.write_legacy_daily_html:
                 html_path = write_daily_html(cfg.repo_root, target, aihot_items)
@@ -155,7 +258,6 @@ def run_unified(cfg: RunConfig) -> RunResult:
                     },
                 )
         else:
-            # Explicit zero-deal meta when caller intends deals channel present
             ensure_channel_meta(
                 date_str,
                 "deals",
@@ -189,8 +291,6 @@ def run_unified(cfg: RunConfig) -> RunResult:
         published_flag = bool(pub.get("published")) or (
             cfg.published and cfg.dry_run is False
         )
-        # In dry-run acceptance tests we may mark published=True to exercise notify mock
-        # without real push — only when explicitly requested via cfg.published for mock path.
         notify_published = published_flag if not cfg.dry_run else cfg.published
 
         if not pub.get("ok"):
@@ -208,7 +308,6 @@ def run_unified(cfg: RunConfig) -> RunResult:
                 notify_preview=preview,
             )
 
-        # Single unified notify — never call legacy Top5 send_feishu
         notify_result = notify_edition(
             date_str,
             dry_run=cfg.dry_run,
@@ -218,7 +317,6 @@ def run_unified(cfg: RunConfig) -> RunResult:
             sender=mock_sender if (not cfg.dry_run and cfg.published) else None,
             state_path=cfg.state_path,
         )
-        # Also expose gated send_text preview for operator tooling
         gate = send_text(preview, dry_run=True)
         stages["notify"] = notify_result
         stages["feishu_gate_preview"] = gate
@@ -237,9 +335,13 @@ def run_unified(cfg: RunConfig) -> RunResult:
             "reason": "run_failed_no_notify",
             "error": str(exc),
         }
+        # best-effort edition_date for error payload
+        ed = stages.get("edition_date") or (
+            cfg.edition_date.isoformat() if cfg.edition_date else shanghai_today().isoformat()
+        )
         return RunResult(
             ok=False,
-            edition_date=date_str,
+            edition_date=str(ed),
             dry_run=cfg.dry_run,
             stages=stages,
             error=str(exc),

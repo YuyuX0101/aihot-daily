@@ -1,11 +1,10 @@
 """AIHOT source fetch interfaces.
 
-Live CDP fetch depends on a headed Chrome/Chromium instance (box inventory notes
-headless fails to extract aihot data). This cloud VM may have Chrome, but we do
-**not** claim the full CDP scrape path is production-ready here.
+Supported live path: public HTTP API on aihot.news (see aihot_http.py).
+Legacy HP/box used headed Chrome+CDP against the homepage; that adapter is
+**not** implemented here and must not be presented as runnable.
 
-Default path for tests / offline: MockFetcher or FileGroupsFetcher.
-Live CDP is behind AIHOT_ALLOW_LIVE_FETCH=1 and still may fail with DependencyGap.
+Offline / parent-provided path: FileGroupsFetcher (groups JSON from external capture).
 """
 
 from __future__ import annotations
@@ -13,18 +12,27 @@ from __future__ import annotations
 import json
 import os
 from abc import ABC, abstractmethod
+from dataclasses import asdict
+from datetime import date
 from pathlib import Path
 from typing import Any
 
+from .aihot_http import (
+    DEFAULT_BASE,
+    HttpFetchEvidence,
+    fetch_daily_report,
+    report_to_raw_items,
+)
+
 
 class DependencyGapError(RuntimeError):
-    """Raised when a live dependency (Chrome/CDP/display) is missing or disabled."""
+    """Raised when a required upstream source is missing or disabled."""
 
 
 class AihotFetcher(ABC):
     @abstractmethod
     def fetch_groups(self) -> list[dict[str, Any]]:
-        """Return homepage day-groups as produced by extract_items_from_page JS."""
+        """Return homepage day-groups (HP extract_items_from_page shape)."""
 
     def enrich_summaries(self, items: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Optional detail-page enrichment. Default: leave items unchanged."""
@@ -50,7 +58,12 @@ class MockFetcher(AihotFetcher):
 
 
 class FileGroupsFetcher(AihotFetcher):
-    """Load pre-captured groups JSON (offline / CI)."""
+    """Load pre-captured groups JSON (offline / parent external upstream).
+
+    Expected shape: ``{"groups":[{"day":"11月22日","rows":[...]}, ...]}``
+    or a bare list of groups. Parent may produce this via headed browser
+    computerUse on https://aihot.news/ when HTTP API is unavailable.
+    """
 
     def __init__(self, path: Path):
         self.path = Path(path)
@@ -67,61 +80,56 @@ class FileGroupsFetcher(AihotFetcher):
         return MockFetcher([]).enrich_summaries(items)
 
 
-class CdpFetcher(AihotFetcher):
-    """Optional live fetcher. Not used by default tests.
+class HttpDailyFetcher:
+    """Fetch official structured daily via public REST API (not groups/CDP)."""
 
-    Requires:
-      - AIHOT_ALLOW_LIVE_FETCH=1
-      - Chrome/Chromium binary (AIHOT_CHROME_BIN)
-      - Prefer headed mode + DISPLAY (inventory: headless fails on aihot)
-    """
+    def __init__(self, base_url: str | None = None):
+        self.base_url = (base_url or os.environ.get("AIHOT_URL") or DEFAULT_BASE).rstrip("/")
+        if self.base_url.rstrip("/").endswith("aihot.virxact.com"):
+            # Old host now redirects; prefer documented public API host.
+            self.base_url = DEFAULT_BASE
+        self.last_evidence: HttpFetchEvidence | None = None
+        self.last_report: dict[str, Any] | None = None
 
-    def __init__(self, aihot_url: str | None = None):
-        self.aihot_url = aihot_url or os.environ.get(
-            "AIHOT_URL", "https://aihot.virxact.com/"
-        )
+    def fetch_report(self, daily_date: date | str | None = None) -> dict[str, Any]:
+        report, evidence = fetch_daily_report(daily_date, base_url=self.base_url)
+        self.last_evidence = evidence
+        self.last_report = report
+        return report
 
-    def _ensure_allowed(self) -> None:
-        if os.environ.get("AIHOT_ALLOW_LIVE_FETCH", "").strip() != "1":
-            raise DependencyGapError(
-                "live CDP fetch disabled (set AIHOT_ALLOW_LIVE_FETCH=1 to attempt). "
-                "Cloud environment Chrome/DISPLAY readiness is NOT assumed."
-            )
+    def fetch_items(self, daily_date: date | str | None = None) -> list[dict[str, Any]]:
+        return report_to_raw_items(self.fetch_report(daily_date))
 
-    def fetch_groups(self) -> list[dict[str, Any]]:
-        self._ensure_allowed()
-        # Import inventory CDP helpers lazily so offline imports never start Chrome.
-        try:
-            from vendor.box_inventory_bridge import extract_groups_via_cdp
-        except Exception as exc:  # pragma: no cover - import path messaging
-            raise DependencyGapError(
-                f"CDP bridge unavailable: {exc}. "
-                "Use FileGroupsFetcher/MockFetcher for offline runs."
-            ) from exc
-        return extract_groups_via_cdp(self.aihot_url)
-
-    def enrich_summaries(self, items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        self._ensure_allowed()
-        try:
-            from vendor.box_inventory_bridge import enrich_via_cdp
-        except Exception as exc:  # pragma: no cover
-            raise DependencyGapError(f"CDP enrich unavailable: {exc}") from exc
-        return enrich_via_cdp(items)
+    def evidence_dict(self) -> dict[str, Any] | None:
+        if self.last_evidence is None:
+            return None
+        return asdict(self.last_evidence)
 
 
 def build_fetcher_from_env(
     *,
     groups_file: str | Path | None = None,
     mock_groups: list[dict[str, Any]] | None = None,
-) -> AihotFetcher:
+    prefer_http: bool | None = None,
+) -> AihotFetcher | HttpDailyFetcher:
+    """Resolve source. HTTP API preferred for live; groups-file for offline/parent capture.
+
+    There is no CDP fetcher. Setting AIHOT_ALLOW_LIVE_FETCH alone enables HTTP.
+    """
     if mock_groups is not None:
         return MockFetcher(mock_groups)
     path = groups_file or os.environ.get("AIHOT_GROUPS_FILE")
     if path:
         return FileGroupsFetcher(path)
-    if os.environ.get("AIHOT_ALLOW_LIVE_FETCH", "").strip() == "1":
-        return CdpFetcher()
+    if prefer_http is None:
+        prefer_http = (
+            os.environ.get("AIHOT_HTTP_FETCH", "").strip() == "1"
+            or os.environ.get("AIHOT_ALLOW_LIVE_FETCH", "").strip() == "1"
+        )
+    if prefer_http:
+        return HttpDailyFetcher()
     raise DependencyGapError(
-        "no fetcher configured: provide AIHOT_GROUPS_FILE / mock groups, "
-        "or set AIHOT_ALLOW_LIVE_FETCH=1 (Chrome/CDP dependency gap may still apply)"
+        "no AIHOT source configured: pass --http-aihot (public REST), "
+        "--groups-file PATH (parent-captured groups JSON), or --skip-aihot. "
+        "CDP browser adapter is not implemented and will not be invoked."
     )

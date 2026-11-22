@@ -1,10 +1,7 @@
-"""Optional bridge to box-inventory CDP scrape (NOT used by default / offline tests).
+"""Dependency probe + legacy inventory pointers (no CDP execution).
 
-The inventory generator module has import-time side effects (opens log file, mutates
-sys.path). This bridge therefore does **not** import it wholesale.
-
-Live scrape still needs: headed Chrome/Chromium, DISPLAY, network to aihot.virxact.com.
-This environment is not asserted ready. Callers must set AIHOT_ALLOW_LIVE_FETCH=1.
+Live AIHOT ingest for this repo is the public HTTP API (tools.aihot_pipeline.aihot_http).
+The box-inventory CDP generator is reference-only; this bridge does not launch browsers.
 """
 
 from __future__ import annotations
@@ -32,33 +29,66 @@ def _chrome_probe() -> str | None:
     return None
 
 
-def dependency_report() -> dict[str, Any]:
-    chrome = _chrome_probe()
-    return {
-        "allow_live_fetch": os.environ.get("AIHOT_ALLOW_LIVE_FETCH", "").strip() == "1",
-        "chrome_binary": chrome,
+def dependency_report(*, probe_http: bool = False) -> dict[str, Any]:
+    """Report readiness. CDP is never claimed ready.
+
+    When probe_http=True, performs one read-only GET /api/v1/dailies/latest.
+    """
+    base = {
+        "preferred_live_mode": "public_http_api",
+        "api_base": os.environ.get("AIHOT_URL", "https://aihot.news").rstrip("/"),
+        "api_docs": [
+            "https://aihot.news/llms.txt",
+            "https://aihot.news/agent?tab=api",
+            "https://aihot.news/openapi-v1.json",
+        ],
+        "allow_live_fetch_env": os.environ.get("AIHOT_ALLOW_LIVE_FETCH", "").strip() == "1",
+        "http_fetch_env": os.environ.get("AIHOT_HTTP_FETCH", "").strip() == "1",
+        "chrome_binary": _chrome_probe(),
         "display": os.environ.get("DISPLAY"),
-        "inventory_generator": "vendor/box-inventory/aihot-daily-generator.py",
-        "note": (
-            "Inventory uses headed Chrome + CDP; headless historically failed on aihot. "
-            "Do not claim full live scrape works until a dedicated CDP adapter is proven."
+        "inventory_generator_reference_only": "vendor/box-inventory/aihot-daily-generator.py",
+        "cdp_adapter_implemented": False,
+        "cdp_ready": False,
+        "groups_file_fallback": (
+            "Parent may supply AIHOT_GROUPS_FILE / --groups-file from external headed "
+            "capture of https://aihot.news/ (computerUse). Not required when HTTP API works."
         ),
-        "live_ready": False,  # intentionally never claimed true in this PR
+        "note": (
+            "Do not use the unimplemented CDP stub. Prefer --http-aihot "
+            "(GET /api/v1/dailies). Homepage HTML is bot-challenged; public REST is the path."
+        ),
     }
+    if not probe_http:
+        base.update(
+            {
+                "http_api_ready": None,
+                "live_ready": False,
+                "live_ready_reason": (
+                    "HTTP probe not run in this deps call (pass probe_http / "
+                    "python3 -m tools.aihot_pipeline deps --probe-http). "
+                    "CDP remains unimplemented."
+                ),
+            }
+        )
+        return base
+
+    from tools.aihot_pipeline.aihot_http import probe_http_api
+
+    probe = probe_http_api(base.get("api_base") or "https://aihot.news")
+    base.update(probe)
+    return base
 
 
 def extract_groups_via_cdp(aihot_url: str) -> list[dict[str, Any]]:
-    report = dependency_report()
     raise RuntimeError(
-        "Live CDP extract is intentionally not auto-executed in this repository adapter. "
-        f"Probe={report}. Capture groups offline into AIHOT_GROUPS_FILE, or implement/"
-        "prove a side-effect-free CDP adapter before enabling production scrape."
+        "CDP extract is not implemented in this repository. "
+        f"Requested url={aihot_url}. Use public HTTP: "
+        "python3 -m tools.aihot_pipeline fetch-aihot --http "
+        "or provide --groups-file from parent external capture."
     )
 
 
 def enrich_via_cdp(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    report = dependency_report()
     raise RuntimeError(
-        "Live CDP enrich is intentionally not auto-executed. "
-        f"Probe={report}."
+        "CDP enrich is not implemented. Official /api/v1/dailies already includes summaries."
     )

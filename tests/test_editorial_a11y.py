@@ -32,6 +32,11 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertEqual(snap["edition_date"], "2026-11-22")
         self.assertEqual(snap["counts"]["builder"], 5)
         self.assertEqual(snap["counts"]["deals"], 0)
+        self.assertGreaterEqual(snap["counts"]["daily"], 6)
+        self.assertEqual(snap.get("daily_source_date"), "2026-11-22")
+        self.assertTrue(
+            (snap.get("daily_official_page") or "").startswith("https://aihot.news/daily/")
+        )
         self.assertEqual(len(snap["builder_items"]), 5)
         for item in snap["builder_items"]:
             self.assertTrue(item.get("source_url", "").startswith("https://"))

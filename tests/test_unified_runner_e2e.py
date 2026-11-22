@@ -56,15 +56,19 @@ class UnifiedRunnerE2ETests(unittest.TestCase):
             "DAYS_JSON": paths.DAYS_JSON,
             "NOTIFY_STATE": paths.NOTIFY_STATE,
             "REPO_ROOT": paths.REPO_ROOT,
+            "DATA_DIR": paths.DATA_DIR,
         }
+        self._data = self.tmp / "data"
+        self._data.mkdir()
         paths.EDITIONS_DIR = self.editions
-        paths.EDITIONS_INDEX = self.tmp / "editions_index.json"
+        paths.EDITIONS_INDEX = self._data / "editions_index.json"
         paths.EDITION_HTML_DIR = self.tmp / "e"
         paths.BUILDER_DIR = self.tmp / "builder"
         paths.DEALS_DIR = self.tmp / "deals"
         paths.DAYS_JSON = self.tmp / "days.json"
         paths.NOTIFY_STATE = self.tmp / "notify_state.json"
         paths.REPO_ROOT = self.tmp
+        paths.DATA_DIR = self._data
         ingest_mod.EDITIONS_DIR = self.editions
         ingest_mod.EDITIONS_INDEX = paths.EDITIONS_INDEX
         build_mod.EDITIONS_DIR = self.editions
@@ -74,8 +78,19 @@ class UnifiedRunnerE2ETests(unittest.TestCase):
         build_mod.DAYS_JSON = paths.DAYS_JSON
         build_mod.REPO_ROOT = self.tmp
         notify_mod.NOTIFY_STATE = paths.NOTIFY_STATE
+        # Prevent e2e build_site from overwriting the committed homepage snapshot.
+        from tools.aihot_pipeline import home_snapshot as home_snap_mod
+
+        self._home_snap_orig = home_snap_mod.HOME_SNAPSHOT
+        self._home_data_orig = home_snap_mod.DATA_DIR
+        home_snap_mod.DATA_DIR = self._data
+        home_snap_mod.HOME_SNAPSHOT = self._data / "home_snapshot.json"
 
     def tearDown(self):
+        from tools.aihot_pipeline import home_snapshot as home_snap_mod
+
+        home_snap_mod.HOME_SNAPSHOT = self._home_snap_orig
+        home_snap_mod.DATA_DIR = self._home_data_orig
         for k, v in self._orig.items():
             setattr(paths, k, v)
         ingest_mod.EDITIONS_DIR = self._orig["EDITIONS_DIR"]

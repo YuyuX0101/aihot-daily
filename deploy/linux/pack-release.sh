@@ -86,12 +86,15 @@ manifest = {
             "AIHOT_ALLOW_LIVE_FETCH": "0",
         },
     },
-    "live_ready": False,
+    "live_ready": False,  # pack-time default; parent should run deps --probe-http
     "live_ready_reason": (
-        "CDP live scrape intentionally disabled (AIHOT_ALLOW_LIVE_FETCH default 0; "
-        "bridge never claims live_ready). Chrome binary may exist but headed CDP "
-        "adapter is unproven; use AIHOT_GROUPS_FILE / committed feeds for dry-run."
+        "Preferred live path is public HTTP GET https://aihot.news/api/v1/dailies "
+        "(--http-aihot). CDP browser adapter is NOT implemented. "
+        "Pack-time live_ready stays false until parent runs "
+        "`python3 -m tools.aihot_pipeline deps --probe-http` / check-http-readonly.sh. "
+        "Fallback: --groups-file from parent external capture."
     ),
+    "cdp_adapter_implemented": False,
     "file_count": len(files),
     "files": files,
 }

@@ -1,17 +1,19 @@
-"""CLI entrypoints for ingest / build / notify / summary."""
+"""CLI entrypoints for ingest / build / notify / summary / HTTP fetch."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 
-from datetime import datetime
-
+from .aihot_http import fetch_daily_report, resolve_daily_date
 from .build import build_site
+from .convert_aihot import official_report_to_daily_feed
 from .ingest import ingest_inbox, load_edition
 from .notify import mock_sender, notify_edition
+from .paths import DATA_DIR, REPO_ROOT
 from .summary import build_summary_text
 from .unified_runner import RunConfig, run_result_to_dict, run_unified
 
@@ -44,8 +46,6 @@ def cmd_summary(args: argparse.Namespace) -> int:
 
 def cmd_notify(args: argparse.Namespace) -> int:
     dry_run = not args.send
-    # --send still blocked unless --i-understand-live AND a mock/injected path;
-    # repository never loads secrets. --send without --mock raises via stub.
     sender = mock_sender if args.mock else None
     if args.send and not args.mock and not args.i_understand_live:
         print(
@@ -93,25 +93,92 @@ def cmd_pipeline(args: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_deps(_: argparse.Namespace) -> int:
+def cmd_deps(args: argparse.Namespace) -> int:
     from vendor.box_inventory_bridge import dependency_report
 
-    _print_json(dependency_report())
+    _print_json(dependency_report(probe_http=bool(args.probe_http)))
     return 0
+
+
+def cmd_fetch_aihot(args: argparse.Namespace) -> int:
+    """Read-only public HTTP fetch of official daily. Never publish/push/notify."""
+    edition = None
+    if args.date:
+        edition = datetime.strptime(args.date, "%Y-%m-%d").date()
+    base = args.base_url or "https://aihot.news"
+    resolved = resolve_daily_date(edition, base_url=base, probe_latest=True)
+    report, evidence = fetch_daily_report(resolved.edition_date, base_url=base)
+    from dataclasses import asdict
+
+    feed = official_report_to_daily_feed(report, evidence=asdict(evidence))
+    out = {
+        "ok": evidence.ok,
+        "mode": "public_http_api",
+        "date_resolution": {
+            "edition_date": resolved.edition_date.isoformat(),
+            "beijing_today": resolved.beijing_today.isoformat(),
+            "hp_legacy_yesterday": resolved.hp_legacy_yesterday.isoformat(),
+            "resolution": resolved.resolution,
+            "latest_api_date": resolved.latest_api_date.isoformat()
+            if resolved.latest_api_date
+            else None,
+            "note": resolved.note,
+        },
+        "evidence": asdict(evidence),
+        "feed_item_count": len(feed["items"]),
+        "titles": [it["title"] for it in feed["items"]],
+        "official_page": (feed.get("source_meta") or {}).get("official_page"),
+        "publish": {"attempted": False},
+        "notify": {"attempted": False},
+        "git_push": {"attempted": False},
+    }
+
+    if args.save_evidence:
+        dest = Path(args.save_evidence)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(
+            json.dumps(
+                {"evidence": asdict(evidence), "report": report, "feed": feed},
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        out["saved_evidence"] = str(dest)
+
+    if args.write_feed:
+        feed_path = Path(args.write_feed)
+        feed_path.parent.mkdir(parents=True, exist_ok=True)
+        feed_path.write_text(json.dumps(feed, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        out["written_feed"] = str(feed_path)
+
+    _print_json(out)
+    return 0 if evidence.ok else 1
 
 
 def cmd_run(args: argparse.Namespace) -> int:
     """Unified runner. Always defaults to dry-run; never enables schedule."""
     if args.live:
         print(
-            "Refusing --live in this CLI surface. Use dry-run offline runner; "
-            "parent Bot cutover will wire live flags later.",
+            "Refusing --live (push/notify cutover). "
+            "Use --http-aihot for read-only public API ingest with dry-run gates.",
             file=sys.stderr,
         )
         return 2
     edition = None
     if args.date:
         edition = datetime.strptime(args.date, "%Y-%m-%d").date()
+    use_http = bool(args.http_aihot)
+    if args.groups_file and use_http:
+        print("Pass only one of --http-aihot or --groups-file", file=sys.stderr)
+        return 2
+    if not args.skip_aihot and not use_http and not args.groups_file:
+        print(
+            "AIHOT source required: --http-aihot | --groups-file PATH | --skip-aihot",
+            file=sys.stderr,
+        )
+        return 2
     cfg = RunConfig(
         edition_date=edition,
         dry_run=True,
@@ -119,6 +186,8 @@ def cmd_run(args: argparse.Namespace) -> int:
         builder_feed=Path(args.builder_feed) if args.builder_feed else None,
         deals_feed=Path(args.deals_feed) if args.deals_feed else None,
         aihot_groups_file=Path(args.groups_file) if args.groups_file else None,
+        use_http_aihot=use_http,
+        aihot_base_url=args.base_url,
         skip_aihot_fetch=bool(args.skip_aihot),
         require_publish_for_notify=True,
         published=False,
@@ -170,8 +239,20 @@ def build_parser() -> argparse.ArgumentParser:
         "run",
         help="Unified AIHOT+feeds runner (always dry-run; no schedule/live send)",
     )
-    s.add_argument("--date", help="YYYY-MM-DD edition date (default: yesterday Asia/Shanghai)")
-    s.add_argument("--groups-file", help="Offline AIHOT groups JSON")
+    s.add_argument(
+        "--date",
+        help="YYYY-MM-DD edition date (HTTP mode default: API latest daily date)",
+    )
+    s.add_argument(
+        "--http-aihot",
+        action="store_true",
+        help="Read-only public GET https://aihot.news/api/v1/dailies (no browser/CDP)",
+    )
+    s.add_argument("--base-url", help="API base (default https://aihot.news)")
+    s.add_argument(
+        "--groups-file",
+        help="Offline/parent-captured AIHOT groups JSON (HP DOM shape)",
+    )
     s.add_argument("--builder-feed", help="Builder channel feed JSON")
     s.add_argument("--deals-feed", help="Deals channel feed JSON (may be items:[])")
     s.add_argument("--skip-aihot", action="store_true", help="Skip AIHOT fetch/convert")
@@ -183,11 +264,29 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument(
         "--live",
         action="store_true",
-        help="Rejected: live push/notify/CDP not enabled via this flag",
+        help="Rejected: must not enable push/notify via this flag",
     )
     s.set_defaults(func=cmd_run)
 
-    s = sub.add_parser("deps", help="Report Chrome/CDP dependency probe (no network side effects)")
+    s = sub.add_parser(
+        "fetch-aihot",
+        help="Read-only fetch official daily via public HTTP API (no publish/push/notify)",
+    )
+    s.add_argument("--date", help="YYYY-MM-DD (default: API latest)")
+    s.add_argument("--base-url", default="https://aihot.news")
+    s.add_argument(
+        "--save-evidence",
+        help="Write evidence+report+feed JSON path",
+    )
+    s.add_argument("--write-feed", help="Write converted daily feed JSON path")
+    s.set_defaults(func=cmd_fetch_aihot)
+
+    s = sub.add_parser("deps", help="Report ingest dependencies (optional HTTP probe)")
+    s.add_argument(
+        "--probe-http",
+        action="store_true",
+        help="Perform one read-only GET /api/v1/dailies/latest",
+    )
     s.set_defaults(func=cmd_deps)
 
     return p
