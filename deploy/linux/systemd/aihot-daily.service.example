@@ -1,0 +1,13 @@
+[Unit]
+Description=AIHOT unified daily (manual enable only — do NOT enable while HP task runs)
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/opt/aihot-daily/config/aihot.env
+WorkingDirectory=/opt/aihot-daily/repo
+ExecStart=/opt/aihot-daily/repo/scripts/run-if-missed.sh
+User=aihot
+Nice=10
+
+# Safety: example unit ships disabled. Parent enables only after HP cutover.

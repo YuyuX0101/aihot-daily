@@ -7,10 +7,13 @@ import json
 import sys
 from pathlib import Path
 
+from datetime import datetime
+
 from .build import build_site
 from .ingest import ingest_inbox, load_edition
 from .notify import mock_sender, notify_edition
 from .summary import build_summary_text
+from .unified_runner import RunConfig, run_result_to_dict, run_unified
 
 
 def _print_json(obj: object) -> None:
@@ -90,6 +93,41 @@ def cmd_pipeline(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_deps(_: argparse.Namespace) -> int:
+    from vendor.box_inventory_bridge import dependency_report
+
+    _print_json(dependency_report())
+    return 0
+
+
+def cmd_run(args: argparse.Namespace) -> int:
+    """Unified runner. Always defaults to dry-run; never enables schedule."""
+    if args.live:
+        print(
+            "Refusing --live in this CLI surface. Use dry-run offline runner; "
+            "parent Bot cutover will wire live flags later.",
+            file=sys.stderr,
+        )
+        return 2
+    edition = None
+    if args.date:
+        edition = datetime.strptime(args.date, "%Y-%m-%d").date()
+    cfg = RunConfig(
+        edition_date=edition,
+        dry_run=True,
+        write_legacy_daily_html=bool(args.write_legacy_html),
+        builder_feed=Path(args.builder_feed) if args.builder_feed else None,
+        deals_feed=Path(args.deals_feed) if args.deals_feed else None,
+        aihot_groups_file=Path(args.groups_file) if args.groups_file else None,
+        skip_aihot_fetch=bool(args.skip_aihot),
+        require_publish_for_notify=True,
+        published=False,
+    )
+    result = run_unified(cfg)
+    _print_json(run_result_to_dict(result))
+    return 0 if result.ok else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="aihot_pipeline", description="AIHOT static pipeline")
     sub = p.add_subparsers(dest="command", required=True)
@@ -127,6 +165,30 @@ def build_parser() -> argparse.ArgumentParser:
     s = sub.add_parser("pipeline", help="ingest + build + dry-run notify preview")
     s.add_argument("--date", help="Edition date for notify preview")
     s.set_defaults(func=cmd_pipeline)
+
+    s = sub.add_parser(
+        "run",
+        help="Unified AIHOT+feeds runner (always dry-run; no schedule/live send)",
+    )
+    s.add_argument("--date", help="YYYY-MM-DD edition date (default: yesterday Asia/Shanghai)")
+    s.add_argument("--groups-file", help="Offline AIHOT groups JSON")
+    s.add_argument("--builder-feed", help="Builder channel feed JSON")
+    s.add_argument("--deals-feed", help="Deals channel feed JSON (may be items:[])")
+    s.add_argument("--skip-aihot", action="store_true", help="Skip AIHOT fetch/convert")
+    s.add_argument(
+        "--write-legacy-html",
+        action="store_true",
+        help="Also write YYYY-MM-DD.html from AIHOT items (off by default in CLI)",
+    )
+    s.add_argument(
+        "--live",
+        action="store_true",
+        help="Rejected: live push/notify/CDP not enabled via this flag",
+    )
+    s.set_defaults(func=cmd_run)
+
+    s = sub.add_parser("deps", help="Report Chrome/CDP dependency probe (no network side effects)")
+    s.set_defaults(func=cmd_deps)
 
     return p
 

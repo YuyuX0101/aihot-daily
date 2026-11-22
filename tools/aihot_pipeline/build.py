@@ -92,7 +92,7 @@ def build_edition_page(edition: dict[str, Any]) -> str:
         lead=lead,
         body=body,
         active_nav="editions",
-        css_href="../assets/site.css",
+        css_href="../assets/editorial.css",
     )
 
 
@@ -133,7 +133,7 @@ def build_channel_index(channel: str, dates: list[str]) -> str:
         lead="按日期浏览该栏目；空栏目会标明原因，不会用示例条目充数。",
         body=body,
         active_nav=channel if channel in {"builder", "deals"} else "daily",
-        css_href="../assets/site.css",
+        css_href="../assets/editorial.css",
     )
 
 
@@ -157,7 +157,7 @@ def build_editions_index(dates: list[str]) -> str:
         lead="每日一期，汇总三个栏目。历史 YYYY-MM-DD.html 日报 URL 继续可用。示例 fixtures 不会进入此目录。",
         body=body,
         active_nav="editions",
-        css_href="../assets/site.css",
+        css_href="../assets/editorial.css",
     )
 
 

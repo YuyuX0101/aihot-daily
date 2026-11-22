@@ -1,0 +1,10 @@
+[Unit]
+Description=AIHOT daily timer 12:05 Asia/Shanghai (example — keep disabled until cutover)
+
+[Timer]
+OnCalendar=*-*-* 12:05:00
+Persistent=true
+Unit=aihot-daily.service
+
+[Install]
+WantedBy=timers.target

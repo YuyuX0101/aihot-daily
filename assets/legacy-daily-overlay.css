@@ -1,0 +1,131 @@
+/* Soft editorial overlay for historical YYYY-MM-DD.html pages.
+   Does not change article text — only restyles chrome after inline styles. */
+@import url("./editorial.css");
+
+body {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  font-family: var(--font-body) !important;
+}
+
+.nav, .topnav, header.nav {
+  background: rgba(247, 247, 244, 0.92) !important;
+  border-bottom: 1px solid var(--rule) !important;
+  backdrop-filter: blur(10px) !important;
+}
+.nav-brand, .brand {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: var(--ink) !important;
+  font-family: var(--font-display) !important;
+}
+.nav-back {
+  background: var(--paper-elevated) !important;
+  border: 1px solid var(--rule) !important;
+  color: var(--ink-secondary) !important;
+  border-radius: 6px !important;
+}
+
+.hero {
+  background: transparent !important;
+  text-align: left !important;
+  padding: 2.5rem 1.25rem 1.5rem !important;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+.hero::before { display: none !important; }
+.hero-date {
+  background: var(--accent-soft) !important;
+  border: 1px solid var(--rule) !important;
+  color: var(--accent) !important;
+  border-radius: 999px !important;
+}
+.hero h1 {
+  font-family: var(--font-display) !important;
+  color: var(--ink) !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+.hero-lead, .hero-stats .stat-label { color: var(--ink-secondary) !important; }
+.stat-value { color: var(--ink) !important; font-family: var(--font-display) !important; }
+
+.content, main, .sections, .main {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
+  background: transparent !important;
+}
+
+.section, .top5-section {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.section-header, .top5-header {
+  border-bottom: 1px solid var(--rule-strong) !important;
+  background: transparent !important;
+}
+.section-title, .top5-title {
+  color: var(--ink) !important;
+  font-family: var(--font-display) !important;
+}
+.section-count, .top5-badge {
+  color: var(--ink-muted) !important;
+  background: var(--accent-soft) !important;
+  border: none !important;
+}
+
+.item, .top5-item, .day-card, article {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.item-title, .top5-item-title, h3 {
+  color: var(--ink) !important;
+  font-family: var(--font-display) !important;
+}
+.item-summary, .top5-item-summary, .item-source, .top5-item-source {
+  color: var(--ink-secondary) !important;
+}
+.item-link, a.item-link {
+  color: var(--accent) !important;
+}
+.item-num, .top5-item-rank {
+  background: var(--accent) !important;
+  color: #f7f7f4 !important;
+  box-shadow: none !important;
+}
+.top5-item-score {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  border: none !important;
+}
+
+.sidebar, .sidebar-toggle, .sidebar-overlay {
+  /* Keep functionality; quiet the neon chrome */
+  border-color: var(--rule) !important;
+}
+.sidebar {
+  background: rgba(247, 247, 244, 0.98) !important;
+}
+.sidebar-nav .nav-item a {
+  color: var(--ink-secondary) !important;
+}
+.sidebar-nav .nav-item a:hover,
+.sidebar-nav .nav-item a.active {
+  color: var(--accent) !important;
+  background: var(--accent-soft) !important;
+  border-left-color: var(--accent) !important;
+}
+
+.footer, footer {
+  border-top: 1px solid var(--rule) !important;
+  color: var(--ink-muted) !important;
+  background: transparent !important;
+}
+.footer a { color: var(--accent) !important; }
+
+/* Hide decorative neon grids if present */
+.hero-grid { display: none !important; }

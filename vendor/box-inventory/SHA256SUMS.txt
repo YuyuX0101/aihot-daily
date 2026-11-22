@@ -1,0 +1,5 @@
+af358c75b707dc9c3571cc151e9274ed04e031c94b5a6479e955dfb797b48ec0  vendor/box-inventory/aihot-daily-generator.py
+32dda29c67b6473702f1b155ac87d40b1a9e52bc0208db11fa0a421dc5609a7f  vendor/box-inventory/aihot-daily-generator-win.py
+49758e622697f82765de184d2bd390c52d2736a1ee154c21fe4ecfe93d25aa05  vendor/box-inventory/feishu_notify.py
+6fa04635ca2633786fb0d3299789709f4c4d7c672b9070511975ea072bc78c9c  vendor/box-inventory/scripts/run-if-missed.ps1
+a051cc00e0acc433a793b8f969488a4b6d95db7a8636673c16b2ad101541cc43  vendor/box-inventory/scripts/run-if-missed.sh

@@ -1,0 +1,51 @@
+{
+  "captured_note": "Offline fixture for unified runner E2E. Not live CDP output. Do not publish as production daily HTML without real scrape.",
+  "groups": [
+    {
+      "day": "11月22日",
+      "rows": [
+        {
+          "time": "09:10",
+          "src": "The Verge",
+          "score": "88",
+          "title": "离线夹具：开源模型小版本更新（测试用）",
+          "reason": "推荐理由：用于离线集成测试的合成条目，摘要长度足够通过质量与渲染检查，不得当作真实快报。",
+          "link": "https://aihot.virxact.com/items/offline-fixture-model-1",
+          "summary": "这是离线测试夹具中的 AIHOT 原始条目摘要。它模拟评分筛选后的日报内容，供统一期次构建与单条飞书摘要预览使用，不代表真实发布。"
+        },
+        {
+          "time": "10:20",
+          "src": "TechCrunch",
+          "score": "81",
+          "title": "离线夹具：AI 编程助手产品更新（测试用）",
+          "reason": "推荐理由：第二条合成条目，验证去重与分类逻辑。",
+          "link": "https://aihot.virxact.com/items/offline-fixture-product-2",
+          "summary": "第二条离线夹具摘要，覆盖产品发布分类关键词，用于确认统一 runner 能把 AIHOT 原始条目并入 daily 频道且不触发真实推送或飞书。"
+        },
+        {
+          "time": "11:00",
+          "src": "LowScore",
+          "score": "60",
+          "title": "离线夹具：低分应被过滤",
+          "reason": "低于阈值，不应出现。",
+          "link": "https://aihot.virxact.com/items/offline-fixture-low",
+          "summary": "should be filtered"
+        }
+      ]
+    },
+    {
+      "day": "11月21日",
+      "rows": [
+        {
+          "time": "12:00",
+          "src": "Other",
+          "score": "90",
+          "title": "其他日期条目不应入选",
+          "reason": "跨日窗口测试：目标日以外不选。",
+          "link": "https://aihot.virxact.com/items/offline-fixture-other-day",
+          "summary": "other day"
+        }
+      ]
+    }
+  ]
+}

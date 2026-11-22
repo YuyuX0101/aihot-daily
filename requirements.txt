@@ -1,0 +1,3 @@
+# Runtime uses Python 3.10+ standard library only.
+# No third-party packages required for offline ingest/build/notify dry-run.
+# Optional future: pin browser automation only after CDP adapter is proven.

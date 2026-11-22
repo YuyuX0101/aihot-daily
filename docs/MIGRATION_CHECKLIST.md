@@ -73,9 +73,10 @@ python3 -m tools.aihot_pipeline notify 2026-11-22          # dry-run + 未发布
 ## 明确未接线边界（本 PR 仍成立）
 
 1. **HP 生产生成器**（`aihot-daily-generator-win.py` / 任务 `Kimi-AIHOT-Daily`）未迁入仓库，也未停用。
-2. **真实统一调度**（父 Bot routines / 云电脑定时）未由本 PR 改动或启用。
-3. **飞书真实发送**未接线；仓库无 webhook secret，notify 默认 dry-run。
-4. 正式切流前必须与其他雷达迁移协调，防止双端 push / 双发飞书。
+2. **真实统一调度**：`AIHOT_ENABLE_SCHEDULE` 默认 0；systemd 示例默认禁用；Cursor VM **未**安装 timer。
+3. **飞书真实发送**需 `AIHOT_FEISHU_ENABLED=1` + 外置配置；默认 dry-run。
+4. 正式切流前必须与「日更雷达」协调，防止双端 push / 双发飞书。
+5. 目标运行环境是 **parent 持久 Linux**，不是本 Cursor 短暂 VM——见 `docs/GENERATOR_MIGRATION.md` 四态表。
 
 ## 禁止事项（再次确认）
 

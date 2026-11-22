@@ -1,4 +1,4 @@
-"""HTML rendering helpers — all dynamic text is escaped; times in 北京时间."""
+"""HTML rendering helpers — editorial shell; all dynamic text escaped; Beijing time."""
 
 from __future__ import annotations
 
@@ -89,8 +89,6 @@ def render_item(item: dict[str, Any], channel: str) -> str:
             f'<div class="evidence-box"><div class="box-label">核验正文证据</div>'
             f"<div>{escape_text(evidence)}</div></div>"
         )
-    elif item.get("summary"):
-        blocks.append(f'<div class="item-summary">{escape_text(item.get("summary"))}</div>')
 
     notes_html = f'<div class="item-notes">备注：{notes}</div>' if notes else ""
 
@@ -101,7 +99,9 @@ def render_item(item: dict[str, Any], channel: str) -> str:
         if deal.get("threshold"):
             rows.append(f"<div>门槛：{escape_text(deal['threshold'])}</div>")
         if deal.get("deadline"):
-            rows.append(f"<div>截止：{escape_text(format_beijing(deal['deadline']) or deal['deadline'])}</div>")
+            rows.append(
+                f"<div>截止：{escape_text(format_beijing(deal['deadline']) or deal['deadline'])}</div>"
+            )
         if deal.get("regions"):
             regions = "、".join(escape_text(r) for r in deal["regions"])
             rows.append(f"<div>地区：{regions}</div>")
@@ -111,10 +111,12 @@ def render_item(item: dict[str, Any], channel: str) -> str:
             deal_html = f'<div class="deal-box">{"".join(rows)}</div>'
 
     links = []
-    src = _safe_link(item.get("source_url"), "来源帖")
-    play = _safe_link(item.get("playable_url"), "可打开页面")
-    repo = _safe_link(item.get("repo_url"), "仓库")
-    for part in (src, play, repo):
+    for url, label in (
+        (item.get("source_url"), "来源帖"),
+        (item.get("playable_url"), "可打开页面"),
+        (item.get("repo_url"), "仓库"),
+    ):
+        part = _safe_link(url, label)
         if part:
             links.append(part)
     link_html = f'<div class="item-links">{" · ".join(links)}</div>' if links else ""
@@ -177,7 +179,7 @@ def page_shell(
     lead: str,
     body: str,
     active_nav: str,
-    css_href: str = "../assets/site.css",
+    css_href: str = "../assets/editorial.css",
     home_href: str = "../index.html",
     demo_banner: str | None = None,
 ) -> str:
@@ -200,8 +202,11 @@ def page_shell(
 
     links = []
     for key, (label, href) in nav.items():
-        cls = "active" if key == active_nav else ""
-        links.append(f'<a class="{cls}" href="{href}">{escape_text(label)}</a>')
+        current = ' aria-current="page"' if key == active_nav else ""
+        cls = ' class="active"' if key == active_nav else ""
+        links.append(
+            f'<a{cls}{current} href="{href}">{escape_text(label)}</a>'
+        )
 
     banner = ""
     if demo_banner:
@@ -217,27 +222,28 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{css_href}">
 </head>
 <body>
-<header class="topnav">
-  <a class="brand" href="{nav['home'][1]}">AI HOT</a>
-  <nav class="nav-links">
-    {''.join(links)}
-  </nav>
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="{nav['home'][1]}">AI <span>HOT</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      {''.join(links)}
+    </nav>
+  </div>
 </header>
 {banner}
-<main class="page">
-  <div class="page-kicker">{escape_text(kicker)}</div>
+<main class="page" id="main">
+  <div class="kicker">{escape_text(kicker)}</div>
   <h1>{escape_text(heading)}</h1>
   <p class="page-lead">{escape_text(lead)}</p>
   {body}
 </main>
-<footer class="footer">
-  <p>静态托管于 GitHub Pages · 数据经本地 JSON 摄取构建 · 不包含任何 webhook 密钥</p>
-  <p>展示时间均为北京时间（Asia/Shanghai）· 页可打开≠功能/隐私审计 · 未实测不等于不可用</p>
+<footer class="site-footer">
+  <p>静态托管于 GitHub Pages · 数据经本地 JSON 摄取构建 · 不含 webhook 密钥</p>
+  <p>展示时间为北京时间（Asia/Shanghai）· 页可打开≠功能/隐私审计 · 未实测不等于不可用</p>
 </footer>
 </body>
 </html>
