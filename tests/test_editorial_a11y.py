@@ -16,6 +16,27 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn('aria-label="主导航"', html)
         self.assertIn("assets/editorial.css", html)
         self.assertIn('href="e/index.html"', html)
+        self.assertIn('id="today"', html)
+        self.assertIn("今日统一期次", html)
+        self.assertIn("网站预览", html)
+        self.assertIn("尚未启用", html)
+        self.assertIn('id="nav-toggle"', html)
+        self.assertIn("data/home_snapshot.json", html)
+        self.assertIn("功能预览", html)
+        self.assertNotRegex(html, r"(?<!不代表)生产已迁移")
+
+    def test_home_snapshot_has_real_builder_five(self):
+        import json
+
+        snap = json.loads((REPO / "data" / "home_snapshot.json").read_text(encoding="utf-8"))
+        self.assertEqual(snap["edition_date"], "2026-11-22")
+        self.assertEqual(snap["counts"]["builder"], 5)
+        self.assertEqual(snap["counts"]["deals"], 0)
+        self.assertEqual(len(snap["builder_items"]), 5)
+        for item in snap["builder_items"]:
+            self.assertTrue(item.get("source_url", "").startswith("https://"))
+            self.assertIn("北京时间", item.get("published_beijing") or "")
+        self.assertIn("不等于全网无优惠", snap["deals_empty_message"])
 
     def test_edition_page_links_and_contrast_tokens(self):
         html = (REPO / "e" / "2026-11-22.html").read_text(encoding="utf-8")

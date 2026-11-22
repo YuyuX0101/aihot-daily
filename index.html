@@ -7,11 +7,12 @@
 <link rel="stylesheet" href="assets/editorial.css">
 </head>
 <body>
-<a class="skip-link" href="#timeline">跳到历史日报</a>
+<a class="skip-link" href="#today">跳到今日精选</a>
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="index.html">AI <span>HOT</span></a>
-    <nav class="nav-links" aria-label="主导航">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">菜单</button>
+    <nav class="nav-links" id="site-nav" aria-label="主导航">
       <a class="active" aria-current="page" href="index.html">首页</a>
       <a href="e/index.html">统一期次</a>
       <a href="builder/index.html">Builder</a>
@@ -23,20 +24,40 @@
 
 <section class="hero-home page-wide">
   <div>
-    <div class="eyebrow">每日编辑部 · 北京时间</div>
+    <div class="eyebrow">网站预览 · 北京时间</div>
     <h1 class="hero-title">AI HOT</h1>
-    <p class="hero-lead">日报、Builder 一手作品与 AI 羊毛雷达集中在网站呈现；飞书只发摘要与链接。完整证据与来源标签以期次页为准。</p>
-    <div class="hero-stats" aria-live="polite">
-      <div>
-        <div class="stat-value" id="total-days">--</div>
-        <div class="stat-label">历史期数</div>
-      </div>
-      <div>
-        <div class="stat-value" id="total-items">--</div>
-        <div class="stat-label">约计资讯</div>
-      </div>
+    <p class="hero-lead">把日报、Builder 一手作品与 AI 羊毛雷达汇到同一站点查阅。下方为最新统一期次真实数据预览；统一飞书摘要发送与生产切流尚未启用。</p>
+  </div>
+</section>
+
+<section class="today-panel" id="today" aria-labelledby="today-heading">
+  <div class="timeline-header" style="max-width:none;margin-bottom:0.85rem;">
+    <h2 id="today-heading">今日统一期次</h2>
+    <span class="timeline-count" id="today-date">加载中…</span>
+  </div>
+  <div class="today-grid">
+    <article class="featured-card">
+      <h2>Builder 一手作品</h2>
+      <p class="status-meta" id="builder-count-line">—</p>
+      <ul class="featured-list" id="builder-list"></ul>
+      <p class="preview-note"><a id="edition-link" href="e/index.html">打开完整统一期次 →</a></p>
+    </article>
+    <div>
+      <article class="status-card" style="margin-bottom:1rem;">
+        <h2>AI 羊毛雷达</h2>
+        <div class="count" id="deals-count">0</div>
+        <p class="status-meta" id="deals-msg">加载中…</p>
+        <p><a href="deals/index.html">查看羊毛栏目 →</a></p>
+      </article>
+      <article class="status-card">
+        <h2>AI HOT 日报</h2>
+        <div class="count" id="daily-count">0</div>
+        <p class="status-meta" id="daily-msg">加载中…</p>
+        <p id="daily-legacy-wrap"><a id="daily-legacy" href="index.html#timeline">历史日报入口 →</a></p>
+      </article>
     </div>
   </div>
+  <p class="preview-note" id="home-note"></p>
 </section>
 
 <section class="timeline-section" id="timeline">
@@ -48,35 +69,98 @@
 </section>
 
 <footer class="site-footer">
-  <p>数据来自 <a href="https://aihot.virxact.com" rel="noopener noreferrer" target="_blank">aihot.virxact.com</a> · 站点托管于 GitHub Pages</p>
-  <p>时间显示为 Asia/Shanghai · 历史 <code>YYYY-MM-DD.html</code> URL 保持不变</p>
+  <p>数据来自 <a href="https://aihot.virxact.com" rel="noopener noreferrer" target="_blank">aihot.virxact.com</a> 与已核验公开来源 · 托管于 GitHub Pages</p>
+  <p>时间显示为 Asia/Shanghai · 历史 <code>YYYY-MM-DD.html</code> URL 保持不变 · 本页为功能预览，不代表生产已迁移</p>
 </footer>
 
 <script>
-fetch('days.json?v=' + Date.now())
-  .then(function (r) { return r.json(); })
-  .then(function (days) {
-    days.sort(function (a, b) { return b.localeCompare(a); });
-    document.getElementById('day-count').textContent = days.length + ' 期';
-    document.getElementById('total-days').textContent = String(days.length);
-    document.getElementById('total-items').textContent = String(days.length * 28);
-    var list = document.getElementById('timeline-list');
-    var weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-    days.forEach(function (day) {
-      var date = new Date(day + 'T00:00:00');
-      var formatted = (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + weekdays[date.getDay()];
-      var a = document.createElement('a');
-      a.className = 'list-card';
-      a.href = day + '.html';
-      a.innerHTML = '<div class="date">' + formatted + '</div>' +
-        '<div>AI HOT 日报 · ' + day + '</div>' +
-        '<div class="meta">' + day + ' · 打开历史页</div>';
-      list.appendChild(a);
+(function () {
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-  })
-  .catch(function () {
-    document.getElementById('timeline-list').innerHTML = '<p class="empty">暂无日报数据</p>';
-  });
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  fetch('data/home_snapshot.json?v=' + Date.now())
+    .then(function (r) { return r.json(); })
+    .then(function (snap) {
+      var date = snap.edition_date || '';
+      document.getElementById('today-date').textContent = date ? (date + ' · 北京时间业务日') : '暂无期次';
+      var counts = snap.counts || {};
+      document.getElementById('builder-count-line').textContent =
+        (counts.builder || 0) + ' 条 · 未实测标签保留 · 来源可点开';
+      document.getElementById('deals-count').textContent = String(counts.deals || 0);
+      document.getElementById('daily-count').textContent = String(counts.daily || 0);
+      document.getElementById('deals-msg').textContent = snap.deals_empty_message || '';
+      document.getElementById('daily-msg').textContent = snap.daily_empty_message || '';
+      document.getElementById('home-note').textContent = snap.note || '';
+      var editionLink = document.getElementById('edition-link');
+      if (snap.edition_url) {
+        editionLink.href = snap.edition_url;
+        editionLink.textContent = '打开 ' + date + ' 完整统一期次 →';
+      }
+      var legacy = document.getElementById('daily-legacy');
+      if (snap.legacy_daily_url) {
+        var legacyHref = snap.legacy_daily_url;
+        if (legacyHref && !/\.html(#|$)/.test(legacyHref)) legacyHref += '.html';
+        legacy.href = legacyHref;
+        legacy.textContent = '最近历史日报 ' + legacyHref + ' →';
+      }
+      var list = document.getElementById('builder-list');
+      list.innerHTML = '';
+      (snap.builder_items || []).forEach(function (item) {
+        var links = [];
+        if (item.source_url) links.push('<a href="' + esc(item.source_url) + '" rel="noopener noreferrer" target="_blank">来源帖</a>');
+        if (item.playable_url) links.push('<a href="' + esc(item.playable_url) + '" rel="noopener noreferrer" target="_blank">可打开页面</a>');
+        if (item.repo_url) links.push('<a href="' + esc(item.repo_url) + '" rel="noopener noreferrer" target="_blank">仓库</a>');
+        var li = document.createElement('li');
+        li.innerHTML =
+          '<div class="ftitle">' + esc(item.title) + '</div>' +
+          '<div class="fmeta">' + esc(item.author || '') +
+            (item.published_beijing ? ' · 发布 ' + esc(item.published_beijing) : '') + '</div>' +
+          (links.length ? '<div class="flinks">' + links.join(' · ') + '</div>' : '');
+        list.appendChild(li);
+      });
+      if (!(snap.builder_items || []).length) {
+        list.innerHTML = '<li class="empty">本期暂无 Builder 条目</li>';
+      }
+    })
+    .catch(function () {
+      document.getElementById('today-date').textContent = '无法加载今日快照';
+    });
+
+  fetch('days.json?v=' + Date.now())
+    .then(function (r) { return r.json(); })
+    .then(function (days) {
+      days.sort(function (a, b) { return b.localeCompare(a); });
+      document.getElementById('day-count').textContent = days.length + ' 期';
+      var list = document.getElementById('timeline-list');
+      var weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      days.forEach(function (day) {
+        var date = new Date(day + 'T00:00:00');
+        var formatted = (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + weekdays[date.getDay()];
+        var a = document.createElement('a');
+        a.className = 'list-card';
+        a.href = day + '.html';
+        a.innerHTML = '<div class="date">' + formatted + '</div>' +
+          '<div>AI HOT 日报 · ' + day + '</div>' +
+          '<div class="meta">' + day + ' · 打开历史页</div>';
+        list.appendChild(a);
+      });
+    })
+    .catch(function () {
+      document.getElementById('timeline-list').innerHTML = '<p class="empty">暂无日报数据</p>';
+    });
+})();
 </script>
 </body>
 </html>

@@ -205,11 +205,17 @@ def build_site() -> dict[str, Any]:
     (DEALS_DIR / "index.html").write_text(build_channel_index("deals", dates), encoding="utf-8")
     written.extend(["e/index.html", "builder/index.html", "deals/index.html"])
 
+    from .home_snapshot import build_home_snapshot
+
+    snap = build_home_snapshot(dates)
+    written.append("data/home_snapshot.json")
+
     legacy_days = update_days_json_from_legacy()
     return {
         "ok": len(errors) == 0,
         "edition_dates": dates,
         "written": written,
         "legacy_days": legacy_days,
+        "home_snapshot": snap.get("edition_date"),
         "errors": errors,
     }
