@@ -1,6 +1,6 @@
 /* Soft editorial overlay for historical YYYY-MM-DD.html pages.
    Does not change article text — only restyles chrome after inline styles. */
-@import url("./editorial.css?v=atelier-2");
+@import url("./editorial.css?v=wordmark-1");
 
 body {
   background: var(--paper) !important;

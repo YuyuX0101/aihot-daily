@@ -20,14 +20,14 @@ TAG_LABELS = {
     "unverified_upstream": "未独立核验",
 }
 
-# Cover illustrations and editorial descriptions of the November 22 projects.
+# Editorial descriptions of the November 22 projects.
 # New projects use the title, description and creator supplied by their feed.
-PROJECT_COVERS = {
-    "builder:2124333271177908405": ("paper", "文档工具", "据作者介绍，文隐可以在本地为文档脱敏，方便在交给 AI 之前处理敏感信息。"),
-    "builder:2124265810663244086": ("chip", "交互模拟", "作者把 3nm 芯片做成了可缩放的三维模型，让人从外观一路探索到处理器内部。"),
-    "builder:2124194668015661346": ("power", "经营游戏", "从车库里的一间 AI 实验室起步。作者把芯片、算力与能源做进了一款浏览器经营游戏。"),
-    "builder:2124161720448893216": ("play", "对战游戏", "一位开发者和孩子一起做的格斗游戏。按作者介绍，玩家可以扮演不同的 AI 公司负责人。"),
-    "builder:2124141427672134013": ("orbit", "太空探索", "在浏览器里驾驶飞船、降落行星。作者介绍，这次更新给外星居民加入了对话功能。"),
+PROJECT_DESCRIPTIONS = {
+    "builder:2124333271177908405": ("文档工具", "据作者介绍，文隐可以在本地为文档脱敏，方便在交给 AI 之前处理敏感信息。"),
+    "builder:2124265810663244086": ("交互模拟", "作者把 3nm 芯片做成了可缩放的三维模型，让人从外观一路探索到处理器内部。"),
+    "builder:2124194668015661346": ("经营游戏", "从车库里的一间 AI 实验室起步。作者把芯片、算力与能源做进了一款浏览器经营游戏。"),
+    "builder:2124161720448893216": ("对战游戏", "一位开发者和孩子一起做的格斗游戏。按作者介绍，玩家可以扮演不同的 AI 公司负责人。"),
+    "builder:2124141427672134013": ("太空探索", "在浏览器里驾驶飞船、降落行星。作者介绍，这次更新给外星居民加入了对话功能。"),
 }
 
 DEFAULT_EMPTY = {
@@ -61,10 +61,10 @@ def _safe_link(url: str | None, label: str) -> str:
 
 def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
     title = item.get("title") or ""
-    art, category, intro = PROJECT_COVERS.get(
-        item.get("id"), ("generic", "", item.get("summary") or item.get("author_claim") or "")
+    category, intro = PROJECT_DESCRIPTIONS.get(
+        item.get("id"), ("", item.get("summary") or item.get("author_claim") or "")
     )
-    name = title.partition("：")[0] if art != "generic" else title
+    name = title.partition("：")[0] if category else title
     links = "".join([
         _safe_link(item.get("playable_url"), "打开作品"),
         _safe_link(item.get("source_url"), "作者原帖"),
@@ -85,7 +85,6 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
             details = '<details><summary>查看来源说明</summary>' + "".join(parts) + "</details>"
     anchor = f' id="{escape_text(item["id"])}"' if detailed and item.get("id") else ""
     return f'''<article class="project"{anchor}>
-<div class="art art-{art}" aria-hidden="true"><span class="object"><i></i></span></div>
 <div class="project-body"><div class="project-kind">{escape_text(category)} {_tags_html(item.get("verification_tags"))}</div>
 <h3>{escape_text(name)}</h3><p class="intro">{escape_text(intro)}</p>
 <div class="creator">{escape_text(item.get("author") or "")}<small>{escape_text(published)}</small></div>
@@ -306,14 +305,15 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=atelier-2">
+<link rel="stylesheet" href="{css_href}?v=wordmark-1">
+<link rel="icon" type="image/svg+xml" href="{css_href.rsplit('/', 1)[0]}/favicon.svg">
 {snapshot_link}
 </head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
 <header class="site-header">
   <div class="site-header-inner">
-    <a class="brand" href="{nav['home'][1]}">AI <span>HOT</span></a>
+    <a class="brand" href="{nav['home'][1]}" aria-label="AI HOT 首页"><em>AI</em> <span>HOT</span></a>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false">菜单</button>
     <nav class="nav-links" id="site-nav" aria-label="主导航">
       {''.join(links)}

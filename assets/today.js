@@ -13,6 +13,7 @@
   };
   let activeDay = '';
   let generation = 0;
+  const rendered = new Map();
 
   function textElement(tag, value) {
     const node = document.createElement(tag);
@@ -21,6 +22,9 @@
   }
 
   function present(channel, entries, message) {
+    const signature = JSON.stringify([entries, message]);
+    if (rendered.get(channel) === signature) return;
+    rendered.set(channel, signature);
     const panel = document.getElementById(channel);
     const output = panel.querySelector('.channel-content');
     const pager = panel.querySelector('.pager');
@@ -54,10 +58,9 @@
     return type === 'json' ? response.json() : response.text();
   }
 
-  async function load(force = false) {
+  async function load() {
     const now = new Date();
     const day = calendar.format(now);
-    if (!force && day === activeDay) return;
     const revision = ++generation;
     if (day !== activeDay) {
       for (const key of Object.keys(pending)) present(key, [], '正在读取当日内容…');
@@ -109,6 +112,6 @@
     }
   }
   load();
-  setInterval(() => load(), 15000);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) load(true); });
+  setInterval(() => { if (!document.hidden) load(); }, 60000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
 })();

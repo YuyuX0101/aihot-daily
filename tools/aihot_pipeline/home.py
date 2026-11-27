@@ -22,14 +22,13 @@ def daily_archive(days: list[str], edition_days: list[str]) -> str:
 
 def build_home() -> str:
     sections = []
-    for key, title, archive, label, art in (
-        ("daily", "AI HOT 日报", "daily/index.html", "历史日报", "paper"),
-        ("builder", "Builder 一手作品", "builder/index.html", "作品档案", "chip"),
-        ("deals", "AI 羊毛雷达", "deals/index.html", "历史优惠", "orbit"),
+    for key, title, archive, label in (
+        ("daily", "AI HOT 日报", "daily/index.html", "历史日报"),
+        ("builder", "Builder 一手作品", "builder/index.html", "作品档案"),
+        ("deals", "AI 羊毛雷达", "deals/index.html", "历史优惠"),
     ):
         sections.append(f"""
 <section id="{key}" class="desk-card desk-{key}" tabindex="-1" aria-labelledby="{key}-title">
-  <div class="desk-art art art-{art}" aria-hidden="true"><span class="object"><i></i></span></div>
   <div class="desk-body"><h2 id="{key}-title">{title}</h2>
   <div class="channel-content" aria-live="polite"><p>正在读取当日内容…</p></div>
   <div class="desk-controls"><a class="action soft" href="{archive}">{label} <b aria-hidden="true">↗</b></a>
@@ -44,6 +43,6 @@ def build_home() -> str:
 <nav class="quick-nav" aria-label="跳至今日栏目"><a href="#daily">日报</a><a href="#builder">Builder 作品</a><a href="#deals">羊毛雷达</a></nav>
 <div id="today" class="desk-grid" aria-label="今日统一期次">""" + "".join(sections) + """</div>
 <noscript>请启用 JavaScript 查看北京时间当天的内容，或使用各栏目归档入口。</noscript>
-<script src="assets/today.js?v=1" defer></script>"""
+<script src="assets/today.js?v=2" defer></script>"""
     return page_shell(title="AI HOT 日报", kicker="", heading="", lead="", body=body,
                       active_nav="home", css_href="assets/editorial.css", home_href="index.html")
