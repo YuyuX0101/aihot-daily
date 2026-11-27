@@ -82,7 +82,7 @@
   ],
   "deals_empty_message": "本次未找到同时满足最近12小时新鲜度与可核验要求的新优惠（不等于全网无优惠）。",
   "daily_empty_message": "当日暂无 AI HOT 日报生成结果。",
-  "legacy_daily_url": "2026-11-20",
+  "legacy_daily_url": "2026-11-22.html",
   "daily_source_date": "2026-11-22",
   "daily_ingest_source": "aihot-news-api-v1-dailies",
   "daily_official_page": "https://aihot.news/daily/2026-11-22",
