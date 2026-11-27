@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -23,4 +24,6 @@ DAYS_JSON = REPO_ROOT / "days.json"
 EDITIONS_INDEX = DATA_DIR / "editions_index.json"
 NOTIFY_STATE = STATE_DIR / "notify_state.json"
 
-SITE_BASE_URL = "https://yuyux0101.github.io/aihot-daily"
+SITE_BASE_URL = (
+    os.environ.get("AIHOT_SITE_BASE_URL", "").strip() or "https://yuyux0101.github.io/aihot-daily"
+).rstrip("/")
