@@ -29,7 +29,7 @@ def generate_top5_html(items: list[dict[str, Any]]) -> str:
         html += f'    <div class="top5-item-source">{escape(item["src"])}</div>\n'
         html += f'    <div class="top5-item-summary">{escape(summary)}</div>\n'
         if item.get("link"):
-            html += f'    <a href="{escape(item["link"])}" class="item-link" target="_blank">查看原文 &rarr;</a>\n'
+            html += f'    <a href="{escape(item["link"])}" class="item-link" target="_blank">查看原文</a>\n'
         html += "  </article>\n"
     html += "</section>\n"
     return html
@@ -56,7 +56,7 @@ def generate_sections_html(items: list[dict[str, Any]]) -> str:
             html += f'    <div class="item-source">{escape(item["src"])} &middot; {item["score"]}分</div>\n'
             html += f'    <div class="item-summary">{escape(summary)}</div>\n'
             if item.get("link"):
-                html += f'    <a href="{escape(item["link"])}" class="item-link" target="_blank">查看原文 &rarr;</a>\n'
+                html += f'    <a href="{escape(item["link"])}" class="item-link" target="_blank">查看原文</a>\n'
             html += "  </article>\n"
         html += "</section>\n"
     return html

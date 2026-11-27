@@ -1,0 +1,115 @@
+{
+  "edition_date": "2026-11-27",
+  "channel": "daily",
+  "source_url": "https://aihot.news/daily/2026-11-27",
+  "items": [
+    {
+      "id": "daily:hdvt6wswzycj78wnr7r43xn6o",
+      "author": "蚂蚁 inclusionAI：HuggingFace 新模型",
+      "title": "蚂蚁 inclusionAI 开源 Ming-Image-0.2-Design 图像生成模型",
+      "source_url": "https://aihot.news/items/hdvt6wswzycj78wnr7r43xn6o",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:lewbr91m3z1dyea1n7pbm3bnl",
+      "author": "X：Greg Brockman (@gdb)",
+      "title": "OpenAI 测试私有推理功能",
+      "source_url": "https://aihot.news/items/lewbr91m3z1dyea1n7pbm3bnl",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:rlt60gq96bl1cf5b88o8rbj30",
+      "author": "X：Rohan Paul (@rohanpaul_ai)",
+      "title": "FT 报道 Nvidia 暂停向东南亚四国发运服务器",
+      "source_url": "https://aihot.news/items/rlt60gq96bl1cf5b88o8rbj30",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:g5yjacklnlbp3v51hkzciksjy",
+      "author": "Calif：Research（AI 漏洞研究）",
+      "title": "OEMpocalypse Part 2：利用 Knox DualDAR 漏洞链 root Galaxy S23 与 S26 旗舰机",
+      "source_url": "https://aihot.news/items/g5yjacklnlbp3v51hkzciksjy",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:gv1y811sp5p9kl7p3ci7xjt5n",
+      "author": "Calif：Research（AI 漏洞研究）",
+      "title": "Calif 披露 Tor Browser 15.0.22 UAF 漏洞链可致真实 IP 泄露",
+      "source_url": "https://aihot.news/items/gv1y811sp5p9kl7p3ci7xjt5n",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:e6gp31eup40d99unaon9umnpo",
+      "author": "X：Elon Musk (@elonmusk, xAI)",
+      "title": "Dario Amodei 澄清不主张向 AI 交出人类自由意志",
+      "source_url": "https://aihot.news/items/e6gp31eup40d99unaon9umnpo",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:gc4qp85ij5qzhu53qzkg8quqj",
+      "author": "X：Ado Kukic（Anthropic 开发者关系，Claude Code） (@adocomplete)",
+      "title": "Karpathy 用 Claude Code 和 Opus 5.5 把美国真实数据做成文明风格游戏地图",
+      "source_url": "https://aihot.news/items/gc4qp85ij5qzhu53qzkg8quqj",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:mruv0rx3oxnkjy9ll805qaidc",
+      "author": "公众号：数字生命卡兹克",
+      "title": "卡兹克把《人生意义设计课》做成AI Prompt，帮你设计人生的意义",
+      "source_url": "https://aihot.news/items/mruv0rx3oxnkjy9ll805qaidc",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "daily:jcdfpftbam647yhc210dbace9",
+      "author": "X：Philipp Schmid（Google DeepMind 开发者体验） (@_philschmid)",
+      "title": "Philipp Schmid 撰文解释为何在 Skills 与 CLI 兴起后仍更看好 MCP",
+      "source_url": "https://aihot.news/items/jcdfpftbam647yhc210dbace9",
+      "verification_tags": [
+        "aihot_repost",
+        "unverified_upstream",
+        "untested",
+        "hearsay"
+      ]
+    }
+  ]
+}

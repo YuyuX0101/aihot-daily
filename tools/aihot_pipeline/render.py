@@ -55,7 +55,7 @@ def _safe_link(url: str | None, label: str) -> str:
         return ""
     return (
         f'<a class="item-link" href="{escape_text(safe)}" '
-        f'rel="noopener noreferrer" target="_blank">{escape_text(label)} →</a>'
+        f'rel="noopener noreferrer" target="_blank">{escape_text(label)}</a>'
     )
 
 
@@ -305,7 +305,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=wordmark-1">
+<link rel="stylesheet" href="{css_href}?v=edition-layout-1">
 <link rel="icon" type="image/svg+xml" href="{css_href.rsplit('/', 1)[0]}/favicon.svg">
 {snapshot_link}
 </head>

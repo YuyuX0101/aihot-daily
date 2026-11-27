@@ -86,7 +86,7 @@ def generate_daily(date_str):
             source = item.get("sourceName", "")
             url = item.get("sourceUrl", "")
             
-            link_html = f'<a href="{url}" class="item-link" target="_blank">阅读原文 →</a>' if url else ""
+            link_html = f'<a href="{url}" class="item-link" target="_blank">阅读原文</a>' if url else ""
             
             sections_html += f"""
       <div class="item">
