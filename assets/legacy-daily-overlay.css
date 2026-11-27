@@ -1,6 +1,6 @@
 /* Soft editorial overlay for historical YYYY-MM-DD.html pages.
    Does not change article text — only restyles chrome after inline styles. */
-@import url("./editorial.css");
+@import url("./editorial.css?v=atelier-2");
 
 body {
   background: var(--paper) !important;
@@ -75,12 +75,13 @@ body {
   border: none !important;
 }
 
-.item, .top5-item, .day-card, article {
-  background: transparent !important;
-  border: none !important;
-  border-bottom: 1px solid var(--rule) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+.item, .top5-item {
+  background: var(--paper-elevated) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 14px !important;
+  padding: 1.25rem !important;
+  margin: 0 0 .8rem !important;
+  box-shadow: 0 3px 14px #24413109 !important;
 }
 .item-title, .top5-item-title, h3 {
   color: var(--ink) !important;
@@ -90,6 +91,14 @@ body {
   color: var(--ink-secondary) !important;
 }
 .item-link, a.item-link {
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 2.3rem;
+  padding: .35rem .9rem !important;
+  border-radius: 2rem !important;
+  border: 1px solid var(--rule-strong) !important;
+  background: var(--accent-soft) !important;
+  text-decoration: none !important;
   color: var(--accent) !important;
 }
 .item-num, .top5-item-rank {

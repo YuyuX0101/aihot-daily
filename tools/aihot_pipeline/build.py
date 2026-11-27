@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .demo_guard import DemoGuardError, assert_edition_has_no_demo_urls
+from .home import build_home, daily_archive
 from .ingest import load_edition, refresh_editions_index
 from .paths import (
     BUILDER_DIR,
@@ -16,7 +17,7 @@ from .paths import (
     EDITIONS_DIR,
     REPO_ROOT,
 )
-from .render import CHANNEL_TITLES, page_shell, render_channel_section
+from .render import CHANNEL_TITLES, page_shell, project_grid, render_channel_section
 from .sanitize import escape_text
 
 
@@ -104,7 +105,10 @@ def build_channel_index(channel: str, dates: list[str]) -> str:
         bucket = (edition.get("channels") or {}).get(channel) or {}
         items = bucket.get("items") or []
         meta = bucket.get("meta") or {}
-        if items:
+        if channel == "builder" and items:
+            assert_edition_has_no_demo_urls(edition)
+            cards.append(f'<section class="issue-group"><h2>{escape_text(date)}</h2>{project_grid(items)}</section>')
+        elif items:
             top = items[0].get("title", "")
             cards.append(
                 f'<a class="list-card" href="../e/{escape_text(date)}.html#{escape_text(channel)}">'
@@ -131,7 +135,7 @@ def build_channel_index(channel: str, dates: list[str]) -> str:
         title=title,
         kicker="栏目",
         heading=title,
-        lead="按日期浏览该栏目；空栏目会标明原因，不会用示例条目充数。",
+        lead="按期浏览作品简介、作者原帖和体验入口。" if channel == "builder" else "浏览每期收录的优惠和适用条件。",
         body=body,
         active_nav=channel if channel in {"builder", "deals"} else "daily",
         css_href="../assets/editorial.css",
@@ -155,7 +159,7 @@ def build_editions_index(dates: list[str]) -> str:
         title="AIHOT 统一期次",
         kicker="目录",
         heading="统一期次",
-        lead="每日一期，汇总三个栏目。历史 YYYY-MM-DD.html 日报 URL 继续可用。示例 fixtures 不会进入此目录。",
+        lead="按日期阅读日报、Builder 作品与优惠。",
         body=body,
         active_nav="editions",
         css_href="../assets/editorial.css",
@@ -187,6 +191,7 @@ def build_site() -> dict[str, Any]:
     written: list[str] = []
     errors: list[str] = []
 
+    edition_days = []
     for date in dates:
         edition = load_edition(date)
         try:
@@ -194,6 +199,8 @@ def build_site() -> dict[str, Any]:
         except DemoGuardError as exc:
             errors.append(f"{date}: {exc}")
             continue
+        if _counts(edition)["daily"]:
+            edition_days.append(date)
         out = EDITION_HTML_DIR / f"{date}.html"
         out.write_text(html, encoding="utf-8")
         try:
@@ -212,6 +219,13 @@ def build_site() -> dict[str, Any]:
     written.append("data/home_snapshot.json")
 
     legacy_days = update_days_json_from_legacy()
+
+    if not errors:
+        archive_dir = REPO_ROOT / "daily"
+        archive_dir.mkdir(exist_ok=True)
+        (archive_dir / "index.html").write_text(daily_archive(legacy_days, edition_days), encoding="utf-8")
+        (REPO_ROOT / "index.html").write_text(build_home(), encoding="utf-8")
+        written.extend(["daily/index.html", "index.html"])
     return {
         "ok": len(errors) == 0,
         "edition_dates": dates,

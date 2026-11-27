@@ -14,23 +14,20 @@ CHANNEL_TITLES = {
 }
 
 TAG_LABELS = {
-    "page_reachable": "页面可达",
-    "author_claim": "作者声明",
     "untested": "未实测",
-    "repo_reachable": "仓库可达",
     "hearsay": "二手转述",
-    "no_playable": "无可玩页",
-    "aihot_repost": "AIHOT转载",
+    "aihot_repost": "AIHOT 转载",
     "unverified_upstream": "未独立核验",
 }
 
-WARN_TAGS = {
-    "untested",
-    "hearsay",
-    "author_claim",
-    "no_playable",
-    "aihot_repost",
-    "unverified_upstream",
+# Cover illustrations and editorial descriptions of the November 22 projects.
+# New projects use the title, description and creator supplied by their feed.
+PROJECT_COVERS = {
+    "builder:2124333271177908405": ("paper", "文档工具", "据作者介绍，文隐可以在本地为文档脱敏，方便在交给 AI 之前处理敏感信息。"),
+    "builder:2124265810663244086": ("chip", "交互模拟", "作者把 3nm 芯片做成了可缩放的三维模型，让人从外观一路探索到处理器内部。"),
+    "builder:2124194668015661346": ("power", "经营游戏", "从车库里的一间 AI 实验室起步。作者把芯片、算力与能源做进了一款浏览器经营游戏。"),
+    "builder:2124161720448893216": ("play", "对战游戏", "一位开发者和孩子一起做的格斗游戏。按作者介绍，玩家可以扮演不同的 AI 公司负责人。"),
+    "builder:2124141427672134013": ("orbit", "太空探索", "在浏览器里驾驶飞船、降落行星。作者介绍，这次更新给外星居民加入了对话功能。"),
 }
 
 DEFAULT_EMPTY = {
@@ -41,14 +38,10 @@ DEFAULT_EMPTY = {
 
 
 def _tags_html(tags: list[str] | None) -> str:
-    if not tags:
-        return ""
-    bits = []
-    for t in tags:
-        label = TAG_LABELS.get(t, t)
-        cls = "tag warn" if t in WARN_TAGS else "tag"
-        bits.append(f'<span class="{cls}">{escape_text(label)}</span>')
-    return " ".join(bits)
+    return " ".join(
+        f'<span class="tag">{TAG_LABELS[t]}</span>'
+        for t in tags or [] if t in TAG_LABELS
+    )
 
 
 def _safe_link(url: str | None, label: str) -> str:
@@ -66,7 +59,48 @@ def _safe_link(url: str | None, label: str) -> str:
     )
 
 
+def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
+    title = item.get("title") or ""
+    art, category, intro = PROJECT_COVERS.get(
+        item.get("id"), ("generic", "", item.get("summary") or item.get("author_claim") or "")
+    )
+    name = title.partition("：")[0] if art != "generic" else title
+    links = "".join([
+        _safe_link(item.get("playable_url"), "打开作品"),
+        _safe_link(item.get("source_url"), "作者原帖"),
+        _safe_link(item.get("repo_url"), "代码仓库"),
+    ])
+    published = format_beijing(item.get("published_at"))
+    details = ""
+    if detailed:
+        facts = [
+            ("作者声明", item.get("author_claim")),
+            ("核验正文证据", item.get("verified_evidence")),
+            ("备注", item.get("notes")),
+        ]
+        parts = [f'<p><strong>{label}</strong>　{escape_text(value)}</p>' for label, value in facts if value]
+        if "page_reachable" in (item.get("verification_tags") or []):
+            parts.append("<p>页面可达仅指采集时可以打开链接。</p>")
+        if parts:
+            details = '<details><summary>查看来源说明</summary>' + "".join(parts) + "</details>"
+    anchor = f' id="{escape_text(item["id"])}"' if detailed and item.get("id") else ""
+    return f'''<article class="project"{anchor}>
+<div class="art art-{art}" aria-hidden="true"><span class="object"><i></i></span></div>
+<div class="project-body"><div class="project-kind">{escape_text(category)} {_tags_html(item.get("verification_tags"))}</div>
+<h3>{escape_text(name)}</h3><p class="intro">{escape_text(intro)}</p>
+<div class="creator">{escape_text(item.get("author") or "")}<small>{escape_text(published)}</small></div>
+<div class="actions">{links}</div>{details}</div></article>'''
+
+
+def project_grid(items: list[dict[str, Any]], *, detailed: bool = False) -> str:
+    if not items:
+        return '<p class="empty">本期暂无 Builder 作品。</p>'
+    return '<div class="project-grid">' + "".join(project_card(i, detailed=detailed) for i in items) + '</div>'
+
+
 def render_item(item: dict[str, Any], channel: str) -> str:
+    if channel == "builder":
+        return project_card(item, detailed=True)
     title = escape_text(item.get("title"))
     author = escape_text(item.get("author") or "")
     notes = escape_text(item.get("notes") or "")
@@ -153,10 +187,10 @@ def render_item(item: dict[str, Any], channel: str) -> str:
         part = _safe_link(url, label)
         if part:
             links.append(part)
-    link_html = f'<div class="item-links">{" · ".join(links)}</div>' if links else ""
+    link_html = f'<div class="item-links">{"".join(links)}</div>' if links else ""
 
     return f"""
-<article class="item">
+<article class="item" id="{escape_text(item.get('id') or '')}">
   <h3 class="item-title">{title}</h3>
   {meta_html}
   {"".join(blocks)}
@@ -199,7 +233,7 @@ def render_channel_section(
         body = f'<div class="empty-state-box"><p class="empty">{escape_text(message)}</p>{extra}</div>'
         collapsed_attr = ' data-collapsed="true" class="section is-empty"'
     else:
-        body = "\n".join(render_item(i, channel) for i in items)
+        body = project_grid(items, detailed=True) if channel == "builder" else "\n".join(render_item(i, channel) for i in items)
         collapsed_attr = ' class="section"'
 
     return f"""
@@ -229,7 +263,7 @@ def page_shell(
     if css_href.startswith("assets/"):
         nav = {
             "home": ("首页", "index.html"),
-            "daily": ("历史日报", "index.html#timeline"),
+            "daily": ("历史日报", "daily/index.html"),
             "builder": ("Builder", "builder/index.html"),
             "deals": ("羊毛雷达", "deals/index.html"),
             "editions": ("统一期次", "e/index.html"),
@@ -237,7 +271,7 @@ def page_shell(
     else:
         nav = {
             "home": ("首页", home_href),
-            "daily": ("历史日报", "../index.html#timeline"),
+            "daily": ("历史日报", "../daily/index.html"),
             "builder": ("Builder", "../builder/index.html"),
             "deals": ("羊毛雷达", "../deals/index.html"),
             "editions": ("统一期次", "../e/index.html"),
@@ -259,35 +293,49 @@ def page_shell(
             f"</div>"
         )
 
+    is_home = active_nav == "home"
+    page_class = "home" if is_home else "page page-wide"
+    heading_html = "" if is_home else (
+        f'<header class="inner-heading"><p class="section-meta">{escape_text(kicker)}</p>'
+        f'<h1>{escape_text(heading)}</h1><p class="page-lead">{escape_text(lead)}</p></header>'
+    )
+    snapshot_link = '<link rel="alternate" type="application/json" href="data/home_snapshot.json">' if is_home else ""
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}">
+<link rel="stylesheet" href="{css_href}?v=atelier-2">
+{snapshot_link}
 </head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="{nav['home'][1]}">AI <span>HOT</span></a>
-    <nav class="nav-links" aria-label="主导航">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false">菜单</button>
+    <nav class="nav-links" id="site-nav" aria-label="主导航">
       {''.join(links)}
     </nav>
   </div>
 </header>
 {banner}
-<main class="page" id="main">
-  <div class="kicker">{escape_text(kicker)}</div>
-  <h1>{escape_text(heading)}</h1>
-  <p class="page-lead">{escape_text(lead)}</p>
-  {body}
+<main class="{page_class}" id="main">
+{heading_html}
+{body}
 </main>
 <footer class="site-footer">
-  <p>静态托管于 GitHub Pages · 数据经本地 JSON 摄取构建 · 不含 webhook 密钥</p>
-  <p>展示时间为北京时间（Asia/Shanghai）· 页可打开≠功能/隐私审计 · 未实测不等于不可用</p>
+  <strong>AI HOT 日报</strong>
+  <p>网站预览 · 北京时间</p><p>功能预览期间，自动推送尚未启用。</p>
 </footer>
+<script>
+const toggle = document.getElementById('nav-toggle');
+toggle.addEventListener('click', () => {{
+  const open = document.getElementById('site-nav').classList.toggle('is-open');
+  toggle.setAttribute('aria-expanded', String(open));
+}});
+</script>
 </body>
 </html>
 """
