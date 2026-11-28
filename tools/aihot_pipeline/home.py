@@ -6,7 +6,7 @@ from typing import Any
 
 from .ingest import load_edition
 from .paths import REPO_ROOT
-from .render import date_select, page_shell, render_item
+from .render import date_select, page_shell
 from .sanitize import escape_text, validate_url
 
 
@@ -57,6 +57,26 @@ def _legacy_items(day: str) -> list[dict[str, str]]:
     return parser.items
 
 
+def _daily_item_html(item: dict[str, Any], day: str, index: int) -> str:
+    link = ""
+    try:
+        href = validate_url(item.get("source_url"))
+    except Exception:
+        href = None
+    if href:
+        link = (
+            f'<div class="item-links"><a class="item-link" href="{escape_text(href)}" '
+            'rel="noopener noreferrer" target="_blank">查看来源</a></div>'
+        )
+    summary = (item.get("summary") or item.get("author_claim") or "").removeprefix(
+        "【上游报道 · AIHOT 转载 · 未独立核验】"
+    ).strip()
+    return f'''<article class="item daily-reading-item" id="daily-{escape_text(day)}-{index}">
+<h3 class="item-title">{escape_text(item.get("title"))}</h3>
+<div class="item-meta"><span>{escape_text(item.get("author") or "AIHOT")}</span></div>
+<p class="reading-copy">{escape_text(summary)}</p>{link}</article>'''
+
+
 def _legacy_item_html(item: dict[str, str], day: str, index: int) -> str:
     link = ""
     try:
@@ -68,9 +88,9 @@ def _legacy_item_html(item: dict[str, str], day: str, index: int) -> str:
             f'<div class="item-links"><a class="item-link" href="{escape_text(href)}" '
             'rel="noopener noreferrer" target="_blank">AIHOT 条目</a></div>'
         )
-    return f'''<article class="item legacy-item" id="legacy-{escape_text(day)}-{index}">
+    return f'''<article class="item daily-reading-item legacy-item" id="legacy-{escape_text(day)}-{index}">
 <h3 class="item-title">{escape_text(item["title"])}</h3>
-<div class="item-meta"><span>{escape_text(item.get("source"))}</span><span>AIHOT 转载 · 未独立核验</span></div>
+<div class="item-meta"><span>{escape_text(item.get("source"))}</span></div>
 <p class="reading-copy">{escape_text(item.get("summary"))}</p>{link}</article>'''
 
 
@@ -83,7 +103,9 @@ def daily_archive(days: list[str], edition_days: list[str]) -> str:
             edition = load_edition(day)
             bucket = (edition.get("channels") or {}).get("daily") or {}
             items = bucket.get("items") or []
-            content = '<div class="article-list">' + "".join(render_item(item, "daily") for item in items) + '</div>'
+            content = '<div class="article-list">' + "".join(
+                _daily_item_html(item, day, item_index) for item_index, item in enumerate(items, 1)
+            ) + '</div>'
             count = len(items)
         else:
             legacy_items = _legacy_items(day)
@@ -97,6 +119,7 @@ def daily_archive(days: list[str], edition_days: list[str]) -> str:
         panels.append(
             f'<section class="date-panel" data-date-panel="{escape_text(day)}"{hidden}>'
             f'<div class="date-panel-meta"><span>{escape_text(day)}</span><span>{count} 条</span></div>'
+            '<p class="reading-boundary">内容为 AIHOT 转载，未独立核验。</p>'
             f'{content}</section>'
         )
     body = ""

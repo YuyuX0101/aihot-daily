@@ -65,6 +65,8 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn("在 Windows 上编译运行 SwiftUI", builder)
         daily = (REPO / "daily" / "index.html").read_text(encoding="utf-8")
         self.assertIn("Character.AI", daily)
+        self.assertIn("daily-reading-item", daily)
+        self.assertNotIn('class="claim-box"', daily)
         edition_index = (REPO / "e" / "index.html").read_text(encoding="utf-8")
         self.assertIn('data-date-panel="2026-11-28"', builder)
         self.assertIn('data-url-template="{date}.html"', edition_index)
