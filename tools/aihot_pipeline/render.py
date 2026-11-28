@@ -78,6 +78,7 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
         item.get("id"), ("", item.get("summary") or item.get("author_claim") or "")
     )
     name = title.partition("：")[0] if category else title
+    intro = intro.removeprefix("【速报转载 · 未独立核验 · 未实测】").lstrip()
     links = "".join([
         _safe_link(item.get("playable_url"), "打开作品"),
         _safe_link(item.get("source_url"), "作者原帖"),
