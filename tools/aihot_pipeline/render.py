@@ -320,7 +320,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-20">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-21">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>
