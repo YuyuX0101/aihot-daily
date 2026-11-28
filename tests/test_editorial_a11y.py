@@ -18,12 +18,51 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn('href="e/index.html"', html)
         self.assertIn('id="today"', html)
         self.assertIn("今日统一期次", html)
-        self.assertIn("网站预览", html)
-        self.assertIn("尚未启用", html)
         self.assertIn('id="nav-toggle"', html)
         self.assertIn("data/home_snapshot.json", html)
-        self.assertIn("功能预览", html)
+        self.assertIn("AI 日报", html)
+        self.assertNotIn("site-footer", html)
+        self.assertNotIn("网站预览", html)
+        self.assertNotIn("功能预览", html)
+        self.assertIn('class="reading-flow"', html)
+        self.assertIn('class="side-column"', html)
+        self.assertNotIn('class="pager"', html)
+        self.assertNotIn("上一页", html)
+        self.assertIn('id="cover-image"', html)
         self.assertNotRegex(html, r"(?<!不代表)生产已迁移")
+
+    def test_home_renders_every_entry_and_dated_cover(self):
+        script = (REPO / "assets" / "today.js").read_text(encoding="utf-8")
+        self.assertIn("for (const entry of entries)", script)
+        self.assertNotIn("entries.slice", script)
+        self.assertNotIn("pageSize", script)
+        self.assertIn("assets/covers/", script)
+        self.assertIn("cover.onerror", script)
+        css = (REPO / "assets" / "editorial.css").read_text(encoding="utf-8")
+        self.assertIn("grid-template-columns:minmax(0,1.7fr)", css)
+        self.assertNotIn("width:100vw", css)
+        self.assertNotIn("webkit-line-clamp", css)
+
+    def test_channel_pages_show_latest_content_with_lightweight_date_picker(self):
+        expectations = {
+            "daily": "2026-11-26",
+            "builder": "2026-11-22",
+            "deals": "2026-11-22",
+        }
+        for channel, latest in expectations.items():
+            html = (REPO / channel / "index.html").read_text(encoding="utf-8")
+            self.assertIn("data-date-picker", html)
+            self.assertIn(f'data-date-panel="{latest}"', html)
+            self.assertIn("date-picker.js", html)
+            self.assertNotIn("archive-grid", html)
+            self.assertNotIn("list-card", html)
+        builder = (REPO / "builder" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Prompt Puncher", builder)
+        daily = (REPO / "daily" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Character.AI", daily)
+        edition_index = (REPO / "e" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Prompt Puncher", edition_index)
+        self.assertIn('data-url-template="{date}.html"', edition_index)
 
     def test_home_snapshot_has_real_builder_five(self):
         import json
@@ -62,7 +101,13 @@ class EditorialA11yTests(unittest.TestCase):
     def test_legacy_overlay_injected_without_wiping_body_copy(self):
         sample = (REPO / "2026-11-20.html").read_text(encoding="utf-8")
         self.assertIn("assets/legacy-daily-overlay.css", sample)
-        self.assertIn("AI HOT 日报", sample)
+        self.assertIn("AI 日报", sample)
+        self.assertIn("assets/date-picker.js", sample)
+        self.assertNotIn("user-scalable=no", sample)
+        self.assertNotIn("fonts.googleapis.com", sample)
+        overlay = (REPO / "assets" / "legacy-daily-overlay.css").read_text(encoding="utf-8")
+        self.assertIn(".footer,footer { display:none !important; }", overlay)
+        self.assertIn(".top5-section { display:none !important; }", overlay)
         # original inline content markers remain
         self.assertIn("item-summary", sample)
 

@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <title>AI HOT</title>
-  <rect width="48" height="48" rx="10" fill="#153e36"/>
-  <path fill="#fffdf6" fill-rule="evenodd" d="M5 35 20 12h5l2 23h-5l-.4-5H13l-3 5zm10.8-9h5.4l-.6-8z"/>
-  <path fill="#b8e4cc" d="m32 12 6 0-5 23h-6z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>AI 日报</title>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="#18231f"/>
+  <circle cx="38" cy="25" r="11" fill="#d8b66a"/>
+  <path d="M10 48 26 31 38 43 47 34 55 48Z" fill="#f5f3ed"/>
+  <path d="M10 48 26 31 38 43 47 34 55 48" fill="none" stroke="#fffefa" stroke-width="1.5" stroke-linejoin="round"/>
 </svg>

@@ -119,7 +119,7 @@ class UnifiedRunnerE2ETests(unittest.TestCase):
         )
         r1 = run_unified(cfg)
         self.assertTrue(r1.ok, r1.error)
-        self.assertIn("统一速报", r1.notify_preview or "")
+        self.assertIn("AI 日报 · 每日速报", r1.notify_preview or "")
         self.assertIn("Builder", r1.notify_preview or "")
         self.assertIn("不等于全网无优惠", r1.notify_preview or "")
         self.assertEqual(r1.stages["aihot_items"], 2)

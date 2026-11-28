@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -17,7 +18,7 @@ from .paths import (
     EDITIONS_DIR,
     REPO_ROOT,
 )
-from .render import CHANNEL_TITLES, page_shell, project_grid, render_channel_section
+from .render import CHANNEL_TITLES, date_select, page_shell, project_grid, render_channel_section, render_item
 from .sanitize import escape_text
 
 
@@ -39,17 +40,14 @@ def latest_legacy_daily(before_or_on: str | None = None) -> str | None:
     return days[0] if days else None
 
 
-def build_edition_page(edition: dict[str, Any]) -> str:
+def build_edition_page(
+    edition: dict[str, Any], available_dates: list[str] | None = None
+) -> str:
     assert_edition_has_no_demo_urls(edition)
     date = edition["edition_date"]
     counts = _counts(edition)
     channels = edition.get("channels") or {}
-
-    tabs = [
-        f'<a href="#daily">日报 {counts["daily"]}</a>',
-        f'<a href="#builder">Builder {counts["builder"]}</a>',
-        f'<a href="#deals">羊毛 {counts["deals"]}</a>',
-    ]
+    dates = available_dates or [date]
 
     legacy_same_day = ""
     legacy_path = REPO_ROOT / f"{date}.html"
@@ -78,17 +76,17 @@ def build_edition_page(edition: dict[str, Any]) -> str:
             )
         )
 
-    body = f'<div class="channel-tabs">{"".join(tabs)}</div>\n' + "\n".join(sections)
+    overview = f'日报 {counts["daily"]} · AI Builder {counts["builder"]} · 羊毛 {counts["deals"]}'
+    body = (
+        f'<div class="page-toolbar">{date_select(dates, date, url_template="{date}.html")}'
+        f'<p class="issue-overview">{overview}</p></div>\n' + "\n".join(sections)
+    )
     if legacy_same_day:
         body += "\n" + legacy_same_day
 
-    lead = (
-        "本页汇总当日 AI HOT 日报、Builder 一手作品与 AI 羊毛雷达。"
-        "日报栏目为 AIHOT 第三方转载（未独立核验）；Builder 保留作者声明/页面可达/未实测边界；"
-        "页可打开不等于功能或隐私审计，也不等于原文事实已证实。"
-    )
+    lead = "AIHOT 动态、独立作品与优惠，按刊期完整归档。"
     return page_shell(
-        title=f"AIHOT 统一期次 · {date}",
+        title=f"AI 日报 · 统一期次 · {date}",
         kicker="统一期次",
         heading=f"{date}",
         lead=lead,
@@ -99,68 +97,55 @@ def build_edition_page(edition: dict[str, Any]) -> str:
 
 
 def build_channel_index(channel: str, dates: list[str]) -> str:
-    cards = []
-    for date in dates:
+    panels = []
+    for index, date in enumerate(dates):
         edition = load_edition(date)
         bucket = (edition.get("channels") or {}).get(channel) or {}
         items = bucket.get("items") or []
         meta = bucket.get("meta") or {}
         if channel == "builder" and items:
             assert_edition_has_no_demo_urls(edition)
-            cards.append(f'<section class="issue-group"><h2>{escape_text(date)}</h2>{project_grid(items)}</section>')
+            content = project_grid(items, detailed=True)
         elif items:
-            top = items[0].get("title", "")
-            cards.append(
-                f'<a class="list-card" href="../e/{escape_text(date)}.html#{escape_text(channel)}">'
-                f'<div class="date">{escape_text(date)}</div>'
-                f'<div>{escape_text(top)}</div>'
-                f'<div class="meta">{len(items)} 条 · 查看期次</div>'
-                f"</a>"
-            )
-        elif meta.get("empty_message"):
-            # Surface zero-item days with an explicit reason (e.g. deals=0).
-            cards.append(
-                f'<a class="list-card is-empty" href="../e/{escape_text(date)}.html#{escape_text(channel)}">'
-                f'<div class="date">{escape_text(date)}</div>'
-                f'<div>0 条</div>'
-                f'<div class="meta">{escape_text(meta.get("empty_message"))}</div>'
-                f"</a>"
-            )
-    if not cards:
-        body = '<p class="empty">暂无内容。将生产 JSON 放入 data/inbox/ 后运行 ingest + build。</p>'
+            content = '<div class="article-list">' + "".join(render_item(item, channel) for item in items) + '</div>'
+        else:
+            message = meta.get("empty_message") or "本期暂无收录。"
+            content = f'<p class="empty-state-inline">{escape_text(message)}</p>'
+        hidden = "" if index == 0 else " hidden"
+        panels.append(
+            f'<section class="date-panel" data-date-panel="{escape_text(date)}"{hidden}>'
+            f'<div class="date-panel-meta"><span>{escape_text(date)}</span><span>{len(items)} 条</span></div>'
+            f'{content}</section>'
+        )
+    title = "AI Builder" if channel == "builder" else "羊毛雷达"
+    if dates:
+        toolbar = (
+            f'<div class="page-toolbar">{date_select(dates, dates[0])}'
+            '<p class="issue-overview">默认展示最新一期，选择日期查看往期。</p></div>'
+        )
+        body = toolbar + "\n".join(panels)
     else:
-        body = "\n".join(cards)
-    title = CHANNEL_TITLES[channel]
+        body = '<p class="empty">暂无内容。将生产 JSON 放入 data/inbox/ 后运行 ingest + build。</p>'
     return page_shell(
-        title=title,
-        kicker="栏目",
+        title=f"{title} · AI 日报",
+        kicker="每日精选",
         heading=title,
-        lead="按期浏览作品简介、作者原帖和体验入口。" if channel == "builder" else "浏览每期收录的优惠和适用条件。",
+        lead="作品、作者声明与体验入口。" if channel == "builder" else "优惠内容、门槛与适用条件。",
         body=body,
-        active_nav=channel if channel in {"builder", "deals"} else "daily",
+        active_nav=channel,
         css_href="../assets/editorial.css",
     )
 
 
 def build_editions_index(dates: list[str]) -> str:
-    cards = []
-    for date in dates:
-        edition = load_edition(date)
-        c = _counts(edition)
-        cards.append(
-            f'<a class="list-card" href="{escape_text(date)}.html">'
-            f'<div class="date">{escape_text(date)}</div>'
-            f'<div>统一期次</div>'
-            f'<div class="meta">日报 {c["daily"]} · Builder {c["builder"]} · 羊毛 {c["deals"]}</div>'
-            f"</a>"
-        )
-    body = "\n".join(cards) if cards else '<p class="empty">暂无统一期次</p>'
+    if dates:
+        return build_edition_page(load_edition(dates[0]), available_dates=dates)
     return page_shell(
-        title="AIHOT 统一期次",
-        kicker="目录",
-        heading="统一期次",
-        lead="按日期阅读日报、Builder 作品与优惠。",
-        body=body,
+        title="期次 · AI 日报",
+        kicker="期次",
+        heading="每日期次",
+        lead="按日期阅读日报、AI Builder 作品与优惠。",
+        body='<p class="empty">暂无统一期次。</p>',
         active_nav="editions",
         css_href="../assets/editorial.css",
     )
@@ -173,6 +158,36 @@ def update_days_json_from_legacy() -> list[str]:
     )
     DAYS_JSON.write_text(json.dumps(days, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return days
+
+
+def update_legacy_ui() -> None:
+    paths = list(REPO_ROOT.glob("????-??-??.html"))
+    template = REPO_ROOT / "daily-template.html"
+    if template.exists():
+        paths.append(template)
+    for path in paths:
+        html = path.read_text(encoding="utf-8")
+        if "legacy-daily-overlay.css" not in html:
+            continue
+        original = html
+        html = re.sub(r'<link rel="preconnect" href="https://fonts\.googleapis\.com">\s*', "", html)
+        html = re.sub(r'<link href="https://fonts\.googleapis\.com/css2[^"]*" rel="stylesheet">\s*', "", html)
+        html = html.replace(
+            'content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"',
+            'content="width=device-width, initial-scale=1.0"',
+        )
+        html = html.replace("AI HOT 日报 ·", "AI 日报 ·")
+        html = html.replace("<h1>AI HOT 日报</h1>", "<h1>AI 日报</h1>")
+        html = html.replace(
+            '<div class="nav-brand"><em>AI</em> <span>HOT</span></div>',
+            '<div class="nav-brand">AI 日报</div>',
+        )
+        if "assets/date-picker.js" not in html:
+            html = html.replace(
+                "</head>", '<script src="assets/date-picker.js?v=1" defer></script>\n</head>', 1
+            )
+        if html != original:
+            path.write_text(html, encoding="utf-8")
 
 
 def build_site() -> dict[str, Any]:
@@ -195,7 +210,7 @@ def build_site() -> dict[str, Any]:
     for date in dates:
         edition = load_edition(date)
         try:
-            html = build_edition_page(edition)
+            html = build_edition_page(edition, available_dates=dates)
         except DemoGuardError as exc:
             errors.append(f"{date}: {exc}")
             continue
@@ -219,6 +234,7 @@ def build_site() -> dict[str, Any]:
     written.append("data/home_snapshot.json")
 
     legacy_days = update_days_json_from_legacy()
+    update_legacy_ui()
 
     if not errors:
         archive_dir = REPO_ROOT / "daily"

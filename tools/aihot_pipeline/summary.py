@@ -12,7 +12,7 @@ from typing import Any
 from .paths import SITE_BASE_URL
 
 CHANNEL_LABELS = {
-    "daily": "AI HOT 日报",
+    "daily": "AI 日报 · AI 动态",
     "builder": "Builder 一手作品",
     "deals": "AI 羊毛雷达",
 }
@@ -26,7 +26,7 @@ def _top_titles(items: list[dict[str, Any]], n: int = 3) -> list[str]:
 def build_summary_text(edition: dict[str, Any], site_base: str = SITE_BASE_URL) -> str:
     date = edition.get("edition_date", "")
     channels = edition.get("channels") or {}
-    lines: list[str] = [f"AIHOT 统一速报 · {date}", ""]
+    lines: list[str] = [f"AI 日报 · 每日速报 · {date}", ""]
 
     totals = []
     for key in ("daily", "builder", "deals"):

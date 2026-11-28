@@ -58,7 +58,7 @@ def build_home_snapshot(dates: list[str]) -> dict[str, Any]:
             ),
             "daily_empty_message": daily_meta.get(
                 "empty_message",
-                "当日暂无 AI HOT 日报生成结果。",
+                "当日暂无 AI 动态生成结果。",
             ),
             "legacy_daily_url": legacy,
             "daily_source_date": date,

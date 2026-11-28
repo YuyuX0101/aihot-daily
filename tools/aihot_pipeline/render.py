@@ -8,7 +8,7 @@ from .sanitize import escape_text, validate_url
 from .timefmt import format_beijing
 
 CHANNEL_TITLES = {
-    "daily": "AI HOT 日报",
+    "daily": "AI 日报 · AI 动态",
     "builder": "Builder 一手作品速报",
     "deals": "AI 羊毛雷达",
 }
@@ -31,10 +31,23 @@ PROJECT_DESCRIPTIONS = {
 }
 
 DEFAULT_EMPTY = {
-    "daily": "当日暂无 AI HOT 日报生成结果；请查看最近历史日报，勿将示例内容当作当日资讯。",
+    "daily": "当日暂无 AI 动态；请查看最近历史日报，勿将示例内容当作当日资讯。",
     "builder": "本期暂无 Builder 条目。",
     "deals": "本期暂无羊毛条目。",
 }
+
+
+def date_select(dates: list[str], current: str, *, url_template: str | None = None) -> str:
+    days = sorted(set(dates) | {current}, reverse=True)
+    options = "".join(
+        f'<option value="{escape_text(day)}"{" selected" if day == current else ""}>{escape_text(day)}</option>'
+        for day in days
+    )
+    navigation = f' data-url-template="{escape_text(url_template)}"' if url_template else ""
+    return (
+        '<label class="date-picker"><span>日期</span>'
+        f'<select data-date-picker{navigation} aria-label="选择内容日期">{options}</select></label>'
+    )
 
 
 def _tags_html(tags: list[str] | None) -> str:
@@ -191,11 +204,11 @@ def render_item(item: dict[str, Any], channel: str) -> str:
     return f"""
 <article class="item" id="{escape_text(item.get('id') or '')}">
   <h3 class="item-title">{title}</h3>
-  {meta_html}
-  {"".join(blocks)}
-  {deal_html}
-  {notes_html}
-  {link_html}
+{meta_html}
+{"".join(blocks)}
+{deal_html}
+{notes_html}
+{link_html}
 </article>
 """.strip()
 
@@ -230,7 +243,7 @@ def render_channel_section(
                 f"</p>"
             )
         body = f'<div class="empty-state-box"><p class="empty">{escape_text(message)}</p>{extra}</div>'
-        collapsed_attr = ' data-collapsed="true" class="section is-empty"'
+        collapsed_attr = ' class="section is-empty"'
     else:
         body = project_grid(items, detailed=True) if channel == "builder" else "\n".join(render_item(i, channel) for i in items)
         collapsed_attr = ' class="section"'
@@ -239,10 +252,10 @@ def render_channel_section(
 <section{collapsed_attr} id="{escape_text(channel)}">
   <div class="section-header">
     <span class="section-title">{escape_text(title)}</span>
-    <span class="section-count">{count} 条{" · 已折叠" if empty else ""}</span>
+    <span class="section-count">{count} 条</span>
   </div>
-  {disclaimer}
-  {body}
+{disclaimer}
+{body}
 </section>
 """.strip()
 
@@ -262,18 +275,18 @@ def page_shell(
     if css_href.startswith("assets/"):
         nav = {
             "home": ("首页", "index.html"),
-            "daily": ("历史日报", "daily/index.html"),
-            "builder": ("Builder", "builder/index.html"),
-            "deals": ("羊毛雷达", "deals/index.html"),
-            "editions": ("统一期次", "e/index.html"),
+            "daily": ("日报", "daily/index.html"),
+            "builder": ("AI Builder", "builder/index.html"),
+            "deals": ("羊毛", "deals/index.html"),
+            "editions": ("期次", "e/index.html"),
         }
     else:
         nav = {
             "home": ("首页", home_href),
-            "daily": ("历史日报", "../daily/index.html"),
-            "builder": ("Builder", "../builder/index.html"),
-            "deals": ("羊毛雷达", "../deals/index.html"),
-            "editions": ("统一期次", "../e/index.html"),
+            "daily": ("日报", "../daily/index.html"),
+            "builder": ("AI Builder", "../builder/index.html"),
+            "deals": ("羊毛", "../deals/index.html"),
+            "editions": ("期次", "../e/index.html"),
         }
 
     links = []
@@ -305,7 +318,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=edition-layout-1">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-2">
 <link rel="icon" type="image/svg+xml" href="{css_href.rsplit('/', 1)[0]}/favicon.svg">
 {snapshot_link}
 </head>
@@ -313,7 +326,7 @@ def page_shell(
 <a class="skip-link" href="#main">跳到正文</a>
 <header class="site-header">
   <div class="site-header-inner">
-    <a class="brand" href="{nav['home'][1]}" aria-label="AI HOT 首页"><em>AI</em> <span>HOT</span></a>
+    <a class="brand" href="{nav['home'][1]}" aria-label="AI 日报首页"><span class="brand-name">AI 日报</span><span class="brand-en">AI DAILY</span></a>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false">菜单</button>
     <nav class="nav-links" id="site-nav" aria-label="主导航">
       {''.join(links)}
@@ -325,10 +338,7 @@ def page_shell(
 {heading_html}
 {body}
 </main>
-<footer class="site-footer">
-  <strong>AI HOT 日报</strong>
-  <p>网站预览 · 北京时间</p><p>功能预览期间，自动推送尚未启用。</p>
-</footer>
+<script src="{css_href.rsplit('/', 1)[0]}/date-picker.js?v=1" defer></script>
 <script>
 const toggle = document.getElementById('nav-toggle');
 toggle.addEventListener('click', () => {{
