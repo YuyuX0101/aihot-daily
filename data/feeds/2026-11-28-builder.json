@@ -3,7 +3,7 @@
   "edition_date": "2026-11-28",
   "channel": "builder",
   "source": "builder-digest",
-  "generated_at": "2026-11-28T20:43:52+08:00",
+  "generated_at": "2026-11-28T22:13:33+08:00",
   "items": [
     {
       "id": "builder:2125788901122216173",
@@ -647,6 +647,150 @@
       "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
       "score": 81,
       "playable_url": "https://anterm.app"
+    },
+    {
+      "id": "builder:2126665318089232491",
+      "title": "MultAI：把队友拉进同一场 AI 编程会话",
+      "summary": "队友用浏览器加入你正在跑的 agent 会话，阅读摘要并下达指示；代码和密钥留在你的电脑上，命令都要你批准后才执行。",
+      "source_url": "https://x.com/aryagupta_ag/status/2126665318089232491",
+      "playable_url": "https://multai.si",
+      "author": "@aryagupta_ag",
+      "published_at": "2026-11-28T13:11:38.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称因父亲用 AI 编程卡住却无法加入会话，于是做了 MultAI：队友从浏览器加入现场会话，每步由主机批准，代码仍留在本地。",
+      "verified_evidence": "本轮打开了作者原帖和 https://multai.si 产品页，页面说明与原帖一致；未安装桌面应用，也未实测会话协作。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "产品页写明面向 Apple silicon 的桌面应用，尚未代码签名，需在系统设置里允许一次。未实测。",
+      "score": 88
+    },
+    {
+      "id": "builder:2126658267426521093",
+      "title": "mastery-checkpoint：做完一步先测验再往下",
+      "summary": "这是给 Claude Code 的 skill。每完成一项任务会更新项目地图和说明，再用三道题考你，通过后才允许进入下一步。",
+      "source_url": "https://x.com/alpsei06/status/2126658267426521093",
+      "repo_url": "https://github.com/alpsei/mastery-checkpoint",
+      "author": "@alpsei06",
+      "published_at": "2026-11-28T12:43:37.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称 AI 写完代码后自己看不懂，于是做了这个 skill：任务结束后更新可点击的项目地图，并用测验拦住下一步。",
+      "verified_evidence": "本轮打开了作者原帖和 GitHub 仓库及 README；仓库创建于 2026-11-28，README 与原帖描述一致。未在 Claude Code 中安装或实测。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "开源 skill，需自行克隆到 Claude Code 的 skills 目录。未实测。",
+      "score": 87
+    },
+    {
+      "id": "builder:2126675854893924689",
+      "title": "Proof Duels：用真正的 Lean 代码来对决证明",
+      "summary": "可在 Windows 和 macOS 下载。游戏里要用 Lean 4 写出证明步骤，由自带的 Lean 检查对错，适合刚接触定理证明的人。",
+      "source_url": "https://x.com/IndexVirtualis/status/2126675854893924689",
+      "playable_url": "https://fawnlonlon.itch.io/proof-duels",
+      "author": "@IndexVirtualis",
+      "published_at": "2026-11-28T13:53:30.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称做了一款用真实 Lean 代码检查证明的小游戏，可免费下载，并提到可用它学习定理证明基础。",
+      "verified_evidence": "本轮打开了作者原帖和 itch.io 页面 Proof Duels。页面显示约 1 天前发布，提供 Windows 与 macOS 下载，并写明捆绑 Lean 4、拒收 sorry。未下载或试玩。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "安装包较大（页面写 Windows 约 1GB、macOS 约 735MB）。itch 页面标注约 2026-11-27 发布，本轮分享在今晚窗口内。未实测。",
+      "score": 86
+    },
+    {
+      "id": "builder:2126677868763857373",
+      "title": "RENAT：在隔离环境里抢救坏掉的仓库",
+      "summary": "Hacksgiving 作品。它在 Fly.io Sprite 里复现仓库故障、尝试可回滚的小修补，并给出可审查补丁和核验证据。",
+      "source_url": "https://x.com/banks_crypt/status/2126677868763857373",
+      "repo_url": "https://github.com/banks02/renat",
+      "author": "@banks_crypt",
+      "published_at": "2026-11-28T14:01:30.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称 RENAT 能在 Fly.io Sprite 上复现缺陷、回滚到检查点，并用 7 项测试和 4 项独立检查验证补丁。",
+      "verified_evidence": "本轮打开了作者原帖和 GitHub README。作者在仓库中记录了一次成功复活的演示，也写明另一个示例仓库未能恢复。未自行复现。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "Hacksgiving 2026 项目。作者披露并非所有示例都修复成功，且不会自动推送补丁。未实测。",
+      "score": 85
+    },
+    {
+      "id": "builder:2126667451064823870",
+      "title": "Perjury：评论一句就核对 PR 里的每句承诺",
+      "summary": "在 Pull Request 里评论 /perjury 后，它会在可回滚的隔离环境里跑检查，逐条对照描述是否属实，再把裁决写回同一条 PR。",
+      "source_url": "https://x.com/anishtDev07/status/2126667451064823870",
+      "repo_url": "https://github.com/singhAmandeep007/perjury",
+      "author": "@anishtDev07",
+      "published_at": "2026-11-28T13:20:06.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称在 PR 评论 /perjury 后，陪审会在 Fly.io Sprite 上检查描述里的每项声明，检查结束后环境会被回滚。",
+      "verified_evidence": "本轮打开了作者原帖和 GitHub README，仓库创建于 2026-11-28，说明与原帖一致，并链到示例 PR。未在真实仓库启用或实测。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "Hacksgiving 2026 项目。需要 GitHub webhook 与 Fly.io Sprite。未实测。",
+      "score": 84
+    },
+    {
+      "id": "builder:2126670696302711234",
+      "title": "Origins: Polygon Uprising：能在浏览器里开玩的太空射击",
+      "summary": "用 three.js 和 Gemini 做的肉鸽太空射击，目前开放第一星区，可在浏览器里直接玩，支持键鼠或手柄。",
+      "source_url": "https://x.com/AureliusBuilds/status/2126670696302711234",
+      "playable_url": "https://opengame.io/g/ph5y4e43wx",
+      "author": "@AureliusBuilds",
+      "published_at": "2026-11-28T13:33:00.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称新游戏已上线，用 three.js 和 Gemini 制作，可在浏览器游玩第一星区的程序化任务、Boss 与技能。",
+      "verified_evidence": "本轮打开了作者原帖和 https://opengame.io/g/ph5y4e43wx 游戏页，标题为 Origins: Polygon Uprising，标为可玩的 Jam 参赛作品。未进入关卡试玩。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "托管在 opengame.io 的 Game Jam 条目。未实测手感或关卡完整性。",
+      "score": 83
+    },
+    {
+      "id": "builder:2126677351450984847",
+      "title": "Pigeon Pals：浏览器里的屋顶养鸽小游戏",
+      "summary": "作者上线了可直接打开的网页测试版，在屋顶鸽棚里照顾鸽子，并邀请玩家在不同鸽子之间选边。",
+      "source_url": "https://x.com/PigeonPalsGame/status/2126677351450984847",
+      "playable_url": "https://pigeon-pals-beta.pages.dev/?src=x-ss1128",
+      "author": "@PigeonPalsGame",
+      "published_at": "2026-11-28T13:59:26.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称这是自己做的屋顶养鸽小游戏，可在浏览器免费游玩。",
+      "verified_evidence": "本轮打开了作者原帖和 https://pigeon-pals-beta.pages.dev 测试页，页面标题为 PIGEON PALS；抓取时主要看到加载文案，未进入实际玩法。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "Cloudflare Pages 测试版地址。页面是前端应用，本轮未确认关卡或存档是否可用。",
+      "score": 82
+    },
+    {
+      "id": "builder:2126655996856783305",
+      "title": "Bones：一套骨架做出两款可离线用的小应用",
+      "summary": "Kiroween 黑客松作品。同一套约 120 行、无依赖的 JS 骨架，长出印尼小吃摊记账本和间隔重复单词卡，官方页可直接试用。",
+      "source_url": "https://x.com/Oxdeva/status/2126655996856783305",
+      "playable_url": "https://deva1999.github.io/kiroween-bones/",
+      "author": "@Oxdeva",
+      "published_at": "2026-11-28T12:34:35.000Z",
+      "verified_at": "2026-11-28T22:13:33+08:00",
+      "author_claim": "作者称用一套零依赖的 JS 骨架做出 WarungLedger 日记账和 KartuKu 间隔重复卡片，两款应用都可离线使用，并提供了在线演示。",
+      "verified_evidence": "本轮打开了作者原帖和 https://deva1999.github.io/kiroween-bones/ 演示页，页面列出两款应用及离线说明。未实际记账或背单词。",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ],
+      "notes": "Kiroween 2026 黑客松参赛页。未实测离线能力和数据持久化。",
+      "score": 82
     }
   ],
   "source_meta": {
@@ -692,6 +836,7 @@
         },
         "count": 8
       }
-    ]
+    ],
+    "evening_2200_note": "Evening 22:00 window append only. Window 2026-11-28T20:32:02+08:00 to run time. Official daily and previously published builder items were not rewritten. Deals had no new verifiable opportunity in this window."
   }
 }

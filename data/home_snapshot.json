@@ -3,10 +3,114 @@
   "edition_url": "e/2026-11-28.html",
   "counts": {
     "daily": 3,
-    "builder": 32,
+    "builder": 40,
     "deals": 0
   },
   "builder_items": [
+    {
+      "id": "builder:2126665318089232491",
+      "title": "MultAI：把队友拉进同一场 AI 编程会话",
+      "author": "@aryagupta_ag",
+      "source_url": "https://x.com/aryagupta_ag/status/2126665318089232491",
+      "playable_url": "https://multai.si",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 21:11 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
+    {
+      "id": "builder:2126658267426521093",
+      "title": "mastery-checkpoint：做完一步先测验再往下",
+      "author": "@alpsei06",
+      "source_url": "https://x.com/alpsei06/status/2126658267426521093",
+      "playable_url": null,
+      "repo_url": "https://github.com/alpsei/mastery-checkpoint",
+      "published_beijing": "2026-11-28 20:43 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
+    {
+      "id": "builder:2126675854893924689",
+      "title": "Proof Duels：用真正的 Lean 代码来对决证明",
+      "author": "@IndexVirtualis",
+      "source_url": "https://x.com/IndexVirtualis/status/2126675854893924689",
+      "playable_url": "https://fawnlonlon.itch.io/proof-duels",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 21:53 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
+    {
+      "id": "builder:2126677868763857373",
+      "title": "RENAT：在隔离环境里抢救坏掉的仓库",
+      "author": "@banks_crypt",
+      "source_url": "https://x.com/banks_crypt/status/2126677868763857373",
+      "playable_url": null,
+      "repo_url": "https://github.com/banks02/renat",
+      "published_beijing": "2026-11-28 22:01 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
+    {
+      "id": "builder:2126667451064823870",
+      "title": "Perjury：评论一句就核对 PR 里的每句承诺",
+      "author": "@anishtDev07",
+      "source_url": "https://x.com/anishtDev07/status/2126667451064823870",
+      "playable_url": null,
+      "repo_url": "https://github.com/singhAmandeep007/perjury",
+      "published_beijing": "2026-11-28 21:20 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
+    {
+      "id": "builder:2126670696302711234",
+      "title": "Origins: Polygon Uprising：能在浏览器里开玩的太空射击",
+      "author": "@AureliusBuilds",
+      "source_url": "https://x.com/AureliusBuilds/status/2126670696302711234",
+      "playable_url": "https://opengame.io/g/ph5y4e43wx",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 21:33 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
+    {
+      "id": "builder:2126655996856783305",
+      "title": "Bones：一套骨架做出两款可离线用的小应用",
+      "author": "@Oxdeva",
+      "source_url": "https://x.com/Oxdeva/status/2126655996856783305",
+      "playable_url": "https://deva1999.github.io/kiroween-bones/",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 20:34 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
+    {
+      "id": "builder:2126677351450984847",
+      "title": "Pigeon Pals：浏览器里的屋顶养鸽小游戏",
+      "author": "@PigeonPalsGame",
+      "source_url": "https://x.com/PigeonPalsGame/status/2126677351450984847",
+      "playable_url": "https://pigeon-pals-beta.pages.dev/?src=x-ss1128",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 21:59 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested"
+      ]
+    },
     {
       "id": "builder:2126590476174405875",
       "title": "Ante：一键切换 Claude Code / Codex 账号的 macOS 终端",
