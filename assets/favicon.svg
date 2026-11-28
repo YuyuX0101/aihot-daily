@@ -1,7 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>AI 日报</title>
-  <rect x="2" y="2" width="60" height="60" rx="17" fill="#18231f"/>
-  <circle cx="38" cy="25" r="11" fill="#d8b66a"/>
-  <path d="M10 48 26 31 38 43 47 34 55 48Z" fill="#f5f3ed"/>
-  <path d="M10 48 26 31 38 43 47 34 55 48" fill="none" stroke="#fffefa" stroke-width="1.5" stroke-linejoin="round"/>
+  <defs>
+    <linearGradient id="ink" x1="12" y1="10" x2="50" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#102a43"/>
+      <stop offset=".55" stop-color="#243b53"/>
+      <stop offset="1" stop-color="#829ab1"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="35" y1="13" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#334e68"/>
+      <stop offset="1" stop-color="#9fb3c8"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#ink)" fill-rule="evenodd" d="M7 55 26.4 10.7c1.7-4 7-4 8.7 0l2.3 5.5-7.8 4.2-2.1-5.4L18.2 39h10.5l4.3 9.5H21.9l-2.4 6.5H7Zm23.2-23h5.1l-2.6-6.4L30.2 32Z"/>
+  <path fill="url(#edge)" d="m35.7 14.2 2.2 5.4L57 55H45.6L29.7 20.4l6-6.2Z"/>
 </svg>

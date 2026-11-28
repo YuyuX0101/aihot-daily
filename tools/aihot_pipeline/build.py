@@ -168,6 +168,7 @@ def update_legacy_ui() -> None:
     for path in paths:
         html = path.read_text(encoding="utf-8")
         original = html
+        html = html.replace('href="assets/favicon.svg"', 'href="assets/favicon.svg?v=2"')
         if "legacy-daily-overlay.css" not in html:
             html = html.replace(
                 "</head>", '<link rel="stylesheet" href="assets/legacy-daily-overlay.css">\n</head>', 1
