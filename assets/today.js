@@ -49,6 +49,7 @@
     const output = panel.querySelector('.channel-content');
     panel.classList.toggle('unpublished', !entries.length);
     panel.classList.toggle('has-many', entries.length >= 4);
+    panel.classList.toggle('has-lots', entries.length >= 10);
     panel.querySelector('.item-total').textContent = context || (entries.length ? entries.length + ' 条' : '暂无收录');
     output.replaceChildren();
     if (!entries.length) {

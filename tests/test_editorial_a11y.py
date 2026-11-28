@@ -63,22 +63,26 @@ class EditorialA11yTests(unittest.TestCase):
         daily = (REPO / "daily" / "index.html").read_text(encoding="utf-8")
         self.assertIn("Character.AI", daily)
         edition_index = (REPO / "e" / "index.html").read_text(encoding="utf-8")
-        self.assertIn("Prompt Puncher", edition_index)
+        self.assertIn('data-date-panel="2026-11-28"', builder)
         self.assertIn('data-url-template="{date}.html"', edition_index)
+        self.assertIn('id="builder"', edition_index)
 
-    def test_home_snapshot_has_real_builder_five(self):
+    def test_home_snapshot_matches_latest_real_edition(self):
         import json
 
+        dates = json.loads((REPO / "data" / "editions_index.json").read_text(encoding="utf-8"))
+        latest = dates[0]
+        edition = json.loads((REPO / "data" / "editions" / f"{latest}.json").read_text(encoding="utf-8"))
         snap = json.loads((REPO / "data" / "home_snapshot.json").read_text(encoding="utf-8"))
-        self.assertEqual(snap["edition_date"], "2026-11-22")
-        self.assertEqual(snap["counts"]["builder"], 5)
-        self.assertEqual(snap["counts"]["deals"], 0)
-        self.assertGreaterEqual(snap["counts"]["daily"], 6)
-        self.assertEqual(snap.get("daily_source_date"), "2026-11-22")
+        self.assertEqual(snap["edition_date"], latest)
+        for channel in ("daily", "builder", "deals"):
+            expected = len(edition["channels"][channel].get("items") or [])
+            self.assertEqual(snap["counts"][channel], expected)
+        self.assertEqual(snap.get("daily_source_date"), latest)
         self.assertTrue(
             (snap.get("daily_official_page") or "").startswith("https://aihot.news/daily/")
         )
-        self.assertEqual(len(snap["builder_items"]), 5)
+        self.assertEqual(len(snap["builder_items"]), snap["counts"]["builder"])
         for item in snap["builder_items"]:
             self.assertTrue(item.get("source_url", "").startswith("https://"))
             self.assertIn("北京时间", item.get("published_beijing") or "")
