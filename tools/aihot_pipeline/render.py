@@ -77,8 +77,13 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
     category, intro = PROJECT_DESCRIPTIONS.get(
         item.get("id"), ("", item.get("summary") or item.get("author_claim") or "")
     )
-    name = title.partition("：")[0] if category else title
+    name = title
     intro = intro.removeprefix("【速报转载 · 未独立核验 · 未实测】").lstrip()
+    project_name, separator, tagline = title.partition("：")
+    if separator and project_name.strip() and tagline.strip():
+        name = project_name.strip()
+        if intro.strip() == title:
+            intro = tagline.strip()
     links = "".join([
         _safe_link(item.get("playable_url"), "打开作品"),
         _safe_link(item.get("source_url"), "作者原帖"),
@@ -319,7 +324,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-4">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-5">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>

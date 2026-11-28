@@ -140,6 +140,6 @@ def build_home() -> str:
 """ + '<div class="left-column">' + sections["daily"] + sections["deals"] + '</div>' + sections["builder"] + """</div>
 <nav class="section-dock" aria-label="跳至本期栏目"><a href="#daily">AIHOT</a><a href="#builder">作品</a><a href="#deals">羊毛</a></nav>
 <noscript>请启用 JavaScript 查看北京时间当天的内容，或使用各栏目归档入口。</noscript>
-<script src="assets/today.js?v=9" defer></script>"""
+<script src="assets/today.js?v=10" defer></script>"""
     return page_shell(title="AI 日报 · 每日新知", kicker="", heading="", lead="", body=body,
                       active_nav="home", css_href="assets/editorial.css", home_href="index.html")

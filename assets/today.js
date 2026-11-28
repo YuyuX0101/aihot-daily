@@ -144,9 +144,19 @@
             href
           };
         }
+        let title = item.title;
+        let summary = (item.summary || item.author_claim || item.notes || '').replace(/^【速报转载 · 未独立核验 · 未实测】\s*/, '');
+        if (key === 'builder' && item.title.includes('：')) {
+          const [name, ...rest] = item.title.split('：');
+          const tagline = rest.join('：').trim();
+          if (name.trim() && tagline) {
+            title = name.trim();
+            if (!summary || summary === item.title) summary = tagline;
+          }
+        }
         return {
-          title: item.title,
-          summary: (item.summary || item.author_claim || item.notes || '').replace(/^【速报转载 · 未独立核验 · 未实测】\s*/, ''),
+          title,
+          summary,
           meta: key === 'builder' ? (item.author ? '作者 · ' + item.author : '独立开发者作品') : '优惠详情与适用条件见期次页',
           href
         };

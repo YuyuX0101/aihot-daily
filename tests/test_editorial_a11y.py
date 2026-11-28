@@ -61,6 +61,8 @@ class EditorialA11yTests(unittest.TestCase):
         builder = (REPO / "builder" / "index.html").read_text(encoding="utf-8")
         self.assertIn("Prompt Puncher", builder)
         self.assertNotIn("【速报转载 · 未独立核验 · 未实测】", builder)
+        self.assertIn("<h3>SwiftWin Studio</h3>", builder)
+        self.assertIn("在 Windows 上编译运行 SwiftUI", builder)
         daily = (REPO / "daily" / "index.html").read_text(encoding="utf-8")
         self.assertIn("Character.AI", daily)
         edition_index = (REPO / "e" / "index.html").read_text(encoding="utf-8")
