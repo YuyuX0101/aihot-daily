@@ -13,13 +13,6 @@ CHANNEL_TITLES = {
     "deals": "AI 羊毛雷达",
 }
 
-TAG_LABELS = {
-    "untested": "未实测",
-    "hearsay": "二手转述",
-    "aihot_repost": "AIHOT 转载",
-    "unverified_upstream": "未独立核验",
-}
-
 # Editorial descriptions of the November 22 projects.
 # New projects use the title, description and creator supplied by their feed.
 PROJECT_DESCRIPTIONS = {
@@ -47,13 +40,6 @@ def date_select(dates: list[str], current: str, *, url_template: str | None = No
     return (
         '<label class="date-picker"><span>日期</span>'
         f'<select data-date-picker{navigation} aria-label="选择内容日期">{options}</select></label>'
-    )
-
-
-def _tags_html(tags: list[str] | None) -> str:
-    return " ".join(
-        f'<span class="tag">{TAG_LABELS[t]}</span>'
-        for t in tags or [] if t in TAG_LABELS
     )
 
 
@@ -104,7 +90,7 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
             details = '<details><summary>查看来源说明</summary>' + "".join(parts) + "</details>"
     anchor = f' id="{escape_text(item["id"])}"' if detailed and item.get("id") else ""
     return f'''<article class="project"{anchor}>
-<div class="project-body"><div class="project-kind">{escape_text(category)} {_tags_html(item.get("verification_tags"))}</div>
+<div class="project-body"><div class="project-kind">{escape_text(category)}</div>
 <h3>{escape_text(name)}</h3><p class="intro">{escape_text(intro)}</p>
 <div class="creator">{escape_text(item.get("author") or "")}<small>{escape_text(published)}</small></div>
 <div class="actions">{links}</div>{details}</div></article>'''
@@ -124,7 +110,6 @@ def render_item(item: dict[str, Any], channel: str) -> str:
     notes = escape_text(item.get("notes") or "")
     published = format_beijing(item.get("published_at") or "")
     verified = format_beijing(item.get("verified_at") or "")
-    tags = _tags_html(item.get("verification_tags"))
     is_daily = channel == "daily"
 
     meta_parts = []
@@ -142,8 +127,6 @@ def render_item(item: dict[str, Any], channel: str) -> str:
         meta_parts.append(
             f"<span>{'摄取' if is_daily else '核查'} {escape_text(verified)}</span>"
         )
-    if tags:
-        meta_parts.append(tags)
     meta_html = f'<div class="item-meta">{"".join(meta_parts)}</div>' if meta_parts else ""
 
     claim = item.get("author_claim") or ""
@@ -324,7 +307,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-10">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-11">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>

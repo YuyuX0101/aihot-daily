@@ -81,7 +81,7 @@ class TagSemanticsTests(unittest.TestCase):
             validate_feed(raw)
         self.assertIn("forbidden", str(ctx.exception).lower())
 
-    def test_allowed_honesty_tags_render_labels(self):
+    def test_honesty_details_without_visible_tag_cluster(self):
         html = render_item(
             {
                 "id": "builder:1",
@@ -96,7 +96,7 @@ class TagSemanticsTests(unittest.TestCase):
         self.assertIn("作者声明", html)
         self.assertIn("核验正文证据", html)
         self.assertIn("页面可达", html)
-        self.assertIn("未实测", html)
+        self.assertNotIn('class="tag"', html)
         self.assertNotIn(">verified<", html.lower())
 
 
@@ -333,7 +333,7 @@ class CommittedSiteAcceptanceTests(unittest.TestCase):
         self.assertIn("北京时间", page)
         self.assertIn("作者声明", page)
         self.assertIn("核验正文证据", page)
-        self.assertIn("未实测", page)
+        self.assertNotIn('class="tag"', page)
         self.assertNotIn("example.com", page)
         self.assertNotIn("OpenClaw", page)
         self.assertNotIn("LLM 推理额度", page)

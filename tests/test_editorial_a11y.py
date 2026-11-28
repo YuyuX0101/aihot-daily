@@ -68,6 +68,7 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn("daily-reading-item", daily)
         self.assertNotIn('class="claim-box"', daily)
         self.assertIn("原始来源", daily)
+        self.assertNotIn("<h1>AI 日报</h1>", daily)
         self.assertIn("https://mp.weixin.qq.com", daily)
         edition_index = (REPO / "e" / "index.html").read_text(encoding="utf-8")
         self.assertIn('data-date-panel="2026-11-28"', builder)

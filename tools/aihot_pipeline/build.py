@@ -119,10 +119,7 @@ def build_channel_index(channel: str, dates: list[str]) -> str:
         )
     title = "AI Builder" if channel == "builder" else "羊毛雷达"
     if dates:
-        toolbar = (
-            f'<div class="page-toolbar">{date_select(dates, dates[0])}'
-            '<p class="issue-overview">默认展示最新一期，选择日期查看往期。</p></div>'
-        )
+        toolbar = f'<div class="page-toolbar">{date_select(dates, dates[0])}</div>'
         body = toolbar + "\n".join(panels)
     else:
         body = '<p class="empty">暂无内容。将生产 JSON 放入 data/inbox/ 后运行 ingest + build。</p>'

@@ -130,13 +130,10 @@ def daily_archive(days: list[str], edition_days: list[str]) -> str:
         )
     body = ""
     if dates:
-        body += (
-            f'<div class="page-toolbar">{date_select(dates, dates[0])}'
-            '<p class="issue-overview">默认展示最新一期，选择日期阅读往期。</p></div>'
-        ) + "".join(panels)
+        body += f'<div class="page-toolbar">{date_select(dates, dates[0])}</div>' + "".join(panels)
     else:
         body = '<p class="empty">暂无日报。</p>'
-    return page_shell(title="AI 日报", kicker="每日精选", heading="AI 日报",
+    return page_shell(title="AI 日报", kicker="DAILY", heading="AI 行业动态",
                       lead="AI 行业动态、产品更新与前沿研究。",
                       body=body, active_nav="daily")
 
