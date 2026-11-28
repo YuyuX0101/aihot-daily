@@ -48,8 +48,6 @@
     const panel = document.getElementById(channel);
     const output = panel.querySelector('.channel-content');
     panel.classList.toggle('unpublished', !entries.length);
-    panel.classList.toggle('has-many', entries.length >= 4);
-    panel.classList.toggle('has-lots', entries.length >= 10);
     panel.querySelector('.item-total').textContent = context || (entries.length ? entries.length + ' 条' : '暂无收录');
     output.replaceChildren();
     if (!entries.length) {
@@ -75,7 +73,6 @@
     const dailyHeavy = counts.daily >= 7 && counts.daily > counts.builder;
     const flow = document.getElementById('today');
     flow.classList.toggle('daily-heavy', dailyHeavy);
-    flow.classList.toggle('builder-heavy', !dailyHeavy && counts.builder >= 4);
   }
 
   async function get(path, type = 'json') {

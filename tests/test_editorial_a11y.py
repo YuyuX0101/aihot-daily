@@ -26,7 +26,7 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertNotIn("网站预览", html)
         self.assertNotIn("功能预览", html)
         self.assertIn('class="reading-flow"', html)
-        self.assertIn('class="side-column"', html)
+        self.assertIn('class="left-column"', html)
         self.assertNotIn('class="pager"', html)
         self.assertNotIn("上一页", html)
         self.assertIn('id="cover-image"', html)
