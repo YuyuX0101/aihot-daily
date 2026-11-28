@@ -324,7 +324,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-7">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-8">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>
@@ -343,7 +343,7 @@ def page_shell(
 {heading_html}
 {body}
 </main>
-<script src="{css_href.rsplit('/', 1)[0]}/date-picker.js?v=1" defer></script>
+<script src="{css_href.rsplit('/', 1)[0]}/date-picker.js?v=2" defer></script>
 </body>
 </html>
 """

@@ -69,6 +69,12 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn('data-date-panel="2026-11-28"', builder)
         self.assertIn('data-url-template="{date}.html"', edition_index)
         self.assertIn('id="builder"', edition_index)
+        picker_script = (REPO / "assets" / "date-picker.js").read_text(encoding="utf-8")
+        self.assertIn("enhanceSelect", picker_script)
+        self.assertIn("Escape", picker_script)
+        css = (REPO / "assets" / "editorial.css").read_text(encoding="utf-8")
+        self.assertIn(".select-menu", css)
+        self.assertIn(".select-trigger:focus-visible", css)
 
     def test_home_snapshot_matches_latest_real_edition(self):
         import json

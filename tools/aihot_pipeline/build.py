@@ -185,9 +185,10 @@ def update_legacy_ui() -> None:
             '<div class="nav-brand"><em>AI</em> <span>HOT</span></div>',
             '<div class="nav-brand">AI 日报</div>',
         )
+        html = re.sub(r'assets/date-picker\.js(?:\?v=\d+)?', 'assets/date-picker.js?v=2', html)
         if "assets/date-picker.js" not in html:
             html = html.replace(
-                "</head>", '<script src="assets/date-picker.js?v=1" defer></script>\n</head>', 1
+                "</head>", '<script src="assets/date-picker.js?v=2" defer></script>\n</head>', 1
             )
         if html != original:
             path.write_text(html, encoding="utf-8")
