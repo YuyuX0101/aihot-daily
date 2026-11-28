@@ -92,7 +92,8 @@ button,select { font:inherit; }
 .inner-heading h1 { margin:0; font:650 clamp(1.8rem,3vw,2.2rem)/1.2 var(--font-body); letter-spacing:-.025em; }
 .inner-heading p { margin:0; }
 .inner-heading .page-lead { max-width:32rem; color:var(--ink-secondary); font-size:.8rem; text-align:left; }
-.page-toolbar { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.6rem 0; border-bottom:1px solid var(--rule); }
+.page-toolbar { display:flex; align-items:center; justify-content:flex-end; gap:1rem; padding:.6rem 0; }
+.inner-hero + .page-toolbar { position:relative; z-index:5; margin-top:-3rem; padding:0 0 .6rem; }
 .date-picker { display:inline-flex; align-items:center; gap:.55rem; color:var(--ink-muted); font-size:.72rem; }
 .date-picker select { min-width:9.5rem; padding:.34rem .5rem; border:1px solid var(--rule); border-radius:.4rem; background:transparent; color:var(--ink); cursor:pointer; font-size:.76rem; }
 .date-picker select:hover { border-color:var(--rule-strong); }
@@ -201,6 +202,7 @@ button,select { font:inherit; }
   .entry-meta { font-size:.65rem; }
   .page-toolbar { align-items:flex-start; flex-wrap:wrap; }
   .inner-hero { height:10rem; }
+  .page { padding-bottom:5rem; }
   .inner-hero .inner-heading { padding:1rem 0; }
   .inner-heading { display:block; }
   .inner-heading .page-lead { margin-top:.35rem; text-align:left; }

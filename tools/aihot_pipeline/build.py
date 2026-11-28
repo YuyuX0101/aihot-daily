@@ -18,8 +18,8 @@ from .paths import (
     EDITIONS_DIR,
     REPO_ROOT,
 )
-from .render import CHANNEL_TITLES, date_select, page_shell, project_grid, render_channel_section, render_item
-from .sanitize import escape_text
+from .render import date_select, page_shell, project_grid, render_item
+from .sanitize import escape_text, validate_url
 
 
 def _counts(edition: dict[str, Any]) -> dict[str, int]:
@@ -40,6 +40,83 @@ def latest_legacy_daily(before_or_on: str | None = None) -> str | None:
     return days[0] if days else None
 
 
+def _entry_href(*urls: str | None) -> str:
+    for url in urls:
+        try:
+            href = validate_url(url)
+        except Exception:
+            href = None
+        if href:
+            return href
+    return ""
+
+
+def _compact_entry(item: dict[str, Any], channel: str) -> str:
+    title = item.get("title") or ""
+    summary = (item.get("summary") or item.get("author_claim") or "").removeprefix(
+        "【速报转载 · 未独立核验 · 未实测】"
+    ).strip()
+    if channel == "builder" and "：" in title:
+        name, tagline = title.split("：", 1)
+        if name.strip() and tagline.strip():
+            title = name.strip()
+            if not summary or summary == item.get("title"):
+                summary = tagline.strip()
+    href = _entry_href(item.get("playable_url"), item.get("source_url"))
+    source_href = _entry_href(item.get("source_url")) if channel != "daily" else href
+    if channel == "builder":
+        source_label = "作者原帖"
+        meta = item.get("author") or "独立开发者作品"
+    elif channel == "daily":
+        source_label = "原始来源" if item.get("playable_url") else "AIHOT 条目"
+        meta = item.get("author") or "AIHOT"
+        summary = ""
+    else:
+        source_label = "查看来源"
+        meta = "优惠条件与适用期限见来源"
+    title_html = escape_text(title)
+    if href:
+        title_html = (
+            f'<a class="entry-title" href="{escape_text(href)}" target="_blank" '
+            f'rel="noopener noreferrer"><strong>{title_html}</strong></a>'
+        )
+    else:
+        title_html = f"<strong>{title_html}</strong>"
+    summary_html = f'<span class="entry-summary">{escape_text(summary)}</span>' if summary else ""
+    source_html = ""
+    if source_href:
+        source_html = (
+            '<div class="entry-actions">'
+            f'<a class="entry-source" href="{escape_text(source_href)}" target="_blank" '
+            f'rel="noopener noreferrer">{source_label}</a></div>'
+        )
+    return (
+        '<article class="desk-entry"><div class="entry-copy">'
+        f'{title_html}{summary_html}<small class="entry-meta">{escape_text(meta)}</small>'
+        f'{source_html}</div></article>'
+    )
+
+
+def _compact_section(
+    channel: str,
+    index: str,
+    english: str,
+    title: str,
+    items: list[dict[str, Any]],
+    empty_message: str,
+) -> str:
+    archive = {"daily": "../daily/index.html", "builder": "../builder/index.html", "deals": "../deals/index.html"}[channel]
+    archive_label = {"daily": "全部日报", "builder": "全部作品", "deals": "全部优惠"}[channel]
+    content = "".join(_compact_entry(item, channel) for item in items)
+    if not items:
+        content = f'<p class="empty-message">{escape_text(empty_message)}</p>'
+    boundary = '<p class="reading-boundary">AIHOT 转载，未独立核验；刊期不等于原文发布时间。</p>' if channel == "daily" else ""
+    return f'''<section id="{channel}" class="news-section desk-{channel}" aria-labelledby="{channel}-title">
+<header class="section-heading"><div><p class="section-index">{index} / {english}</p><h2 id="{channel}-title">{title}</h2></div>
+<div class="section-aside"><small class="item-total">{len(items)} 条</small><a class="archive-link" href="{archive}">{archive_label}</a></div></header>
+{boundary}<div class="channel-content">{content}</div></section>'''
+
+
 def build_edition_page(
     edition: dict[str, Any], available_dates: list[str] | None = None
 ) -> str:
@@ -51,35 +128,28 @@ def build_edition_page(
 
     legacy_same_day = ""
     legacy_path = REPO_ROOT / f"{date}.html"
-    legacy_href_for_empty = None
     if legacy_path.exists():
         legacy_same_day = (
-            f'<p class="legacy-note">同日历史日报页仍保留：'
-            f'<a href="../{escape_text(date)}.html">{escape_text(date)}.html</a>'
-            f"（原 URL 不变）</p>"
-        )
-        legacy_href_for_empty = f"../{date}.html"
-    else:
-        latest = latest_legacy_daily(before_or_on=date)
-        if latest:
-            legacy_href_for_empty = f"../{latest}.html"
-
-    sections = []
-    for ch in ("daily", "builder", "deals"):
-        bucket = channels.get(ch) or {}
-        sections.append(
-            render_channel_section(
-                ch,
-                bucket.get("items") or [],
-                meta=bucket.get("meta") or {},
-                legacy_daily_href=legacy_href_for_empty if ch == "daily" else None,
-            )
+            f'<p class="legacy-note">同日历史日报：'
+            f'<a href="../{escape_text(date)}.html">{escape_text(date)}.html</a></p>'
         )
 
-    overview = f'日报 {counts["daily"]} · AI Builder {counts["builder"]} · 羊毛 {counts["deals"]}'
+    daily_items = (channels.get("daily") or {}).get("items") or []
+    builder_items = (channels.get("builder") or {}).get("items") or []
+    deals_items = (channels.get("deals") or {}).get("items") or []
+    daily_empty = ((channels.get("daily") or {}).get("meta") or {}).get("empty_message") or "本期暂无 AI 动态。"
+    builder_empty = "本期暂无作品记录。"
+    deals_empty = ((channels.get("deals") or {}).get("meta") or {}).get("empty_message") or "本期暂无优惠记录。"
+    daily = _compact_section("daily", "01", "DAILY", "AIHOT", daily_items, daily_empty)
+    builder = _compact_section("builder", "02", "MAKERS", "AI Builder", builder_items, builder_empty)
+    deals = _compact_section("deals", "03", "DEALS", "羊毛雷达", deals_items, deals_empty)
+    daily_heavy = " daily-heavy" if counts["daily"] >= 7 and counts["daily"] > counts["builder"] else ""
     body = (
-        f'<div class="page-toolbar">{date_select(dates, date, url_template="{date}.html")}'
-        f'<p class="issue-overview">{overview}</p></div>\n' + "\n".join(sections)
+        f'<div class="page-toolbar">{date_select(dates, date, url_template="{date}.html")}</div>'
+        f'<div class="reading-flow{daily_heavy}" aria-label="{escape_text(date)} 统一期次">'
+        f'<div class="left-column">{daily}{deals}</div>{builder}</div>'
+        '<nav class="section-dock" aria-label="跳至本期栏目"><a href="#daily">AIHOT</a>'
+        '<a href="#builder">作品</a><a href="#deals">羊毛</a></nav>'
     )
     if legacy_same_day:
         body += "\n" + legacy_same_day
