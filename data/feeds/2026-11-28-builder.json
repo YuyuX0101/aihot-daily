@@ -3,7 +3,7 @@
   "edition_date": "2026-11-28",
   "channel": "builder",
   "source": "builder-digest",
-  "generated_at": "2026-11-28T16:16:38+08:00",
+  "generated_at": "2026-11-28T20:43:52+08:00",
   "items": [
     {
       "id": "builder:2125788901122216173",
@@ -486,10 +486,171 @@
       "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-26 晚至 11-27 的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
       "score": 73,
       "repo_url": "https://github.com/Dadon-11/SwiftWin-Studio"
+    },
+    {
+      "id": "builder:2126338898959958133",
+      "title": "织物实验室 Filament：能上手撕的布料互动",
+      "summary": "浏览器里即可打开的布料互动实验室，可以拉扯、撕开不同材质，观察织物在外力下的反应，适合直接上手体验。",
+      "source_url": "https://x.com/liyue_ai/status/2126338898959958133",
+      "author": "@liyue_ai",
+      "published_at": "2026-11-27T15:34:33.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "织物实验室 Filament：能上手撕的布料互动",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 74,
+      "playable_url": "https://play.liyue.io/filament/"
+    },
+    {
+      "id": "builder:2126345790603809138",
+      "title": "Sherwood：给财报算账，并标出数字出处",
+      "summary": "贴一段财报摘录后，它会完成计算并标出用到的数字出处，同时提供只读 MCP 工具，方便核对演算过程。",
+      "source_url": "https://x.com/MerrymenAI/status/2126345790603809138",
+      "author": "@MerrymenAI",
+      "published_at": "2026-11-27T16:01:56.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "Sherwood：给财报算账，并标出数字出处",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 75,
+      "repo_url": "https://github.com/Merrymen-Labs/sherwood"
+    },
+    {
+      "id": "builder:2126418237634044190",
+      "title": "rust-use：让 agent 用更少步骤驱动 GPUI 界面",
+      "summary": "面向 GPUI 界面的开源工具，让 agent 用更少步骤完成操作。作者用同一套象棋和小提示对比，称通用 MCP 需要 70 次调用，这套只需 3 次。",
+      "source_url": "https://x.com/KhalidDevLog/status/2126418237634044190",
+      "author": "@KhalidDevLog",
+      "published_at": "2026-11-27T20:49:49.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "rust-use：让 agent 用更少步骤驱动 GPUI 界面",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 76,
+      "repo_url": "https://github.com/better-vault/rust-use"
+    },
+    {
+      "id": "builder:2126428364940734666",
+      "title": "今天吃什么：边配菜边管热量的健康饮食小游戏",
+      "summary": "打开即可游玩的配餐小游戏，共五关、七顿饭，需要同时兼顾饱腹、热量、营养和食物相克。",
+      "source_url": "https://x.com/zihao_ZiO/status/2126428364940734666",
+      "author": "@zihao_ZiO",
+      "published_at": "2026-11-27T21:30:03.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "今天吃什么：边配菜边管热量的健康饮食小游戏",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 77,
+      "playable_url": "https://www.bilibili.com/toy/today-eat/index.html"
+    },
+    {
+      "id": "builder:2126433366266585484",
+      "title": "open-igi：把 Project I.G.I. 搬进浏览器的干净室引擎",
+      "summary": "一套干净室实现的网页引擎，使用你自己持有的游戏文件，即可在浏览器中游玩 Project I.G.I.。",
+      "source_url": "https://x.com/apekshik/status/2126433366266585484",
+      "author": "@apekshik",
+      "published_at": "2026-11-27T21:49:56.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "open-igi：把 Project I.G.I. 搬进浏览器的干净室引擎",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 78,
+      "playable_url": "https://freeigi.com",
+      "repo_url": "https://github.com/apekshik/open-igi"
+    },
+    {
+      "id": "builder:2126456247821926410",
+      "title": "fab-asset-prep：把 AI 三维模型整理成能上架的 Claude skill",
+      "summary": "开源的 Claude skill，用来自动修整 AI 生成的三维模型，按真实比例导出 FBX 或 GLB，并打包、撰写上架文案。",
+      "source_url": "https://x.com/LamineBelhadj4/status/2126456247821926410",
+      "author": "@LamineBelhadj4",
+      "published_at": "2026-11-27T23:20:51.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "fab-asset-prep：把 AI 三维模型整理成能上架的 Claude skill",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 79,
+      "repo_url": "https://github.com/LamineBelhadj/fab-asset-prep"
+    },
+    {
+      "id": "builder:2126566358762897587",
+      "title": "Tresmith：给 Godot 4 做游戏风 UI 主题",
+      "summary": "打开网页即可在实时游戏画面上调整颜色、边框和字体，无需注册，调完可以导出 Godot 4 使用的 theme.tres 主题文件。",
+      "source_url": "https://x.com/LohaniDamodar/status/2126566358762897587",
+      "author": "@LohaniDamodar",
+      "published_at": "2026-11-28T06:38:24.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "Tresmith：给 Godot 4 做游戏风 UI 主题",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 80,
+      "playable_url": "https://tresmith.appwrite.network"
+    },
+    {
+      "id": "builder:2126590476174405875",
+      "title": "Ante：一键切换 Claude Code / Codex 账号的 macOS 终端",
+      "summary": "面向 macOS 的终端工具，可在额度用尽时切换 Claude Code 或 Codex 账号，并在同一段对话中继续，MCP 与设置也会保留。",
+      "source_url": "https://x.com/ishangupta_1/status/2126590476174405875",
+      "author": "@ishangupta_1",
+      "published_at": "2026-11-28T08:14:14.000Z",
+      "verified_at": "2026-11-28T20:43:52+08:00",
+      "author_claim": "Ante：一键切换 Claude Code / Codex 账号的 macOS 终端",
+      "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ],
+      "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+      "score": 81,
+      "playable_url": "https://anterm.app"
     }
   ],
   "source_meta": {
-    "note": "Assembled from on-box builder digest delivered JSON (unpublished since 11-22 site edition). No new page/repo reachability checks this run.",
+    "note": "Assembled from on-box builder digest delivered JSON. Kept the previously published 24 items from 11-26 evening through 11-27, and appended 8 items from the 11-28 evening digest. No new page/repo reachability checks this run.",
     "sources": [
       {
         "file": "/workspace/ai-builder-digest-20261126pm/delivered-20261126pm.json",
@@ -518,6 +679,16 @@
           "start": "2026-11-27T09:48:29+08:00",
           "end": "2026-11-27T20:46:53+08:00",
           "note": "承接今早档覆盖终点至本次晚上北京时间；约 11 小时"
+        },
+        "count": 8
+      },
+      {
+        "file": "/workspace/ai-builder-digest-20261128pm/delivered-20261128pm.json",
+        "last_run_at": "2026-11-28T20:32:02+08:00",
+        "window": {
+          "start": "2026-11-27T20:46:53+08:00",
+          "end": "2026-11-28T20:32:02+08:00",
+          "note": "承接昨晚档覆盖终点至本次晚上北京时间；今早档未留下窗口，故覆盖约 24 小时"
         },
         "count": 8
       }

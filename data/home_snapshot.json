@@ -3,10 +3,130 @@
   "edition_url": "e/2026-11-28.html",
   "counts": {
     "daily": 3,
-    "builder": 24,
+    "builder": 32,
     "deals": 0
   },
   "builder_items": [
+    {
+      "id": "builder:2126590476174405875",
+      "title": "Ante：一键切换 Claude Code / Codex 账号的 macOS 终端",
+      "author": "@ishangupta_1",
+      "source_url": "https://x.com/ishangupta_1/status/2126590476174405875",
+      "playable_url": "https://anterm.app",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 16:14 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126566358762897587",
+      "title": "Tresmith：给 Godot 4 做游戏风 UI 主题",
+      "author": "@LohaniDamodar",
+      "source_url": "https://x.com/LohaniDamodar/status/2126566358762897587",
+      "playable_url": "https://tresmith.appwrite.network",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 14:38 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126456247821926410",
+      "title": "fab-asset-prep：把 AI 三维模型整理成能上架的 Claude skill",
+      "author": "@LamineBelhadj4",
+      "source_url": "https://x.com/LamineBelhadj4/status/2126456247821926410",
+      "playable_url": null,
+      "repo_url": "https://github.com/LamineBelhadj/fab-asset-prep",
+      "published_beijing": "2026-11-28 07:20 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126433366266585484",
+      "title": "open-igi：把 Project I.G.I. 搬进浏览器的干净室引擎",
+      "author": "@apekshik",
+      "source_url": "https://x.com/apekshik/status/2126433366266585484",
+      "playable_url": "https://freeigi.com",
+      "repo_url": "https://github.com/apekshik/open-igi",
+      "published_beijing": "2026-11-28 05:49 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126428364940734666",
+      "title": "今天吃什么：边配菜边管热量的健康饮食小游戏",
+      "author": "@zihao_ZiO",
+      "source_url": "https://x.com/zihao_ZiO/status/2126428364940734666",
+      "playable_url": "https://www.bilibili.com/toy/today-eat/index.html",
+      "repo_url": null,
+      "published_beijing": "2026-11-28 05:30 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126418237634044190",
+      "title": "rust-use：让 agent 用更少步骤驱动 GPUI 界面",
+      "author": "@KhalidDevLog",
+      "source_url": "https://x.com/KhalidDevLog/status/2126418237634044190",
+      "playable_url": null,
+      "repo_url": "https://github.com/better-vault/rust-use",
+      "published_beijing": "2026-11-28 04:49 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126345790603809138",
+      "title": "Sherwood：给财报算账，并标出数字出处",
+      "author": "@MerrymenAI",
+      "source_url": "https://x.com/MerrymenAI/status/2126345790603809138",
+      "playable_url": null,
+      "repo_url": "https://github.com/Merrymen-Labs/sherwood",
+      "published_beijing": "2026-11-28 00:01 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126338898959958133",
+      "title": "织物实验室 Filament：能上手撕的布料互动",
+      "author": "@liyue_ai",
+      "source_url": "https://x.com/liyue_ai/status/2126338898959958133",
+      "playable_url": "https://play.liyue.io/filament/",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 23:34 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
     {
       "id": "builder:2126289053087604987",
       "title": "SwiftWin Studio：在 Windows 上编译运行 SwiftUI，还给 agent 接了 MCP",

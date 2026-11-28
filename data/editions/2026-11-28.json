@@ -1,6 +1,6 @@
 {
   "edition_date": "2026-11-28",
-  "updated_at": "2026-11-28T08:17:34Z",
+  "updated_at": "2026-11-28T12:44:10Z",
   "channels": {
     "daily": {
       "items": [
@@ -10,7 +10,7 @@
           "summary": "【上游报道 · AIHOT 转载 · 未独立核验】作者完整实测支付宝 SkillPay 平台的 Skill 变现流程，该平台7月上线，支持买断和订阅两种售卖模式。买断制将 Skill 完整内容交付本地，订阅制把 Skill 保留在云端沙盒中、Agent 看不到明文；买断定价 0.01-50 元，订阅按周月季度收费上限 50 元，免费试用最低 5 次。",
           "author": "公众号：数字生命卡兹克",
           "published_at": null,
-          "verified_at": "2026-11-28T16:17:34+08:00",
+          "verified_at": "2026-11-28T20:44:10+08:00",
           "verification_tags": [
             "aihot_repost",
             "unverified_upstream",
@@ -30,7 +30,7 @@
           "summary": "【上游报道 · AIHOT 转载 · 未独立核验】OpenBMB 转发并点评上海人工智能实验室 InternLM 团队发布的开源全双工语音视频模型 Sage-Interaction，该模型基于 MiniCPM-o 4.5 构建。OpenBMB 称赞其边说边听、在不打断对话的情况下把复杂任务交给后端模型，是迈向更自然 AI 交互的一步，并向 InternLM 团队致意。",
           "author": "X：面壁智能 OpenBMB (@OpenBMB)",
           "published_at": null,
-          "verified_at": "2026-11-28T16:17:34+08:00",
+          "verified_at": "2026-11-28T20:44:10+08:00",
           "verification_tags": [
             "aihot_repost",
             "unverified_upstream",
@@ -50,7 +50,7 @@
           "summary": "【上游报道 · AIHOT 转载 · 未独立核验】卡兹克分享一个 Antigravity 使用技巧，针对模型长时间闷头干活不输出信息的问题，只需在 GEMINI.md 中加一句话，要求动手前说要做什么、有发现、换方向、卡住或连干四五步时再说一句，即可获得类似 Claude 或 Codex 那种实时汇报进度的交互体验。",
           "author": "X：卡兹克 (@Khazix0918)",
           "published_at": null,
-          "verified_at": "2026-11-28T16:17:34+08:00",
+          "verified_at": "2026-11-28T20:44:10+08:00",
           "verification_tags": [
             "aihot_repost",
             "unverified_upstream",
@@ -74,6 +74,11 @@
         {
           "source": "aihot-news-api-v1-dailies",
           "generated_at": "2026-11-28T16:17:34+08:00",
+          "item_count": 3
+        },
+        {
+          "source": "aihot-news-api-v1-dailies",
+          "generated_at": "2026-11-28T20:44:10+08:00",
           "item_count": 3
         }
       ],
@@ -113,7 +118,7 @@
             "window_start": "2026-11-27T00:00:00.000Z",
             "window_end": "2026-11-28T00:00:00.000Z",
             "error": null,
-            "fetched_at_beijing": "2026-11-28 16:17:30 北京时间",
+            "fetched_at_beijing": "2026-11-28 20:44:07 北京时间",
             "note": "Public REST /api/v1/dailies — anonymous read-only. Not CDP/browser. Not a publish/push/notify action."
           }
         },
@@ -122,6 +127,167 @@
     },
     "builder": {
       "items": [
+        {
+          "id": "builder:2126590476174405875",
+          "title": "Ante：一键切换 Claude Code / Codex 账号的 macOS 终端",
+          "summary": "面向 macOS 的终端工具，可在额度用尽时切换 Claude Code 或 Codex 账号，并在同一段对话中继续，MCP 与设置也会保留。",
+          "source_url": "https://x.com/ishangupta_1/status/2126590476174405875",
+          "author": "@ishangupta_1",
+          "published_at": "2026-11-28T08:14:14.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "Ante：一键切换 Claude Code / Codex 账号的 macOS 终端",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 81,
+          "playable_url": "https://anterm.app"
+        },
+        {
+          "id": "builder:2126566358762897587",
+          "title": "Tresmith：给 Godot 4 做游戏风 UI 主题",
+          "summary": "打开网页即可在实时游戏画面上调整颜色、边框和字体，无需注册，调完可以导出 Godot 4 使用的 theme.tres 主题文件。",
+          "source_url": "https://x.com/LohaniDamodar/status/2126566358762897587",
+          "author": "@LohaniDamodar",
+          "published_at": "2026-11-28T06:38:24.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "Tresmith：给 Godot 4 做游戏风 UI 主题",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 80,
+          "playable_url": "https://tresmith.appwrite.network"
+        },
+        {
+          "id": "builder:2126456247821926410",
+          "title": "fab-asset-prep：把 AI 三维模型整理成能上架的 Claude skill",
+          "summary": "开源的 Claude skill，用来自动修整 AI 生成的三维模型，按真实比例导出 FBX 或 GLB，并打包、撰写上架文案。",
+          "source_url": "https://x.com/LamineBelhadj4/status/2126456247821926410",
+          "author": "@LamineBelhadj4",
+          "published_at": "2026-11-27T23:20:51.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "fab-asset-prep：把 AI 三维模型整理成能上架的 Claude skill",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 79,
+          "repo_url": "https://github.com/LamineBelhadj/fab-asset-prep"
+        },
+        {
+          "id": "builder:2126433366266585484",
+          "title": "open-igi：把 Project I.G.I. 搬进浏览器的干净室引擎",
+          "summary": "一套干净室实现的网页引擎，使用你自己持有的游戏文件，即可在浏览器中游玩 Project I.G.I.。",
+          "source_url": "https://x.com/apekshik/status/2126433366266585484",
+          "author": "@apekshik",
+          "published_at": "2026-11-27T21:49:56.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "open-igi：把 Project I.G.I. 搬进浏览器的干净室引擎",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 78,
+          "playable_url": "https://freeigi.com",
+          "repo_url": "https://github.com/apekshik/open-igi"
+        },
+        {
+          "id": "builder:2126428364940734666",
+          "title": "今天吃什么：边配菜边管热量的健康饮食小游戏",
+          "summary": "打开即可游玩的配餐小游戏，共五关、七顿饭，需要同时兼顾饱腹、热量、营养和食物相克。",
+          "source_url": "https://x.com/zihao_ZiO/status/2126428364940734666",
+          "author": "@zihao_ZiO",
+          "published_at": "2026-11-27T21:30:03.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "今天吃什么：边配菜边管热量的健康饮食小游戏",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 77,
+          "playable_url": "https://www.bilibili.com/toy/today-eat/index.html"
+        },
+        {
+          "id": "builder:2126418237634044190",
+          "title": "rust-use：让 agent 用更少步骤驱动 GPUI 界面",
+          "summary": "面向 GPUI 界面的开源工具，让 agent 用更少步骤完成操作。作者用同一套象棋和小提示对比，称通用 MCP 需要 70 次调用，这套只需 3 次。",
+          "source_url": "https://x.com/KhalidDevLog/status/2126418237634044190",
+          "author": "@KhalidDevLog",
+          "published_at": "2026-11-27T20:49:49.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "rust-use：让 agent 用更少步骤驱动 GPUI 界面",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 76,
+          "repo_url": "https://github.com/better-vault/rust-use"
+        },
+        {
+          "id": "builder:2126345790603809138",
+          "title": "Sherwood：给财报算账，并标出数字出处",
+          "summary": "贴一段财报摘录后，它会完成计算并标出用到的数字出处，同时提供只读 MCP 工具，方便核对演算过程。",
+          "source_url": "https://x.com/MerrymenAI/status/2126345790603809138",
+          "author": "@MerrymenAI",
+          "published_at": "2026-11-27T16:01:56.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "Sherwood：给财报算账，并标出数字出处",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 75,
+          "repo_url": "https://github.com/Merrymen-Labs/sherwood"
+        },
+        {
+          "id": "builder:2126338898959958133",
+          "title": "织物实验室 Filament：能上手撕的布料互动",
+          "summary": "浏览器里即可打开的布料互动实验室，可以拉扯、撕开不同材质，观察织物在外力下的反应，适合直接上手体验。",
+          "source_url": "https://x.com/liyue_ai/status/2126338898959958133",
+          "author": "@liyue_ai",
+          "published_at": "2026-11-27T15:34:33.000Z",
+          "verified_at": "2026-11-28T20:43:52+08:00",
+          "author_claim": "织物实验室 Filament：能上手撕的布料互动",
+          "verified_evidence": "仅确认条目来自本期收录的 AI builder 速报；本轮未打开原帖或演示页核验功能。",
+          "verification_tags": [
+            "author_claim",
+            "untested",
+            "unverified_upstream",
+            "hearsay"
+          ],
+          "notes": "未实测，也未在本轮打开页面或仓库核验；条目来自 11-28 晚的 builder 速报，标题与链接沿用速报原文，不把链接存在当作已证实。",
+          "score": 74,
+          "playable_url": "https://play.liyue.io/filament/"
+        },
         {
           "id": "builder:2126289053087604987",
           "title": "SwiftWin Studio：在 Windows 上编译运行 SwiftUI，还给 agent 接了 MCP",
@@ -610,11 +776,16 @@
           "source": "builder-digest",
           "generated_at": "2026-11-28T16:16:38+08:00",
           "item_count": 24
+        },
+        {
+          "source": "builder-digest",
+          "generated_at": "2026-11-28T20:43:52+08:00",
+          "item_count": 32
         }
       ],
       "meta": {
         "source_meta": {
-          "note": "Assembled from on-box builder digest delivered JSON (unpublished since 11-22 site edition). No new page/repo reachability checks this run.",
+          "note": "Assembled from on-box builder digest delivered JSON. Kept the previously published 24 items from 11-26 evening through 11-27, and appended 8 items from the 11-28 evening digest. No new page/repo reachability checks this run.",
           "sources": [
             {
               "file": "/workspace/ai-builder-digest-20261126pm/delivered-20261126pm.json",
@@ -643,6 +814,16 @@
                 "start": "2026-11-27T09:48:29+08:00",
                 "end": "2026-11-27T20:46:53+08:00",
                 "note": "承接今早档覆盖终点至本次晚上北京时间；约 11 小时"
+              },
+              "count": 8
+            },
+            {
+              "file": "/workspace/ai-builder-digest-20261128pm/delivered-20261128pm.json",
+              "last_run_at": "2026-11-28T20:32:02+08:00",
+              "window": {
+                "start": "2026-11-27T20:46:53+08:00",
+                "end": "2026-11-28T20:32:02+08:00",
+                "note": "承接昨晚档覆盖终点至本次晚上北京时间；今早档未留下窗口，故覆盖约 24 小时"
               },
               "count": 8
             }
