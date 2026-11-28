@@ -89,6 +89,7 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn(".select-menu", css)
         self.assertIn(".select-trigger:focus-visible", css)
         self.assertIn(".desk-builder .entry-title { display:block; text-align:center; }", css)
+        self.assertNotIn(".desk-builder .entry-copy { height:100%", css)
 
     def test_home_snapshot_matches_latest_real_edition(self):
         import json
