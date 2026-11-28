@@ -1,90 +1,378 @@
 {
-  "edition_date": "2026-11-22",
-  "edition_url": "e/2026-11-22.html",
+  "edition_date": "2026-11-28",
+  "edition_url": "e/2026-11-28.html",
   "counts": {
-    "daily": 6,
-    "builder": 5,
+    "daily": 3,
+    "builder": 24,
     "deals": 0
   },
   "builder_items": [
     {
-      "id": "builder:2124333271177908405",
-      "title": "文隐 TextVeil：丢给 AI 之前，先在本地给文档脱敏",
-      "author": "Limch (@ramdolphlim)",
-      "source_url": "https://x.com/ramdolphlim/status/2124333271177908405",
-      "playable_url": "https://textveil.limch.cc",
-      "repo_url": "https://github.com/ramdolphlim/textveil",
-      "published_beijing": "2026-11-22 10:44 北京时间",
+      "id": "builder:2126289053087604987",
+      "title": "SwiftWin Studio：在 Windows 上编译运行 SwiftUI，还给 agent 接了 MCP",
+      "author": "@yoav_dadon",
+      "source_url": "https://x.com/yoav_dadon/status/2126289053087604987",
+      "playable_url": null,
+      "repo_url": "https://github.com/Dadon-11/SwiftWin-Studio",
+      "published_beijing": "2026-11-27 20:16 北京时间",
       "verification_tags": [
-        "page_reachable",
         "author_claim",
         "untested",
-        "repo_reachable"
+        "unverified_upstream",
+        "hearsay"
       ]
     },
     {
-      "id": "builder:2124265810663244086",
-      "title": "Inside a 3nm CPU：能放大 1500 万倍的交互 3D 模拟",
-      "author": "Navidix (@Navidixx)",
-      "source_url": "https://x.com/Navidixx/status/2124265810663244086",
-      "playable_url": "https://navidixstudio.com/explore/inside-a-cpu/?lang=en",
-      "repo_url": "https://github.com/NavidixStudio/inside-a-3nm-cpu",
-      "published_beijing": "2026-11-22 06:16 北京时间",
+      "id": "builder:2126282434346185180",
+      "title": "Country Breakout：挡板是你的国家轮廓",
+      "author": "@biodata777",
+      "source_url": "https://x.com/biodata777/status/2126282434346185180",
+      "playable_url": "https://country-breakout.pages.dev/en/?v=2",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 19:50 北京时间",
       "verification_tags": [
-        "page_reachable",
         "author_claim",
         "untested",
-        "repo_reachable"
+        "unverified_upstream",
+        "hearsay"
       ]
     },
     {
-      "id": "builder:2124194668015661346",
-      "title": "Watts & Weights：从车库把整条 AI 栈做成经营游戏",
-      "author": "Daiwik Chilukuri (@Mradulterated)",
-      "source_url": "https://x.com/Mradulterated/status/2124194668015661346",
-      "playable_url": "https://wattsandweights.app/",
+      "id": "builder:2126273034767978676",
+      "title": "TBRand：给「我绝对会读」的书做的应用",
+      "author": "@hey_sesan",
+      "source_url": "https://x.com/hey_sesan/status/2126273034767978676",
+      "playable_url": "https://TBRand.co",
       "repo_url": null,
-      "published_beijing": "2026-11-22 01:34 北京时间",
+      "published_beijing": "2026-11-27 19:12 北京时间",
       "verification_tags": [
-        "page_reachable",
         "author_claim",
-        "untested"
+        "untested",
+        "unverified_upstream",
+        "hearsay"
       ]
     },
     {
-      "id": "builder:2124161720448893216",
-      "title": "Prompt Puncher：和孩子一起做的 AI CEO 格斗小游戏",
-      "author": "Matthew Hefferon (@HeffHQ)",
-      "source_url": "https://x.com/HeffHQ/status/2124161720448893216",
-      "playable_url": "https://www.promptpuncher.com/",
-      "repo_url": null,
-      "published_beijing": "2026-11-21 23:23 北京时间",
+      "id": "builder:2126263506173661512",
+      "title": "先想后做：先问清需求，再让 agent 开工",
+      "author": "@Ihaveafriend0",
+      "source_url": "https://x.com/Ihaveafriend0/status/2126263506173661512",
+      "playable_url": null,
+      "repo_url": "https://github.com/ihaveafriend/think-before-build",
+      "published_beijing": "2026-11-27 18:34 北京时间",
       "verification_tags": [
-        "page_reachable",
         "author_claim",
-        "untested"
+        "untested",
+        "unverified_upstream",
+        "hearsay"
       ]
     },
     {
-      "id": "builder:2124141427672134013",
-      "title": "Tiny Orbits：行星上的外星居民现在会回话",
-      "author": "별마실 (@byeolmasil)",
-      "source_url": "https://x.com/byeolmasil/status/2124141427672134013",
-      "playable_url": "https://tiny-orbits.vercel.app/?lang=en",
-      "repo_url": null,
-      "published_beijing": "2026-11-21 22:02 北京时间",
+      "id": "builder:2126239271107571881",
+      "title": "Cup Runner：你是一只茶杯，别把茶洒了",
+      "author": "@KirtikumarAlone",
+      "source_url": "https://x.com/KirtikumarAlone/status/2126239271107571881",
+      "playable_url": "https://kirtikumaralone.github.io/Cup_Runner/",
+      "repo_url": "https://github.com/kirtikumarAlone/Cup_Runner",
+      "published_beijing": "2026-11-27 16:58 北京时间",
       "verification_tags": [
-        "page_reachable",
         "author_claim",
-        "untested"
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126195606049988652",
+      "title": "Scrib：先画草图，再换成真组件",
+      "author": "@RachitThakur146",
+      "source_url": "https://x.com/RachitThakur146/status/2126195606049988652",
+      "playable_url": "https://tryscrib.vercel.app",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 14:05 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126190925772951649",
+      "title": "whomade：这张图到底是谁做的",
+      "author": "@jynx_29",
+      "source_url": "https://x.com/jynx_29/status/2126190925772951649",
+      "playable_url": null,
+      "repo_url": "https://github.com/ajinkya-cs/whomade",
+      "published_beijing": "2026-11-27 13:46 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126168609240326224",
+      "title": "This was meant to find you：一张会自己找上你的塔罗桌",
+      "author": "@Martellfox",
+      "source_url": "https://x.com/Martellfox/status/2126168609240326224",
+      "playable_url": "https://Thiswasmeanttofindyou.com",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 12:17 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126111812970295592",
+      "title": "Dinner Survivors：感恩节晚餐会反击",
+      "author": "@tapturnbattler",
+      "source_url": "https://x.com/tapturnbattler/status/2126111812970295592",
+      "playable_url": "https://tapturnbattler.itch.io/dinnersurvivors-browser",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 08:32 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126106141625327702",
+      "title": "雪迹 Cold Smoke：1.5 MB、零素材的 3D 滑雪",
+      "author": "@huiskylabs",
+      "source_url": "https://x.com/huiskylabs/status/2126106141625327702",
+      "playable_url": "https://huisky.xyz/cold-smoke/play",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 08:09 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126084477017579570",
+      "title": "dot-bridge：让手机上的 ChatGPT 点进你 Mac 上的文件",
+      "author": "@apoorvdarshan",
+      "source_url": "https://x.com/apoorvdarshan/status/2126084477017579570",
+      "playable_url": null,
+      "repo_url": "https://github.com/apoorvdarshan/dot-bridge",
+      "published_beijing": "2026-11-27 06:43 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126072804068241475",
+      "title": "Terra à Vista：把巴西画成可玩的策略地图",
+      "author": "@_ciromaciel",
+      "source_url": "https://x.com/_ciromaciel/status/2126072804068241475",
+      "playable_url": "https://ciro-maciel.github.io/terra-a-vista/",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 05:57 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126068834607964328",
+      "title": "Turkey Trot：连续第二年用 vibe coding 做的感恩节小游戏",
+      "author": "@SIP200OK",
+      "source_url": "https://x.com/SIP200OK/status/2126068834607964328",
+      "playable_url": "https://turkey-trot.replit.app",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 05:41 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126055803392045481",
+      "title": "agentdream：给任意 agent 做本地「睡眠整理」记忆",
+      "author": "@deeponailabs",
+      "source_url": "https://x.com/deeponailabs/status/2126055803392045481",
+      "playable_url": null,
+      "repo_url": "https://github.com/mvplab-ai/agentdream",
+      "published_beijing": "2026-11-27 04:49 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2126048447342018863",
+      "title": "voicehook：在浏览器里跟 Claude Code 语音开会",
+      "author": "@OliverSpitzkat",
+      "source_url": "https://x.com/OliverSpitzkat/status/2126048447342018863",
+      "playable_url": "https://voicehook.ai/",
+      "repo_url": null,
+      "published_beijing": "2026-11-27 04:20 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125995984400654658",
+      "title": "Cloud Pass：没完没了的 three.js 摩托骑行",
+      "author": "@MengTo",
+      "source_url": "https://x.com/MengTo/status/2125995984400654658",
+      "playable_url": "https://threeui.com/cloud-pass",
+      "repo_url": "https://github.com/MengTo/Skills/tree/main/agent-skills/3d/scroll-fisheye-dolly-zoom",
+      "published_beijing": "2026-11-27 00:51 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125907473764958377",
+      "title": "HeatGlance：人一走开，就帮你盯着发烫的 agent",
+      "author": "@MatteoRicupero",
+      "source_url": "https://x.com/MatteoRicupero/status/2125907473764958377",
+      "playable_url": null,
+      "repo_url": "https://github.com/tapeo/heatglance",
+      "published_beijing": "2026-11-26 19:00 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125903909445091539",
+      "title": "Eko-Gesa：拉各斯街头地图对战",
+      "author": "@luwadotdev",
+      "source_url": "https://x.com/luwadotdev/status/2125903909445091539",
+      "playable_url": "https://eko-gesa.vercel.app",
+      "repo_url": null,
+      "published_beijing": "2026-11-26 18:46 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125889899694096762",
+      "title": "Touch Bar Claude：Touch Bar 上的像素状态宠物",
+      "author": "@_peachboiii",
+      "source_url": "https://x.com/_peachboiii/status/2125889899694096762",
+      "playable_url": null,
+      "repo_url": "https://github.com/nokzon/touchbar-claude",
+      "published_beijing": "2026-11-26 17:50 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125888222366707804",
+      "title": "Game Cards：一张图连上多平台游戏码",
+      "author": "@onefifthblue",
+      "source_url": "https://x.com/onefifthblue/status/2125888222366707804",
+      "playable_url": "https://gamecards.loopyhop.com/",
+      "repo_url": null,
+      "published_beijing": "2026-11-26 17:43 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125881268168692033",
+      "title": "Hoof Care：在浏览器里慢慢给马修蹄",
+      "author": "@corotagames",
+      "source_url": "https://x.com/corotagames/status/2125881268168692033",
+      "playable_url": "https://corota.itch.io/hoof-care",
+      "repo_url": null,
+      "published_beijing": "2026-11-26 17:16 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125840188094226655",
+      "title": "POWER ON：六代计算机都能上手拧一拧",
+      "author": "@airplanestar_",
+      "source_url": "https://x.com/airplanestar_/status/2125840188094226655",
+      "playable_url": "https://brass-to-silicon.vercel.app",
+      "repo_url": null,
+      "published_beijing": "2026-11-26 14:32 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125830207886307585",
+      "title": "Hold The Road：城里关卡射击小游戏",
+      "author": "@Shivamkrux",
+      "source_url": "https://x.com/Shivamkrux/status/2125830207886307585",
+      "playable_url": "https://shooting-game-red-tau.vercel.app/",
+      "repo_url": null,
+      "published_beijing": "2026-11-26 13:53 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
+      ]
+    },
+    {
+      "id": "builder:2125788901122216173",
+      "title": "ai-studio-skill：一装就改掉千篇一律的落地页",
+      "author": "@himanshubuildss",
+      "source_url": "https://x.com/himanshubuildss/status/2125788901122216173",
+      "playable_url": null,
+      "repo_url": "https://github.com/scrolltide/ai-studio-skill",
+      "published_beijing": "2026-11-26 11:09 北京时间",
+      "verification_tags": [
+        "author_claim",
+        "untested",
+        "unverified_upstream",
+        "hearsay"
       ]
     }
   ],
   "deals_empty_message": "本次未找到同时满足最近12小时新鲜度与可核验要求的新优惠（不等于全网无优惠）。",
   "daily_empty_message": "当日暂无 AI 动态生成结果。",
-  "legacy_daily_url": "2026-11-22.html",
-  "daily_source_date": "2026-11-22",
+  "legacy_daily_url": "2026-11-28.html",
+  "daily_source_date": "2026-11-28",
   "daily_ingest_source": "aihot-news-api-v1-dailies",
-  "daily_official_page": "https://aihot.news/daily/2026-11-22",
-  "note": "网站预览：完整结果在期次页。日报栏目日期=2026-11-22（AIHOT 第三方汇总转载，未独立核验）；官方页=https://aihot.news/daily/2026-11-22。统一飞书摘要发送与生产切流尚未启用。"
+  "daily_official_page": "https://aihot.news/daily/2026-11-28",
+  "note": "网站预览：完整结果在期次页。日报栏目日期=2026-11-28（AIHOT 第三方汇总转载，未独立核验）；官方页=https://aihot.news/daily/2026-11-28。统一飞书摘要发送与生产切流尚未启用。"
 }

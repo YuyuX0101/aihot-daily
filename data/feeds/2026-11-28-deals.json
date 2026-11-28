@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "edition_date": "2026-11-28",
+  "channel": "deals",
+  "source": "local-inbox",
+  "generated_at": "2026-11-28T16:16:38+08:00",
+  "items": [],
+  "channel_meta": {
+    "empty_reason": "no_match_12h_verifiable",
+    "empty_message": "本次未找到同时满足最近12小时新鲜度与可核验要求的新优惠（不等于全网无优惠）。"
+  },
+  "source_meta": {
+    "ingest_note": "No on-box 2026-11-28 deals/yangmao scout artifact was found; published as honest empty deals."
+  }
+}
