@@ -110,11 +110,10 @@ def _compact_section(
     content = "".join(_compact_entry(item, channel) for item in items)
     if not items:
         content = f'<p class="empty-message">{escape_text(empty_message)}</p>'
-    boundary = '<p class="reading-boundary">AIHOT 转载，未独立核验；刊期不等于原文发布时间。</p>' if channel == "daily" else ""
     return f'''<section id="{channel}" class="news-section desk-{channel}" aria-labelledby="{channel}-title">
 <header class="section-heading"><div><p class="section-index">{index} / {english}</p><h2 id="{channel}-title">{title}</h2></div>
 <div class="section-aside"><small class="item-total">{len(items)} 条</small><a class="archive-link" href="{archive}">{archive_label}</a></div></header>
-{boundary}<div class="channel-content">{content}</div></section>'''
+<div class="channel-content">{content}</div></section>'''
 
 
 def build_edition_page(

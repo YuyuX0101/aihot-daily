@@ -65,7 +65,7 @@ def _safe_link(url: str | None, label: str) -> str:
     )
 
 
-def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
+def project_card(item: dict[str, Any], *, detailed: bool = False, index: int = 0) -> str:
     title = item.get("title") or ""
     category, intro = PROJECT_DESCRIPTIONS.get(
         item.get("id"), ("", item.get("summary") or item.get("author_claim") or "")
@@ -96,7 +96,7 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
             details = '<details><summary>查看来源说明</summary>' + "".join(parts) + "</details>"
     anchor = f' id="{escape_text(item["id"])}"' if detailed and item.get("id") else ""
     return f'''<article class="project"{anchor}>
-<div class="project-body"><div class="project-kind">{escape_text(category)}</div>
+{f'<span class="content-index">{index:02}</span>' if index else ''}<div class="project-body"><div class="project-kind">{escape_text(category)}</div>
 <h3>{escape_text(name)}</h3><p class="intro">{escape_text(intro)}</p>
 <div class="project-footer"><div class="creator">{escape_text(item.get("author") or "")}<small>{escape_text(published)}</small></div>
 <div class="actions">{links}</div></div>{details}</div></article>'''
@@ -105,7 +105,7 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
 def project_grid(items: list[dict[str, Any]], *, detailed: bool = False) -> str:
     if not items:
         return '<p class="empty">本期暂无 Builder 作品。</p>'
-    return '<div class="project-grid">' + "".join(project_card(i, detailed=detailed) for i in items) + '</div>'
+    return '<div class="project-grid">' + "".join(project_card(item, detailed=detailed, index=index) for index, item in enumerate(items, 1)) + '</div>'
 
 
 def render_item(item: dict[str, Any], channel: str) -> str:
@@ -320,7 +320,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-18">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-20">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>

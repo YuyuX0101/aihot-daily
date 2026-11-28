@@ -1,5 +1,5 @@
 /* Shared modern chrome for historical pages; article text and URLs stay intact. */
-@import url("./editorial.css?v=ai-daily-18");
+@import url("./editorial.css?v=ai-daily-20");
 
 body {
   background:var(--paper) !important;
@@ -125,13 +125,15 @@ body {
 }
 .item-num,.top5-item-rank {
   flex:0 0 auto;
-  width:auto !important;
-  min-width:1.2rem;
-  height:auto !important;
+  display:grid !important;
+  place-items:center;
+  width:1.55rem !important;
+  min-width:1.55rem;
+  height:1.55rem !important;
   padding:0 !important;
   border:0 !important;
-  border-radius:0 !important;
-  background:none !important;
+  border-radius:.4rem !important;
+  background:#eceee7 !important;
   color:var(--accent) !important;
   box-shadow:none !important;
   font-size:.68rem !important;

@@ -78,7 +78,7 @@ def _daily_item_html(item: dict[str, Any], day: str, index: int) -> str:
         "【上游报道 · AIHOT 转载 · 未独立核验】"
     ).strip()
     return f'''<article class="item daily-reading-item" id="daily-{escape_text(day)}-{index}">
-<h3 class="item-title">{escape_text(item.get("title"))}</h3>
+<span class="content-index">{index:02}</span><h3 class="item-title">{escape_text(item.get("title"))}</h3>
 <div class="item-meta"><span>{escape_text(item.get("author") or "AIHOT")}</span></div>
 <p class="reading-copy">{escape_text(summary)}</p>{link}</article>'''
 
@@ -95,7 +95,7 @@ def _legacy_item_html(item: dict[str, str], day: str, index: int) -> str:
             'rel="noopener noreferrer" target="_blank">AIHOT 条目</a></div>'
         )
     return f'''<article class="item daily-reading-item legacy-item" id="legacy-{escape_text(day)}-{index}">
-<h3 class="item-title">{escape_text(item["title"])}</h3>
+<span class="content-index">{index:02}</span><h3 class="item-title">{escape_text(item["title"])}</h3>
 <div class="item-meta"><span>{escape_text(item.get("source"))}</span></div>
 <p class="reading-copy">{escape_text(item.get("summary"))}</p>{link}</article>'''
 
@@ -125,7 +125,7 @@ def daily_archive(days: list[str], edition_days: list[str]) -> str:
         panels.append(
             f'<section class="date-panel" data-date-panel="{escape_text(day)}"{hidden}>'
             f'<div class="date-panel-meta"><span>{escape_text(day)}</span><span>{count} 条</span></div>'
-            '<p class="reading-boundary">内容为 AIHOT 转载，未独立核验。</p>'
+
             f'{content}</section>'
         )
     body = ""
