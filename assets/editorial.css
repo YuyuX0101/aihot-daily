@@ -118,6 +118,8 @@ button,select { font:inherit; }
 .daily-reading-item { padding:1.35rem 0; }
 .daily-reading-item .item-title { font-size:1.16rem; line-height:1.5; }
 .daily-reading-item .item-meta { font-size:.74rem; }
+.daily-reading-item .reading-copy { text-indent:2em; }
+.daily-reading-item .item-links { justify-content:flex-end; }
 .daily-reading-item .item-link { font-size:.76rem; }
 .item-links { gap:1rem; margin-top:.55rem; }
 .item-link,.action,.empty-link a,.legacy-note a { display:inline-flex; align-items:center; padding:0; border:0; background:none; color:var(--accent); font-size:.74rem; font-weight:600; text-decoration:underline; text-underline-offset:.25em; cursor:pointer; }

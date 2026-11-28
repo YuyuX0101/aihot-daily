@@ -59,14 +59,20 @@ def _legacy_items(day: str) -> list[dict[str, str]]:
 
 def _daily_item_html(item: dict[str, Any], day: str, index: int) -> str:
     link = ""
-    try:
-        href = validate_url(item.get("source_url"))
-    except Exception:
-        href = None
+    href = None
+    label = "AIHOT 条目"
+    for candidate, candidate_label in ((item.get("playable_url"), "原始来源"), (item.get("source_url"), "AIHOT 条目")):
+        try:
+            href = validate_url(candidate)
+        except Exception:
+            href = None
+        if href:
+            label = candidate_label
+            break
     if href:
         link = (
             f'<div class="item-links"><a class="item-link" href="{escape_text(href)}" '
-            'rel="noopener noreferrer" target="_blank">查看来源</a></div>'
+            f'rel="noopener noreferrer" target="_blank">{label}</a></div>'
         )
     summary = (item.get("summary") or item.get("author_claim") or "").removeprefix(
         "【上游报道 · AIHOT 转载 · 未独立核验】"
