@@ -78,9 +78,8 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
         if intro.strip() == title:
             intro = tagline.strip()
     links = "".join([
-        _safe_link(item.get("playable_url"), "打开作品"),
+        _safe_link(item.get("playable_url"), "打开作品") if item.get("playable_url") else _safe_link(item.get("repo_url"), "代码仓库"),
         _safe_link(item.get("source_url"), "作者原帖"),
-        _safe_link(item.get("repo_url"), "代码仓库"),
     ])
     published = format_beijing(item.get("published_at"))
     details = ""
@@ -99,8 +98,8 @@ def project_card(item: dict[str, Any], *, detailed: bool = False) -> str:
     return f'''<article class="project"{anchor}>
 <div class="project-body"><div class="project-kind">{escape_text(category)}</div>
 <h3>{escape_text(name)}</h3><p class="intro">{escape_text(intro)}</p>
-<div class="creator">{escape_text(item.get("author") or "")}<small>{escape_text(published)}</small></div>
-<div class="actions">{links}</div>{details}</div></article>'''
+<div class="project-footer"><div class="creator">{escape_text(item.get("author") or "")}<small>{escape_text(published)}</small></div>
+<div class="actions">{links}</div></div>{details}</div></article>'''
 
 
 def project_grid(items: list[dict[str, Any]], *, detailed: bool = False) -> str:
@@ -321,7 +320,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-13">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-14">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>

@@ -105,7 +105,7 @@ def build_channel_index(channel: str, dates: list[str]) -> str:
         meta = bucket.get("meta") or {}
         if channel == "builder" and items:
             assert_edition_has_no_demo_urls(edition)
-            content = project_grid(items, detailed=True)
+            content = project_grid(items, detailed=False)
         elif items:
             content = '<div class="article-list">' + "".join(render_item(item, channel) for item in items) + '</div>'
         else:

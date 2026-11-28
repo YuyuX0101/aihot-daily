@@ -55,16 +55,35 @@
       return;
     }
     for (const entry of entries) {
-      const link = document.createElement('a');
-      link.className = 'desk-entry';
-      link.href = entry.href;
+      const article = document.createElement('article');
+      article.className = 'desk-entry';
       const copy = document.createElement('div');
       copy.className = 'entry-copy';
-      copy.append(textElement('strong', entry.title));
+      const titleLink = document.createElement('a');
+      titleLink.className = 'entry-title';
+      titleLink.href = entry.href;
+      if (/^https:\/\//.test(entry.href)) {
+        titleLink.target = '_blank';
+        titleLink.rel = 'noopener noreferrer';
+      }
+      titleLink.append(textElement('strong', entry.title));
+      copy.append(titleLink);
       if (entry.summary) copy.append(textElement('span', entry.summary, 'entry-summary'));
       if (entry.meta) copy.append(textElement('small', entry.meta, 'entry-meta'));
-      link.append(copy);
-      output.append(link);
+      if (entry.sourceHref) {
+        const actions = document.createElement('div');
+        actions.className = 'entry-actions';
+        const source = document.createElement('a');
+        source.className = 'entry-source';
+        source.href = entry.sourceHref;
+        source.target = '_blank';
+        source.rel = 'noopener noreferrer';
+        source.textContent = entry.sourceLabel || '查看来源';
+        actions.append(source);
+        copy.append(actions);
+      }
+      article.append(copy);
+      output.append(article);
     }
   }
 
@@ -132,16 +151,23 @@
         }
       }
       const entries = (group?.items || []).map(item => {
-        let href = 'e/' + entryDay + '.html#' + encodeURIComponent(item.id);
+        let href = item.playable_url || item.source_url;
+        let sourceHref = key === 'daily' ? (item.playable_url || item.source_url) : item.source_url;
+        let sourceLabel = key === 'builder' ? '作者原帖' : (item.playable_url ? '原始来源' : 'AIHOT 条目');
+        if (key === 'deals') sourceLabel = '查看来源';
         if (entryDay === day && issue?.previewFeed) {
           const source = /^https:\/\/aihot\.news\/items\/[a-zA-Z0-9_-]+$/.test(item.source_url);
           href = source ? item.source_url : 'https://aihot.news/daily/' + day;
+          sourceHref = href;
+          sourceLabel = 'AIHOT 条目';
         }
         if (key === 'daily') {
           return {
             title: item.title,
             meta: item.author || 'AIHOT',
-            href
+            href,
+            sourceHref,
+            sourceLabel
           };
         }
         let title = item.title;
@@ -158,7 +184,9 @@
           title,
           summary,
           meta: key === 'builder' ? (item.author ? '作者 · ' + item.author : '独立开发者作品') : '优惠详情与适用条件见期次页',
-          href
+          href,
+          sourceHref,
+          sourceLabel
         };
       });
       if (key === 'daily' && !entries.length && archive.value) {

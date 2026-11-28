@@ -1,5 +1,5 @@
 /* Shared modern chrome for historical pages; article text and URLs stay intact. */
-@import url("./editorial.css?v=ai-daily-13");
+@import url("./editorial.css?v=ai-daily-14");
 
 body {
   background:var(--paper) !important;
