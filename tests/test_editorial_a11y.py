@@ -67,6 +67,7 @@ class EditorialA11yTests(unittest.TestCase):
         self.assertIn("MCP 接口", builder)
         self.assertIn("page-builder.webp", builder)
         self.assertNotIn("查看来源说明", builder)
+        self.assertNotIn("<span>日期</span>", builder)
         daily = (REPO / "daily" / "index.html").read_text(encoding="utf-8")
         self.assertIn("Character.AI", daily)
         self.assertIn("daily-reading-item", daily)

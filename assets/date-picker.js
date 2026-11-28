@@ -125,8 +125,6 @@
 
   const label = document.createElement('label');
   label.className = 'date-picker legacy-date-picker';
-  const caption = document.createElement('span');
-  caption.textContent = '日期';
   const select = document.createElement('select');
   select.setAttribute('aria-label', '选择日报日期');
   const currentOption = document.createElement('option');
@@ -134,7 +132,7 @@
   currentOption.textContent = current;
   select.append(currentOption);
   select.addEventListener('change', () => { location.href = select.value + '.html'; });
-  label.append(caption, select);
+  label.append(select);
   legacyDate.replaceWith(label);
   enhanceSelect(select);
 

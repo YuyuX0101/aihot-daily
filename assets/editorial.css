@@ -108,6 +108,10 @@ button,select { font:inherit; }
 .select-menu button { display:block; width:100%; padding:.42rem .55rem; border:0; border-radius:.35rem; background:transparent; color:var(--ink-secondary); cursor:pointer; font-size:.74rem; text-align:left; }
 .select-menu button:hover { background:#f0f1eb; color:var(--ink); }
 .select-menu button[aria-pressed="true"] { background:#e7e9e1; color:var(--ink); font-weight:600; }
+.inner-hero + .page-toolbar .select-trigger,.hero .select-trigger { border-color:rgba(255,255,255,.42); background:rgba(255,254,250,.62); box-shadow:0 4px 14px #18231f0a; }
+.inner-hero + .page-toolbar select,.hero .legacy-date-picker select { border-color:rgba(255,255,255,.42); background:rgba(255,254,250,.62); }
+.inner-hero + .page-toolbar .select-menu,.hero .select-menu { border-color:rgba(255,255,255,.62); border-radius:.7rem; background:rgba(255,254,250,.97); box-shadow:0 14px 32px #18231f18; }
+.inner-hero + .page-toolbar .select-menu button,.hero .select-menu button { border-radius:.45rem; }
 .issue-overview { margin:0; color:var(--ink-muted); font-size:.74rem; }
 .date-panel-meta { display:flex; justify-content:flex-end; padding:.65rem 0 0; color:var(--ink-muted); font-size:.7rem; }
 .date-panel-meta span:first-child { display:none; }

@@ -45,7 +45,7 @@ def date_select(dates: list[str], current: str, *, url_template: str | None = No
     )
     navigation = f' data-url-template="{escape_text(url_template)}"' if url_template else ""
     return (
-        '<label class="date-picker"><span>日期</span>'
+        '<label class="date-picker">'
         f'<select data-date-picker{navigation} aria-label="选择内容日期">{options}</select></label>'
     )
 
@@ -320,7 +320,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-16">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-17">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>
@@ -339,7 +339,7 @@ def page_shell(
 {heading_html}
 {body}
 </main>
-<script src="{css_href.rsplit('/', 1)[0]}/date-picker.js?v=2" defer></script>
+<script src="{css_href.rsplit('/', 1)[0]}/date-picker.js?v=3" defer></script>
 </body>
 </html>
 """
