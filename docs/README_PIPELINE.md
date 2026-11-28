@@ -16,7 +16,7 @@ GitHub Pages 静态托管。云侧通过 JSON 文件导入扩展 Builder / 羊�
 
 ## 站点封面
 
-日常发布固定沿用现有封面，不再逐期生成或替换，也不在仓库中保存逐期 PNG 母图。只有明确要求整体更换站点封面时，才更新共享封面资源并运行 `python -m tools.aihot_pipeline build`。
+日常发布固定沿用现有封面，不再逐期生成或替换，也不在仓库中保存逐期 PNG 母图。只有明确要求整体更换站点封面时，才更新共享封面资源并运行 `python -m tools.aihot_pipeline build`。日报、Builder、羊毛与期次内页分别使用 `assets/covers/page-*.webp` 固定栏目配图，历史日报共用日报栏目图。
 
 ## Builder 文案与命名约定
 

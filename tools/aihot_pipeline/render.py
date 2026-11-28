@@ -13,6 +13,13 @@ CHANNEL_TITLES = {
     "deals": "AI 羊毛雷达",
 }
 
+PAGE_COVERS = {
+    "daily": "page-daily.webp",
+    "builder": "page-builder.webp",
+    "deals": "page-deals.webp",
+    "editions": "page-editions.webp",
+}
+
 # Editorial descriptions of the November 22 projects.
 # New projects use the title, description and creator supplied by their feed.
 PROJECT_DESCRIPTIONS = {
@@ -300,6 +307,13 @@ def page_shell(
         f'<header class="inner-heading"><p class="section-meta">{escape_text(kicker)}</p>'
         f'<h1>{escape_text(heading)}</h1><p class="page-lead">{escape_text(lead)}</p></header>'
     )
+    cover_name = PAGE_COVERS.get(active_nav)
+    if not is_home and cover_name:
+        cover_href = f"{css_href.rsplit('/', 1)[0]}/covers/{cover_name}"
+        heading_html = (
+            f'<section class="inner-hero"><img class="inner-cover-image" src="{cover_href}" '
+            f'alt="" width="2048" height="688">{heading_html}</section>'
+        )
     snapshot_link = '<link rel="alternate" type="application/json" href="data/home_snapshot.json">' if is_home else ""
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -307,7 +321,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-11">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-12">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>
