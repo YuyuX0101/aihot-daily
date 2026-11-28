@@ -318,7 +318,7 @@ def page_shell(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escape_text(title)}</title>
-<link rel="stylesheet" href="{css_href}?v=ai-daily-2">
+<link rel="stylesheet" href="{css_href}?v=ai-daily-3">
 <link rel="icon" type="image/png" href="{css_href.rsplit('/', 1)[0]}/favicon.png?v=1">
 {snapshot_link}
 </head>
@@ -327,7 +327,6 @@ def page_shell(
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="{nav['home'][1]}" aria-label="AI 日报首页"><span class="brand-name">AI 日报</span><span class="brand-en">AI DAILY</span></a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false">菜单</button>
     <nav class="nav-links" id="site-nav" aria-label="主导航">
       {''.join(links)}
     </nav>
@@ -339,13 +338,6 @@ def page_shell(
 {body}
 </main>
 <script src="{css_href.rsplit('/', 1)[0]}/date-picker.js?v=1" defer></script>
-<script>
-const toggle = document.getElementById('nav-toggle');
-toggle.addEventListener('click', () => {{
-  const open = document.getElementById('site-nav').classList.toggle('is-open');
-  toggle.setAttribute('aria-expanded', String(open));
-}});
-</script>
 </body>
 </html>
 """

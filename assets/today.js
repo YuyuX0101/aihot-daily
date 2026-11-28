@@ -48,6 +48,7 @@
     const panel = document.getElementById(channel);
     const output = panel.querySelector('.channel-content');
     panel.classList.toggle('unpublished', !entries.length);
+    panel.classList.toggle('has-many', entries.length >= 4);
     panel.querySelector('.item-total').textContent = context || (entries.length ? entries.length + ' 条' : '暂无收录');
     output.replaceChildren();
     if (!entries.length) {
@@ -66,6 +67,14 @@
       link.append(copy);
       output.append(link);
     }
+  }
+
+  function arrange(results) {
+    const counts = Object.fromEntries(results.map(result => [result.key, result.entries.length]));
+    const dailyHeavy = counts.daily >= 7 && counts.daily > counts.builder;
+    const flow = document.getElementById('today');
+    flow.classList.toggle('daily-heavy', dailyHeavy);
+    flow.classList.toggle('builder-heavy', !dailyHeavy && counts.builder >= 4);
   }
 
   async function get(path, type = 'json') {
@@ -133,7 +142,7 @@
         if (key === 'daily') {
           return {
             title: item.title,
-            meta: '上游来源 · ' + (item.author || 'AIHOT') + ' · 未独立核验',
+            meta: item.author || 'AIHOT',
             href
           };
         }
@@ -152,7 +161,7 @@
           const articles = doc.querySelectorAll('article.item');
           for (const item of articles) {
             const title = item.querySelector('.item-title')?.textContent;
-            if (title) entries.push({title, meta: 'AIHOT 转载 · 未独立核验', href: day + '.html'});
+            if (title) entries.push({title, meta: 'AIHOT 转载', href: day + '.html'});
           }
           if (!entries.length) entries.push({title: 'AI 日报 · 历史日报', summary: day, href: day + '.html'});
         } catch {
@@ -165,6 +174,7 @@
         (failed ? '暂时无法读取当日内容，请稍后刷新。' : pending[key])});
     }
     for (const result of results) present(result.key, result.entries, result.message, result.context);
+    arrange(results);
   }
   load();
   setInterval(() => { if (!document.hidden) load(); }, 60000);

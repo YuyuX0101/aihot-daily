@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI 日报 · 每日新知</title>
-<link rel="stylesheet" href="assets/editorial.css?v=ai-daily-2">
+<link rel="stylesheet" href="assets/editorial.css?v=ai-daily-3">
 <link rel="icon" type="image/png" href="assets/favicon.png?v=1">
 <link rel="alternate" type="application/json" href="data/home_snapshot.json">
 </head>
@@ -13,7 +13,6 @@
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="index.html" aria-label="AI 日报首页"><span class="brand-name">AI 日报</span><span class="brand-en">AI DAILY</span></a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false">菜单</button>
     <nav class="nav-links" id="site-nav" aria-label="主导航">
       <a class="active" aria-current="page" href="index.html">首页</a><a href="daily/index.html">日报</a><a href="builder/index.html">AI Builder</a><a href="deals/index.html">羊毛</a><a href="e/index.html">期次</a>
     </nav>
@@ -54,16 +53,10 @@
   </header>
   <div class="channel-content" aria-live="polite"><p>正在读取当日内容…</p></div>
 </section></div></div>
+<nav class="section-dock" aria-label="跳至本期栏目"><a href="#daily">AIHOT</a><a href="#builder">作品</a><a href="#deals">羊毛</a></nav>
 <noscript>请启用 JavaScript 查看北京时间当天的内容，或使用各栏目归档入口。</noscript>
-<script src="assets/today.js?v=6" defer></script>
+<script src="assets/today.js?v=7" defer></script>
 </main>
 <script src="assets/date-picker.js?v=1" defer></script>
-<script>
-const toggle = document.getElementById('nav-toggle');
-toggle.addEventListener('click', () => {
-  const open = document.getElementById('site-nav').classList.toggle('is-open');
-  toggle.setAttribute('aria-expanded', String(open));
-});
-</script>
 </body>
 </html>

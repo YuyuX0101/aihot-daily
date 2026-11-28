@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>羊毛雷达 · AI 日报</title>
-<link rel="stylesheet" href="../assets/editorial.css?v=ai-daily-2">
+<link rel="stylesheet" href="../assets/editorial.css?v=ai-daily-3">
 <link rel="icon" type="image/png" href="../assets/favicon.png?v=1">
 
 </head>
@@ -13,7 +13,6 @@
 <header class="site-header">
   <div class="site-header-inner">
     <a class="brand" href="../index.html" aria-label="AI 日报首页"><span class="brand-name">AI 日报</span><span class="brand-en">AI DAILY</span></a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false">菜单</button>
     <nav class="nav-links" id="site-nav" aria-label="主导航">
       <a href="../index.html">首页</a><a href="../daily/index.html">日报</a><a href="../builder/index.html">AI Builder</a><a class="active" aria-current="page" href="../deals/index.html">羊毛</a><a href="../e/index.html">期次</a>
     </nav>
@@ -25,12 +24,5 @@
 <div class="page-toolbar"><label class="date-picker"><span>日期</span><select data-date-picker aria-label="选择内容日期"><option value="2026-11-22" selected>2026-11-22</option></select></label><p class="issue-overview">默认展示最新一期，选择日期查看往期。</p></div><section class="date-panel" data-date-panel="2026-11-22"><div class="date-panel-meta"><span>2026-11-22</span><span>0 条</span></div><p class="empty-state-inline">本次未找到同时满足最近12小时新鲜度与可核验要求的新优惠（不等于全网无优惠）。</p></section>
 </main>
 <script src="../assets/date-picker.js?v=1" defer></script>
-<script>
-const toggle = document.getElementById('nav-toggle');
-toggle.addEventListener('click', () => {
-  const open = document.getElementById('site-nav').classList.toggle('is-open');
-  toggle.setAttribute('aria-expanded', String(open));
-});
-</script>
 </body>
 </html>
