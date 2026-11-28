@@ -125,7 +125,7 @@
         {
           "id": "builder:2126289053087604987",
           "title": "SwiftWin Studio：在 Windows 上编译运行 SwiftUI，还给 agent 接了 MCP",
-          "summary": "【速报转载 · 未独立核验 · 未实测】SwiftWin Studio：在 Windows 上编译运行 SwiftUI，还给 agent 接了 MCP",
+          "summary": "一款在 Windows 上编译、运行 SwiftUI 的开发工具，同时提供 MCP 接口，方便 AI agent 参与构建和调试。",
           "source_url": "https://x.com/yoav_dadon/status/2126289053087604987",
           "author": "@yoav_dadon",
           "published_at": "2026-11-27T12:16:29.000Z",
@@ -145,7 +145,7 @@
         {
           "id": "builder:2126282434346185180",
           "title": "Country Breakout：挡板是你的国家轮廓",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Country Breakout：挡板是你的国家轮廓",
+          "summary": "一款以国家轮廓为线索的地理游戏，玩家根据地图形状辨认国家，在游玩中熟悉各国边界。",
           "source_url": "https://x.com/biodata777/status/2126282434346185180",
           "author": "@biodata777",
           "published_at": "2026-11-27T11:50:11.000Z",
@@ -165,7 +165,7 @@
         {
           "id": "builder:2126273034767978676",
           "title": "TBRand：给「我绝对会读」的书做的应用",
-          "summary": "【速报转载 · 未独立核验 · 未实测】TBRand：给「我绝对会读」的书做的应用",
+          "summary": "围绕个人阅读清单和“我绝对会读”的书打造的应用，把想读的书集中到一个专门的阅读体验中。",
           "source_url": "https://x.com/hey_sesan/status/2126273034767978676",
           "author": "@hey_sesan",
           "published_at": "2026-11-27T11:12:50.000Z",
@@ -185,7 +185,7 @@
         {
           "id": "builder:2126263506173661512",
           "title": "先想后做：先问清需求，再让 agent 开工",
-          "summary": "【速报转载 · 未独立核验 · 未实测】先想后做：先问清需求，再让 agent 开工",
+          "summary": "面向 AI 编程 agent 的需求澄清工具，在生成代码前先追问目标、限制和预期结果，减少需求不清造成的返工。",
           "source_url": "https://x.com/Ihaveafriend0/status/2126263506173661512",
           "author": "@Ihaveafriend0",
           "published_at": "2026-11-27T10:34:58.000Z",
@@ -205,7 +205,7 @@
         {
           "id": "builder:2126239271107571881",
           "title": "Cup Runner：你是一只茶杯，别把茶洒了",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Cup Runner：你是一只茶杯，别把茶洒了",
+          "summary": "一款浏览器休闲游戏，玩家控制一只茶杯移动，在完成关卡的同时尽量保持杯里的茶不洒出来。",
           "source_url": "https://x.com/KirtikumarAlone/status/2126239271107571881",
           "author": "@KirtikumarAlone",
           "published_at": "2026-11-27T08:58:40.000Z",
@@ -226,7 +226,7 @@
         {
           "id": "builder:2126195606049988652",
           "title": "Scrib：先画草图，再换成真组件",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Scrib：先画草图，再换成真组件",
+          "summary": "把手绘草图转换为可使用的界面组件，适合快速将页面构想变成前端原型，缩短从草图到实现的过程。",
           "source_url": "https://x.com/RachitThakur146/status/2126195606049988652",
           "author": "@RachitThakur146",
           "published_at": "2026-11-27T06:05:09.000Z",
@@ -246,7 +246,7 @@
         {
           "id": "builder:2126190925772951649",
           "title": "whomade：这张图到底是谁做的",
-          "summary": "【速报转载 · 未独立核验 · 未实测】whomade：这张图到底是谁做的",
+          "summary": "用于追溯图片创作者或来源的工具，帮助用户判断一张图是谁制作的，并找到对应的作者信息。",
           "source_url": "https://x.com/jynx_29/status/2126190925772951649",
           "author": "@jynx_29",
           "published_at": "2026-11-27T05:46:34.000Z",
@@ -266,7 +266,7 @@
         {
           "id": "builder:2126168609240326224",
           "title": "This was meant to find you：一张会自己找上你的塔罗桌",
-          "summary": "【速报转载 · 未独立核验 · 未实测】This was meant to find you：一张会自己找上你的塔罗桌",
+          "summary": "一个自动呈现塔罗抽牌与解读的网页体验，强调内容主动找上门，而不是让用户反复搜索和选择。",
           "source_url": "https://x.com/Martellfox/status/2126168609240326224",
           "author": "@Martellfox",
           "published_at": "2026-11-27T04:17:53.000Z",
@@ -286,7 +286,7 @@
         {
           "id": "builder:2126111812970295592",
           "title": "Dinner Survivors：感恩节晚餐会反击",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Dinner Survivors：感恩节晚餐会反击",
+          "summary": "以感恩节晚餐为背景的轻量游戏，把节日聚餐设计成一场需要应对各种状况的“生存”挑战。",
           "source_url": "https://x.com/tapturnbattler/status/2126111812970295592",
           "author": "@tapturnbattler",
           "published_at": "2026-11-27T00:32:12.000Z",
@@ -306,7 +306,7 @@
         {
           "id": "builder:2126106141625327702",
           "title": "雪迹 Cold Smoke：1.5 MB、零素材的 3D 滑雪",
-          "summary": "【速报转载 · 未独立核验 · 未实测】雪迹 Cold Smoke：1.5 MB、零素材的 3D 滑雪",
+          "summary": "一款约 1.5 MB 的浏览器 3D 滑雪体验，不依赖外部美术素材即可生成场景，突出小体积和即时游玩。",
           "source_url": "https://x.com/huiskylabs/status/2126106141625327702",
           "author": "@huiskylabs",
           "published_at": "2026-11-27T00:09:39.000Z",
@@ -326,7 +326,7 @@
         {
           "id": "builder:2126084477017579570",
           "title": "dot-bridge：让手机上的 ChatGPT 点进你 Mac 上的文件",
-          "summary": "【速报转载 · 未独立核验 · 未实测】dot-bridge：让手机上的 ChatGPT 点进你 Mac 上的文件",
+          "summary": "连接手机端 ChatGPT 与 Mac 本地文件，让用户可以从手机对话中打开或定位电脑上的文件。",
           "source_url": "https://x.com/apoorvdarshan/status/2126084477017579570",
           "author": "@apoorvdarshan",
           "published_at": "2026-11-26T22:43:34.000Z",
@@ -346,7 +346,7 @@
         {
           "id": "builder:2126072804068241475",
           "title": "Terra à Vista：把巴西画成可玩的策略地图",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Terra à Vista：把巴西画成可玩的策略地图",
+          "summary": "以巴西地图为舞台的策略游戏，把地理区域转化为可探索、可操作的地图玩法，让玩家在地图上推进决策。",
           "source_url": "https://x.com/_ciromaciel/status/2126072804068241475",
           "author": "@_ciromaciel",
           "published_at": "2026-11-26T21:57:11.000Z",
@@ -366,7 +366,7 @@
         {
           "id": "builder:2126068834607964328",
           "title": "Turkey Trot：连续第二年用 vibe coding 做的感恩节小游戏",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Turkey Trot：连续第二年用 vibe coding 做的感恩节小游戏",
+          "summary": "作者连续第二年用 vibe coding 制作的感恩节主题小游戏，可直接在浏览器打开，主打轻量节日体验。",
           "source_url": "https://x.com/SIP200OK/status/2126068834607964328",
           "author": "@SIP200OK",
           "published_at": "2026-11-26T21:41:25.000Z",
@@ -386,7 +386,7 @@
         {
           "id": "builder:2126055803392045481",
           "title": "agentdream：给任意 agent 做本地「睡眠整理」记忆",
-          "summary": "【速报转载 · 未独立核验 · 未实测】agentdream：给任意 agent 做本地「睡眠整理」记忆",
+          "summary": "本地运行的 agent 记忆整理工具，通过类似“睡眠整理”的过程归纳已有信息，并可接入不同类型的 agent。",
           "source_url": "https://x.com/deeponailabs/status/2126055803392045481",
           "author": "@deeponailabs",
           "published_at": "2026-11-26T20:49:38.000Z",
@@ -406,7 +406,7 @@
         {
           "id": "builder:2126048447342018863",
           "title": "voicehook：在浏览器里跟 Claude Code 语音开会",
-          "summary": "【速报转载 · 未独立核验 · 未实测】voicehook：在浏览器里跟 Claude Code 语音开会",
+          "summary": "在浏览器中与 Claude Code 进行语音交互，把编码助手变成可以边说话边沟通的协作对象，减少纯文字输入。",
           "source_url": "https://x.com/OliverSpitzkat/status/2126048447342018863",
           "author": "@OliverSpitzkat",
           "published_at": "2026-11-26T20:20:24.000Z",
@@ -426,7 +426,7 @@
         {
           "id": "builder:2125995984400654658",
           "title": "Cloud Pass：没完没了的 three.js 摩托骑行",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Cloud Pass：没完没了的 three.js 摩托骑行",
+          "summary": "使用 three.js 制作的持续摩托骑行体验，玩家可以不断穿行在云端场景中，强调轻量、连贯的视觉效果。",
           "source_url": "https://x.com/MengTo/status/2125995984400654658",
           "author": "@MengTo",
           "published_at": "2026-11-26T16:51:56.000Z",
@@ -447,7 +447,7 @@
         {
           "id": "builder:2125907473764958377",
           "title": "HeatGlance：人一走开，就帮你盯着发烫的 agent",
-          "summary": "【速报转载 · 未独立核验 · 未实测】HeatGlance：人一走开，就帮你盯着发烫的 agent",
+          "summary": "用于远程留意 AI agent 运行情况的工具，在用户离开电脑后继续跟踪任务，方便及时发现异常或失控状态。",
           "source_url": "https://x.com/MatteoRicupero/status/2125907473764958377",
           "author": "@MatteoRicupero",
           "published_at": "2026-11-26T11:00:13.000Z",
@@ -467,7 +467,7 @@
         {
           "id": "builder:2125903909445091539",
           "title": "Eko-Gesa：拉各斯街头地图对战",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Eko-Gesa：拉各斯街头地图对战",
+          "summary": "以尼日利亚拉各斯的街头地图为场景的对战游戏，把真实城市地点融入地图探索和对抗玩法。",
           "source_url": "https://x.com/luwadotdev/status/2125903909445091539",
           "author": "@luwadotdev",
           "published_at": "2026-11-26T10:46:04.000Z",
@@ -487,7 +487,7 @@
         {
           "id": "builder:2125889899694096762",
           "title": "Touch Bar Claude：Touch Bar 上的像素状态宠物",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Touch Bar Claude：Touch Bar 上的像素状态宠物",
+          "summary": "在 MacBook Touch Bar 上显示一只像素小宠物，用它的动画和变化呈现 Claude 的运行状态。",
           "source_url": "https://x.com/_peachboiii/status/2125889899694096762",
           "author": "@_peachboiii",
           "published_at": "2026-11-26T09:50:23.000Z",
@@ -507,7 +507,7 @@
         {
           "id": "builder:2125888222366707804",
           "title": "Game Cards：一张图连上多平台游戏码",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Game Cards：一张图连上多平台游戏码",
+          "summary": "把不同平台的游戏兑换码整理到一张卡片中，方便集中保存、展示和分享，不必分别翻找各平台记录。",
           "source_url": "https://x.com/onefifthblue/status/2125888222366707804",
           "author": "@onefifthblue",
           "published_at": "2026-11-26T09:43:43.000Z",
@@ -527,7 +527,7 @@
         {
           "id": "builder:2125881268168692033",
           "title": "Hoof Care：在浏览器里慢慢给马修蹄",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Hoof Care：在浏览器里慢慢给马修蹄",
+          "summary": "一款节奏较慢的浏览器修蹄模拟游戏，玩家可以一步步清理、修整马蹄，体验细致的照顾过程。",
           "source_url": "https://x.com/corotagames/status/2125881268168692033",
           "author": "@corotagames",
           "published_at": "2026-11-26T09:16:05.000Z",
@@ -547,7 +547,7 @@
         {
           "id": "builder:2125840188094226655",
           "title": "POWER ON：六代计算机都能上手拧一拧",
-          "summary": "【速报转载 · 未独立核验 · 未实测】POWER ON：六代计算机都能上手拧一拧",
+          "summary": "以六代计算机为主题的互动体验，把不同代际的机器做成可以亲手操作的物件，而不是只阅读文字介绍。",
           "source_url": "https://x.com/airplanestar_/status/2125840188094226655",
           "author": "@airplanestar_",
           "published_at": "2026-11-26T06:32:51.000Z",
@@ -567,7 +567,7 @@
         {
           "id": "builder:2125830207886307585",
           "title": "Hold The Road：城里关卡射击小游戏",
-          "summary": "【速报转载 · 未独立核验 · 未实测】Hold The Road：城里关卡射击小游戏",
+          "summary": "一款以城市关卡为场景的浏览器射击小游戏，打开演示页即可游玩，适合短时间体验。",
           "source_url": "https://x.com/Shivamkrux/status/2125830207886307585",
           "author": "@Shivamkrux",
           "published_at": "2026-11-26T05:53:12.000Z",
@@ -587,7 +587,7 @@
         {
           "id": "builder:2125788901122216173",
           "title": "ai-studio-skill：一装就改掉千篇一律的落地页",
-          "summary": "【速报转载 · 未独立核验 · 未实测】ai-studio-skill：一装就改掉千篇一律的落地页",
+          "summary": "面向 AI 页面生成的样式技能包，用来减少落地页反复出现的模板化布局和视觉风格，让生成结果更容易形成差异。",
           "source_url": "https://x.com/himanshubuildss/status/2125788901122216173",
           "author": "@himanshubuildss",
           "published_at": "2026-11-26T03:09:03.000Z",
