@@ -167,9 +167,11 @@ def update_legacy_ui() -> None:
         paths.append(template)
     for path in paths:
         html = path.read_text(encoding="utf-8")
-        if "legacy-daily-overlay.css" not in html:
-            continue
         original = html
+        if "legacy-daily-overlay.css" not in html:
+            html = html.replace(
+                "</head>", '<link rel="stylesheet" href="assets/legacy-daily-overlay.css">\n</head>', 1
+            )
         html = re.sub(r'<link rel="preconnect" href="https://fonts\.googleapis\.com">\s*', "", html)
         html = re.sub(r'<link href="https://fonts\.googleapis\.com/css2[^"]*" rel="stylesheet">\s*', "", html)
         html = html.replace(
