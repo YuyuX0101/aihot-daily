@@ -1,5 +1,5 @@
 /* Shared modern chrome for historical pages; article text and URLs stay intact. */
-@import url("./editorial.css?v=ai-daily-12");
+@import url("./editorial.css?v=ai-daily-13");
 
 body {
   background:var(--paper) !important;
@@ -33,10 +33,10 @@ body {
 }
 .nav-back:hover { color:var(--accent) !important; }
 .hero {
-  width:calc(100% - 4rem);
+  width:100%;
   max-width:none !important;
-  margin:0 auto !important;
-  padding:1.5rem 0 1rem !important;
+  margin:0 !important;
+  padding:1.5rem 2rem 1rem !important;
   border-bottom:1px solid var(--rule);
   background:linear-gradient(90deg,rgba(245,243,237,.98) 0%,rgba(245,243,237,.88) 38%,rgba(245,243,237,.18) 78%),url("./covers/page-daily.webp") center / cover no-repeat !important;
   text-align:left !important;
@@ -155,8 +155,8 @@ body {
 .footer,footer { display:none !important; }
 @media (max-width:700px) {
   .nav,.topnav,header.nav { padding:0 1rem !important; }
-  .hero,.content,main.content { width:calc(100% - 2rem); }
-  .hero { padding-top:1.2rem !important; }
+  .content,main.content { width:calc(100% - 2rem); }
+  .hero { width:100%; padding:1.2rem 1rem 1rem !important; }
   .hero h1 { font-size:2rem !important; }
   .section { grid-template-columns:1fr; }
   .item,.top5-item { padding:.9rem 0 !important; }
